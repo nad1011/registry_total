@@ -3,19 +3,19 @@ import * as BsIcon from "react-icons/bs";
 const items = [
   {
     cName: "",
-    path: "Shop",
+    path: "/shop",
     icon: <AiIcon.AiOutlineShoppingCart />,
     title: "Shop",
   },
   {
     cName: "",
-    path: "Mail",
+    path: "/mail",
     icon: <BsIcon.BsMailbox />,
     title: "Mail",
   },
   {
     cName: "",
-    path: "/",
+    path: "/check",
     icon: <BsIcon.BsFillCalendar2CheckFill />,
     title: "Check",
   },

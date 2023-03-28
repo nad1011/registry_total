@@ -17,7 +17,7 @@ function Navbar() {
           <FaBars onClick={showSidebar} />
         </Link>
       </div>
-      <nav className={sidebar ? styles["nav-menu-active"] : styles["nav-menu"]}>
+      <nav className={sidebar ? `${styles["nav-menu"]} ${styles["active"]}` : styles["nav-menu"]}>
         <ul className={styles["nav-menu-item"]}>
           <li className={styles["nav-toggle"]}>
             <Link to="#" className={styles["menu-bar"]}>

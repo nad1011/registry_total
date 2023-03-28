@@ -19,20 +19,16 @@
   justify-content: flex-center;
   position: fixed;
   top: 0;
-  left: -100%;
-  transition: 600ms;
+  left: -20%;
+  opacity: 0.8;
+  transition: all 0.5s ease;
 }
 
-.nav-menu-active {
-  background-color: #060b26;
-  width: 250px;
-  height: 100vh;
-  display: flex;
-  justify-content: flex-center;
-  position: fixed;
-  top: 0;
+.active {
   left: 0;
-  transition: 350ms;
+  opacity: 1;
+  transition: all 0.5s ease;
+  /* transition: 350ms; */
 }
 
 .nav-toggle {

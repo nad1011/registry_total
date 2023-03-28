@@ -5,6 +5,8 @@ import Homepage from "./pages/Homepage/Homepage";
 import Shop from "./pages/Shop";
 import Mail from "./pages/Mail";
 import Navbar from "./components/Navbar/Navbar.jsx";
+import SignInPage from "./pages/SignInPage/SignInPage";
+
 const App = () => {
   return (
     <div className="App">
@@ -13,6 +15,7 @@ const App = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/mail" element={<Mail />} />
+        <Route path="/auth" element={<SignInPage/>}/>
       </Routes>
     </div>
   );

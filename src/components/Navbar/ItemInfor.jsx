@@ -19,5 +19,11 @@ const items = [
     icon: <BsIcon.BsFillCalendar2CheckFill />,
     title: "Check",
   },
+  {
+    cName: "",
+    path: "/auth",
+    icon: <BsIcon.BsFillCalendar2CheckFill />,
+    title: "Sign-in",
+  },
 ];
 export default items;

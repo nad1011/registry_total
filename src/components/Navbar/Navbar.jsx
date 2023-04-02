@@ -11,25 +11,18 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   return (
-    <>
-      <div className={styles.navbar}>
-        <Link to="#" className={styles["menu-bar"]}>
-          <FaBars onClick={showSidebar} />
-        </Link>
+    <div className={styles["nav-bar"]} >
+      <div className={styles["logo-bar"]}>
+        <AiOutlineClose onClick={showSidebar} />
       </div>
       <nav className={sidebar ? `${styles["nav-menu"]} ${styles["active"]}` : styles["nav-menu"]}>
         <ul className={styles["nav-menu-item"]}>
-          <li className={styles["nav-toggle"]}>
-            <Link to="#" className={styles["menu-bar"]}>
-              <AiOutlineClose onClick={showSidebar} />
-            </Link>
-          </li>
           {items.map((item, index) => {
             return <NavItem key={index} index={index} item={item} />;
           })}
         </ul>
       </nav>
-    </>
+    </div>
   );
 }
 

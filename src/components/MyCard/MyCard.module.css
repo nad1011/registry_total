@@ -1,0 +1,10 @@
+.card-item {
+    color: black;
+}
+
+.hidden-btn {
+    position: absolute;
+    right: 0;
+    z-index: 5;
+    background-color: blueviolet;
+}

@@ -3,15 +3,16 @@ import FormInput from "../FormInput/FormInput";
 
 import styles from "./RenewForm.module.css";
 
-const defaultFormFields = {
-    name: "",
-    numberPlate: "",
-    feeCheck: true,
-    carCheck: true,
-    expirationDate: "",
-};
 
-const RenewForm = () => {
+
+const RenewForm = ({car}) => {
+    const defaultFormFields = {
+        name: car.name,
+        numberPlate: car.numberPlate,
+        feeCheck: true,
+        carCheck: true,
+        expirationDate: "",
+    };
     const [formFields, setFormFields] = useState(defaultFormFields);
     const { name, numberPlate, feeCheck, carCheck, expirationDate } = formFields;
 

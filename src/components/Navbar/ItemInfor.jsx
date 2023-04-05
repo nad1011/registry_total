@@ -17,7 +17,7 @@ const items = [
   },
   {
     cName: "",
-    path: "/check",
+    path: "/",
     icon: <BsIcon.BsFillCalendar2CheckFill className={styles["nav-icon"]}/>,
     title: "Check",
   },

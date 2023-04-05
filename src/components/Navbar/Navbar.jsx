@@ -11,11 +11,17 @@ function Navbar() {
   const [sidebar, setSidebar] = useState(false);
   const showSidebar = () => setSidebar(!sidebar);
   return (
-    <div className={styles["nav-bar"]} >
+    <div className={styles["nav-bar"]}>
       <div className={styles["logo-bar"]}>
-        <AiOutlineClose onClick={showSidebar} />
+          <AiOutlineClose onClick={showSidebar} />
       </div>
-      <nav className={sidebar ? `${styles["nav-menu"]} ${styles["active"]}` : styles["nav-menu"]}>
+      <nav
+        className={
+          sidebar
+            ? `${styles["nav-menu"]} ${styles["active"]}`
+            : styles["nav-menu"]
+        }
+      >
         <ul className={styles["nav-menu-item"]}>
           {items.map((item, index) => {
             return <NavItem key={index} index={index} item={item} />;

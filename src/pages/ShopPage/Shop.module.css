@@ -1,11 +1,10 @@
 .page {
+    position: relative;
     width: 100%;
     margin: 10px 10px 10px 0px;
     border-radius: 15px;
     border-top-right-radius: 8px;
     border-bottom-right-radius: 8px;
     background-color: white;
-    overflow-y: scroll;
-    overflow-x: hidden;
     /* margin-right: -5px; */
 }

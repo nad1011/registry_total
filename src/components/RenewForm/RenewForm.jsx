@@ -1,4 +1,6 @@
 import { useState } from "react";
+import * as FiIcon from "react-icons/fi";
+import * as BsIcon from "react-icons/bs";
 import FormInput from "../FormInput/FormInput";
 
 import styles from "./RenewForm.module.css";
@@ -7,8 +9,8 @@ import styles from "./RenewForm.module.css";
 
 const RenewForm = ({car}) => {
     const defaultFormFields = {
-        name: car.name,
-        numberPlate: car.numberPlate,
+        name: "",
+        numberPlate: "",
         feeCheck: true,
         carCheck: true,
         expirationDate: "",
@@ -37,7 +39,8 @@ const RenewForm = ({car}) => {
                     required
                     onChange={handleChange}
                     name="name"
-                    value={name}
+                    value={name} 
+                    icon = <FiIcon.FiUser/>
                 />
                 <FormInput
                     label="Number Plate"
@@ -46,6 +49,16 @@ const RenewForm = ({car}) => {
                     onChange={handleChange}
                     name="numberPlate"
                     value={numberPlate}
+                    icon = <BsIcon.BsCarFront/>
+                />
+                <FormInput
+                    label="New expiration date"
+                    type="text"
+                    required
+                    onChange={handleChange}
+                    name="expirationDate"
+                    value={expirationDate}
+                    icon = <BsIcon.BsCalendarHeart/>
                 />
                 <div className={styles["checkbox-container"]}>
                     <input
@@ -63,15 +76,7 @@ const RenewForm = ({car}) => {
                     />
                     <label htmlFor="car-check">Đã kiểm tra xe</label>
                 </div>
-                <FormInput
-                    label="New vehicle registration expiration date"
-                    type="date"
-                    required
-                    onChange={handleChange}
-                    name="expirationDate"
-                    value={expirationDate}
-                />
-                <button type="submit">Confirm</button>
+                <button type="submit" className={styles["buttons"]}>Confirm</button>
             </form>
         </div>
     );

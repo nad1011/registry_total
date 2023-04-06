@@ -4,15 +4,16 @@ import { useState } from "react";
 // import RenewForm from "../../components/RenewForm/RenewForm";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import LISENCE_DATA from "../../data";
+import RenewForm from "../../components/RenewForm/RenewForm";
+import LICENSE_DATA from "../../data";
 import styles from "./Shop.module.css"
 
 export default function Shop() {
     const [searchField, setSearchField] = useState("");
-    const [filterList, setFilterList] = useState(LISENCE_DATA);
+    const [filterList, setFilterList] = useState(LICENSE_DATA);
 
     useEffect(() => {
-        const newList = LISENCE_DATA.filter((car) => {
+        const newList = LICENSE_DATA.filter((car) => {
             return car.numberPlate.toUpperCase().includes(searchField);
         });
         setFilterList(newList);
@@ -30,6 +31,7 @@ export default function Shop() {
                 onChangeHandler={onTitleChange}
             />
             <CartList filterList={filterList} />
+            <RenewForm />
         </div>
     );
 }

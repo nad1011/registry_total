@@ -1,8 +1,9 @@
 import styles from "./FormInput.module.css";
 
-const FormInput = ({ label, ...otherProps }) => {
+const FormInput = ({ label, icon,...otherProps }) => {
     return (
         <div className={styles["input-group"]}>
+            {icon}
             <input className={styles["form-input"]} {...otherProps} />
             {label && (
                 <label

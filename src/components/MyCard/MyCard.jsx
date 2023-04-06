@@ -40,7 +40,7 @@ const MyCard = ({ car }) => {
           </div>
         </Card.Body>
       </Card>
-      {isFormOpen && <RenewForm car={car} />}
+      {/* {isFormOpen && <RenewForm car={car} />}
       {isFormOpen && (
         <button
           onClick={onHiddenFormHandler}
@@ -48,7 +48,7 @@ const MyCard = ({ car }) => {
         >
           X (thay bang icon ho :))))
         </button>
-      )}
+      )} */}
     </>
   );
 };

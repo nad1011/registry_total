@@ -1,4 +1,4 @@
-const LISENCE_DATA = [
+const LICENSE_DATA = [
     {
         id:1,
         name: "John Smith",
@@ -46,4 +46,4 @@ const LISENCE_DATA = [
     },
 ]
 
-export default LISENCE_DATA;
+export default LICENSE_DATA;

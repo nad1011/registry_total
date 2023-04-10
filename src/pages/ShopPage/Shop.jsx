@@ -27,7 +27,7 @@ export default function Shop() {
     return (
         <div className={styles["page"]}>
             <SearchBox
-                placeholder="search lisence"
+                placeholder="Search lisence"
                 onChangeHandler={onTitleChange}
             />
             <CartList filterList={filterList} />

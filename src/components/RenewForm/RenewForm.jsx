@@ -33,11 +33,17 @@ const RenewForm = ({ car }) => {
   };
 
   const handleFeeCheck = () => {
-    setFormFields({ ...formFields, feeCheck: true });
+    setFormFields((prevFormFields) => ({
+      ...prevFormFields,
+      feeCheck: !prevFormFields.feeCheck,
+    }));
   };
 
   const handleCarCheck = () => {
-    setFormFields({ ...formFields, carCheck: true });
+    setFormFields((prevFormFields) => ({
+      ...prevFormFields,
+      carCheck: !prevFormFields.carCheck,
+    }));
   };
 
   useEffect(() => {

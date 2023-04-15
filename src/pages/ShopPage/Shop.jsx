@@ -5,6 +5,7 @@ import { useState } from "react";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
+import SelectSearch from "../../components/SeclectSearch/SelectSearch";
 
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 
@@ -25,13 +26,14 @@ export default function Shop() {
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
+  const [filter, setFilter] = useState("numberPlate");
 
   useEffect(() => {
     const newList = LICENSE_DATA.filter((car) => {
-      return car.numberPlate.toUpperCase().includes(searchField);
+      return car[filter].toUpperCase().includes(searchField);
     });
     setFilterList(newList);
-  }, [searchField]);
+  }, [searchField, filter]);
 
   const onTitleChange = (event) => {
     const searchInput = event.target.value.toUpperCase();
@@ -53,9 +55,15 @@ export default function Shop() {
     setChunk(() => chunk + 1);
   };
 
+  const selectHandler = (newFilter) => {
+    // console.log(data);
+    setFilter(newFilter);
+  };
+
   return (
     <div className={styles["page"]}>
       <SearchBox placeholder="search lisence" onChangeHandler={onTitleChange} />
+      <SelectSearch tranfer={selectHandler} />
       <br />
       <FiArrowLeft className={styles["arrow"]} onClick={toPreviousChunk} />
       <FiArrowRight className={styles["arrow"]} onClick={toNextChunk} />

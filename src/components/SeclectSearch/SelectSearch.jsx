@@ -5,6 +5,13 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 
+import { FaFilter } from "react-icons/fa";
+
+const ITEMS_SELECTION = {
+  name: "name",
+  numberPlate: "numberPlate",
+};
+
 export default function SelectSearch({ tranfer }) {
   const [item, setItem] = useState("numberPlate");
 
@@ -18,18 +25,18 @@ export default function SelectSearch({ tranfer }) {
   return (
     <Box sx={{ minWidth: 120 }}>
       <FormControl>
-        <InputLabel id="demo-simple-select-label">Filter</InputLabel>
+        <InputLabel id="demo-simple-select-label">
+          <FaFilter />
+        </InputLabel>
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
           value={item}
           label="item"
           onChange={handleInput}
-          // onChange={handleChange}
         >
-          <MenuItem value={"name"}>Name</MenuItem>
-          <MenuItem value={"numberPlate"}>Number Plate</MenuItem>
-          {/* <MenuItem value={30}>Thirty</MenuItem> */}
+          <MenuItem value={ITEMS_SELECTION.name}>Name</MenuItem>
+          <MenuItem value={ITEMS_SELECTION.numberPlate}>Number Plate</MenuItem>
         </Select>
       </FormControl>
     </Box>

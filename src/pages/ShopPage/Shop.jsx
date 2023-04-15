@@ -5,6 +5,9 @@ import { useState } from "react";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
+
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+
 import LICENSE_DATA from "../../data";
 import styles from "./Shop.module.css";
 
@@ -36,7 +39,7 @@ export default function Shop() {
     setChunk(0);
   };
 
-  const chunkSize = 2;
+  const chunkSize = 4;
   const finalList = chunkFilterList(filterList, chunkSize);
   const toPreviousChunk = () => {
     if (chunk <= 0) return;
@@ -54,12 +57,8 @@ export default function Shop() {
     <div className={styles["page"]}>
       <SearchBox placeholder="search lisence" onChangeHandler={onTitleChange} />
       <br />
-      <span className={styles["arrow"]} onClick={toPreviousChunk}>
-        left{" "}
-      </span>
-      <span className={styles["arrow"]} onClick={toNextChunk}>
-        right
-      </span>
+      <FiArrowLeft className={styles["arrow"]} onClick={toPreviousChunk} />
+      <FiArrowRight className={styles["arrow"]} onClick={toNextChunk} />
       <CartList filterList={finalList ? finalList[chunk] : []} />
 
       <RenewForm />

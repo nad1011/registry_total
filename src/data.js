@@ -43,6 +43,27 @@ const LICENSE_DATA = [
     expirationDate: "10-11-2024",
     expirated: false,
   },
+  {
+    id: 7,
+    name: "Ancijc Light",
+    numberPlate: "99C00845",
+    expirationDate: "19-11-2024",
+    expirated: false,
+  },
+  {
+    id: 8,
+    name: "Dark Green",
+    numberPlate: "00M99845",
+    expirationDate: "10-11-2034",
+    expirated: false,
+  },
+  {
+    id: 9,
+    name: "React Native",
+    numberPlate: "22C15645",
+    expirationDate: "10-11-2024",
+    expirated: false,
+  },
 ];
 
 export default LICENSE_DATA;

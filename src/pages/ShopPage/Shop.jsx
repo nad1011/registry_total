@@ -6,7 +6,7 @@ import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import LICENSE_DATA from "../../data";
-import styles from "./Shop.module.css";
+// import styles from "./Shop.module.css";
 
 export default function Shop() {
   const [searchField, setSearchField] = useState("");

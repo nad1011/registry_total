@@ -1,30 +1,31 @@
 import * as AiIcon from "react-icons/ai";
-import * as BsIcon from "react-icons/bs";
+import * as MdIcon from "react-icons/md";
+import {GoGraph} from "react-icons/go";
 import styles from "./NavItem.module.css";
 
 const items = [
   {
     cName: "",
     path: "/shop",
-    icon: <AiIcon.AiOutlineShoppingCart className={styles["nav-icon"]}/>,
+    icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]}/>,
     title: "Shop",
   },
   {
     cName: "",
     path: "/mail",
-    icon: <BsIcon.BsMailbox className={styles["nav-icon"]}/>,
+    icon: <GoGraph className={styles["nav-icon"]}/>,
     title: "Mail",
   },
   {
     cName: "",
     path: "/",
-    icon: <BsIcon.BsFillCalendar2CheckFill className={styles["nav-icon"]}/>,
+    icon: <MdIcon.MdAppRegistration className={styles["nav-icon"]}/>,
     title: "Check",
   },
   {
     cName: "",
     path: "/auth",
-    icon: <BsIcon.BsFillCalendar2CheckFill className={styles["nav-icon"]}/>,
+    icon: <MdIcon.MdOutlineAnalytics className={styles["nav-icon"]}/>,
     title: "Sign-in",
   },
 ];

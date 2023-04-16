@@ -1,14 +1,35 @@
 import React from "react";
 import Page from "./Page/Page";
 import LineChart from "../components/LineChart";
-import styles from "./Mail.module.css";
+import Box from "@mui/material/Box";
 
 export default function Mail() {
   return (
     <Page>
-      <div className={styles["chart"]}>
-        <LineChart />
-      </div>
+      <Box
+        sx={{
+          bgcolor: "#173A5E",
+          boxShadow: 1,
+          borderRadius: 2,
+          p: 1,
+          width: 1,
+          height: 1,
+          columns: 1,
+        }}
+      >
+        <Box
+          sx={{
+            bgcolor: "#fff",
+            boxShadow: 1,
+            borderRadius: 2,
+            p: 1,
+            width: 600,
+            height: 300,
+          }}
+        >
+          <LineChart />
+        </Box>
+      </Box>
     </Page>
   );
 }

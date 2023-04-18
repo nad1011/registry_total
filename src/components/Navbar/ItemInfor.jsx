@@ -6,9 +6,9 @@ import styles from "./NavItem.module.css";
 const items = [
   {
     cName: "",
-    path: "/shop",
+    path: "/",
     icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]}/>,
-    title: "Shop",
+    title: "Check",
   },
   {
     cName: "",
@@ -18,9 +18,9 @@ const items = [
   },
   {
     cName: "",
-    path: "/",
+    path: "/shop",
     icon: <MdIcon.MdAppRegistration className={styles["nav-icon"]}/>,
-    title: "Check",
+    title: "Shop",
   },
   {
     cName: "",

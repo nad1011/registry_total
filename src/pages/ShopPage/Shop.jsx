@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Page from '../Page/Page'
-// import RenewForm from "../../components/RenewForm/RenewForm";
+
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
-import SelectSearch from "../../components/SeclectSearch/SelectSearch";
+import SelectSearch from "../../components/SelectSearch/SelectSearch";
 
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 

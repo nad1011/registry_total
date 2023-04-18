@@ -1,17 +1,19 @@
-
 import MyCard from "../MyCard/MyCard";
 
 import styles from "./CardList.module.css";
 
 const CartList = ({ filterList }) => {
-    
-    return (
-        <div className={styles["card-list-container"]}>
-            {filterList.map((car) => {
-                return <MyCard car={car} key={car.id}/>;
-            })}
-        </div>
-    );
+  if (!filterList) {
+    return null;
+  }
+
+  return (
+    <div className={styles["card-list-container"]}>
+      {filterList.map((car) => {
+        return <MyCard car={car} key={car.id} />;
+      })}
+    </div>
+  );
 };
 
 export default CartList;

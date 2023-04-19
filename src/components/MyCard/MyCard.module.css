@@ -1,6 +1,7 @@
 .card {
     color: black;
     border-radius: 1rem;
+    max-height: 100%;
 }
 
 .card-body {
@@ -19,13 +20,6 @@
 .card-title {
     font-weight: bold;
     
-}
-
-.hidden-btn {
-    position: absolute;
-    right: 0;
-    z-index: 5;
-    background-color: blueviolet;
 }
 
 .card-button {

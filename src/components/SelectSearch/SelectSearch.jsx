@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
-
-import { FaFilter } from "react-icons/fa";
+import Menu from "@mui/material/Menu";
+import { AiFillSetting } from "react-icons/ai";
+import IconButton from '@mui/material/IconButton';
 
 const ITEMS_SELECTION = {
   name: "name",
@@ -14,31 +12,56 @@ const ITEMS_SELECTION = {
 
 export default function SelectSearch({ tranfer }) {
   const [item, setItem] = useState("numberPlate");
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenu = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
 
   useEffect(() => {
     tranfer(item);
   }, [item, tranfer]);
 
   const handleInput = (event) => {
-    setItem(event.target.value);
+    setItem(event.target.getAttribute("value"));
+    console.log(event.target.getAttribute("value"));
+    handleClose();
   };
   return (
     <Box sx={{ minWidth: 120 }}>
-      <FormControl>
-        <InputLabel id="demo-simple-select-label">
-          <FaFilter />
-        </InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={item}
-          label="item"
-          onChange={handleInput}
-        >
-          <MenuItem value={ITEMS_SELECTION.name}>Name</MenuItem>
-          <MenuItem value={ITEMS_SELECTION.numberPlate}>Number Plate</MenuItem>
-        </Select>
-      </FormControl>
+      <IconButton
+        size="medium"
+        aria-controls="menu-appbar"
+        aria-haspopup="true"
+        onClick={handleMenu}
+        color="default"
+      >
+        <AiFillSetting />
+      </IconButton>
+      <Menu
+        id="menu-appbar"
+        anchorEl={anchorEl}
+        anchorOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        keepMounted
+        transformOrigin={{
+          vertical: 'top',
+          horizontal: 'right',
+        }}
+        open={Boolean(anchorEl)}
+        onClose={handleClose}
+      >
+        <MenuItem value={ITEMS_SELECTION.name} onClick={handleInput}>Name</MenuItem>
+        <MenuItem value={ITEMS_SELECTION.numberPlate} onClick={handleInput}>Number Plate</MenuItem>
+      </Menu>
+
+      {/* </Select> */}
     </Box>
   );
 }

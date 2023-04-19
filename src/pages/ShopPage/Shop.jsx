@@ -1,16 +1,14 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Page from '../Page/Page'
-
+import Page from "../Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
-
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-
 import LICENSE_DATA from "../../data";
 import styles from "./Shop.module.css";
+import Stack from '@mui/material/Stack';
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -41,7 +39,7 @@ export default function Shop() {
     setChunk(0);
   };
 
-  const chunkSize = 4;
+  const chunkSize = 6;
   const finalList = chunkFilterList(filterList, chunkSize);
   const toPreviousChunk = () => {
     if (chunk <= 0) return;
@@ -61,15 +59,20 @@ export default function Shop() {
   };
 
   return (
-    <div className={styles["page"]}>
-      <SearchBox placeholder="search lisence" onChangeHandler={onTitleChange} />
-      <SelectSearch tranfer={selectHandler} />
-      <br />
-      <FiArrowLeft className={styles["arrow"]} onClick={toPreviousChunk} />
-      <FiArrowRight className={styles["arrow"]} onClick={toNextChunk} />
+    <Page>
+      <Stack direction="row" spacing={20} justifyContent="space-between" width="60%">
+        <Stack direction="row" spacing={-2} alignItems="center">
+          <SearchBox placeholder={`Search by ${filter}`} onChangeHandler={onTitleChange} />
+          <SelectSearch tranfer={selectHandler} />
+        </Stack>
+        <Stack direction="row" spacing={0} alignItems="flex-end">
+          <FiArrowLeft className={styles["arrow"]} onClick={toPreviousChunk} />
+          <FiArrowRight className={styles["arrow"]} onClick={toNextChunk} />
+        </Stack>
+      </Stack>
       <CartList filterList={finalList ? finalList[chunk] : []} />
 
       <RenewForm />
-    </div>
+    </Page>
   );
 }

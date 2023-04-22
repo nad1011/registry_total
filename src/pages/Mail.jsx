@@ -14,6 +14,7 @@ export default function Mail() {
   //
   const [data, setData] = useState([]);
   const [list, setList] = useState([]);
+  const [viewOption, setViewOption] = useState("Năm");
 
   useEffect(() => {
     const getNewData = async () => {
@@ -87,14 +88,41 @@ export default function Mail() {
     };
     list.forEach((date) => {
       const year = date.split("-")[0];
-      listSortByYear[year]++;
+      if (listSortByYear[year]) {
+        listSortByYear[year]++;
+      } else {
+        listSortByYear[year] = 1;
+      }
     });
     // console.log(listSortByYear);
     return listSortByYear;
   };
 
+  const sortByMonthAndYear = () => {
+    const listSortByMonthAndYear = {};
+
+    list.forEach((date) => {
+      const monthAndYear = date.split("-")[0] + "/" + date.split("-")[1];
+      // console.log("monthAndYear: " + monthAndYear);
+      if (listSortByMonthAndYear[monthAndYear]) {
+        listSortByMonthAndYear[monthAndYear]++;
+      } else {
+        listSortByMonthAndYear[monthAndYear] = 1;
+      }
+    });
+    console.log(listSortByMonthAndYear);
+    // console.log(listSortByYear);
+    return listSortByMonthAndYear;
+  };
+
   const handle = () => {
-    const sortedList = sortByYear();
+    let sortedList = {};
+    if (viewOption === "Năm") {
+      sortedList = sortByYear();
+      console.log("sortedList", sortedList);
+    } else if (viewOption === "Tháng") {
+      console.log("Lọc theo:", viewOption);
+    }
     const newData = data.map((item) => ({
       ...item,
       data: item.data.map((value) => {
@@ -112,7 +140,6 @@ export default function Mail() {
     setData(newData);
   };
   //
-  const [viewOption, setViewOption] = useState("Năm");
   const onChangeDropdown = (data) => {
     setViewOption(data);
     console.log("viewOption", viewOption);
@@ -120,6 +147,7 @@ export default function Mail() {
 
   return (
     <Page>
+      <button onClick={sortByMonthAndYear}>ok</button>
       <Grid container justifyContent="center" spacing={2} height={1}>
         <Grid
           container

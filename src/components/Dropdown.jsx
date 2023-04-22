@@ -25,7 +25,7 @@ export default function SplitButton({ tranfer, changeGraph }) {
   };
 
   useEffect(() => {
-    console.log(options[selectedIndex]);
+    // console.log(options[selectedIndex]);
     tranfer(options[selectedIndex]);
   }, [selectedIndex, tranfer]);
 

@@ -6,10 +6,12 @@ import Shop from "./pages/ShopPage/Shop";
 import Mail from "./pages/Mail";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import SignInPage from "./pages/SignInPage/SignInPage";
+import CssBaseline from '@mui/material/CssBaseline';
 
 const App = () => {
   return (
     <div className="App">
+      <CssBaseline />
       <Navbar />
       <Routes>
         <Route path="/" element={<Homepage />} />

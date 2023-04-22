@@ -2,9 +2,9 @@ import { useState, useContext, useEffect } from "react";
 import * as FiIcon from "react-icons/fi";
 import * as BsIcon from "react-icons/bs";
 import FormInput from "../FormInput/FormInput";
-
+import Box from '@mui/material/Box';
 import { FormContext } from "../../contexts/FormContext";
-
+import Button from '@mui/material/Button';
 import styles from "./RenewForm.module.css";
 
 const RenewForm = ({ car }) => {
@@ -57,7 +57,7 @@ const RenewForm = ({ car }) => {
   }, [autoName]);
 
   return (
-    <div className={styles["renew-form-container"]}>
+    <Box sx={{width:0.55 , p: 2, border: '2px solid black', borderRadius: 10 }} className={styles['container']}>
       <h2 className={styles["form-header"]}>Renew Car Registration</h2>
       <form onSubmit={submitHandle}>
         <FormInput
@@ -107,11 +107,9 @@ const RenewForm = ({ car }) => {
           />
           <label htmlFor="car-check">Đã kiểm tra xe</label>
         </div>
-        <button type="submit" className={styles["buttons"]}>
-          Confirm
-        </button>
+        <Button variant="contained">Confirm</Button>
       </form>
-    </div>
+    </Box>
   );
 };
 

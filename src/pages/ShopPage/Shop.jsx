@@ -8,7 +8,7 @@ import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import LICENSE_DATA from "../../data";
 import styles from "./Shop.module.css";
-import Stack from '@mui/material/Stack';
+import Stack from "@mui/material/Stack";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -60,9 +60,17 @@ export default function Shop() {
 
   return (
     <Page>
-      <Stack direction="row" spacing={20} justifyContent="space-between" width="60%">
+      <Stack
+        direction="row"
+        spacing={20}
+        justifyContent="space-between"
+        width="60%"
+      >
         <Stack direction="row" spacing={-2} alignItems="center">
-          <SearchBox placeholder={`Search by ${filter}`} onChangeHandler={onTitleChange} />
+          <SearchBox
+            placeholder={`Search by ${filter}`}
+            onChangeHandler={onTitleChange}
+          />
           <SelectSearch tranfer={selectHandler} />
         </Stack>
         <Stack direction="row" spacing={0} alignItems="flex-end">
@@ -70,9 +78,10 @@ export default function Shop() {
           <FiArrowRight className={styles["arrow"]} onClick={toNextChunk} />
         </Stack>
       </Stack>
-      <CartList filterList={finalList ? finalList[chunk] : []} />
-
-      <RenewForm />
+      <Stack direction="row" spacing={1} alignItems="center" height={0.9}>
+        <CartList filterList={finalList ? finalList[chunk] : []} />
+        <RenewForm />
+      </Stack>
     </Page>
   );
 }

@@ -1,6 +1,5 @@
 import MyCard from "../MyCard/MyCard";
 import Grid from "@mui/material/Grid";
-import styles from "./CardList.module.css";
 import Box from "@mui/material/Box";
 
 const CartList = ({ filterList }) => {

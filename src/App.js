@@ -5,7 +5,6 @@ import Homepage from "./pages/Homepage/Homepage";
 import Shop from "./pages/ShopPage/Shop";
 import Mail from "./pages/Mail";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import SignInPage from "./pages/SignInPage/SignInPage";
 import CssBaseline from '@mui/material/CssBaseline';
 
 const App = () => {
@@ -17,7 +16,6 @@ const App = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/mail" element={<Mail />} />
-        <Route path="/auth" element={<SignInPage/>}/>
       </Routes>
     </div>
   );

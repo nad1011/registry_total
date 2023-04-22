@@ -57,7 +57,7 @@ const RenewForm = ({ car }) => {
   }, [autoName]);
 
   return (
-    <Box sx={{width:0.55 , p: 2, border: '2px solid black', borderRadius: 10 }} className={styles['container']}>
+    <Box sx={{width:1 , p: 2, border: '2px solid black', borderRadius: 10 }} className={styles['container']}>
       <h2 className={styles["form-header"]}>Renew Car Registration</h2>
       <form onSubmit={submitHandle}>
         <FormInput

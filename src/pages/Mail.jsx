@@ -10,9 +10,12 @@ import { getRegistrationDate } from "../utils/firebase.utils";
 
 import { useState, useEffect } from "react";
 
+// var tableData = [];
+
 export default function Mail() {
-  //
+  // data de truyen vao line graph
   const [data, setData] = useState([]);
+  // list data from database
   const [list, setList] = useState([]);
   const [viewOption, setViewOption] = useState("Năm");
 
@@ -20,6 +23,7 @@ export default function Mail() {
     const getNewData = async () => {
       const newList = await getRegistrationDate();
       setList(newList);
+      // console.log(list);
     };
 
     getNewData();
@@ -30,47 +34,49 @@ export default function Mail() {
         data: [
           {
             x: "2014",
-            y: 211,
+            y: 0,
           },
           {
             x: "2015",
-            y: 222,
+            y: 0,
           },
           {
             x: "2016",
-            y: 108,
+            y: 0,
           },
           {
             x: "2017",
-            y: 133,
+            y: 0,
           },
           {
             x: "2018",
-            y: 281,
+            y: 0,
           },
           {
             x: "2019",
-            y: 190,
+            y: 0,
           },
           {
             x: "2020",
-            y: 202,
+            y: 0,
           },
           {
             x: "2021",
-            y: 187,
+            y: 0,
           },
           {
             x: "2022",
-            y: 181,
+            y: 0,
           },
           {
             x: "2023",
-            y: 191,
+            y: 0,
           },
         ],
       },
     ]);
+    // tableData = data;
+    // console.log("1", tableData);
   }, []);
 
   const sortByYear = () => {
@@ -94,60 +100,110 @@ export default function Mail() {
         listSortByYear[year] = 1;
       }
     });
-    // console.log(listSortByYear);
+    console.log("listSortByYear", listSortByYear);
     return listSortByYear;
   };
 
-  const sortByMonthAndYear = () => {
-    const listSortByMonthAndYear = {};
+  const sortByQuarter = () => {
+    const listSortByQuarter = {};
+
+    list.forEach((date) => {
+      const [year, month, day] = date.split("-");
+      const quarter = Math.floor((parseInt(month, 10) - 1) / 3) + 1;
+      const quarterKey = `${year}-Q${quarter}`;
+
+      if (listSortByQuarter[quarterKey]) {
+        listSortByQuarter[quarterKey]++;
+      } else {
+        listSortByQuarter[quarterKey] = 1;
+      }
+    });
+    console.log("listSortByQuarter", listSortByQuarter);
+    return listSortByQuarter;
+  };
+
+  const sortByMonth = () => {
+    const listSortByMonth = {};
 
     list.forEach((date) => {
       const monthAndYear = date.split("-")[0] + "/" + date.split("-")[1];
       // console.log("monthAndYear: " + monthAndYear);
-      if (listSortByMonthAndYear[monthAndYear]) {
-        listSortByMonthAndYear[monthAndYear]++;
+      if (listSortByMonth[monthAndYear]) {
+        listSortByMonth[monthAndYear]++;
       } else {
-        listSortByMonthAndYear[monthAndYear] = 1;
+        listSortByMonth[monthAndYear] = 1;
       }
     });
-    console.log(listSortByMonthAndYear);
+    console.log("listSortByMonth", listSortByMonth);
     // console.log(listSortByYear);
-    return listSortByMonthAndYear;
+    return listSortByMonth;
   };
 
   const handle = () => {
     let sortedList = {};
-    if (viewOption === "Năm") {
-      sortedList = sortByYear();
-      console.log("sortedList", sortedList);
-    } else if (viewOption === "Tháng") {
-      console.log("Lọc theo:", viewOption);
+    switch (viewOption) {
+      case "Năm": {
+        sortedList = sortByYear();
+        // console.log("sortedList", sortedList);
+        break;
+      }
+
+      case "Tháng": {
+        const tmpList = sortByMonth();
+
+        const tmpArr = Object.entries(tmpList);
+
+        tmpArr.sort((a, b) => {
+          if (a[0] < b[0]) return -1;
+          if (a[0] > b[0]) return 1;
+          return 0;
+        });
+        sortedList = Object.fromEntries(tmpArr);
+        break;
+      }
+
+      case "Quý": {
+        const tmpList = sortByQuarter();
+
+        const tmpArr = Object.entries(tmpList);
+
+        tmpArr.sort((a, b) => {
+          if (a[0] < b[0]) return -1;
+          if (a[0] > b[0]) return 1;
+          return 0;
+        });
+
+        sortedList = Object.fromEntries(tmpArr);
+        break;
+      }
+      default:
+        return new Error("Invalid viewOption");
     }
+
+    const keyArray = Object.keys(sortedList);
+    const start = keyArray.length - 10;
     const newData = data.map((item) => ({
       ...item,
-      data: item.data.map((value) => {
-        // console.log(value.x);
-
+      data: item.data.map((value, index) => {
         return {
-          ...value,
-          y: sortedList[value.x],
+          x: keyArray[start + index],
+          y: sortedList[keyArray[index]],
         };
       }),
     }));
-    // console.log(sortedList);
-    console.log("ver1", newData);
-    console.log(viewOption);
+    // console.log(viewOption);
     setData(newData);
+    // tableData = data;
+    // console.log("2", tableData);
+    // console.log("data in mail", data);
   };
   //
   const onChangeDropdown = (data) => {
     setViewOption(data);
-    console.log("viewOption", viewOption);
   };
 
   return (
     <Page>
-      <button onClick={sortByMonthAndYear}>ok</button>
       <Grid container justifyContent="center" spacing={2} height={1}>
         <Grid
           container
@@ -218,3 +274,4 @@ export default function Mail() {
     </Page>
   );
 }
+// export { tableData };

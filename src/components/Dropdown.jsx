@@ -1,24 +1,33 @@
-import * as React from 'react';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
-import ClickAwayListener from '@mui/material/ClickAwayListener';
-import Grow from '@mui/material/Grow';
-import Paper from '@mui/material/Paper';
-import Popper from '@mui/material/Popper';
-import MenuItem from '@mui/material/MenuItem';
-import MenuList from '@mui/material/MenuList';
-import {MdOutlineArrowDropDownCircle} from 'react-icons/md';
+import * as React from "react";
+import Button from "@mui/material/Button";
+import ButtonGroup from "@mui/material/ButtonGroup";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuItem from "@mui/material/MenuItem";
+import MenuList from "@mui/material/MenuList";
+import { MdOutlineArrowDropDownCircle } from "react-icons/md";
 
-const options = ['Tháng', 'Quý', 'Năm'];
+import { useEffect } from "react";
 
-export default function SplitButton() {
+const options = ["Tháng", "Quý", "Năm"];
+
+export default function SplitButton({ tranfer, changeGraph }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(1);
+  const [selectedIndex, setSelectedIndex] = React.useState(2);
 
   const handleClick = () => {
-    console.info(`You clicked ${options[selectedIndex]}`);
+    // console.info(`You clicked ${options[selectedIndex]}`);
+    tranfer(options[selectedIndex]);
+    changeGraph();
   };
+
+  useEffect(() => {
+    console.log(options[selectedIndex]);
+    tranfer(options[selectedIndex]);
+  }, [selectedIndex, tranfer]);
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -39,12 +48,16 @@ export default function SplitButton() {
 
   return (
     <React.Fragment>
-      <ButtonGroup variant="contained" ref={anchorRef} aria-label="split button">
+      <ButtonGroup
+        variant="contained"
+        ref={anchorRef}
+        aria-label="split button"
+      >
         <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
-          aria-controls={open ? 'split-button-menu' : undefined}
-          aria-expanded={open ? 'true' : undefined}
+          aria-controls={open ? "split-button-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
           aria-label="select merge strategy"
           aria-haspopup="menu"
           onClick={handleToggle}
@@ -67,7 +80,7 @@ export default function SplitButton() {
             {...TransitionProps}
             style={{
               transformOrigin:
-                placement === 'bottom' ? 'center top' : 'center bottom',
+                placement === "bottom" ? "center top" : "center bottom",
             }}
           >
             <Paper>

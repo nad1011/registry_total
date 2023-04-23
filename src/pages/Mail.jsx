@@ -14,7 +14,55 @@ import { useState, useEffect } from "react";
 
 export default function Mail() {
   // data de truyen vao line graph
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([
+    {
+      id: "japan",
+      color: "hsl(62, 70%, 50%)",
+      data: [
+        {
+          x: "2014",
+          y: 0,
+        },
+        {
+          x: "2015",
+          y: 0,
+        },
+        {
+          x: "2016",
+          y: 0,
+        },
+        {
+          x: "2017",
+          y: 0,
+        },
+        {
+          x: "2018",
+          y: 0,
+        },
+        {
+          x: "2019",
+          y: 0,
+        },
+        {
+          x: "2020",
+          y: 0,
+        },
+        {
+          x: "2021",
+          y: 0,
+        },
+        {
+          x: "2022",
+          y: 0,
+        },
+        {
+          x: "2023",
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [tableData, setTableData] = useState([]);
   // list data from database
   const [list, setList] = useState([]);
   const [viewOption, setViewOption] = useState("Năm");
@@ -27,56 +75,6 @@ export default function Mail() {
     };
 
     getNewData();
-    setData([
-      {
-        id: "japan",
-        color: "hsl(62, 70%, 50%)",
-        data: [
-          {
-            x: "2014",
-            y: 0,
-          },
-          {
-            x: "2015",
-            y: 0,
-          },
-          {
-            x: "2016",
-            y: 0,
-          },
-          {
-            x: "2017",
-            y: 0,
-          },
-          {
-            x: "2018",
-            y: 0,
-          },
-          {
-            x: "2019",
-            y: 0,
-          },
-          {
-            x: "2020",
-            y: 0,
-          },
-          {
-            x: "2021",
-            y: 0,
-          },
-          {
-            x: "2022",
-            y: 0,
-          },
-          {
-            x: "2023",
-            y: 0,
-          },
-        ],
-      },
-    ]);
-    // tableData = data;
-    // console.log("1", tableData);
   }, []);
 
   const sortByYear = () => {
@@ -192,12 +190,22 @@ export default function Mail() {
       }),
     }));
     // console.log(viewOption);
+    // console.log("sorted list", sortedList);
+    // console.log("oldData: ", data[0].data);
     setData(newData);
+    setTableData(newData[0].data);
+    // console.log("newdata", newData[0].data);
+    // console.log("data: ", data[0].data);
+    // console.log("new", data[0].data);
     // tableData = data;
     // console.log("2", tableData);
     // console.log("data in mail", data);
   };
   //
+  // useEffect(() => {
+  //   console.log("effect");
+  //   setTableData(data[0].data);
+  // }, [data]);
   const onChangeDropdown = (data) => {
     setViewOption(data);
   };
@@ -267,7 +275,7 @@ export default function Mail() {
               height: 1.0,
             }}
           >
-            <Table />
+            <Table data={tableData} />
           </Box>
         </Grid>
       </Grid>

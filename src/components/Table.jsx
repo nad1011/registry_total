@@ -12,138 +12,123 @@ import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 
-// import { tableData } from "../pages/Mail";
-
-function createData(name, calories) {
-  // console.log("3", tableData);
-  return {
-    name,
-    calories,
-  };
-}
-
-const rows = [
-  createData("Cupcake", 305),
-  createData("Donut", 452),
-  createData("Eclair", 262),
-  createData("Frozen yoghurt", 159),
-  createData("Gingerbread", 356),
-  createData("Honeycomb", 408),
-  createData("Ice cream sandwich", 237),
-  createData("Jelly Bean", 375),
-  createData("KitKat", 518),
-  createData("Lollipop", 392),
-  createData("Marshmallow", 318),
-  createData("Nougat", 360),
-  createData("Oreo", 437),
-];
-
-function descendingComparator(a, b, orderBy) {
-  if (b[orderBy] < a[orderBy]) {
-    return -1;
-  }
-  if (b[orderBy] > a[orderBy]) {
-    return 1;
-  }
-  return 0;
-}
-
-function getComparator(order, orderBy) {
-  return order === "desc"
-    ? (a, b) => descendingComparator(a, b, orderBy)
-    : (a, b) => -descendingComparator(a, b, orderBy);
-}
-
-// Since 2020 all major browsers ensure sort stability with Array.prototype.sort().
-// stableSort() brings sort stability to non-modern browsers (notably IE11). If you
-// only support modern browsers you can replace stableSort(exampleArray, exampleComparator)
-// with exampleArray.slice().sort(exampleComparator)
-function stableSort(array, comparator) {
-  const stabilizedThis = array.map((el, index) => [el, index]);
-  stabilizedThis.sort((a, b) => {
-    const order = comparator(a[0], b[0]);
-    if (order !== 0) {
-      return order;
-    }
-    return a[1] - b[1];
-  });
-  return stabilizedThis.map((el) => el[0]);
-}
-
-const headCells = [
-  {
-    id: "name",
-    numeric: false,
-    disablePadding: true,
-    label: "Time",
-  },
-  {
-    id: "calories",
-    numeric: true,
-    disablePadding: false,
-    label: "Quantity",
-  },
-  // {
-  //   id: "fat",
-  //   numeric: true,
-  //   disablePadding: false,
-  //   label: "Fat (g)",
-  // },
-];
-
-const DEFAULT_ORDER = "asc";
-const DEFAULT_ORDER_BY = "calories";
-const DEFAULT_ROWS_PER_PAGE = 5;
-
-function EnhancedTableHead(props) {
-  const { order, orderBy, onRequestSort } = props;
-  const createSortHandler = (newOrderBy) => (event) => {
-    onRequestSort(event, newOrderBy);
-  };
-
-  return (
-    <>
-      <TableHead>
-        <TableRow>
-          {headCells.map((headCell) => (
-            <TableCell
-              key={headCell.id}
-              align={headCell.numeric ? "right" : "left"}
-              padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderBy === headCell.id ? order : false}
-            >
-              <TableSortLabel
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : "asc"}
-                onClick={createSortHandler(headCell.id)}
-              >
-                {headCell.label}
-                {orderBy === headCell.id ? (
-                  <Box component="span" sx={visuallyHidden}>
-                    {order === "desc"
-                      ? "sorted descending"
-                      : "sorted ascending"}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
-            </TableCell>
-          ))}
-        </TableRow>
-      </TableHead>
-    </>
-  );
-}
-
-EnhancedTableHead.propTypes = {
-  numSelected: PropTypes.number.isRequired,
-  onRequestSort: PropTypes.func.isRequired,
-  onSelectAllClick: PropTypes.func.isRequired,
-  order: PropTypes.oneOf(["asc", "desc"]).isRequired,
-  orderBy: PropTypes.string.isRequired,
-  rowCount: PropTypes.number.isRequired,
-};
-
 export default function EnhancedTable({ data }) {
+  function createData(name, calories) {
+    return {
+      name,
+      calories,
+    };
+  }
+
+  const [rows, setRows] = React.useState(
+    data.map((row) => {
+      return createData(row.x, row.y);
+    })
+  );
+
+  React.useEffect(() => {
+    const newRows = data.map((row) => {
+      return createData(row.x, row.y);
+    });
+    console.log("rerender", data);
+    setRows(newRows);
+  }, [data]);
+
+  function descendingComparator(a, b, orderBy) {
+    if (b[orderBy] < a[orderBy]) {
+      return -1;
+    }
+    if (b[orderBy] > a[orderBy]) {
+      return 1;
+    }
+    return 0;
+  }
+
+  function getComparator(order, orderBy) {
+    return order === "desc"
+      ? (a, b) => descendingComparator(a, b, orderBy)
+      : (a, b) => -descendingComparator(a, b, orderBy);
+  }
+
+  function stableSort(array, comparator) {
+    const stabilizedThis = array.map((el, index) => [el, index]);
+    stabilizedThis.sort((a, b) => {
+      const order = comparator(a[0], b[0]);
+      if (order !== 0) {
+        return order;
+      }
+      return a[1] - b[1];
+    });
+    return stabilizedThis.map((el) => el[0]);
+  }
+
+  const headCells = [
+    {
+      id: "name",
+      numeric: false,
+      disablePadding: true,
+      label: "Time",
+    },
+    {
+      id: "calories",
+      numeric: true,
+      disablePadding: false,
+      label: "Quantity",
+    },
+  ];
+
+  const DEFAULT_ORDER = "asc";
+  const DEFAULT_ORDER_BY = "calories";
+  const DEFAULT_ROWS_PER_PAGE = 10;
+
+  function EnhancedTableHead(props) {
+    const { order, orderBy, onRequestSort } = props;
+    const createSortHandler = (newOrderBy) => (event) => {
+      onRequestSort(event, newOrderBy);
+    };
+
+    return (
+      <>
+        <TableHead>
+          <TableRow>
+            {headCells.map((headCell) => (
+              <TableCell
+                key={headCell.id}
+                align={headCell.numeric ? "right" : "left"}
+                padding={headCell.disablePadding ? "none" : "normal"}
+                sortDirection={orderBy === headCell.id ? order : false}
+              >
+                <TableSortLabel
+                  active={orderBy === headCell.id}
+                  direction={orderBy === headCell.id ? order : "asc"}
+                  onClick={createSortHandler(headCell.id)}
+                >
+                  {headCell.label}
+                  {orderBy === headCell.id ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === "desc"
+                        ? "sorted descending"
+                        : "sorted ascending"}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              </TableCell>
+            ))}
+          </TableRow>
+        </TableHead>
+      </>
+    );
+  }
+
+  EnhancedTableHead.propTypes = {
+    numSelected: PropTypes.number.isRequired,
+    onRequestSort: PropTypes.func.isRequired,
+    onSelectAllClick: PropTypes.func.isRequired,
+    order: PropTypes.oneOf(["asc", "desc"]).isRequired,
+    orderBy: PropTypes.string.isRequired,
+    rowCount: PropTypes.number.isRequired,
+  };
+
   const [order, setOrder] = React.useState(DEFAULT_ORDER);
   const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
   const [selected, setSelected] = React.useState([]);
@@ -151,6 +136,11 @@ export default function EnhancedTable({ data }) {
   const [visibleRows, setVisibleRows] = React.useState(null);
   const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
   const [paddingHeight, setPaddingHeight] = React.useState(0);
+
+  React.useEffect(() => {
+    setOrderBy(DEFAULT_ORDER_BY);
+    setOrder(DEFAULT_ORDER);
+  }, [rows]);
 
   React.useEffect(() => {
     let rowsOnMount = stableSort(
@@ -164,7 +154,7 @@ export default function EnhancedTable({ data }) {
     );
 
     setVisibleRows(rowsOnMount);
-  }, []);
+  }, [rows]);
 
   const handleRequestSort = React.useCallback(
     (event, newOrderBy) => {
@@ -184,7 +174,7 @@ export default function EnhancedTable({ data }) {
 
       setVisibleRows(updatedRows);
     },
-    [order, orderBy, page, rowsPerPage]
+    [order, orderBy, page, rowsPerPage, rows]
   );
 
   const handleSelectAllClick = (event) => {
@@ -212,7 +202,6 @@ export default function EnhancedTable({ data }) {
         selected.slice(selectedIndex + 1)
       );
     }
-
     setSelected(newSelected);
   };
 
@@ -237,7 +226,7 @@ export default function EnhancedTable({ data }) {
       const newPaddingHeight = 33 * numEmptyRows;
       setPaddingHeight(newPaddingHeight);
     },
-    [order, orderBy, rowsPerPage]
+    [order, orderBy, rowsPerPage, rows]
   );
 
   const handleChangeRowsPerPage = React.useCallback(
@@ -258,17 +247,13 @@ export default function EnhancedTable({ data }) {
       // There is no layout jump to handle on the first page.
       setPaddingHeight(0);
     },
-    [order, orderBy]
+    [order, orderBy, rows]
   );
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  // const handle = () => {
-  //   console.log(data);
-  // };
 
   return (
     <>
-      {/* <button onClick={handle}>ok</button> */}
       <Box sx={{ width: "100%", height: "100%" }}>
         <Paper sx={{ width: "100%", mb: 2, height: "100%" }}>
           <TableContainer sx={{ maxHeight: 0.85 }}>

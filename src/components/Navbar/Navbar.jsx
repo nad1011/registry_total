@@ -84,7 +84,7 @@ function Navbar() {
   return (
     <Box sx={{ display: "flex", height: 1}}>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader sx= {{bgcolor: "var(--avatar-color)"}}>
+        <DrawerHeader sx= {{bgcolor: "var(--secondary-color)"}}>
           <IconButton
             sx={{
               justifyContent: "center",
@@ -95,7 +95,7 @@ function Navbar() {
           </IconButton>
         </DrawerHeader>
         <Divider />
-        <List sx={{ height: 1, bgcolor: "var(--avatar-color)" }}>
+        <List sx={{ height: 1, bgcolor: "var(--secondary-color)" }}>
           {items.map((item, index) => (
             <ListItem key={index} disablePadding sx={{ display: "block" }}>
               <Link to={item.path} style={{ textDecoration: "none" }}>
@@ -126,7 +126,7 @@ function Navbar() {
           ))}
         </List>
         <Divider />
-        <DrawerFooter sx={{bgcolor: "var(--avatar-color)"}}>
+        <DrawerFooter sx={{bgcolor: "var(--secondary-color)"}}>
           <ListItem
             sx={{
               height: 1,

@@ -8,12 +8,11 @@ const CartList = ({ filterList }) => {
   }
 
   return (
-    <Box sx={{ width: 0.9, height: 1 }}>
+    <Box sx={{ width: 1, height: 1 }}>
       <Grid
         container
-        spacing={{ xs: 0, sm: 1, md: 1 }}
-        rowSpacing={{ xs: -1, sm: 0, md: 1 }}
-        columnSpacing={0}
+        // spacing={{ xs: 1, md: 2 }}
+        spacing={{ xs: 1, md: 2 }}
         sx={{ height: 1 }}
       >
         {filterList.map((car) => {

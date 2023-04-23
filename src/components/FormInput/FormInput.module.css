@@ -4,7 +4,7 @@
 }
 .input-group .form-input {
     background: none;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--secondary-color);
     color: rgb(0, 0, 0);
     font-size: 18px;
     padding: 10px 10px 2px 5px;
@@ -32,7 +32,7 @@
     pointer-events: none;
     left: 5px;
     top: 10px;
-    transition: 300ms ease all;
+    transition: 200ms ease all;
 }
 .input-group .form-input-label.shrink {
     top: 0px;

@@ -61,38 +61,66 @@ export default function Shop() {
 
   return (
     <Page>
-      <Stack direction="row" spacing={-2} alignItems="center">
-        <SearchBox
-          placeholder={`Search by ${filter}`}
-          onChangeHandler={onTitleChange}
-        />
-        <SelectSearch tranfer={selectHandler} />
-      </Stack>
       <Grid
         container
         sx={{ minHeight: 3 }}
         justifyContent={"flex-start"}
         alignItems={"center"}
       >
-        <Grid item xs={12} lg={7.5} sx={{ minHeight: 3 }}>
-          <Box sx={{ border: "1px dashed grey", overflowY: "auto"  }}>
+        <Grid item xs={12} lg={7.5} sx={{ minHeight: 1 }}>
+          <Stack direction="row" justifyContent="space-between">
+            <Stack direction="row" spacing={-1} alignItems="center">
+              <SearchBox
+                placeholder={`Search by ${filter}`}
+                onChangeHandler={onTitleChange}
+              />
+              <SelectSearch tranfer={selectHandler} />
+            </Stack>
+            <Stack direction="row" spacing={2} alignItems="center">
+              <IconButton
+                onClick={toPreviousChunk}
+                sx={{
+                  backgroundColor: "var(--secondary-color)",
+                  ":hover": { backgroundColor: "var(--border-color)" },
+                }}
+              >
+                <FiArrowLeft className={styles["arrow"]} />
+              </IconButton>
+              <IconButton
+                onClick={toNextChunk}
+                sx={{
+                  backgroundColor: "var(--secondary-color)",
+                  ":hover": { backgroundColor: "var(--border-color)" },
+                }}
+              >
+                <FiArrowRight className={styles["arrow"]} />
+              </IconButton>
+            </Stack>
+          </Stack>
+          <Box
+            sx={{
+              border: "2px solid var(--secondary-color)",
+              overflowY: "auto",
+              m: 1,
+              mt: 0,
+              mr: 0,
+              p: 2,
+              py: 1,
+              backgroundColor: "var(--secondary-color)",
+              borderRadius: 3,
+            }}
+          >
             <Stack
               direction="row"
               spacing={0}
               alignItems="center"
-              sx={{ height: 587 }}
+              sx={{ height: 560 }}
             >
-              <IconButton onClick={toPreviousChunk}>
-                <FiArrowLeft className={styles["arrow"]} />
-              </IconButton>
               <CartList filterList={finalList ? finalList[chunk] : []} />
-              <IconButton onClick={toNextChunk}>
-                <FiArrowRight className={styles["arrow"]} />
-              </IconButton>
             </Stack>
           </Box>
         </Grid>
-        <Grid item alignItems="center" height={0.9} xs={12} lg={4.3}>
+        <Grid item alignItems="center" height={0.9} xs={12} lg={4.5} p={1}>
           <RenewForm />
         </Grid>
       </Grid>

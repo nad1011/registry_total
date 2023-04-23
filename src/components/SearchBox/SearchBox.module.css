@@ -3,7 +3,7 @@
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    background-color: #000000;
+    background-color: var(--secondary-color);
     cursor: pointer;
     transition: width 0.5s ease-in-out;
     margin: 10px 10px;
@@ -14,6 +14,7 @@
     justify-content: center;
     align-items: center;
     left: 12px;
+    color: var(--avatar-color);
     top:50%;
     transform: translateY(-50%);
     z-index: 1000;
@@ -30,7 +31,7 @@
     width: 75%;
     height: 100%;
     border-radius: 40px;
-    background-color: #000000;
+    background-color: var(--secondary-color);
     border: none;
     outline: none;
     font-size: 14.3px;

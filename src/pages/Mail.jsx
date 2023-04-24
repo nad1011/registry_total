@@ -10,9 +10,60 @@ import { getRegistrationDate } from "../utils/firebase.utils";
 
 import { useState, useEffect } from "react";
 
+// var tableData = [];
+
 export default function Mail() {
-  //
-  const [data, setData] = useState([]);
+  // data de truyen vao line graph
+  const [data, setData] = useState([
+    {
+      id: "japan",
+      color: "hsl(62, 70%, 50%)",
+      data: [
+        {
+          x: "2014",
+          y: 0,
+        },
+        {
+          x: "2015",
+          y: 0,
+        },
+        {
+          x: "2016",
+          y: 0,
+        },
+        {
+          x: "2017",
+          y: 0,
+        },
+        {
+          x: "2018",
+          y: 0,
+        },
+        {
+          x: "2019",
+          y: 0,
+        },
+        {
+          x: "2020",
+          y: 0,
+        },
+        {
+          x: "2021",
+          y: 0,
+        },
+        {
+          x: "2022",
+          y: 0,
+        },
+        {
+          x: "2023",
+          y: 0,
+        },
+      ],
+    },
+  ]);
+  const [tableData, setTableData] = useState([]);
+  // list data from database
   const [list, setList] = useState([]);
   const [viewOption, setViewOption] = useState("Năm");
 
@@ -20,57 +71,10 @@ export default function Mail() {
     const getNewData = async () => {
       const newList = await getRegistrationDate();
       setList(newList);
+      // console.log(list);
     };
 
     getNewData();
-    setData([
-      {
-        id: "japan",
-        color: "hsl(62, 70%, 50%)",
-        data: [
-          {
-            x: "2014",
-            y: 211,
-          },
-          {
-            x: "2015",
-            y: 222,
-          },
-          {
-            x: "2016",
-            y: 108,
-          },
-          {
-            x: "2017",
-            y: 133,
-          },
-          {
-            x: "2018",
-            y: 281,
-          },
-          {
-            x: "2019",
-            y: 190,
-          },
-          {
-            x: "2020",
-            y: 202,
-          },
-          {
-            x: "2021",
-            y: 187,
-          },
-          {
-            x: "2022",
-            y: 181,
-          },
-          {
-            x: "2023",
-            y: 191,
-          },
-        ],
-      },
-    ]);
   }, []);
 
   const sortByYear = () => {
@@ -94,60 +98,120 @@ export default function Mail() {
         listSortByYear[year] = 1;
       }
     });
-    // console.log(listSortByYear);
+    console.log("listSortByYear", listSortByYear);
     return listSortByYear;
   };
 
-  const sortByMonthAndYear = () => {
-    const listSortByMonthAndYear = {};
+  const sortByQuarter = () => {
+    const listSortByQuarter = {};
+
+    list.forEach((date) => {
+      const [year, month, day] = date.split("-");
+      const quarter = Math.floor((parseInt(month, 10) - 1) / 3) + 1;
+      const quarterKey = `${year}-Q${quarter}`;
+
+      if (listSortByQuarter[quarterKey]) {
+        listSortByQuarter[quarterKey]++;
+      } else {
+        listSortByQuarter[quarterKey] = 1;
+      }
+    });
+    console.log("listSortByQuarter", listSortByQuarter);
+    return listSortByQuarter;
+  };
+
+  const sortByMonth = () => {
+    const listSortByMonth = {};
 
     list.forEach((date) => {
       const monthAndYear = date.split("-")[0] + "/" + date.split("-")[1];
       // console.log("monthAndYear: " + monthAndYear);
-      if (listSortByMonthAndYear[monthAndYear]) {
-        listSortByMonthAndYear[monthAndYear]++;
+      if (listSortByMonth[monthAndYear]) {
+        listSortByMonth[monthAndYear]++;
       } else {
-        listSortByMonthAndYear[monthAndYear] = 1;
+        listSortByMonth[monthAndYear] = 1;
       }
     });
-    console.log(listSortByMonthAndYear);
+    console.log("listSortByMonth", listSortByMonth);
     // console.log(listSortByYear);
-    return listSortByMonthAndYear;
+    return listSortByMonth;
   };
 
   const handle = () => {
     let sortedList = {};
-    if (viewOption === "Năm") {
-      sortedList = sortByYear();
-      console.log("sortedList", sortedList);
-    } else if (viewOption === "Tháng") {
-      console.log("Lọc theo:", viewOption);
+    switch (viewOption) {
+      case "Năm": {
+        sortedList = sortByYear();
+        // console.log("sortedList", sortedList);
+        break;
+      }
+
+      case "Tháng": {
+        const tmpList = sortByMonth();
+
+        const tmpArr = Object.entries(tmpList);
+
+        tmpArr.sort((a, b) => {
+          if (a[0] < b[0]) return -1;
+          if (a[0] > b[0]) return 1;
+          return 0;
+        });
+        sortedList = Object.fromEntries(tmpArr);
+        break;
+      }
+
+      case "Quý": {
+        const tmpList = sortByQuarter();
+
+        const tmpArr = Object.entries(tmpList);
+
+        tmpArr.sort((a, b) => {
+          if (a[0] < b[0]) return -1;
+          if (a[0] > b[0]) return 1;
+          return 0;
+        });
+
+        sortedList = Object.fromEntries(tmpArr);
+        break;
+      }
+      default:
+        return new Error("Invalid viewOption");
     }
+
+    const keyArray = Object.keys(sortedList);
+    const start = keyArray.length - 10;
     const newData = data.map((item) => ({
       ...item,
-      data: item.data.map((value) => {
-        // console.log(value.x);
-
+      data: item.data.map((value, index) => {
         return {
-          ...value,
-          y: sortedList[value.x],
+          x: keyArray[start + index],
+          y: sortedList[keyArray[index]],
         };
       }),
     }));
-    // console.log(sortedList);
-    console.log("ver1", newData);
-    console.log(viewOption);
+    // console.log(viewOption);
+    // console.log("sorted list", sortedList);
+    // console.log("oldData: ", data[0].data);
     setData(newData);
+    setTableData(newData[0].data);
+    // console.log("newdata", newData[0].data);
+    // console.log("data: ", data[0].data);
+    // console.log("new", data[0].data);
+    // tableData = data;
+    // console.log("2", tableData);
+    // console.log("data in mail", data);
   };
   //
+  // useEffect(() => {
+  //   console.log("effect");
+  //   setTableData(data[0].data);
+  // }, [data]);
   const onChangeDropdown = (data) => {
     setViewOption(data);
-    console.log("viewOption", viewOption);
   };
 
   return (
     <Page>
-      <button onClick={sortByMonthAndYear}>ok</button>
       <Grid container justifyContent="center" spacing={2} height={1}>
         <Grid
           container
@@ -211,10 +275,11 @@ export default function Mail() {
               height: 1.0,
             }}
           >
-            <Table />
+            <Table data={tableData} />
           </Box>
         </Grid>
       </Grid>
     </Page>
   );
 }
+// export { tableData };

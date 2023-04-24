@@ -61,7 +61,7 @@ const RenewForm = ({ car }) => {
     <Box
       sx={{
         width: 1,
-        height: 630,
+        height: 1,
         p: 1.5,
         border: "2px solid var(--secondary-color)",
         bgcolor: "var(--secondary-color)",

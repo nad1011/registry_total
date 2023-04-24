@@ -63,13 +63,17 @@ export default function Shop() {
     <Page>
       <Grid
         container
-        sx={{ minHeight: 3 }}
+        sx={{ height: "100%" }}
         justifyContent={"flex-start"}
         alignItems={"center"}
       >
-        <Grid item xs={12} lg={7.5} sx={{ minHeight: 1 }}>
-          <Stack direction="row" justifyContent="space-between">
-            <Stack direction="row" spacing={-1} alignItems="center">
+        <Grid item xs={12} lg={7.5} sx={{ height: "100vh" }}>
+          <Stack
+            direction="row"
+            justifyContent="space-between"
+            sx={{ height: "6vh", mt: "1vh"  }}
+          >
+            <Stack direction="row" spacing={-1} alignItems="center" sx={{ height: 1 }}>
               <SearchBox
                 placeholder={`Search by ${filter}`}
                 onChangeHandler={onTitleChange}
@@ -101,26 +105,38 @@ export default function Shop() {
             sx={{
               border: "2px solid var(--secondary-color)",
               overflowY: "auto",
-              m: 1,
-              mt: 0,
-              mr: 0,
-              p: 2,
+              m: "2vh",
+              mt: "1vh",
+              mr: "1vh",
+              // mt: 0,
+              // mr: 0,
+              p: 1,
               py: 1,
+              pb: 0,
               backgroundColor: "var(--secondary-color)",
               borderRadius: 3,
+              height: "91vh",
             }}
           >
             <Stack
               direction="row"
               spacing={0}
               alignItems="center"
-              sx={{ height: 560 }}
+              sx={{ height: 1 }}
             >
               <CartList filterList={finalList ? finalList[chunk] : []} />
             </Stack>
           </Box>
         </Grid>
-        <Grid item alignItems="center" height={0.9} xs={12} lg={4.5} p={1}>
+        <Grid
+          item
+          alignItems="center"
+          height={0.9}
+          xs={12}
+          lg={4.5}
+          p={1}
+          sx={{ height: "100%" }}
+        >
           <RenewForm />
         </Grid>
       </Grid>

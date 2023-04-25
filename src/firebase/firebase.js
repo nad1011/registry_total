@@ -4,6 +4,7 @@ import {
   collection,
   doc,
   setDoc,
+  getDoc,
   getDocs,
   updateDoc,
   arrayUnion,
@@ -23,6 +24,14 @@ const app = initializeApp(firebaseConfig);
 const database = getFirestore(app);
 
 export { database };
+
+export const getRegistrationDate = async () => {
+  const registrationList = await getDocs(
+    collection(database, "registration-info")
+  );
+
+  return registrationList.docs.map((doc) => doc.data()["registration-date"]);
+};
 
 //============================================================================//
 

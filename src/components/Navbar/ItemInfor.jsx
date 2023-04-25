@@ -1,32 +1,28 @@
 import * as AiIcon from "react-icons/ai";
 import * as MdIcon from "react-icons/md";
-import {GoGraph} from "react-icons/go";
+import { GoGraph } from "react-icons/go";
 import styles from "./NavItem.module.css";
 
 const items = [
   {
-    cName: "",
     path: "/home",
-    icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]}/>,
-    title: "Check",
+    icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]} />,
+    title: "Home",
   },
   {
-    cName: "",
-    path: "/mail",
-    icon: <GoGraph className={styles["nav-icon"]}/>,
-    title: "Mail",
+    path: "/statistic",
+    icon: <GoGraph className={styles["nav-icon"]} />,
+    title: "Statistic",
   },
   {
-    cName: "",
-    path: "/shop",
-    icon: <MdIcon.MdAppRegistration className={styles["nav-icon"]}/>,
-    title: "Shop",
+    path: "/registration",
+    icon: <MdIcon.MdAppRegistration className={styles["nav-icon"]} />,
+    title: "Registration",
   },
   {
-    cName: "",
-    path: "/auth",
-    icon: <MdIcon.MdOutlineAnalytics className={styles["nav-icon"]}/>,
-    title: "Sign-in",
+    path: "/prediction",
+    icon: <MdIcon.MdOutlineAnalytics className={styles["nav-icon"]} />,
+    title: "Prediction",
   },
 ];
 export default items;

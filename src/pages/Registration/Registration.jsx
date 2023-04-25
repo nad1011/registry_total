@@ -7,7 +7,7 @@ import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import LICENSE_DATA from "../../data";
-import styles from "./Shop.module.css";
+import styles from "./Registration.module.css";
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
 
@@ -21,7 +21,7 @@ const chunkFilterList = (array, chunkSize) => {
   return chunkedArray;
 };
 
-export default function Shop() {
+export default function Registration() {
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
@@ -71,9 +71,14 @@ export default function Shop() {
           <Stack
             direction="row"
             justifyContent="space-between"
-            sx={{ height: "6vh", mt: "1vh"  }}
+            sx={{ height: "6vh", mt: "1vh" }}
           >
-            <Stack direction="row" spacing={-1} alignItems="center" sx={{ height: 1 }}>
+            <Stack
+              direction="row"
+              spacing={-1}
+              alignItems="center"
+              sx={{ height: 1 }}
+            >
               <SearchBox
                 placeholder={`Search by ${filter}`}
                 onChangeHandler={onTitleChange}

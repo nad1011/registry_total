@@ -1,18 +1,18 @@
 import React from "react";
-import Page from "./Page/Page";
-import LineChart from "../components/LineChart";
+import Page from "../Page/Page";
+import LineChart from "../../components/LineChart";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import Dropdown from "../components/Dropdown";
-import Switch from "../components/Switch";
-import Table from "../components/Table";
-import { getRegistrationDate } from "../utils/firebase.utils";
+import Dropdown from "../../components/Dropdown";
+import Switch from "../../components/Switch";
+import Table from "../../components/Table";
+import { getRegistrationDate } from "../../firebase/firebase";
 
 import { useState, useEffect } from "react";
 
 // var tableData = [];
 
-export default function Mail() {
+export default function Statistic() {
   // data de truyen vao line graph
   const [data, setData] = useState([
     {
@@ -98,7 +98,7 @@ export default function Mail() {
         listSortByYear[year] = 1;
       }
     });
-    console.log("listSortByYear", listSortByYear);
+    // console.log("listSortByYear", listSortByYear);
     return listSortByYear;
   };
 
@@ -116,7 +116,7 @@ export default function Mail() {
         listSortByQuarter[quarterKey] = 1;
       }
     });
-    console.log("listSortByQuarter", listSortByQuarter);
+    // console.log("listSortByQuarter", listSortByQuarter);
     return listSortByQuarter;
   };
 
@@ -132,7 +132,7 @@ export default function Mail() {
         listSortByMonth[monthAndYear] = 1;
       }
     });
-    console.log("listSortByMonth", listSortByMonth);
+    // console.log("listSortByMonth", listSortByMonth);
     // console.log(listSortByYear);
     return listSortByMonth;
   };

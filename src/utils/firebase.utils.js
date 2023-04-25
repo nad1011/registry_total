@@ -1,61 +1,14 @@
-// // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// // TODO: Add SDKs for Firebase products that you want to use
-// // https://firebase.google.com/docs/web/setup#available-libraries
-// import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-// import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
-
-// // Your web app's Firebase configuration
-// const firebaseConfig = {
-//   apiKey: "AIzaSyD3Yt7Hg7CFKbNhJvzRHlh4isr2qj4gAko",
-//   authDomain: "registry-total-db.firebaseapp.com",
-//   projectId: "registry-total-db",
-//   storageBucket: "registry-total-db.appspot.com",
-//   messagingSenderId: "4272824435",
-//   appId: "1:4272824435:web:c2360c24ab88048bffca06",
-// };
-
-// // Initialize Firebase
-// const app = initializeApp(firebaseConfig);
-
-// const googleProvider = new GoogleAuthProvider();
-
-// googleProvider.setCustomParameters({
-//   prompt: "select_account",
-// });
-
-// export const auth = getAuth();
-
-// export const db = getFirestore(app);
-
-// export const signInWithGooglePopup = () =>
-//   signInWithPopup(auth, googleProvider);
-
-// export const createUserDocumentFromAuth = async (userAuth) => {
-//   const userDocRef = doc(db, "users", userAuth.uid);
-
-//   console.log(userDocRef);
-
-//   const userSnapshot = await getDoc(userDocRef);
-
-//   if (!userSnapshot.exists()) {
-//     const { displayName, email } = userAuth;
-//     const createAt = new Date();
-//     alert(`Da tao tai khoan luc ${createAt}`);
-//     try {
-//       await setDoc(userDocRef, {
-//         displayName,
-//         email,
-//         createAt,
-//       });
-//     } catch (error) {
-//       console.log("error creating the user", error.message);
-//     }
-//   }
-//   return userDocRef;
-// };
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, query, getDocs } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  query,
+  getDocs,
+  getDoc,
+  DocumentReference,
+  doc,
+  docs,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCserEAADxBpBDkNWDig-mQGRXOuyx_-hg",
@@ -77,9 +30,39 @@ export const getRegistrationDate = async () => {
   const list = [];
   querySnapshot.forEach((doc) => {
     list.push(doc.data()["registration-date"]);
-    // console.log(doc.id, " => ", doc.data()["expiration-date"]);
   });
-  // console.log(list);
   return list;
 };
+
+// export const getOwnerInfo = async () => {
+//   const querySnapshot = await getDocs(collection(database, "owner-info"));
+//   const list = [];
+//   querySnapshot.forEach((doc) => {
+//     // list.push(doc.data()["cars"]);
+//     list.push(doc.data().cars);
+//   });
+//   return list;
+// };
+
+export const getOwnerInfo = async () => {
+  // const userDocRef = doc(database, "owner-info", "009200263045");
+  const userDocRef = doc(database, "/owner-info/030383960107");
+  // const userDocRef = doc(database, "car-info", "11D273447");
+  const querySnapshot = await getDoc(userDocRef);
+  // console.log("userDocRef", userDocRef);
+  return querySnapshot.data();
+
+  // const querySnapshot = await getDocs(collection(database, "owner-info"));
+  // const list = [];
+  // querySnapshot.forEach((doc) => {
+  //   // list.push(doc.data()["cars"]);
+  //   list.push(doc.data().cars);
+  // });
+  // return userDocRef;
+};
+// export const getOwnerInfo = async (clubDocRef) => {
+//   const clubSnapshot = await getDoc(clubDocRef);
+//   return clubSnapshot.data();
+// };
+
 export { database };

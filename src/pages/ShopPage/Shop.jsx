@@ -10,6 +10,7 @@ import LICENSE_DATA from "../../data";
 import styles from "./Shop.module.css";
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
+import { getOwnerInfo } from "../../utils/firebase.utils";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -26,6 +27,18 @@ export default function Shop() {
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
   const [filter, setFilter] = useState("numberPlate");
+
+  //
+  useEffect(() => {
+    const getNewData = async () => {
+      const newList = await getOwnerInfo();
+      // setList(newList);
+      console.log(newList);
+    };
+
+    getNewData();
+  }, [filter]);
+  //
 
   useEffect(() => {
     const newList = LICENSE_DATA.filter((car) => {
@@ -71,9 +84,14 @@ export default function Shop() {
           <Stack
             direction="row"
             justifyContent="space-between"
-            sx={{ height: "6vh", mt: "1vh"  }}
+            sx={{ height: "6vh", mt: "1vh" }}
           >
-            <Stack direction="row" spacing={-1} alignItems="center" sx={{ height: 1 }}>
+            <Stack
+              direction="row"
+              spacing={-1}
+              alignItems="center"
+              sx={{ height: 1 }}
+            >
               <SearchBox
                 placeholder={`Search by ${filter}`}
                 onChangeHandler={onTitleChange}

@@ -71,7 +71,7 @@ export default function Mail() {
     const getNewData = async () => {
       const newList = await getRegistrationDate();
       setList(newList);
-      // console.log(list);
+      // console.log(newList);
     };
 
     getNewData();
@@ -189,23 +189,11 @@ export default function Mail() {
         };
       }),
     }));
-    // console.log(viewOption);
-    // console.log("sorted list", sortedList);
-    // console.log("oldData: ", data[0].data);
+
     setData(newData);
     setTableData(newData[0].data);
-    // console.log("newdata", newData[0].data);
-    // console.log("data: ", data[0].data);
-    // console.log("new", data[0].data);
-    // tableData = data;
-    // console.log("2", tableData);
-    // console.log("data in mail", data);
   };
-  //
-  // useEffect(() => {
-  //   console.log("effect");
-  //   setTableData(data[0].data);
-  // }, [data]);
+
   const onChangeDropdown = (data) => {
     setViewOption(data);
   };

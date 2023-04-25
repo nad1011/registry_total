@@ -27,6 +27,7 @@ export default function SplitButton({ tranfer, changeGraph }) {
   useEffect(() => {
     // console.log(options[selectedIndex]);
     tranfer(options[selectedIndex]);
+    // changeGraph();
   }, [selectedIndex, tranfer]);
 
   const handleMenuItemClick = (event, index) => {

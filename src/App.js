@@ -5,7 +5,7 @@ import MainPage from "./pages/MainPage/MainPage";
 import Shop from "./pages/ShopPage/Shop";
 import Mail from "./pages/Mail";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn/SignIn";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -22,7 +22,7 @@ const App = () => {
       <CssBaseline />
       {login && <Navbar />}
       <Routes>
-        <Route path="/" element={<SignIn tranfer={onSignIn}/>} />
+        <Route path="/" element={<SignIn tranfer={onSignIn} />} />
         <Route path="/home" element={<MainPage />} />
         <Route path="/shop" element={<Shop />} />
         <Route path="/mail" element={<Mail />} />

@@ -101,7 +101,7 @@ export default function SignIn( {tranfer} ) {
           sx={{ width: 1, my: 2 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <MdPermIdentity size={24} />
               </InputAdornment>
             ),
@@ -119,7 +119,7 @@ export default function SignIn( {tranfer} ) {
           sx={{ width: 1, my: 2 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <RiLockPasswordFill size={24} />
               </InputAdornment>
             ),

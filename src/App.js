@@ -5,7 +5,7 @@ import Homepage from "./pages/Homepage/Homepage";
 import Shop from "./pages/ShopPage/Shop";
 import Mail from "./pages/Mail";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from "@mui/material/CssBaseline";
 
 const App = () => {
   return (

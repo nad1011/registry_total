@@ -6,7 +6,7 @@ import styles from "./NavItem.module.css";
 const items = [
   {
     cName: "",
-    path: "/",
+    path: "/home",
     icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]}/>,
     title: "Check",
   },

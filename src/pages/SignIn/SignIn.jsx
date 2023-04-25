@@ -18,7 +18,7 @@ import { BsShieldLockFill } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 
-export default function SignIn() {
+export default function SignIn( {tranfer} ) {
   const [input, setInput] = useState({ id: "", password: "" });
   const [error, setError] = useState({
     idState: false,
@@ -59,6 +59,7 @@ export default function SignIn() {
         idState: true,
         idMessage: "ID không tồn tại",
       });
+      tranfer(false);
       return;
     }
 
@@ -70,7 +71,11 @@ export default function SignIn() {
         passwordState: true,
         passwordMessage: "Sai mật khẩu",
       });
+      tranfer(false);
       return;
+    }
+    else {
+      tranfer(true);
     }
   };
 

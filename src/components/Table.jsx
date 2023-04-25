@@ -30,7 +30,6 @@ export default function EnhancedTable({ data }) {
     const newRows = data.map((row) => {
       return createData(row.x, row.y);
     });
-    // console.log("rerender", data);
     setRows(newRows);
   }, [data]);
 

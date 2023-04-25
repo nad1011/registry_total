@@ -7,7 +7,7 @@ import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import LICENSE_DATA from "../../data";
-import styles from "./Shop.module.css";
+import styles from "./Registration.module.css";
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
 import { getOwnerInfo } from "../../utils/firebase.utils";
@@ -22,7 +22,7 @@ const chunkFilterList = (array, chunkSize) => {
   return chunkedArray;
 };
 
-export default function Shop() {
+export default function Registration() {
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);

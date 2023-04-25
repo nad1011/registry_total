@@ -1,21 +1,32 @@
 import "./App.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Routes, Route } from "react-router-dom";
-import Homepage from "./pages/Homepage/Homepage";
-import Shop from "./pages/ShopPage/Shop";
-import Mail from "./pages/Mail";
+import Home from "./pages/Home/Home";
+import Registration from "./pages/Registration/Registration";
+import Statistic from "./pages/Statistic/Statistic";
 import Navbar from "./components/Navbar/Navbar.jsx";
-import CssBaseline from '@mui/material/CssBaseline';
+import CssBaseline from "@mui/material/CssBaseline";
+import SignIn from "./pages/SignIn/SignIn";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const App = () => {
+  const [login, setLogin] = useState(false);
+  const navigate = useNavigate();
+  const onSignIn = (data) => {
+    setLogin(data);
+    if (data) navigate("/home");
+  };
   return (
     <div className="App">
       <CssBaseline />
-      <Navbar />
+      {login && <Navbar />}
       <Routes>
-        <Route path="/" element={<Homepage />} />
-        <Route path="/shop" element={<Shop />} />
-        <Route path="/mail" element={<Mail />} />
+        <Route path="/" element={<SignIn transfer={onSignIn} />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/statistic" element={<Statistic />} />
+        <Route path="/registration" element={<Registration />} />
+        <Route path="/prediction" element={<Home />} />
       </Routes>
     </div>
   );

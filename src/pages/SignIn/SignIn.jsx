@@ -12,13 +12,12 @@ import {
   InputAdornment,
   Link,
 } from "@mui/material";
-import { purple } from "@mui/material/colors";
 
 import { BsShieldLockFill } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 
-export default function SignIn() {
+export default function SignIn({ transfer }) {
   const [input, setInput] = useState({ id: "", password: "" });
   const [error, setError] = useState({
     idState: false,
@@ -59,6 +58,7 @@ export default function SignIn() {
         idState: true,
         idMessage: "ID không tồn tại",
       });
+      transfer(false);
       return;
     }
 
@@ -70,7 +70,10 @@ export default function SignIn() {
         passwordState: true,
         passwordMessage: "Sai mật khẩu",
       });
+      transfer(false);
       return;
+    } else {
+      transfer(true);
     }
   };
 
@@ -85,7 +88,7 @@ export default function SignIn() {
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ mb: 5, width: 50, height: 50, bgcolor: purple[400] }}>
+        <Avatar sx={{ mb: 5, width: 50, height: 50, bgcolor: "#ab47bc" }}>
           <BsShieldLockFill size={30} />
         </Avatar>
         <TextField
@@ -96,7 +99,7 @@ export default function SignIn() {
           sx={{ width: 1, my: 2 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <MdPermIdentity size={24} />
               </InputAdornment>
             ),
@@ -114,7 +117,7 @@ export default function SignIn() {
           sx={{ width: 1, my: 2 }}
           InputProps={{
             endAdornment: (
-              <InputAdornment>
+              <InputAdornment position="end">
                 <RiLockPasswordFill size={24} />
               </InputAdornment>
             ),

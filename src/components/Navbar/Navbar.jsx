@@ -13,7 +13,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
-
+import { NavbarContext } from "../../contexts/NavbarContext";
 const drawerWidth = 170;
 
 const openedMixin = (theme) => ({
@@ -75,16 +75,18 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function Navbar() {
-  const [open, setOpen] = React.useState(false);
+  // const [open, setOpen] = React.useState(false);
+  const { open, changeOpen } = React.useContext(NavbarContext);
 
   const handleDrawer = () => {
-    setOpen(!open);
+    // setOpen(!open);
+    changeOpen();
   };
 
   return (
-    <Box sx={{ display: "flex", height: 1}}>
+    <Box sx={{ display: "flex", height: 1 }}>
       <Drawer variant="permanent" open={open}>
-        <DrawerHeader sx= {{bgcolor: "var(--secondary-color)"}}>
+        <DrawerHeader sx={{ bgcolor: "var(--secondary-color)" }}>
           <IconButton
             sx={{
               justifyContent: "center",
@@ -126,7 +128,7 @@ function Navbar() {
           ))}
         </List>
         <Divider />
-        <DrawerFooter sx={{bgcolor: "var(--secondary-color)"}}>
+        <DrawerFooter sx={{ bgcolor: "var(--secondary-color)" }}>
           <ListItem
             sx={{
               height: 1,
@@ -134,7 +136,7 @@ function Navbar() {
               // justifyContent: open ? "" : "center",
               px: open ? 2 : 0,
               transition: "0.3s",
-              hover:"none"
+              hover: "none",
             }}
           >
             <ListItemIcon

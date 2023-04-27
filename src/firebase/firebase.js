@@ -33,6 +33,14 @@ export const getRegistrationDate = async () => {
   return registrationList.docs.map((doc) => doc.data()["registration-date"]);
 };
 
+export const getExpirationDate = async () => {
+  const expirationDate = await getDocs(
+    collection(database, "registration-info")
+  );
+
+  return expirationDate.docs.map((doc) => doc.data()["expiration-date"]);
+};
+
 //============================================================================//
 
 // const licenseData = new Set();

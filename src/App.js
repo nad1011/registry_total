@@ -7,20 +7,24 @@ import Statistic from "./pages/Statistic/Statistic";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn/SignIn";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
-  const [login, setLogin] = useState(false);
+  // const [login, setLogin] = useState(!!localStorage.getItem("login"));
   const navigate = useNavigate();
+
   const onSignIn = (data) => {
-    setLogin(data);
-    if (data) navigate("/home");
+    if (data) {
+      navigate("/statistic");
+      // localStorage.setItem("login",true);
+      // setLogin(true);
+    }
   };
+
   return (
     <div className="App">
       <CssBaseline />
-      {login && <Navbar />}
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />

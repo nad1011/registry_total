@@ -1,21 +1,19 @@
 import { useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-
 import { database } from "../../firebase/firebase";
-
 import {
-  Container,
   Box,
   TextField,
   Button,
   Avatar,
   InputAdornment,
   Link,
+  Typography,
 } from "@mui/material";
-
-import { BsShieldLockFill } from "react-icons/bs";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
+import { Stack, Grid } from "@mui/material";
+import backgroundImage from "../../assets/images/test2.jpg";
 
 export default function SignIn({ transfer }) {
   const [input, setInput] = useState({ id: "", password: "" });
@@ -78,65 +76,181 @@ export default function SignIn({ transfer }) {
   };
 
   return (
-    <Container maxWidth="xs">
+    <Box
+      width="100%"
+      justifyContent="center"
+      alignItems="center"
+      sx={{
+        p: 0,
+        m: 0,
+        background: `url(${backgroundImage})`,
+        backgroundRepeat: "no-repeat",
+        backgroundSize: "cover",
+        display: "flex",
+        // flexDirection: "column",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
       <Box
         sx={{
-          height: "100vh",
+          height: "100%",
+          width: "100%",
+          backdropFilter: "blur(5px)",
           display: "flex",
-          flexDirection: "column",
+          // flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
       >
-        <Avatar sx={{ mb: 5, width: 50, height: 50, bgcolor: "#ab47bc" }}>
-          <BsShieldLockFill size={30} />
-        </Avatar>
-        <TextField
-          required
-          name="id"
-          label="ID"
-          variant="standard"
-          sx={{ width: 1, my: 2 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <MdPermIdentity size={24} />
-              </InputAdornment>
-            ),
+        <Grid
+          container
+          sx={{
+            height: "85%",
+            width: "95%",
+            background: `url(${backgroundImage})`,
+            backgroundRepeat: "no-repeat",
+            backgroundSize: "cover",
+            opacity: 0.9,
+            borderRadius: 5,
+            boxShadow: 3,
           }}
-          onChange={handleInput}
-          error={error.idState}
-          helperText={error.idMessage}
-        />
-        <TextField
-          required
-          type="password"
-          name="password"
-          label="Mật khẩu"
-          variant="standard"
-          sx={{ width: 1, my: 2 }}
-          InputProps={{
-            endAdornment: (
-              <InputAdornment position="end">
-                <RiLockPasswordFill size={24} />
-              </InputAdornment>
-            ),
-          }}
-          onChange={handleInput}
-          error={error.passwordState}
-          helperText={error.passwordMessage}
-        />
-        <Link href="" underline="hover" sx={{ alignSelf: "flex-end", mt: 1 }}>
-          Quên mật khẩu
-        </Link>
-        <Button
-          variant="contained"
-          sx={{ width: 1, mt: 3, borderRadius: "15px" }}
-          onClick={handleSubmit}
+          justifyContent={"center"}
+          alignItems={"center"}
         >
-          Đăng nhập
-        </Button>
+          <Grid item xs={0} lg={6} sx={{ height: "100%" }}>
+            <Stack sx={{ height: "100%", p: 10 }}>
+              <Box sx={{ height: "50%" }}>
+                <Typography
+                  variant="h4"
+                  gutterBottom
+                  sx={{
+                    color: "var(--avatar-color)",
+                    fontWeight: "bold",
+                    fontFamily: "poppins",
+                  }}
+                >
+                  Registry Total
+                </Typography>
+              </Box>
+              <Box sx={{ height: "50%" }}>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    color: "var(--primary-color)",
+                    fontFamily: "poppins",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Welcome
+                </Typography>
+                <Typography
+                  variant="h3"
+                  sx={{
+                    color: "var(--primary-color)",
+                    fontFamily: "poppins",
+                    fontWeight: "bold",
+                  }}
+                >
+                  To Bla Ble!
+                </Typography>
+                <Typography
+                  variant="p"
+                  sx={{ color: "var(--primary-color)", fontFamily: "poppins" }}
+                >
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Magnam, molestias possimus quod, autem.
+                </Typography>
+              </Box>
+            </Stack>
+          </Grid>
+          <Grid item xs={12} lg={6} sx={{ height: "100%" }}>
+            <Box
+              sx={{
+                height: "100%",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                p: 10,
+              }}
+            >
+              <Typography
+                variant="h4"
+                sx={{ color: "var(--avatar-color)", fontFamily: "poppins" }}
+              >
+                Sign in
+              </Typography>
+              <TextField
+                required
+                name="id"
+                label="ID"
+                variant="standard"
+                sx={{ width: 1, my: 2, fontFamily: "poppins" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <MdPermIdentity size={24} />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={handleInput}
+                error={error.idState}
+                helperText={error.idMessage}
+              />
+              <TextField
+                required
+                type="password"
+                name="password"
+                label="Mật khẩu"
+                variant="standard"
+                sx={{ width: 1, my: 2, fontFamily: "poppins" }}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">
+                      <RiLockPasswordFill size={24} />
+                    </InputAdornment>
+                  ),
+                }}
+                onChange={handleInput}
+                error={error.passwordState}
+                helperText={error.passwordMessage}
+              />
+              <Link
+                href=""
+                sx={{
+                  alignSelf: "flex-end",
+                  mt: 1,
+                  fontFamily: "poppins",
+                  color: "var(--primary-color)",
+                  textDecoration: "none",
+                  ':hover': {color: "var(--border-color)",}
+                }}
+              >
+                Forget password
+              </Link>
+              <Button
+                sx={{
+                  width: 0.8,
+                  height: 50,
+                  mt: 2,
+                  backgroundColor: "var(--avatar-color)",
+                  color: "whitesmoke",
+                  fontWeight: "bold",
+                  fontFamily: "poppins",
+                  "&:hover": {
+                    backgroundColor: "var(--border-color)",
+                    color: "var(--avatar-color)",
+                  },
+                }}
+                onClick={handleSubmit}
+              >
+                Sign In
+              </Button>
+            </Box>
+          </Grid>
+        </Grid>
       </Box>
-    </Container>
+    </Box>
   );
 }

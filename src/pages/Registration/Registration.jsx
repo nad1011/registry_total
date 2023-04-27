@@ -10,7 +10,6 @@ import LICENSE_DATA from "../../data";
 import styles from "./Registration.module.css";
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
-import { getOwnerInfo } from "../../utils/firebase.utils";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -27,18 +26,6 @@ export default function Registration() {
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
   const [filter, setFilter] = useState("numberPlate");
-
-  //
-  useEffect(() => {
-    const getNewData = async () => {
-      const newList = await getOwnerInfo();
-      // setList(newList);
-      console.log(newList);
-    };
-
-    getNewData();
-  }, [filter]);
-  //
 
   useEffect(() => {
     const newList = LICENSE_DATA.filter((car) => {
@@ -96,7 +83,7 @@ export default function Registration() {
                 placeholder={`Search by ${filter}`}
                 onChangeHandler={onTitleChange}
               />
-              <SelectSearch tranfer={selectHandler} />
+              <SelectSearch transfer={selectHandler} />
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center">
               <IconButton

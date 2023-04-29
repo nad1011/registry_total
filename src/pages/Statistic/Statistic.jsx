@@ -75,16 +75,16 @@ export default function Statistic() {
   const [viewOption, setViewOption] = useState("Tháng");
   const [expiredView, setExpiredView] = useState();
 
-  // useEffect(() => {
-  //   const getNewData = async () => {
-  //     const newCurrentList = await getRegistrationDate();
-  //     setCurrentList(newCurrentList);
-  //     const newExpiredList = await getExpirationDate();
-  //     setExpiredList(newExpiredList);
-  //   };
+  useEffect(() => {
+    const getNewData = async () => {
+      const newCurrentList = await getRegistrationDate();
+      setCurrentList(newCurrentList);
+      const newExpiredList = await getExpirationDate();
+      setExpiredList(newExpiredList);
+    };
 
-  //   getNewData();
-  // }, []);
+    getNewData();
+  }, []);
 
   const sortByYear = () => {
     const listSortByYear = {

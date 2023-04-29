@@ -127,7 +127,7 @@ export default function SignIn({ transfer }) {
                   sx={{
                     color: "var(--avatar-color)",
                     fontWeight: "bold",
-                    fontFamily: "poppins",
+                    fontFamily: "Roboto Mono",
                   }}
                 >
                   Registry Total
@@ -138,7 +138,7 @@ export default function SignIn({ transfer }) {
                   variant="h3"
                   sx={{
                     color: "var(--primary-color)",
-                    fontFamily: "poppins",
+                    fontFamily: "roboto mono",
                     fontWeight: "bold",
                   }}
                 >
@@ -148,7 +148,7 @@ export default function SignIn({ transfer }) {
                   variant="h3"
                   sx={{
                     color: "var(--primary-color)",
-                    fontFamily: "poppins",
+                    fontFamily: "roboto mono",
                     fontWeight: "bold",
                   }}
                 >
@@ -177,7 +177,11 @@ export default function SignIn({ transfer }) {
             >
               <Typography
                 variant="h4"
-                sx={{ color: "var(--avatar-color)", fontFamily: "poppins" }}
+                sx={{
+                  color: "var(--avatar-color)",
+                  fontFamily: "roboto mono",
+                  fontWeight: "bold",
+                }}
               >
                 Sign in
               </Typography>
@@ -202,7 +206,7 @@ export default function SignIn({ transfer }) {
                 required
                 type="password"
                 name="password"
-                label="Mật khẩu"
+                label="Password"
                 variant="standard"
                 sx={{ width: 1, my: 2, fontFamily: "poppins" }}
                 InputProps={{
@@ -222,9 +226,11 @@ export default function SignIn({ transfer }) {
                   alignSelf: "flex-end",
                   mt: 1,
                   fontFamily: "poppins",
+                  fontWeight: "bold",
+                  fontSize: 14,
                   color: "var(--primary-color)",
                   textDecoration: "none",
-                  ':hover': {color: "var(--border-color)",}
+                  ":hover": { color: "var(--border-color)" },
                 }}
               >
                 Forget password

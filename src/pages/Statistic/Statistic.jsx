@@ -10,8 +10,8 @@ import {
   getRegistrationDate,
   getExpirationDate,
 } from "../../firebase/firebase";
-
 import { useState, useEffect } from "react";
+import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 
 // var tableData = [];
 
@@ -19,7 +19,7 @@ export default function Statistic() {
   // data de truyen vao line graph
   const [data, setData] = useState([
     {
-      id: "japan",
+      id: "statistic",
       color: "hsl(62, 70%, 50%)",
       data: [
         {
@@ -65,13 +65,14 @@ export default function Statistic() {
       ],
     },
   ]);
+
   const [tableData, setTableData] = useState([]);
   // list data from database
   const [currentList, setCurrentList] = useState([]);
   const [expiredList, setExpiredList] = useState([]);
   const [list, setList] = useState([]);
 
-  const [viewOption, setViewOption] = useState("");
+  const [viewOption, setViewOption] = useState("Tháng");
   const [expiredView, setExpiredView] = useState();
 
   // useEffect(() => {
@@ -276,7 +277,13 @@ export default function Statistic() {
               p: 1,
             }}
           >
-            <Dropdown transfer={onChangeDropdown} changeGraph={handle} />
+            <ToggleSwitch
+              values={["Tháng", "Quý", "Năm"]}
+              selected={viewOption}
+              onChange={onChangeDropdown}
+              changeGraph={handle}
+            />
+            {/* <Dropdown transfer={onChangeDropdown} changeGraph={handle} /> */}
           </Box>
         </Grid>
         <Grid

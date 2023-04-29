@@ -13,22 +13,31 @@ import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 
 export default function EnhancedTable({ data }) {
-  function createData(name, calories) {
-    return {
-      name,
-      calories,
-    };
+  function createData(id, name, numberPlate, registrationDate, center) {
+    return { id, name, numberPlate, registrationDate, center };
   }
 
   const [rows, setRows] = React.useState(
     data.map((row) => {
-      return createData(row.x, row.y);
+      return createData(
+        row.id,
+        row.owner,
+        row.numberPlate,
+        row["registration-date"],
+        row.center
+      );
     })
   );
 
   React.useEffect(() => {
     const newRows = data.map((row) => {
-      return createData(row.x, row.y);
+      return createData(
+        row.id,
+        row.owner,
+        row.numberPlate,
+        row["registration-date"],
+        row.center
+      );
     });
     setRows(newRows);
   }, [data]);
@@ -63,21 +72,34 @@ export default function EnhancedTable({ data }) {
 
   const headCells = [
     {
+      id: "registrationDate",
+      numeric: false,
+      disablePadding: true,
+      label: "Registration Date",
+    },
+    {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Time",
+      label: "Owner",
     },
     {
-      id: "calories",
-      numeric: true,
-      disablePadding: false,
-      label: "Quantity",
+      id: "numberPlate",
+      numeric: false,
+      disablePadding: true,
+      label: "Number Plate",
+    },
+
+    {
+      id: "center",
+      numeric: false,
+      disablePadding: true,
+      label: "Center",
     },
   ];
 
   const DEFAULT_ORDER = "asc";
-  const DEFAULT_ORDER_BY = "calories";
+  const DEFAULT_ORDER_BY = "registrationDate";
   const DEFAULT_ROWS_PER_PAGE = 10;
 
   function EnhancedTableHead(props) {
@@ -283,22 +305,23 @@ export default function EnhancedTable({ data }) {
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
-                          key={row.name}
+                          key={row.id}
                           selected={isItemSelected}
                           sx={{ cursor: "pointer" }}
                         >
+                          <TableCell>{row.registrationDate}</TableCell>
                           <TableCell
                             component="th"
                             id={labelId}
                             scope="row"
-                            padding="none"
+                            // padding="none"
                           >
                             {row.name}
                           </TableCell>
-                          <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell>
+                          <TableCell>{row.numberPlate}</TableCell>
+
+                          <TableCell>{row.center}</TableCell>
+                          <TableCell>{row.protein}</TableCell>
                         </TableRow>
                       );
                     })

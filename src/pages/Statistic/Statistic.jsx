@@ -9,11 +9,10 @@ import Table from "../../components/Table";
 import {
   getRegistrationDate,
   getExpirationDate,
+  getRegistrationInfo,
 } from "../../firebase/firebase";
 import { useState, useEffect } from "react";
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
-
-// var tableData = [];
 
 export default function Statistic() {
   // data de truyen vao line graph
@@ -84,6 +83,15 @@ export default function Statistic() {
     };
 
     getNewData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const newData = await getRegistrationInfo();
+      setTableData(newData);
+      // console.log(newData);
+    };
+    getData();
   }, []);
 
   const sortByYear = () => {
@@ -238,7 +246,7 @@ export default function Statistic() {
 
     setData(newData);
     // console.log("sortList", sortedList);
-    setTableData(newData[0].data);
+    // setTableData(newData[0].data);
   };
 
   const onChangeDropdown = (data) => {
@@ -337,4 +345,3 @@ export default function Statistic() {
     </Page>
   );
 }
-// export { tableData };

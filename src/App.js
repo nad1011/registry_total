@@ -26,11 +26,11 @@ const App = () => {
     <div className="App">
       <CssBaseline />
       <Routes>
-        <Route path="/" element={<SignIn transfer={onSignIn} />} />
+        {/* <Route path="/" element={<SignIn transfer={onSignIn} />} /> */}
         <Route path="/home" element={<Home />} />
-        <Route path="/statistic" element={<Statistic />} />
+        {/* <Route path="/statistic" element={<Statistic />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/prediction" element={<Home />} />
+        <Route path="/prediction" element={<Home />} /> */}
       </Routes>
     </div>
   );

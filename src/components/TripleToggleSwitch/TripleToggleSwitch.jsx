@@ -16,12 +16,12 @@ function ToggleSwitch ({ values, selected, onChange, changeGraph }) {
 
   const ClickableLabel = ({ title, onChange, id }) => (
     <SwitchLabel onClick={() => onChange(title)} className={id}>
-      {titleCase(title)}
+      {titleCase(title)}  
     </SwitchLabel>
   );
 
   const ConcealedRadio = ({ value, selected }) => (
-    <SwitchRadio type="radio" name="switch" checked={selected === value} />
+    <SwitchRadio type="radio" name="switch" checked={selected === value} readOnly={true}/>
   );
   useEffect(() => {
     setSelectedState(selected);

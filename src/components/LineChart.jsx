@@ -1,13 +1,17 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-
+import { Theme } from "@nivo/core";
 function LineChart({ viewOption, data }) {
   return (
     <>
       {/* <button onClick={handle}>ok</button> */}
       <ResponsiveLine
         data={data}
-        margin={{ top: 20, right: 20, bottom: 20, left: 30 }}
+        theme={{
+          fontFamily: 'roboto mono',
+          fontSize: 10,
+        }}
+        margin={{ top: 20, right: 50, bottom: 50, left: 50 }}
         xScale={{ type: "point" }}
         yScale={{
           type: "linear",
@@ -16,27 +20,29 @@ function LineChart({ viewOption, data }) {
           stacked: true,
           reverse: false,
         }}
+        enableGridX={false}
+        enableGridY={false}
         yFormat=" >-.2f"
-        curve="linear"
+        curve="cardinal"
         axisTop={null}
         axisRight={null}
         axisBottom={{
           orient: "bottom",
-          tickSize: 5,
-          tickPadding: 5,
+          tickSize: 0,
+          tickPadding: 20,
           tickRotation: 0,
-          legend: "transportation",
-          legendOffset: 36,
-          legendPosition: "middle",
+          // legend: "transportation",
+          // legendOffset: 36,
+          // legendPosition: "middle",
         }}
         axisLeft={{
           orient: "left",
-          tickSize: 5,
-          tickPadding: 5,
+          tickSize: 0,
+          tickPadding: 15,
           tickRotation: 0,
-          legend: "count",
-          legendOffset: -40,
-          legendPosition: "middle",
+          // legend: "count",
+          // legendOffset: -40,
+          // legendPosition: "middle",
         }}
         colors={{ scheme: "category10" }}
         pointSize={10}
@@ -44,10 +50,11 @@ function LineChart({ viewOption, data }) {
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}
         pointLabelYOffset={-12}
-        enableArea={true}
+        // enableArea={true}
         useMesh={true}
-        areaBaselineValue={0}
+        // areaBaselineValue={0}
         gridXValues={5}
+        enablePoints={false}
       />
     </>
   );

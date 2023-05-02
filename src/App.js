@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const App = () => {
-  const [login, setLogin] = useState(false);
+  const [login, setLogin] = useState(true);
   const navigate = useNavigate();
   const onSignIn = (data) => {
     setLogin(data);
@@ -20,13 +20,13 @@ const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      {login && <Navbar />}
+      {/* {login && <Navbar />} */}
       <Routes>
-        <Route path="/" element={<SignIn transfer={onSignIn} />} />
+        {/* <Route path="/" element={<SignIn transfer={onSignIn} />} /> */}
         <Route path="/home" element={<Home />} />
-        <Route path="/statistic" element={<Statistic />} />
+        {/* <Route path="/statistic" element={<Statistic />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/prediction" element={<Home />} />
+        <Route path="/prediction" element={<Home />} /> */}
       </Routes>
     </div>
   );

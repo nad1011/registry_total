@@ -1,5 +1,5 @@
 import React from "react";
-import Page from "../Page/Page";
+import Page from "../../components/Page/Page";
 import LineChart from "../../components/LineChart";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";

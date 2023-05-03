@@ -13,8 +13,10 @@ import {
   Button,
   List,
   ListItem,
-  ListItemText,
+  Stack,
 } from "@mui/material";
+import Page from "../../components/Page/Page";
+import Navbar from "../../components/Navbar/Navbar";
 
 export default function Home() {
   const [stat, setStat] = useState({
@@ -24,95 +26,165 @@ export default function Home() {
   });
 
   return (
-    <Grid
-      container
-      sx={{
-        backgroundImage:
-          'url("https://cdn.wallpapersafari.com/19/63/HYnDUL.jpg")',
-        backgroundColor: "darkgray",
-        backgroundRepeat: "no-repeat",
-        backgroundSize: "100% 100vh",
-      }}
-    >
+    <Page>
       <Grid
-        item
-        sm={6}
-        md={9}
+        container
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          backgroundColor: "darkgray",
+          height: "100%",
+          width: "100%",
         }}
       >
-        <Box sx={{ m: "10%" }}>
-          <Typography variant="h2" sx={{ fontFamily: "garamond,serif" }}>
-            Registry Total
-          </Typography>
-          <Typography
-            variant="body1"
-            sx={{
-              py: "3%",
-              textAlign: "justify",
-              fontFamily: "courier new,monospace",
-            }}
-          >
-            Are you tired of waiting in long lines at the DMV to register your
-            car? Say goodbye to the hassle and register your car online with our
-            easy-to-use platform. Our website offers a fast and convenient way
-            to get your car registered without any unnecessary delays. Save time
-            and energy by using our car registration service today!
-          </Typography>
-          <Button
-            variant="contained"
-            size="large"
-            sx={{ borderRadius: "5px 25px" }}
-          >
-            <Link
-              to="/registration"
-              style={{
-                color: "white",
-                textDecoration: "none",
-                fontFamily: "tahoma,sans-serif",
-              }}
-            >
-              Register Now
-            </Link>
-          </Button>
-        </Box>
-      </Grid>
-      <Grid item sm={6} md={3}>
-        <List
+        <Grid
+          item
+          sm={6}
+          md={9}
           sx={{
             display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-evenly",
+            justifyContent: "center",
             alignItems: "center",
-            height: "100%",
           }}
         >
-          {Object.entries(stat).map(([title, { id, count }]) => (
-            <ListItem
+          <Stack sx={{ m: "10%", height: 1, width: 1 }}>
+            <Typography
+              variant="h2"
+              sx={{ fontFamily: "garamond,serif", mt: "12%" }}
+            >
+              Registry Total
+            </Typography>
+            <Typography
+              variant="body1"
               sx={{
-                display: "flex",
-                width: "75%",
-                height: "20%",
-                p: 0,
+                py: "3%",
+                textAlign: "justify",
+                fontFamily: "courier new,monospace",
               }}
+            >
+              Are you tired of waiting in long lines at the DMV to register your
+              car? Say goodbye to the hassle and register your car online with
+              our easy-to-use platform. Our website offers a fast and convenient
+              way to get your car registered without any unnecessary delays.
+              Save time and energy by using our car registration service today!
+            </Typography>
+            <Stack
+              direction={"row"}
+              sx={{ height: 1 }}
+              justifyContent="space-between"
+              alignItems="center"
             >
               <Box
                 sx={{
-                  width: "100%",
-                  height: "100%",
-                  backgroundColor: "#939799",
-                  border: "2px double #6E7173",
-                  borderRadius: "10px 40px",
-                  opacity: "0.75",
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                  p: 1,
+                  pt: 0,
+                  mb: 2,
+                  width: 0.3,
+                  height: 0.5,
                 }}
-              ></Box>
-            </ListItem>
-          ))}
-        </List>
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ borderRadius: "5px 25px" }}
+                >
+                  <Link
+                    to="/statistic"
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      fontFamily: "tahoma,sans-serif",
+                    }}
+                  >
+                    Statistic
+                  </Link>
+                </Button>
+              </Box>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                  p: 1,
+                  pt: 0,
+                  mb: 2,
+                  width: 0.3,
+                  height: 0.5,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ borderRadius: "5px 25px" }}
+                >
+                  <Link
+                    to="/registration"
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      fontFamily: "tahoma,sans-serif",
+                    }}
+                  >
+                    Register Now
+                  </Link>
+                </Button>
+              </Box>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  borderTopLeftRadius: 0,
+                  borderTopRightRadius: 0,
+                  p: 1,
+                  pt: 0,
+                  mb: 2,
+                  width: 0.3,
+                  height: 0.5,
+                }}
+              >
+                <Button
+                  variant="contained"
+                  size="large"
+                  sx={{ borderRadius: "5px 25px" }}
+                >
+                  <Link
+                    to="/predict"
+                    style={{
+                      color: "white",
+                      textDecoration: "none",
+                      fontFamily: "tahoma,sans-serif",
+                    }}
+                  >
+                    Predict
+                  </Link>
+                </Button>
+              </Box>
+            </Stack>
+          </Stack>
+        </Grid>
+        <Grid
+          item
+          sm={6}
+          md={3}
+          display="flex"
+          justifyContent="flex-start"
+          alignItems="center"
+        >
+          <Box
+            sx={{
+              bgcolor: "#fff",
+              borderRadius: 2,
+              width: 0.8,
+              height: 0.5,
+            }}
+          >
+            This is logo
+          </Box>
+        </Grid>
       </Grid>
-    </Grid>
+    </Page>
   );
 }

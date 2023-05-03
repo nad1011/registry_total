@@ -8,6 +8,8 @@ import {
   getDocs,
   updateDoc,
   arrayUnion,
+  query,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {

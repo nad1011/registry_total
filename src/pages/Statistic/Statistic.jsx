@@ -6,17 +6,21 @@ import Grid from "@mui/material/Grid";
 import Dropdown from "../../components/Dropdown";
 import Switch from "../../components/Switch";
 import Table from "../../components/Table";
-import { getRegistrationDate } from "../../firebase/firebase";
-
+import {
+  getRegistrationDate,
+  getExpirationDate,
+  getRegistrationInfo,
+} from "../../firebase/firebase";
 import { useState, useEffect } from "react";
-
-// var tableData = [];
+import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
+import { Stack } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Statistic() {
   // data de truyen vao line graph
   const [data, setData] = useState([
     {
-      id: "japan",
+      id: "statistic",
       color: "hsl(62, 70%, 50%)",
       data: [
         {
@@ -62,19 +66,34 @@ export default function Statistic() {
       ],
     },
   ]);
+
   const [tableData, setTableData] = useState([]);
   // list data from database
+  const [currentList, setCurrentList] = useState([]);
+  const [expiredList, setExpiredList] = useState([]);
   const [list, setList] = useState([]);
-  const [viewOption, setViewOption] = useState("Năm");
+
+  const [viewOption, setViewOption] = useState("Tháng");
+  const [expiredView, setExpiredView] = useState();
 
   useEffect(() => {
     const getNewData = async () => {
-      const newList = await getRegistrationDate();
-      setList(newList);
-      // console.log(list);
+      const newCurrentList = await getRegistrationDate();
+      setCurrentList(newCurrentList);
+      const newExpiredList = await getExpirationDate();
+      setExpiredList(newExpiredList);
     };
 
     getNewData();
+  }, []);
+
+  useEffect(() => {
+    const getData = async () => {
+      const newData = await getRegistrationInfo();
+      setTableData(newData);
+      // console.log(newData);
+    };
+    getData();
   }, []);
 
   const sortByYear = () => {
@@ -89,6 +108,10 @@ export default function Statistic() {
       2021: 0,
       2022: 0,
       2023: 0,
+      // 2024: 0,
+      // 2025: 0,
+      // 2026: 0,
+      // 2027: 0,
     };
     list.forEach((date) => {
       const year = date.split("-")[0];
@@ -103,7 +126,18 @@ export default function Statistic() {
   };
 
   const sortByQuarter = () => {
-    const listSortByQuarter = {};
+    const listSortByQuarter = {
+      "2014-Q1": 0,
+      "2014-Q2": 0,
+      "2014-Q3": 0,
+      "2014-Q4": 0,
+      "2015-Q1": 0,
+      "2015-Q2": 0,
+      "2015-Q3": 0,
+      "2015-Q4": 0,
+      "2016-Q1": 0,
+      "2016-Q2": 0,
+    };
 
     list.forEach((date) => {
       const [year, month, day] = date.split("-");
@@ -121,7 +155,18 @@ export default function Statistic() {
   };
 
   const sortByMonth = () => {
-    const listSortByMonth = {};
+    const listSortByMonth = {
+      "01/2014": 0,
+      "02/2014": 0,
+      "03/2014": 0,
+      "04/2014": 0,
+      "05/2014": 0,
+      "06/2014": 0,
+      "07/2014": 0,
+      "08/2014": 0,
+      "09/2014": 0,
+      "10/2014": 0,
+    };
 
     list.forEach((date) => {
       const monthAndYear = date.split("-")[0] + "/" + date.split("-")[1];
@@ -132,8 +177,7 @@ export default function Statistic() {
         listSortByMonth[monthAndYear] = 1;
       }
     });
-    // console.log("listSortByMonth", listSortByMonth);
-    // console.log(listSortByYear);
+
     return listSortByMonth;
   };
 
@@ -141,8 +185,16 @@ export default function Statistic() {
     let sortedList = {};
     switch (viewOption) {
       case "Năm": {
-        sortedList = sortByYear();
+        const tmpList = sortByYear();
         // console.log("sortedList", sortedList);
+        const tmpArr = Object.entries(tmpList);
+
+        tmpArr.sort((a, b) => {
+          if (a[0] < b[0]) return -1;
+          if (a[0] > b[0]) return 1;
+          return 0;
+        });
+        sortedList = Object.fromEntries(tmpArr);
         break;
       }
 
@@ -179,107 +231,150 @@ export default function Statistic() {
     }
 
     const keyArray = Object.keys(sortedList);
-    const start = keyArray.length - 10;
+    let start = keyArray.length - 10;
+    if (expiredView) {
+      start = 0;
+    }
+
     const newData = data.map((item) => ({
       ...item,
       data: item.data.map((value, index) => {
         return {
           x: keyArray[start + index],
-          y: sortedList[keyArray[index]],
+          y: sortedList[keyArray[start + index]],
         };
       }),
     }));
-    // console.log(viewOption);
-    // console.log("sorted list", sortedList);
-    // console.log("oldData: ", data[0].data);
+
     setData(newData);
-    setTableData(newData[0].data);
-    // console.log("newdata", newData[0].data);
-    // console.log("data: ", data[0].data);
-    // console.log("new", data[0].data);
-    // tableData = data;
-    // console.log("2", tableData);
-    // console.log("data in mail", data);
+    // console.log("sortList", sortedList);
+    // setTableData(newData[0].data);
   };
-  //
-  // useEffect(() => {
-  //   console.log("effect");
-  //   setTableData(data[0].data);
-  // }, [data]);
+
   const onChangeDropdown = (data) => {
     setViewOption(data);
   };
 
+  useEffect(() => {
+    if (!expiredView) {
+      setList(currentList);
+    } else {
+      setList(expiredList);
+    }
+
+    handle();
+  }, [viewOption, list, expiredView]);
+
+  const getToggleValue = (value) => {
+    setExpiredView(value);
+  };
+
   return (
     <Page>
-      <Grid container justifyContent="center" spacing={2} height={1}>
-        <Grid
-          container
-          item
-          justifyContent="flex-start"
-          alignItems="center"
-          xs={8}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-            }}
+      <Grid container justifyContent="center" spacing={0} height={1}>
+        <Grid item justifyContent="center" height="100%" xs={8}>
+          <Stack
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ m: "2%", height: "97%", mb: 0 }}
           >
-            <Dropdown tranfer={onChangeDropdown} changeGraph={handle} />
-          </Box>
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                p: 2,
+                pt: 1,
+                mb: 0,
+                width: 1,
+                height: 0.07,
+              }}
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    fontFamily: "Raleway",
+                    fontSize: 25,
+                    color: "#000",
+                  }}
+                >
+                  Statistic
+                </Typography>
+                <Switch onSwitch={getToggleValue} />
+              </Stack>
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                p: 1,
+                pt: 0,
+                mb: 2,
+                width: 1,
+                height: 0.5,
+              }}
+            >
+              <LineChart viewOption={viewOption} data={data} />
+            </Box>
+            <Stack direction="row" sx={{ height: 0.39, mt: "2% !important" }}>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                  mr: "2% !important",
+                }}
+              ></Box>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                }}
+              ></Box>
+            </Stack>
+          </Stack>
         </Grid>
-        <Grid
-          container
-          item
-          justifyContent="flex-end"
-          alignItems="center"
-          xs={4}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-            }}
+        <Grid item justifyContent="center" height="100%" xs={4}>
+          <Stack
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ m: "4%", height: "96%", mb: 0, ml: 0 }}
           >
-            <Switch />
-          </Box>
-        </Grid>
-        <Grid container item justifyContent="center" height={0.5}>
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-              width: 0.7,
-              height: 1.0,
-            }}
-          >
-            <LineChart viewOption={viewOption} data={data} />
-          </Box>
-        </Grid>
-        <Grid container item justifyContent="center" height={0.4}>
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              pl: 1,
-              pr: 1,
-              width: 0.7,
-              height: 1.0,
-            }}
-          >
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                p: 1,
+                mb: "4%",
+                width: 0.6,
+              }}
+            >
+              <ToggleSwitch
+                values={["Tháng", "Quý", "Năm"]}
+                selected={viewOption}
+                onChange={onChangeDropdown}
+                changeGraph={handle}
+              />
+            </Box>
             <Table data={tableData} />
-          </Box>
+          </Stack>
         </Grid>
       </Grid>
     </Page>
   );
 }
-// export { tableData };

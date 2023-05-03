@@ -13,21 +13,43 @@ import { useEffect } from "react";
 
 const options = ["Tháng", "Quý", "Năm"];
 
-export default function SplitButton({ tranfer, changeGraph }) {
+export default function SplitButton({ transfer, changeGraph }) {
   const [open, setOpen] = React.useState(false);
   const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState(2);
+  const [selectedIndex, setSelectedIndex] = React.useState();
 
   const handleClick = () => {
     // console.info(`You clicked ${options[selectedIndex]}`);
-    tranfer(options[selectedIndex]);
+    transfer(options[selectedIndex]);
     changeGraph();
   };
 
+  const handleBtnYear = () => {
+    // console.info(`You clicked ${options[2]}`);
+    transfer(options[2]);
+    setSelectedIndex(2);
+    // changeGraph();
+  };
+
+  const handleBtnQuarter = () => {
+    // console.info(`You clicked ${options[1]}`);
+    transfer(options[1]);
+    setSelectedIndex(1);
+    // changeGraph();
+  };
+
+  const handleBtnMonth = () => {
+    // console.info(`You clicked ${options[0]}`);
+    transfer(options[0]);
+    setSelectedIndex(0);
+    //changeGraph();
+  };
+
   useEffect(() => {
-    // console.log(options[selectedIndex]);
-    tranfer(options[selectedIndex]);
-  }, [selectedIndex, tranfer]);
+    // console.log("effect", options[selectedIndex]);
+    transfer(options[selectedIndex]);
+    // changeGraph();
+  }, [selectedIndex, transfer]);
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -53,7 +75,12 @@ export default function SplitButton({ tranfer, changeGraph }) {
         ref={anchorRef}
         aria-label="split button"
       >
-        <Button onClick={handleClick}>{options[selectedIndex]}</Button>
+        {/*  */}
+        <Button onClick={handleBtnMonth}>{options[0]}</Button>
+        <Button onClick={handleBtnQuarter}>{options[1]}</Button>
+        <Button onClick={handleBtnYear}>{options[2]}</Button>
+        {/*  */}
+        {/* <Button onClick={handleClick}>{options[selectedIndex]}</Button>
         <Button
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}
@@ -63,9 +90,9 @@ export default function SplitButton({ tranfer, changeGraph }) {
           onClick={handleToggle}
         >
           <MdOutlineArrowDropDownCircle />
-        </Button>
+        </Button> */}
       </ButtonGroup>
-      <Popper
+      {/* <Popper
         sx={{
           zIndex: 1,
         }}
@@ -100,7 +127,7 @@ export default function SplitButton({ tranfer, changeGraph }) {
             </Paper>
           </Grow>
         )}
-      </Popper>
+      </Popper> */}
     </React.Fragment>
   );
 }

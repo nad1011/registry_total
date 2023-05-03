@@ -11,24 +11,34 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
+import { styled } from "@mui/system";
 
 export default function EnhancedTable({ data }) {
-  function createData(name, calories) {
-    return {
-      name,
-      calories,
-    };
+  function createData(id, name, numberPlate, registrationDate, center) {
+    return { id, name, numberPlate, registrationDate, center };
   }
 
   const [rows, setRows] = React.useState(
     data.map((row) => {
-      return createData(row.x, row.y);
+      return createData(
+        row.id,
+        row.owner,
+        row.numberPlate,
+        row["registration-date"],
+        row.center
+      );
     })
   );
 
   React.useEffect(() => {
     const newRows = data.map((row) => {
-      return createData(row.x, row.y);
+      return createData(
+        row.id,
+        row.owner,
+        row.numberPlate,
+        row["registration-date"],
+        row.center
+      );
     });
     setRows(newRows);
   }, [data]);
@@ -63,22 +73,35 @@ export default function EnhancedTable({ data }) {
 
   const headCells = [
     {
+      id: "registrationDate",
+      numeric: false,
+      disablePadding: true,
+      label: "Registration Date",
+    },
+    {
       id: "name",
       numeric: false,
       disablePadding: true,
-      label: "Time",
+      label: "Owner",
     },
     {
-      id: "calories",
-      numeric: true,
-      disablePadding: false,
-      label: "Quantity",
+      id: "numberPlate",
+      numeric: false,
+      disablePadding: true,
+      label: "Number Plate",
+    },
+
+    {
+      id: "center",
+      numeric: false,
+      disablePadding: true,
+      label: "Center",
     },
   ];
 
   const DEFAULT_ORDER = "asc";
-  const DEFAULT_ORDER_BY = "calories";
-  const DEFAULT_ROWS_PER_PAGE = 10;
+  const DEFAULT_ORDER_BY = "registrationDate";
+  const DEFAULT_ROWS_PER_PAGE = 14;
 
   function EnhancedTableHead(props) {
     const { order, orderBy, onRequestSort } = props;
@@ -250,15 +273,24 @@ export default function EnhancedTable({ data }) {
   );
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-
+  const DisplayedRows = styled("p")`margin-bottom: 0px!important`;
   return (
     <>
-      <Box sx={{ width: "100%", height: "100%" }}>
-        <Paper sx={{ width: "100%", mb: 2, height: "100%" }}>
-          <TableContainer sx={{ maxHeight: 0.85 }}>
+      <Box sx={{ width: "100%", height: "90.3%" }}>
+        <Paper
+          sx={{
+            width: "100%",
+            height: "100%",
+            boxShadow: 0,
+            pt: "3%",
+            px: "3%",
+            borderRadius: 2,
+          }}
+        >
+          <TableContainer sx={{ maxHeight: 0.93 }}>
             <Table
               stickyHeader
-              sx={{ minWidth: 750 }}
+              sx={{ minWidth: 750, height: "80%" }}
               aria-labelledby="tableTitle"
               size={"small"}
             >
@@ -283,22 +315,23 @@ export default function EnhancedTable({ data }) {
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
-                          key={row.name}
+                          key={row.id}
                           selected={isItemSelected}
                           sx={{ cursor: "pointer" }}
                         >
+                          <TableCell>{row.registrationDate}</TableCell>
                           <TableCell
                             component="th"
                             id={labelId}
                             scope="row"
-                            padding="none"
+                            // padding="none"
                           >
                             {row.name}
                           </TableCell>
-                          <TableCell align="right">{row.calories}</TableCell>
-                          <TableCell align="right">{row.fat}</TableCell>
-                          <TableCell align="right">{row.carbs}</TableCell>
-                          <TableCell align="right">{row.protein}</TableCell>
+                          <TableCell>{row.numberPlate}</TableCell>
+
+                          <TableCell>{row.center}</TableCell>
+                          <TableCell>{row.protein}</TableCell>
                         </TableRow>
                       );
                     })
@@ -316,7 +349,7 @@ export default function EnhancedTable({ data }) {
             </Table>
           </TableContainer>
           <TablePagination
-            rowsPerPageOptions={[5]}
+            rowsPerPageOptions={[15]}
             component="div"
             count={rows.length}
             rowsPerPage={rowsPerPage}

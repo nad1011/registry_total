@@ -83,7 +83,7 @@ export default function Registration() {
                 placeholder={`Search by ${filter}`}
                 onChangeHandler={onTitleChange}
               />
-              <SelectSearch tranfer={selectHandler} />
+              <SelectSearch transfer={selectHandler} />
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center">
               <IconButton

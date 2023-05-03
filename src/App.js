@@ -11,28 +11,25 @@ import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
-  const [login, setLogin] = useState(true);
-  // const [login, setLogin] = useState(!!localStorage.getItem("login"));
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
   const onSignIn = (data) => {
     if (data) {
-      navigate("/statistic");
-      // localStorage.setItem("login",true);
-      // setLogin(true);
+      navigate("/home");
     }
   };
 
   return (
     <div className="App">
       <CssBaseline />
-      {/* {login && <Navbar />} */}
+      {login && <Navbar />}
       <Routes>
-        {/* <Route path="/" element={<SignIn transfer={onSignIn} />} /> */}
+        <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />
-        {/* <Route path="/statistic" element={<Statistic />} />
+        <Route path="/statistic" element={<Statistic />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/prediction" element={<Home />} /> */}
+        <Route path="/prediction" element={<Home />} />
       </Routes>
     </div>
   );

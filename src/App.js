@@ -23,7 +23,6 @@ const App = () => {
   return (
     <div className="App">
       <CssBaseline />
-      {login && <Navbar />}
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />

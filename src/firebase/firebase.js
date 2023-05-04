@@ -2,16 +2,12 @@ import { initializeApp } from "firebase/app";
 import {
   getFirestore,
   collection,
-  doc,
-  setDoc,
   getDoc,
   getDocs,
-  updateDoc,
-  arrayUnion,
-  onSnapshot,
   where,
   query,
 } from "firebase/firestore";
+import Dexie from "dexie";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCserEAADxBpBDkNWDig-mQGRXOuyx_-hg",
@@ -26,8 +22,14 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const database = getFirestore(app);
 
-export { database };
+const dexieDB = new Dexie("cachedData");
+dexieDB.version(1).stores({
+  registration: "id",
+});
 
+export { database, dexieDB };
+
+//move later
 export const getRegistrationDate = async () => {
   const registrationList = await getDocs(
     collection(database, "registration-info")
@@ -36,7 +38,6 @@ export const getRegistrationDate = async () => {
   return registrationList.docs.map((doc) => doc.data()["registration-date"]);
 };
 
-//construct listener in background
 export const getExpirationDate = async () => {
   const expirationDate = await getDocs(
     collection(database, "registration-info")
@@ -45,30 +46,7 @@ export const getExpirationDate = async () => {
   return expirationDate.docs.map((doc) => doc.data()["expiration-date"]);
 };
 
-// export const getRegistrationInfo = async () => {
-//   const registrationList = await getDocs(
-//     collection(database, "registration-info")
-//   );
-
-//   return registrationList.docs.map((doc) => {
-//     //  const docRef = doc(database, doc.data()["car"]);
-//     // const docSnap = await getDoc(docRef);
-
-//     return {
-//       center: doc.data()["center"],
-//       "expiration-date": doc.data()["expiration-date"],
-//       // car: doc.data()["car"],
-//       car: await getDoc(doc.data()["car"]),
-//       // car: getDoc(doc(database, doc.data()["car"])),
-//     };
-//   });
-// };
-
 export const getRegistrationInfo = async () => {
-  // const registrationList = await getDocs(
-  //   collection(database, "registration-info"),
-  //   where("center", "==", "1101S")
-  // );
   const registrationList = await getDocs(
     query(
       collection(database, "registration-info")

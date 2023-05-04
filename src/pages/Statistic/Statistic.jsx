@@ -10,7 +10,7 @@ import {
   getRegistrationDate,
   getExpirationDate,
   getRegistrationInfo,
-} from "../../firebase/firebase";
+} from "../../firebase/firebase-actions";
 import { useState, useEffect } from "react";
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 

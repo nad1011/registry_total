@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
 import Statistic from "./pages/Statistic/Statistic";
+import Prediction from "./pages/Prediction/Prediction";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn/SignIn";
@@ -30,7 +31,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/statistic" element={<Statistic />} />
         <Route path="/registration" element={<Registration />} />
-        <Route path="/prediction" element={<Home />} />
+        <Route path="/prediction" element={<Prediction />} />
       </Routes>
     </div>
   );

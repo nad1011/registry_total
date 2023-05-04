@@ -1,7 +1,7 @@
 import { database } from "./firebase";
 import { collection, onSnapshot } from "firebase/firestore";
 
-export default function setupListener(collectionName, dexieTable, callback) {
+export const setupListener = (collectionName, dexieTable) => {
   const listener = onSnapshot(
     collection(database, collectionName),
     (snapshot) => {
@@ -22,12 +22,8 @@ export default function setupListener(collectionName, dexieTable, callback) {
       alert(error.message);
       console.log(error.code);
       console.log(error.stack);
-    },
-    async () => {
-      const newData = await dexieTable.toArray();
-      callback(newData);
     }
   );
 
   return listener;
-}
+};

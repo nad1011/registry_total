@@ -1,15 +1,20 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
-import LICENSE_DATA from "../../data";
 import styles from "./Registration.module.css";
-import Stack from "@mui/material/Stack";
-import { Grid, IconButton, Box } from "@mui/material";
+import { Grid, IconButton, Box, Stack } from "@mui/material";
+import LICENSE_DATA from "../../data";
+//
+
+//
+import {} from "firebase/firestore";
+import { useLiveQuery } from "dexie-react-hooks";
+import { fireDB, dexieDB } from "../../firebase/firebase";
+import { setupListener } from "../../firebase/listener";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -22,6 +27,13 @@ const chunkFilterList = (array, chunkSize) => {
 };
 
 export default function Registration() {
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
@@ -42,6 +54,7 @@ export default function Registration() {
 
   const chunkSize = 6;
   const finalList = chunkFilterList(filterList, chunkSize);
+
   const toPreviousChunk = () => {
     if (chunk <= 0) return;
     setChunk(() => chunk - 1);
@@ -55,7 +68,6 @@ export default function Registration() {
   };
 
   const selectHandler = (newFilter) => {
-    // console.log(data);
     setFilter(newFilter);
   };
 

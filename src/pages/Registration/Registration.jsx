@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import Page from "../Page/Page";
+import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";

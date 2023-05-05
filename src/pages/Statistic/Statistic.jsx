@@ -1,5 +1,5 @@
 import React from "react";
-import Page from "../Page/Page";
+import Page from "../../components/Page/Page";
 import LineChart from "../../components/LineChart";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
@@ -13,6 +13,8 @@ import {
 } from "../../firebase/firebase-actions";
 import { useState, useEffect } from "react";
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
+import { Stack } from "@mui/material";
+import { Typography } from "@mui/material";
 
 export default function Statistic() {
   // data de truyen vao line graph
@@ -74,16 +76,16 @@ export default function Statistic() {
   const [viewOption, setViewOption] = useState("Tháng");
   const [expiredView, setExpiredView] = useState();
 
-  // useEffect(() => {
-  //   const getNewData = async () => {
-  //     const newCurrentList = await getRegistrationDate();
-  //     setCurrentList(newCurrentList);
-  //     const newExpiredList = await getExpirationDate();
-  //     setExpiredList(newExpiredList);
-  //   };
+  useEffect(() => {
+    const getNewData = async () => {
+      const newCurrentList = await getRegistrationDate();
+      setCurrentList(newCurrentList);
+      const newExpiredList = await getExpirationDate();
+      setExpiredList(newExpiredList);
+    };
 
-  //   getNewData();
-  // }, []);
+    getNewData();
+  }, []);
 
   useEffect(() => {
     const getData = async () => {
@@ -269,77 +271,108 @@ export default function Statistic() {
 
   return (
     <Page>
-      <Grid container justifyContent="center" spacing={2} height={1}>
-        <Grid
-          container
-          item
-          justifyContent="flex-start"
-          alignItems="center"
-          xs={8}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-            }}
+      <Grid container justifyContent="center" spacing={0} height={1}>
+        <Grid item justifyContent="center" height="100%" xs={8}>
+          <Stack
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ m: "2%", height: "97%", mb: 0 }}
           >
-            <ToggleSwitch
-              values={["Tháng", "Quý", "Năm"]}
-              selected={viewOption}
-              onChange={onChangeDropdown}
-              changeGraph={handle}
-            />
-            {/* <Dropdown transfer={onChangeDropdown} changeGraph={handle} /> */}
-          </Box>
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                borderBottomLeftRadius: 0,
+                borderBottomRightRadius: 0,
+                p: 2,
+                pt: 1,
+                mb: 0,
+                width: 1,
+                height: 0.07,
+              }}
+            >
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
+                <Typography
+                  variant="h6"
+                  sx={{
+                    fontWeight: "bold",
+                    fontFamily: "Raleway",
+                    fontSize: 25,
+                    color: "#000",
+                  }}
+                >
+                  Statistic
+                </Typography>
+                <Switch onSwitch={getToggleValue} />
+              </Stack>
+            </Box>
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                borderTopLeftRadius: 0,
+                borderTopRightRadius: 0,
+                p: 1,
+                pt: 0,
+                mb: 2,
+                width: 1,
+                height: 0.5,
+              }}
+            >
+              <LineChart viewOption={viewOption} data={data} />
+            </Box>
+            <Stack direction="row" sx={{ height: 0.39, mt: "2% !important" }}>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                  mr: "2% !important",
+                }}
+              ></Box>
+              <Box
+                sx={{
+                  bgcolor: "#fff",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                }}
+              ></Box>
+            </Stack>
+          </Stack>
         </Grid>
-        <Grid
-          container
-          item
-          justifyContent="flex-end"
-          alignItems="center"
-          xs={4}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-            }}
+        <Grid item justifyContent="center" height="100%" xs={4}>
+          <Stack
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ m: "4%", height: "96%", mb: 0, ml: 0 }}
           >
-            <Switch onSwitch={getToggleValue} />
-          </Box>
-        </Grid>
-        <Grid container item justifyContent="center" height={0.5}>
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-              width: 0.7,
-              height: 1.0,
-            }}
-          >
-            <LineChart viewOption={viewOption} data={data} />
-          </Box>
-        </Grid>
-        <Grid container item justifyContent="center" height={0.4}>
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              pl: 1,
-              pr: 1,
-              width: 0.7,
-              height: 1.0,
-            }}
-          >
+            <Box
+              sx={{
+                bgcolor: "#fff",
+                borderRadius: 2,
+                p: 1,
+                mb: "4%",
+                width: 0.6,
+              }}
+            >
+              <ToggleSwitch
+                values={["Tháng", "Quý", "Năm"]}
+                selected={viewOption}
+                onChange={onChangeDropdown}
+                changeGraph={handle}
+              />
+            </Box>
             <Table data={tableData} />
-          </Box>
+          </Stack>
         </Grid>
       </Grid>
     </Page>

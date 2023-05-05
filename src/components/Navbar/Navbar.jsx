@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { NavbarContext } from "../../contexts/NavbarContext";
-const drawerWidth = 170;
+const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
   width: drawerWidth,

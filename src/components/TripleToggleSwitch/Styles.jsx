@@ -3,11 +3,10 @@ import styled from 'styled-components';
 export const Switch = styled.div`
   font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
   position: relative;
-  height: 26px;
-  width: 135px;
-  background-color: #e4e4e4;
+  height: 100%;
+  width: 100%;
+  background-color: var(--primary-color);
   border-radius: 5px;
-  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.3), 0 1px rgba(255, 255, 255, 0.1);
 `;
 
 export const SwitchRadio = styled.input`
@@ -20,9 +19,9 @@ export const SwitchSelection = styled.span`
   z-index: 1;
   top: 0px;
   left: 0px;
-  width: 45px;
-  height: 26px;
-  background: #216BA5;
+  width: 33.33333333333333%;
+  height: 100%;
+  background: var(--border-color);
   border-radius: 3px;
   transition: left 0.25s ease-out;
 `;
@@ -31,9 +30,9 @@ export const SwitchLabel = styled.label`
   position: relative;
   z-index: 2;
   float: left;
-  width: 45px;
-  line-height: 26px;
-  font-size: 11px;
+  width: 33.33333333333333%;
+  line-height: 200%;
+  font-size: 14px;
   color: rgba(0, 0, 0, 0.6);
   text-align: center;
   cursor: pointer;

@@ -2,29 +2,12 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-//data import
-import { database } from "../../firebase/firebase";
-import { collection, onSnapshot, getDocs } from "firebase/firestore";
+import review from "./Review";
 //UI import
-import {
-  Grid,
-  Box,
-  Typography,
-  Button,
-  List,
-  ListItem,
-  Stack,
-} from "@mui/material";
+import { Grid, Box, Typography, Button, Stack } from "@mui/material";
 import Page from "../../components/Page/Page";
-import Navbar from "../../components/Navbar/Navbar";
-
+import img from "../../assets/images/logo.png";
 export default function Home() {
-  const [stat, setStat] = useState({
-    month: { id: 5, count: 8 },
-    quarter: { id: 2, count: 26 },
-    year: { id: 2022, count: 74 },
-  });
-
   return (
     <Page>
       <Grid
@@ -40,24 +23,37 @@ export default function Home() {
           sm={6}
           md={9}
           sx={{
+            height: "35%",
+            width: "100%",
+            pl: "5%",
+            pt: "5%",
             display: "flex",
-            justifyContent: "center",
+            justifyContent: "flex-start",
             alignItems: "center",
           }}
         >
-          <Stack sx={{ m: "10%", height: 1, width: 1 }}>
+          <Stack
+            sx={{
+              height: 0.35,
+              width: 1,
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "flex-start",
+            }}
+          >
             <Typography
               variant="h2"
-              sx={{ fontFamily: "garamond,serif", mt: "12%" }}
+              sx={{ fontFamily: "roboto mono", fontWeight: "bold" }}
             >
               Registry Total
             </Typography>
             <Typography
               variant="body1"
               sx={{
-                py: "3%",
                 textAlign: "justify",
-                fontFamily: "courier new,monospace",
+                fontFamily: "poppins",
+                mt: 2,
+                ml: 2,
               }}
             >
               Are you tired of waiting in long lines at the DMV to register your
@@ -66,123 +62,69 @@ export default function Home() {
               way to get your car registered without any unnecessary delays.
               Save time and energy by using our car registration service today!
             </Typography>
-            <Stack
-              direction={"row"}
-              sx={{ height: 1 }}
-              justifyContent="space-between"
-              alignItems="center"
-            >
-              <Box
-                sx={{
-                  bgcolor: "#fff",
-                  borderRadius: 2,
-                  borderTopLeftRadius: 0,
-                  borderTopRightRadius: 0,
-                  p: 1,
-                  pt: 0,
-                  mb: 2,
-                  width: 0.3,
-                  height: 0.5,
-                }}
-              >
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{ borderRadius: "5px 25px" }}
-                >
-                  <Link
-                    to="/statistic"
-                    style={{
-                      color: "white",
-                      textDecoration: "none",
-                      fontFamily: "tahoma,sans-serif",
-                    }}
-                  >
-                    Statistic
-                  </Link>
-                </Button>
-              </Box>
-              <Box
-                sx={{
-                  bgcolor: "#fff",
-                  borderRadius: 2,
-                  borderTopLeftRadius: 0,
-                  borderTopRightRadius: 0,
-                  p: 1,
-                  pt: 0,
-                  mb: 2,
-                  width: 0.3,
-                  height: 0.5,
-                }}
-              >
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{ borderRadius: "5px 25px" }}
-                >
-                  <Link
-                    to="/registration"
-                    style={{
-                      color: "white",
-                      textDecoration: "none",
-                      fontFamily: "tahoma,sans-serif",
-                    }}
-                  >
-                    Register Now
-                  </Link>
-                </Button>
-              </Box>
-              <Box
-                sx={{
-                  bgcolor: "#fff",
-                  borderRadius: 2,
-                  borderTopLeftRadius: 0,
-                  borderTopRightRadius: 0,
-                  p: 1,
-                  pt: 0,
-                  mb: 2,
-                  width: 0.3,
-                  height: 0.5,
-                }}
-              >
-                <Button
-                  variant="contained"
-                  size="large"
-                  sx={{ borderRadius: "5px 25px" }}
-                >
-                  <Link
-                    to="/predict"
-                    style={{
-                      color: "white",
-                      textDecoration: "none",
-                      fontFamily: "tahoma,sans-serif",
-                    }}
-                  >
-                    Predict
-                  </Link>
-                </Button>
-              </Box>
-            </Stack>
           </Stack>
         </Grid>
         <Grid
+          container
           item
-          sm={6}
-          md={3}
+          sx={{
+            height: "65%",
+            width: "100%",
+          }}
           display="flex"
-          justifyContent="flex-start"
+          justifyContent="center"
           alignItems="center"
         >
-          <Box
+          <Stack
+            direction={"row"}
+            justifyContent="space-between"
+            alignItems="center"
             sx={{
-              bgcolor: "#fff",
-              borderRadius: 2,
-              width: 0.8,
-              height: 0.5,
+              height: 0.9,
+              width: 0.9,
             }}
           >
-            This is logo
-          </Box>
+            {review.map((item, index) => (
+              <Box
+                sx={{
+                  bgcolor: "darkgray",
+                  width: 1 / 3,
+                  height: 0.7,
+                }}
+                borderRight={index < 2 ? "1px solid black" : "none"}
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Box
+                  sx={{
+                    bgcolor: "#darkgray",
+                    width: 0.9,
+                    height: 0.9,
+                    p: 1,
+                    ":hover": { bgcolor: "var(--border-color)", transition: "all 0.3s ease-in-out" },
+                  }}
+                >
+                  <Stack
+                    height={1}
+                    justifyContent="space-between"
+                    alignItems="flex-start"
+                  >
+                    <Typography color={"black"}>{item.describe}</Typography>
+                    <Link
+                      to={item.path}
+                      style={{
+                        color: "black",
+                        fontFamily: "tahoma,sans-serif",
+                      }}
+                    >
+                      {item.title}
+                    </Link>
+                  </Stack>
+                </Box>
+              </Box>
+            ))}
+          </Stack>
         </Grid>
       </Grid>
     </Page>

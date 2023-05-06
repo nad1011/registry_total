@@ -5,4 +5,5 @@
     height: 100vh;
     background-color: var(--background-color);
     /* margin-right: -5px; */
+    overflow: auto;
   }

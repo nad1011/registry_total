@@ -11,7 +11,6 @@ import TableRow from "@mui/material/TableRow";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
-import { styled } from "@mui/system";
 
 export default function EnhancedTable({ data }) {
   function createData(id, name, numberPlate, registrationDate, center) {
@@ -111,14 +110,15 @@ export default function EnhancedTable({ data }) {
 
     return (
       <>
-        <TableHead>
-          <TableRow>
+        <TableHead sx={{bgcolor: "var(--secondary-color)"}}>
+          <TableRow sx={{bgcolor: "var(--secondary-color)"}}>
             {headCells.map((headCell) => (
               <TableCell
                 key={headCell.id}
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}
                 sortDirection={orderBy === headCell.id ? order : false}
+                sx={{bgcolor: "var(--secondary-color)"}}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
@@ -273,10 +273,9 @@ export default function EnhancedTable({ data }) {
   );
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  const DisplayedRows = styled("p")`margin-bottom: 0px!important`;
   return (
     <>
-      <Box sx={{ width: "100%", height: "90.3%" }}>
+      <Box sx={{ width: "100%", height: "90.3%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
         <Paper
           sx={{
             width: "100%",
@@ -285,9 +284,10 @@ export default function EnhancedTable({ data }) {
             pt: "3%",
             px: "3%",
             borderRadius: 2,
+            bgcolor: "var(--secondary-color)"
           }}
         >
-          <TableContainer sx={{ maxHeight: 0.93 }}>
+          <TableContainer sx={{ maxHeight: 0.93, bgcolor: "var(--secondary-color)" }}>
             <Table
               stickyHeader
               sx={{ minWidth: 750, height: "80%" }}

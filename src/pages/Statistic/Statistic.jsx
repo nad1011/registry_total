@@ -21,7 +21,7 @@ export default function Statistic() {
   const [data, setData] = useState([
     {
       id: "statistic",
-      color: "hsl(62, 70%, 50%)",
+      color: "#969696",
       data: [
         {
           x: "2014",
@@ -272,14 +272,26 @@ export default function Statistic() {
   return (
     <Page>
       <Grid container justifyContent="center" spacing={0} height={1}>
-        <Grid item justifyContent="center" height="100%" xs={8}>
+        <Grid
+          item
+          justifyContent="center"
+          height={{
+            xs: "70%",
+            sm: "80%",
+            md: "85%",
+            lg: "100%",
+          }}
+          lg={8}
+          md={12}
+          xs={12}
+        >
           <Stack
             spacing={{ xs: 0, sm: 0 }}
             sx={{ m: "2%", height: "97%", mb: 0 }}
           >
             <Box
               sx={{
-                bgcolor: "#fff",
+                bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 borderBottomLeftRadius: 0,
                 borderBottomRightRadius: 0,
@@ -311,7 +323,7 @@ export default function Statistic() {
             </Box>
             <Box
               sx={{
-                bgcolor: "#fff",
+                bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 borderTopLeftRadius: 0,
                 borderTopRightRadius: 0,
@@ -327,7 +339,7 @@ export default function Statistic() {
             <Stack direction="row" sx={{ height: 0.39, mt: "2% !important" }}>
               <Box
                 sx={{
-                  bgcolor: "#fff",
+                  bgcolor: "var(--secondary-color)",
                   borderRadius: 2,
                   p: 1,
                   width: 0.5,
@@ -337,7 +349,7 @@ export default function Statistic() {
               ></Box>
               <Box
                 sx={{
-                  bgcolor: "#fff",
+                  bgcolor: "var(--secondary-color)",
                   borderRadius: 2,
                   p: 1,
                   width: 0.5,
@@ -347,20 +359,47 @@ export default function Statistic() {
             </Stack>
           </Stack>
         </Grid>
-        <Grid item justifyContent="center" height="100%" xs={4}>
+        <Grid
+          item
+          justifyContent="center"
+          height={{
+            xs: "70%",
+            sm: "80%",
+            md: "85%",
+            lg: "100%",
+          }}
+          lg={4}
+          md={10}
+          xs={11}
+        >
           <Stack
             display="flex"
             justifyContent="center"
             alignItems="center"
             spacing={{ xs: 0, sm: 0 }}
-            sx={{ m: "4%", height: "96%", mb: 0, ml: 0 }}
+            sx={{ height: "96%", m: "3.4%", mb: 0, ml: 0 }}
+            mb={{
+              lg: "0%",
+              xs: "3.4%",
+            }}
+            mr={{
+              lg: "3.4%",
+              xs: "0%",
+            }}
+            mt={{
+              lg: "3.4%",
+              xs: "0%",
+            }}
           >
             <Box
+              mb={{
+                xs: "2%",
+                lg: "4%",
+              }}
               sx={{
                 bgcolor: "#fff",
                 borderRadius: 2,
                 p: 1,
-                mb: "4%",
                 width: 0.6,
               }}
             >

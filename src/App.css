@@ -1,21 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
 
 :root {
-  --primary-color: 	#EAEDEE;
+  --primary-color: #eaedee;
   --background-color: #f3f3f3;
   --secondary-color: #e1e1e3;
   --avatar-color: #5b5b5bf5;
-  --border-color: #d0d0d0
+  --border-color: #d0d0d0;
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 body {
   padding: 0;
   margin: 0;
-  font-family: 'poppins',sans-serif;
+  font-family: "poppins", sans-serif;
 }
 
 .App {

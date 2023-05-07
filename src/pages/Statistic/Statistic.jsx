@@ -10,7 +10,7 @@ import {
   getRegistrationDate,
   getExpirationDate,
   getRegistrationInfo,
-} from "../../firebase/firebase-actions";
+} from "../../database/firebase-actions";
 import { useState, useEffect } from "react";
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 import { Stack } from "@mui/material";
@@ -76,25 +76,25 @@ export default function Statistic() {
   const [viewOption, setViewOption] = useState("Tháng");
   const [expiredView, setExpiredView] = useState();
 
-  useEffect(() => {
-    const getNewData = async () => {
-      const newCurrentList = await getRegistrationDate();
-      setCurrentList(newCurrentList);
-      const newExpiredList = await getExpirationDate();
-      setExpiredList(newExpiredList);
-    };
+  // useEffect(() => {
+  //   const getNewData = async () => {
+  //     const newCurrentList = await getRegistrationDate();
+  //     setCurrentList(newCurrentList);
+  //     const newExpiredList = await getExpirationDate();
+  //     setExpiredList(newExpiredList);
+  //   };
 
-    getNewData();
-  }, []);
+  //   getNewData();
+  // }, []);
 
-  useEffect(() => {
-    const getData = async () => {
-      const newData = await getRegistrationInfo();
-      setTableData(newData);
-      // console.log(newData);
-    };
-    getData();
-  }, []);
+  // useEffect(() => {
+  //   const getData = async () => {
+  //     const newData = await getRegistrationInfo();
+  //     setTableData(newData);
+  //     // console.log(newData);
+  //   };
+  //   getData();
+  // }, []);
 
   const sortByYear = () => {
     const listSortByYear = {

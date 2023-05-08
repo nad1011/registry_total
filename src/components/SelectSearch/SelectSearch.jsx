@@ -32,7 +32,7 @@ export default function SelectSearch({ transfer }) {
     handleClose();
   };
   return (
-    <Box sx={{ minWidth: 120 }}>
+    <Box sx={{ minWidth: '30%' }}>
       <IconButton
         size="medium"
         aria-controls="menu-appbar"

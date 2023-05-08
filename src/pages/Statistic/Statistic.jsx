@@ -314,6 +314,7 @@ export default function Statistic() {
                     fontFamily: "Raleway",
                     fontSize: 25,
                     color: "#000",
+                    zIndex: 1,
                   }}
                 >
                   Statistic

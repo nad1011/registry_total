@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { database } from "../../firebase/firebase";
+import { fireDB } from "../../database/firebase";
 import {
   Box,
   TextField,
@@ -47,7 +47,7 @@ export default function SignIn({ transfer }) {
       return;
     }
 
-    const docRef = doc(database, "account", input.id);
+    const docRef = doc(fireDB, "account", input.id);
     const docSnap = await getDoc(docRef);
 
     if (!docSnap.exists()) {

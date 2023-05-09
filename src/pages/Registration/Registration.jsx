@@ -1,5 +1,4 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
@@ -22,6 +21,13 @@ const chunkFilterList = (array, chunkSize) => {
 };
 
 export default function Registration() {
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
@@ -42,6 +48,7 @@ export default function Registration() {
 
   const chunkSize = 6;
   const finalList = chunkFilterList(filterList, chunkSize);
+
   const toPreviousChunk = () => {
     if (chunk <= 0) return;
     setChunk(() => chunk - 1);
@@ -55,7 +62,6 @@ export default function Registration() {
   };
 
   const selectHandler = (newFilter) => {
-    // console.log(data);
     setFilter(newFilter);
   };
 

@@ -21,13 +21,6 @@ const chunkFilterList = (array, chunkSize) => {
 };
 
 export default function Registration() {
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   const [searchField, setSearchField] = useState("");
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);

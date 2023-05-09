@@ -7,10 +7,10 @@ const trackError = (error) => {
   console.trace(error.code);
 };
 
-export const setupListener = (collectionName, docName) => {
-  const ref = collection(database, collectionName);
+export const setupListener = (collectionName, docName, tableName) => {
+  const colRef = collection(database, collectionName);
   const listener = onSnapshot(
-    collection(database, collectionName),
+    colRef,
     (snapshot) => {},
     (error) => trackError(error)
   );

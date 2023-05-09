@@ -2,9 +2,6 @@
 import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-//data import
-import { database } from "../../firebase/firebase";
-import { collection, onSnapshot, getDocs } from "firebase/firestore";
 //UI import
 import {
   Grid,

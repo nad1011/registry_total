@@ -1,9 +1,9 @@
-import Page from "../Page/Page";
+import Page from "../../components/Page/Page";
 
 const Prediction = () => {
   return (
     <Page>
-      <div>helllo</div>
+      <div>hello</div>
     </Page>
   );
 };

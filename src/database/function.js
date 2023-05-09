@@ -1,10 +1,10 @@
-import { database } from "./firebase";
+import { fireDB } from "./firebase";
 
 import { collection, getDocs, query, getDoc } from "firebase/firestore";
 
 export const getRegistrationDate = async () => {
   const registrationList = await getDocs(
-    collection(database, "registration-info")
+    collection(fireDB, "registration-info")
   );
 
   return registrationList.docs.map((doc) => doc.data()["registration-date"]);
@@ -12,7 +12,7 @@ export const getRegistrationDate = async () => {
 
 export const getExpirationDate = async () => {
   const expirationDate = await getDocs(
-    collection(database, "registration-info")
+    collection(fireDB, "registration-info")
   );
 
   return expirationDate.docs.map((doc) => doc.data()["expiration-date"]);
@@ -20,7 +20,7 @@ export const getExpirationDate = async () => {
 
 export const getRegistrationInfo = async () => {
   const registrationList = await getDocs(
-    query(collection(database, "registration-info"))
+    query(collection(fireDB, "registration-info"))
   );
 
   let id = 1;

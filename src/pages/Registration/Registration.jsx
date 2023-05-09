@@ -12,9 +12,9 @@ import LICENSE_DATA from "../../data";
 
 //
 import {} from "firebase/firestore";
-import { useLiveQuery } from "dexie-react-hooks";
-import { fireDB, dexieDB } from "../../firebase/firebase";
-import { setupListener } from "../../firebase/listener";
+// import { useLiveQuery } from "dexie-react-hooks";
+// import { fireDB, dexieDB } from "../../firebase/firebase";
+// import { setupListener } from "../../firebase/listener";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];

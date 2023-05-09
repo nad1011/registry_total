@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { doc, getDoc } from "firebase/firestore";
-import { fireDB } from "../../firebase/firebase";
+import { fireDB } from "../../database/firebase";
 import {
   Box,
   TextField,

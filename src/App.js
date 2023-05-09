@@ -7,18 +7,16 @@ import Prediction from "./pages/Prediction/Prediction";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn/SignIn";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {
-  // const [login, setLogin] = useState(!!localStorage.getItem("login"));
+  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
   const onSignIn = (data) => {
     if (data) {
-      navigate("/statistic");
-      // localStorage.setItem("login",true);
-      // setLogin(true);
+      navigate("/home");
     }
   };
 

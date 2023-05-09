@@ -25,3 +25,18 @@ body {
   background-color: var(--background-color);
   color: var(--primary-color);
 }
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
+}

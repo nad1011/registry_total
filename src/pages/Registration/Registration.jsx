@@ -1,13 +1,12 @@
-import React, { useEffect } from "react";
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
-import { FiArrowLeft, FiArrowRight } from "react-icons/fi";
+import ArrowRightIcon from "@mui/icons-material/ArrowRight";
+import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LICENSE_DATA from "../../data";
-import styles from "./Registration.module.css";
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
 
@@ -42,6 +41,7 @@ export default function Registration() {
 
   const chunkSize = 6;
   const finalList = chunkFilterList(filterList, chunkSize);
+
   const toPreviousChunk = () => {
     if (chunk <= 0) return;
     setChunk(() => chunk - 1);
@@ -55,7 +55,6 @@ export default function Registration() {
   };
 
   const selectHandler = (newFilter) => {
-    // console.log(data);
     setFilter(newFilter);
   };
 
@@ -67,17 +66,33 @@ export default function Registration() {
         justifyContent={"flex-start"}
         alignItems={"center"}
       >
-        <Grid item xs={12} lg={7.5} sx={{ height: "100vh" }}>
+        <Grid
+          item
+          xs={12}
+          lg={7.5}
+          height={{
+            xs: "70%",
+            sm: "75%",
+            md: "70%",
+            lg: "100%",
+          }}
+        >
           <Stack
             direction="row"
             justifyContent="space-between"
-            sx={{ height: "6vh", mt: "1vh" }}
+            height={{
+              xs: "13%",
+              sm: "11%",
+              md: "12%",
+              lg: "10%",
+            }}
+            sx={{ mx: "2%", pt: 1.5 }}
           >
             <Stack
               direction="row"
-              spacing={-1}
+              spacing={0}
               alignItems="center"
-              sx={{ height: 1 }}
+              sx={{ height: 1, width: "70%", pb: 0.8 }}
             >
               <SearchBox
                 placeholder={`Search by ${filter}`}
@@ -85,62 +100,94 @@ export default function Registration() {
               />
               <SelectSearch transfer={selectHandler} />
             </Stack>
-            <Stack direction="row" spacing={2} alignItems="center">
-              <IconButton
-                onClick={toPreviousChunk}
+            <Stack direction="row" spacing={1} alignItems="flex-end">
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
                 sx={{
+                  width: "100%",
+                  height: "70%",
                   backgroundColor: "var(--secondary-color)",
-                  ":hover": { backgroundColor: "var(--border-color)" },
+                  borderTopLeftRadius: 15,
+                  borderTopRightRadius: 15,
                 }}
               >
-                <FiArrowLeft className={styles["arrow"]} />
-              </IconButton>
-              <IconButton
-                onClick={toNextChunk}
-                sx={{
-                  backgroundColor: "var(--secondary-color)",
-                  ":hover": { backgroundColor: "var(--border-color)" },
-                }}
-              >
-                <FiArrowRight className={styles["arrow"]} />
-              </IconButton>
+                <IconButton
+                  onClick={toPreviousChunk}
+                  sx={{
+                    backgroundColor: "var(--secondary-color)",
+                    ":hover": { backgroundColor: "var(--border-color)" },
+                    zIndex: 10000,
+                  }}
+                  size="small"
+                >
+                  <ArrowLeftIcon fontSize="large" />
+                </IconButton>
+                <IconButton
+                  onClick={toNextChunk}
+                  sx={{
+                    backgroundColor: "var(--secondary-color)",
+                    ":hover": { backgroundColor: "var(--border-color)" },
+                  }}
+                  size="small"
+                >
+                  <ArrowRightIcon fontSize="large" />
+                </IconButton>
+              </Stack>
             </Stack>
           </Stack>
           <Box
+            height={{
+              xs: "86%",
+              sm: "89%",
+              md: "86%",
+              lg: "87.8%",
+            }}
             sx={{
               border: "2px solid var(--secondary-color)",
-              overflowY: "auto",
-              m: "2vh",
-              mt: "1vh",
-              mr: "1vh",
-              // mt: 0,
-              // mr: 0,
-              p: 1,
-              py: 1,
-              pb: 0,
+              m: "2%",
+              mt: 0,
+              mb: 0,
               backgroundColor: "var(--secondary-color)",
               borderRadius: 3,
-              height: "91vh",
+              borderTopRightRadius: 0,
             }}
           >
-            <Stack
-              direction="row"
-              spacing={0}
-              alignItems="center"
-              sx={{ height: 1 }}
-            >
-              <CartList filterList={finalList ? finalList[chunk] : []} />
-            </Stack>
+            <CartList filterList={finalList ? finalList[chunk] : []} />
           </Box>
         </Grid>
         <Grid
           item
           alignItems="center"
-          height={0.9}
+          height={{
+            xs: "75%",
+            sm: "80%",
+            md: "90%",
+            lg: "100%",
+          }}
           xs={12}
           lg={4.5}
-          p={1}
-          sx={{ height: "100%" }}
+          p={{
+            xs: 1,
+            sm: 1,
+            md: 2,
+            lg: 2,
+          }}
+          pt={{
+            xs: 1,
+            sm: 1,
+            md: 0,
+            lg: 2,
+          }}
+          pb={{ xs: 1, sm: 1, md: 2, lg: 1.65 }}
+          pl={{
+            xs: 1,
+            sm: 1,
+            md: 2,
+            lg: 0,
+          }}
+          
         >
           <RenewForm />
         </Grid>

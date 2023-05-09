@@ -1,0 +1,57 @@
+headquarter account
+    email: hq@registry-total.org
+    password: regTot@lHead
+center account
+    email: center{center-code}@registry-total.org
+    password: regTot@l{center-code}
+
+------------------------------------------------------------------------------------------
+
+center: ~250
+    address
+    name
+    * registered cars
+    telephone
+-------------------------
+owner: 500
+    address
+    name
+    email
+    telephone
+    * owned cars
+    type
+        "personal"
+            date of birth
+            occupation
+        "company"
+            representative
+-------------------------
+car: ~1000
+    brake type
+    * certificate
+    curb weight (ton)
+    door number
+    fuel
+    gear number
+    max output (kW)
+    manufacturing:
+        country
+        manufacturer
+        year
+    model
+    overall dimension (m)
+    * owner
+    purpose
+    PIN
+    seat number
+    suspension type
+    transmission
+    type
+    wheel formula
+    wheel tread
+-------------------------
+certificate: ~1000
+    * car
+    * center
+    registered date
+    expired date

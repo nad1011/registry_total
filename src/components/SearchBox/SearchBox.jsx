@@ -2,29 +2,45 @@ import React from "react";
 import { useState } from "react";
 import { BiSearch } from "react-icons/bi";
 import styles from "./SearchBox.module.css";
+import { IconButton } from "@mui/material";
+
 const SearchBox = ({ placeholder, onChangeHandler }) => {
   const [search, setSearch] = useState(false);
   const onSearchClick = () => {
     setSearch(!search);
   };
   return (
-    // <input
-    //     type="search"
-    //     placeholder={placeholder}
-    //     onChange={onChangeHandler}
-    // />
     <div
       className={
-        search ? `${styles["search"]} ${styles["active"]}` : styles["search"]
+        `${styles["search"]} ${styles["active"]}`
       }
     >
-      <BiSearch onClick={onSearchClick} className={styles["icon"]}></BiSearch>
+      <IconButton aria-label="delete" disabled onClick={onSearchClick} sx={{
+        // '&:hover': {
+        //   backgroundColor: 'transparent',
+        //   boxShadow: 'none',
+        //   borderColor: '#0062cc',
+        // },
+        // '&:active': {
+        //   boxShadow: 'none',
+        //   backgroundColor: 'transparent',
+        //   borderColor: '#005cbf',
+        // },
+        // '&:focus': {
+        //   boxShadow: '0 0 0 0.2rem transparent',
+        // },
+        // textTransform: 'none',
+        height: '100%',
+        
+      }}>
+        <BiSearch/>
+      </IconButton>
       <div className={styles["input"]}>
-        {search && <input
-          type="search"
-          placeholder={placeholder}
-          onChange={onChangeHandler}
-        />}
+          <input
+            type="search"
+            placeholder={placeholder}
+            onChange={onChangeHandler}
+          />
       </div>
     </div>
   );

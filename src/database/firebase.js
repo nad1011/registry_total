@@ -1,6 +1,6 @@
 import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
-import Dexie from "dexie";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCserEAADxBpBDkNWDig-mQGRXOuyx_-hg",
@@ -14,10 +14,6 @@ const firebaseConfig = {
 
 const app = initializeApp(firebaseConfig);
 const fireDB = getFirestore(app);
+const fireAuth = getAuth(app);
 
-const dexieDB = new Dexie("cached-data");
-dexieDB.version(1).stores({
-  registration: "id",
-});
-
-export { fireDB, dexieDB };
+export { fireDB, fireAuth };

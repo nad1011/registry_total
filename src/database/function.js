@@ -19,15 +19,8 @@ export const getExpirationDate = async () => {
 };
 
 export const getRegistrationInfo = async () => {
-  // const registrationList = await getDocs(
-  //   collection(database, "registration-info"),
-  //   where("center", "==", "1101S")
-  // );
   const registrationList = await getDocs(
-    query(
-      collection(database, "registration-info")
-      // where("center", "==", "6104D")
-    )
+    query(collection(database, "registration-info"))
   );
 
   let id = 1;

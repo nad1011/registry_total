@@ -8,7 +8,7 @@ import Prediction from "./pages/Prediction/Prediction";
 import Navbar from "./components/Navbar/Navbar.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn/SignIn";
-import { useEffect, useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const App = () => {

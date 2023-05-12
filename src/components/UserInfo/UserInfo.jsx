@@ -20,14 +20,15 @@ const UserInfo = ({ close }) => {
         textAlign: "center",
       }}
     >
-      <CloseIcon
-        sx={{ position: "absolute", left: 0, top: 0, fontSize: "40px" }}
-        onClick={close}
-      />
+      <Box>
+        <CloseIcon
+          sx={{ position: "absolute", left: 0, top: 0, fontSize: "40px" }}
+          onClick={close}
+        />
+      </Box>
 
       <Box
         sx={{
-          backgroundColor: "rgb(182, 117, 117)",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -45,6 +46,7 @@ const UserInfo = ({ close }) => {
           <Box>
             <h2>Trung tâm đăng kiểm</h2>
           </Box>
+          <div>Email:</div>
           <div>Số điện thoại:</div>
           <div>Địa chỉ:</div>
         </Stack>

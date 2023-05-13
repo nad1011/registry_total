@@ -1,5 +1,8 @@
-import { Box, Avatar, Stack } from "@mui/material";
+import { Box, Avatar, Stack, Divider } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import EmailIcon from "@mui/icons-material/Email";
+import PhoneIcon from "@mui/icons-material/Phone";
+import BusinessIcon from "@mui/icons-material/Business";
 
 const UserInfo = ({ close }) => {
   return (
@@ -41,14 +44,27 @@ const UserInfo = ({ close }) => {
           height: "80%",
         }}
       >
-        <Stack spacing={2}>
+        <Stack
+          direction="column"
+          divider={<Divider orientation="vertical" flexItem />}
+          spacing={2}
+        >
           <Avatar>H</Avatar>
-          <Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
             <h2>Trung tâm đăng kiểm</h2>
           </Box>
-          <div>Email:</div>
-          <div>Số điện thoại:</div>
-          <div>Địa chỉ:</div>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <EmailIcon />
+            <span>Email:</span>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <PhoneIcon />
+            <span>Số điện thoại:</span>
+          </Box>
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <BusinessIcon />
+            <span>Địa chỉ:</span>
+          </Box>
         </Stack>
       </Box>
     </Box>

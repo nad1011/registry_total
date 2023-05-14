@@ -1,6 +1,10 @@
-import { Button, Grid, Box } from "@mui/material";
+import { Button, Grid, Box, Stack, Typography } from "@mui/material";
 import Page from "../../components/Page/Page";
 import PredictChart from "../../components/PredictChart/PredictChart";
+import HorizontalBarChart from "../../components/HorizontalBarChart/HorizontalBarChart";
+import { LineChart } from "../../components/HorizontalBarChart/LineChart";
+import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
+import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
 
 const data = [
   {
@@ -153,54 +157,37 @@ const Prediction = () => {
 
   return (
     <Page>
-      <Grid container justifyContent="center" spacing={2} height={1}>
-        <Grid
-          container
-          item
-          justifyContent="flex-start"
-          alignItems="center"
-          xs={8}
-        >
-          <Box
+      <Grid container height={1}>
+        <Grid container item height={1} xs={5} p={2}>
+          <Stack
+            justifyContent={"space-between"}
+            alignItems={"center"}
             sx={{
               bgcolor: "#fff",
               boxShadow: 1,
               borderRadius: 2,
-              p: 1,
-            }}
-          ></Box>
-        </Grid>
-        <Grid
-          container
-          item
-          justifyContent="flex-end"
-          alignItems="center"
-          xs={4}
-        >
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-            }}
-          ></Box>
-        </Grid>
-        <Grid container item justifyContent="center" height={0.5}>
-          <Box
-            sx={{
-              bgcolor: "#fff",
-              boxShadow: 1,
-              borderRadius: 2,
-              p: 1,
-              width: 0.7,
+              // p: 4,
+              // pt:0,
+              width: 1,
               height: 1.0,
             }}
           >
-            <PredictChart data={data} />
-          </Box>
+            {/* <PredictChart data={data} /> */}
+            <HorizontalBarChart title={"Tháng"} />
+            <HorizontalBarChart title={"Quý"} />
+            <HorizontalBarChart title={"Năm"} />
+          </Stack>
         </Grid>
-        <Grid container item justifyContent="center" height={0.4}>
+        <Grid
+          container
+          item
+          justifyContent="center"
+          height={1}
+          xs={7}
+          p={2}
+          pl={0}
+          pb={6}
+        >
           <Box
             sx={{
               bgcolor: "#fff",
@@ -208,15 +195,125 @@ const Prediction = () => {
               borderRadius: 2,
               pl: 1,
               pr: 1,
-              width: 0.7,
-              height: 1.0,
+              width: 1,
+              height: 0.6,
               color: "#051c33",
             }}
           >
-            Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
-            hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính vì
-            vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục tăng và có thể trở thành một
-            vấn đề quan trọng đối với các chính phủ và tổ chức liên quan.
+            <LineChart />
+          </Box>
+          <Stack
+            direction="row"
+            sx={{
+              justifyContent: "space-between",
+              px: 1,
+              mt: 2,
+              width: 1,
+              height: 0.2,
+            }}
+          >
+            <Box
+              sx={{
+                display: "flex",
+                height: 1,
+                width: 0.3,
+                bgcolor: "#fff",
+                boxShadow: 1,
+                borderRadius: 2,
+              }}
+            ></Box>
+            <Box
+              sx={{
+                display: "flex",
+                height: 1,
+                width: 0.3,
+                bgcolor: "#fff",
+                boxShadow: 1,
+                borderRadius: 2,
+              }}
+            >
+              <Stack
+                direction="column"
+                spacing={1}
+                sx={{
+                  justifyContent: "center",
+                  width: 1,
+                  height: 1,
+                }}
+              >
+                <Typography color={"black"}>Đăng kiểm tháng sau:</Typography>
+                <Stack direction="row">
+                  <Typography
+                    color={"black"}
+                    sx={{ fontSize: 20, fontWeight: "bold" }}
+                  >
+                    312
+                  </Typography>
+                  <ArrowCircleDownIcon
+                    sx={{
+                      color: "#ff0000",
+                      display: "inline-flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      height: "100%",
+                      verticalAlign: "middle",
+                    }}
+                  />
+                  <Typography
+                    sx={{
+                      color: "#ff0000",
+                      fontSize: 12.5,
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    -1.0%
+                  </Typography>
+                </Stack>
+                <Typography
+                  color={"black"}
+                  sx={{
+                    fontSize: 12,
+                  }}
+                >
+                  (So sánh với tháng gần nhất)
+                </Typography>
+              </Stack>
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                height: 1,
+                width: 0.3,
+                bgcolor: "#fff",
+                boxShadow: 1,
+                borderRadius: 2,
+              }}
+            ></Box>
+          </Stack>
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              bgcolor: "#fff",
+              boxShadow: 1,
+              borderRadius: 2,
+              pl: 1,
+              pr: 1,
+              width: 1,
+              mt: 2,
+              height: 0.2,
+              color: "#051c33",
+            }}
+          >
+            <Typography variant="body1" fontFamily={"roboto mono"}>
+              Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
+              hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính
+              vì vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục tăng và có thể trở
+              thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
+              quan.
+            </Typography>
           </Box>
         </Grid>
       </Grid>

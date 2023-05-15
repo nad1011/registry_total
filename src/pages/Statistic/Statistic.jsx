@@ -108,10 +108,6 @@ export default function Statistic() {
       2021: 0,
       2022: 0,
       2023: 0,
-      // 2024: 0,
-      // 2025: 0,
-      // 2026: 0,
-      // 2027: 0,
     };
     list.forEach((date) => {
       const year = date.split("-")[0];

@@ -14,6 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { Link } from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import { NavbarContext } from "../../contexts/NavbarContext";
+import UserInfo from "../UserInfo/UserInfo";
 const drawerWidth = 180;
 
 const openedMixin = (theme) => ({
@@ -82,6 +83,13 @@ function Navbar() {
     // setOpen(!open);
     changeOpen();
   };
+  const [userInfoOpen, setUserInfoOpen] = React.useState(false);
+  const popUpUserInfo = () => {
+    setUserInfoOpen(!userInfoOpen);
+  };
+  const changeUserInfoOpen = () => {
+    popUpUserInfo();
+  };
 
   return (
     <Box sx={{ display: "flex", height: 1 }}>
@@ -146,7 +154,8 @@ function Navbar() {
                 // justifyContent: "center",
               }}
             >
-              <Avatar>H</Avatar>
+              <Avatar onClick={popUpUserInfo}>H</Avatar>
+              {userInfoOpen && <UserInfo close={changeUserInfoOpen} />}
             </ListItemIcon>
             <ListItemText
               primary={"Logout"}

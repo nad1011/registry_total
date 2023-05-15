@@ -1,10 +1,21 @@
-import { Box, Avatar, Stack, Divider } from "@mui/material";
+import { Box, Avatar, Stack, Divider, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const UserInfo = ({ close }) => {
+  const closeOutsideBox = (e) => {
+    if (e.target === e.currentTarget) {
+      close();
+    }
+  };
+
+  const logOutHandle = () => {
+    console.log("dang xuat");
+  };
+
   return (
     <Box
       sx={{
@@ -22,14 +33,8 @@ const UserInfo = ({ close }) => {
         gap: 2,
         textAlign: "center",
       }}
+      onClick={closeOutsideBox}
     >
-      <Box>
-        <CloseIcon
-          sx={{ position: "absolute", left: 0, top: 0, fontSize: "40px" }}
-          onClick={close}
-        />
-      </Box>
-
       <Box
         sx={{
           display: "flex",
@@ -42,8 +47,16 @@ const UserInfo = ({ close }) => {
           borderRadius: 3,
           width: "40%",
           height: "80%",
+          position: "relative",
         }}
       >
+        <Box>
+          <CloseIcon
+            sx={{ position: "absolute", left: 0, top: 0, fontSize: "40px" }}
+            onClick={close}
+          />
+        </Box>
+
         <Stack
           direction="column"
           divider={<Divider orientation="vertical" flexItem />}
@@ -54,16 +67,23 @@ const UserInfo = ({ close }) => {
             <h2>Trung tâm đăng kiểm</h2>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <EmailIcon />
+            <EmailIcon sx={{ marginRight: "8px" }} />
             <span>Email:</span>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <PhoneIcon />
+            <PhoneIcon sx={{ marginRight: "8px" }} />
             <span>Số điện thoại:</span>
           </Box>
           <Box sx={{ display: "flex", alignItems: "center" }}>
-            <BusinessIcon />
+            <BusinessIcon sx={{ marginRight: "8px" }} />
             <span>Địa chỉ:</span>
+          </Box>
+          <br />
+          <Box sx={{ display: "flex", alignItems: "center" }}>
+            <Button onClick={logOutHandle}>
+              <LogoutIcon sx={{ marginRight: "8px" }} onClick={logOutHandle} />
+              Đăng xuất
+            </Button>
           </Box>
         </Stack>
       </Box>

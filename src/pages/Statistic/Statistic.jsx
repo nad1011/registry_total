@@ -1,282 +1,142 @@
-import React from "react";
-import Page from "../../components/Page/Page";
+import React, { useState, useEffect } from "react";
+import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../../components/LineChart";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Dropdown from "../../components/Dropdown";
+import Page from "../../components/Page/Page";
 import Switch from "../../components/Switch";
 import Table from "../../components/Table";
-import {
-  getRegistrationDate,
-  getExpirationDate,
-  getRegistrationInfo,
-} from "../../database/function";
-import { useState, useEffect } from "react";
-import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
-import { Stack } from "@mui/material";
-import { Typography } from "@mui/material";
+import { Box, Grid, Stack, Typography } from "@mui/material";
+import { useLiveQuery } from "dexie-react-hooks";
+import { dexieDB } from "../../database/dexie";
 
 export default function Statistic() {
-  // data de truyen vao line graph
-  const [data, setData] = useState([
+  const [graphData, setGraphData] = useState([
     {
       id: "statistic",
       color: "hsl(62, 70%, 50%)",
-      data: [
-        {
-          x: "2014",
+      data: Array.from({ length: 10 }, (_, i) => {
+        return {
+          x: 2014 + i,
           y: 0,
-        },
-        {
-          x: "2015",
-          y: 0,
-        },
-        {
-          x: "2016",
-          y: 0,
-        },
-        {
-          x: "2017",
-          y: 0,
-        },
-        {
-          x: "2018",
-          y: 0,
-        },
-        {
-          x: "2019",
-          y: 0,
-        },
-        {
-          x: "2020",
-          y: 0,
-        },
-        {
-          x: "2021",
-          y: 0,
-        },
-        {
-          x: "2022",
-          y: 0,
-        },
-        {
-          x: "2023",
-          y: 0,
-        },
-      ],
+        };
+      }),
     },
   ]);
 
+  //require regDate, owner, license plate, center, regID
   const [tableData, setTableData] = useState([]);
-  // list data from database
-  const [currentList, setCurrentList] = useState([]);
-  const [expiredList, setExpiredList] = useState([]);
-  const [list, setList] = useState([]);
+  //on wait list
 
-  const [viewOption, setViewOption] = useState("Tháng");
-  const [expiredView, setExpiredView] = useState();
+  const certificateData = useLiveQuery(() =>
+    dexieDB.table("certificate").where("centerID").equals().toArray()
+  );
+  const [dateList, setDateList] = useState([]);
 
-  useEffect(() => {
-    const getNewData = async () => {
-      const newCurrentList = await getRegistrationDate();
-      setCurrentList(newCurrentList);
-      const newExpiredList = await getExpirationDate();
-      setExpiredList(newExpiredList);
-    };
+  const [timeView, setTimeView] = useState("Năm");
+  const [stateView, setStateView] = useState("registered");
 
-    getNewData();
-  }, []);
-
-  useEffect(() => {
-    const getData = async () => {
-      const newData = await getRegistrationInfo();
-      setTableData(newData);
-      // console.log(newData);
-    };
-    getData();
-  }, []);
-
-  const sortByYear = () => {
-    const listSortByYear = {
-      2014: 0,
-      2015: 0,
-      2016: 0,
-      2017: 0,
-      2018: 0,
-      2019: 0,
-      2020: 0,
-      2021: 0,
-      2022: 0,
-      2023: 0,
-      // 2024: 0,
-      // 2025: 0,
-      // 2026: 0,
-      // 2027: 0,
-    };
-    list.forEach((date) => {
-      const year = date.split("-")[0];
-      if (listSortByYear[year]) {
-        listSortByYear[year]++;
-      } else {
-        listSortByYear[year] = 1;
-      }
-    });
-    // console.log("listSortByYear", listSortByYear);
-    return listSortByYear;
+  const countDateByYear = () => {
+    const yearCount = dateList.reduce(
+      (obj, date) => {
+        const year = Number(date.split("/")[2]);
+        obj.latestYear = Math.max(obj.latestYear, year);
+        obj[year] = (obj[year] || 0) + 1;
+        return obj;
+      },
+      { latestYear: new Date().getFullYear() }
+    );
+    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
+      (obj, year) => {
+        obj[year] = yearCount[year] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
-  const sortByQuarter = () => {
-    const listSortByQuarter = {
-      "2014-Q1": 0,
-      "2014-Q2": 0,
-      "2014-Q3": 0,
-      "2014-Q4": 0,
-      "2015-Q1": 0,
-      "2015-Q2": 0,
-      "2015-Q3": 0,
-      "2015-Q4": 0,
-      "2016-Q1": 0,
-      "2016-Q2": 0,
-    };
-
-    list.forEach((date) => {
-      const [year, month, day] = date.split("-");
-      const quarter = Math.floor((parseInt(month, 10) - 1) / 3) + 1;
-      const quarterKey = `${year}-Q${quarter}`;
-
-      if (listSortByQuarter[quarterKey]) {
-        listSortByQuarter[quarterKey]++;
-      } else {
-        listSortByQuarter[quarterKey] = 1;
+  const countDateByQuarter = () => {
+    const getQuarterNum = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
+    const curDate = new Date();
+    const quarterCount = dateList.reduce(
+      (obj, date) => {
+        const [, month, year] = date.split("/").map(Number);
+        const quarterNum = getQuarterNum(year, month);
+        obj.latestQuarterNum = Math.max(obj.latestQuarterNum, quarterNum);
+        obj[quarterNum] = (obj[quarterNum] || 0) + 1;
+        return obj;
+      },
+      {
+        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
       }
-    });
-    // console.log("listSortByQuarter", listSortByQuarter);
-    return listSortByQuarter;
+    );
+    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
+      (obj, quarterNum) => {
+        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+        obj[quarter] = quarterCount[quarterNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
-  const sortByMonth = () => {
-    const listSortByMonth = {
-      "01/2014": 0,
-      "02/2014": 0,
-      "03/2014": 0,
-      "04/2014": 0,
-      "05/2014": 0,
-      "06/2014": 0,
-      "07/2014": 0,
-      "08/2014": 0,
-      "09/2014": 0,
-      "10/2014": 0,
-    };
-
-    list.forEach((date) => {
-      const monthAndYear = date.split("-")[0] + "/" + date.split("-")[1];
-      // console.log("monthAndYear: " + monthAndYear);
-      if (listSortByMonth[monthAndYear]) {
-        listSortByMonth[monthAndYear]++;
-      } else {
-        listSortByMonth[monthAndYear] = 1;
+  const countDateByMonth = () => {
+    const getMonthNum = (year, month) => year * 12 + month;
+    const curDate = new Date();
+    const monthCount = dateList.reduce(
+      (obj, date) => {
+        const [, month, year] = date.split("/").map(Number);
+        const monthNum = getMonthNum(year, month - 1);
+        obj.latestMonthNum = Math.max(obj.latestMonthNum, monthNum);
+        obj[monthNum] = (obj[monthNum] || 0) + 1;
+        return obj;
+      },
+      {
+        latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
-    });
-
-    return listSortByMonth;
+    );
+    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
+      (obj, monthNum) => {
+        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+        obj[month] = monthCount[monthNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
-  const handle = () => {
-    let sortedList = {};
-    switch (viewOption) {
-      case "Năm": {
-        const tmpList = sortByYear();
-        // console.log("sortedList", sortedList);
-        const tmpArr = Object.entries(tmpList);
+  const changeTimeView = () => {
+    const rawData = {
+      Năm: () => countDateByYear(),
+      Quý: () => countDateByQuarter(),
+      Tháng: () => countDateByMonth(),
+    }[timeView]();
 
-        tmpArr.sort((a, b) => {
-          if (a[0] < b[0]) return -1;
-          if (a[0] > b[0]) return 1;
-          return 0;
-        });
-        sortedList = Object.fromEntries(tmpArr);
-        break;
-      }
-
-      case "Tháng": {
-        const tmpList = sortByMonth();
-
-        const tmpArr = Object.entries(tmpList);
-
-        tmpArr.sort((a, b) => {
-          if (a[0] < b[0]) return -1;
-          if (a[0] > b[0]) return 1;
-          return 0;
-        });
-        sortedList = Object.fromEntries(tmpArr);
-        break;
-      }
-
-      case "Quý": {
-        const tmpList = sortByQuarter();
-
-        const tmpArr = Object.entries(tmpList);
-
-        tmpArr.sort((a, b) => {
-          if (a[0] < b[0]) return -1;
-          if (a[0] > b[0]) return 1;
-          return 0;
-        });
-
-        sortedList = Object.fromEntries(tmpArr);
-        break;
-      }
-      default:
-        return new Error("Invalid viewOption");
-    }
-
-    const keyArray = Object.keys(sortedList);
-    let start = keyArray.length - 10;
-    if (expiredView) {
-      start = 0;
-    }
-
-    const newData = data.map((item) => ({
-      ...item,
-      data: item.data.map((value, index) => {
-        return {
-          x: keyArray[start + index],
-          y: sortedList[keyArray[start + index]],
-        };
-      }),
-    }));
-
-    setData(newData);
-    // console.log("sortList", sortedList);
-    // setTableData(newData[0].data);
-  };
-
-  const onChangeDropdown = (data) => {
-    setViewOption(data);
+    setGraphData([
+      {
+        ...graphData[0],
+        data: Object.keys(rawData).map((key) => {
+          return {
+            x: key,
+            y: rawData[key],
+          };
+        }),
+      },
+    ]);
   };
 
   useEffect(() => {
-    if (!expiredView) {
-      setList(currentList);
-    } else {
-      setList(expiredList);
-    }
+    if (!certificateData) return;
+    setDateList(certificateData.map((cert) => cert[`${stateView}Date`]));
+    changeTimeView();
+  }, [certificateData, stateView]);
 
-    handle();
-  }, [viewOption, list, expiredView]);
-
-  const getToggleValue = (value) => {
-    setExpiredView(value);
-  };
+  const onChangeDropdown = (mode) => setTimeView(mode);
+  const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");
 
   return (
     <Page>
       <Grid container justifyContent="center" spacing={0} height={1}>
         <Grid item justifyContent="center" height="100%" xs={8}>
-          <Stack
-            spacing={{ xs: 0, sm: 0 }}
-            sx={{ m: "2%", height: "97%", mb: 0 }}
-          >
+          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ m: "2%", height: "97%", mb: 0 }}>
             <Box
               sx={{
                 bgcolor: "#fff",
@@ -290,11 +150,7 @@ export default function Statistic() {
                 height: 0.07,
               }}
             >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   variant="h6"
                   sx={{
@@ -306,7 +162,7 @@ export default function Statistic() {
                 >
                   Statistic
                 </Typography>
-                <Switch onSwitch={getToggleValue} />
+                <Switch onSwitch={onToggleSwitch} />
               </Stack>
             </Box>
             <Box
@@ -322,9 +178,15 @@ export default function Statistic() {
                 height: 0.5,
               }}
             >
-              <LineChart viewOption={viewOption} data={data} />
+              <LineChart viewOption={timeView} data={graphData} />
             </Box>
-            <Stack direction="row" sx={{ height: 0.39, mt: "2% !important" }}>
+            <Stack
+              direction="row"
+              sx={{
+                height: 0.39,
+                mt: "2% !important",
+              }}
+            >
               <Box
                 sx={{
                   bgcolor: "#fff",
@@ -353,7 +215,12 @@ export default function Statistic() {
             justifyContent="center"
             alignItems="center"
             spacing={{ xs: 0, sm: 0 }}
-            sx={{ m: "4%", height: "96%", mb: 0, ml: 0 }}
+            sx={{
+              m: "4%",
+              height: "96%",
+              mb: 0,
+              ml: 0,
+            }}
           >
             <Box
               sx={{
@@ -366,9 +233,9 @@ export default function Statistic() {
             >
               <ToggleSwitch
                 values={["Tháng", "Quý", "Năm"]}
-                selected={viewOption}
+                selected={timeView}
                 onChange={onChangeDropdown}
-                changeGraph={handle}
+                changeGraph={changeTimeView}
               />
             </Box>
             <Table data={tableData} />

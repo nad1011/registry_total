@@ -1,25 +1,18 @@
-import "./App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import { Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
 import Statistic from "./pages/Statistic/Statistic";
 import Prediction from "./pages/Prediction/Prediction";
-import Navbar from "./components/Navbar/Navbar.jsx";
 import CssBaseline from "@mui/material/CssBaseline";
-import SignIn from "./pages/SignIn/SignIn";
-import { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import "./App.css";
+import { user } from "./database/dexie";
 
 const App = () => {
-  const [login, setLogin] = useState(false);
   const navigate = useNavigate();
 
-  const onSignIn = (data) => {
-    if (data) {
-      navigate("/home");
-    }
-  };
+  const onSignIn = () => navigate("/home");
 
   return (
     <div className="App">
@@ -27,7 +20,10 @@ const App = () => {
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/statistic" element={<Statistic />} />
+        <Route
+          path="/statistic"
+          element={user.id === "hq" ? <pageForHq></pageForHq> : <Statistic />}
+        />
         <Route path="/registration" element={<Registration />} />
         <Route path="/prediction" element={<Prediction />} />
       </Routes>

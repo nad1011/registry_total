@@ -1,6 +1,6 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { Theme } from "@nivo/core";
+
 function LineChart({ viewOption, data }) {
   return (
     <>
@@ -8,7 +8,7 @@ function LineChart({ viewOption, data }) {
       <ResponsiveLine
         data={data}
         theme={{
-          fontFamily: 'roboto mono',
+          fontFamily: "roboto mono",
           fontSize: 10,
         }}
         margin={{ top: 20, right: 50, bottom: 50, left: 50 }}

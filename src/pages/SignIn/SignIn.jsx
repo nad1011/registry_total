@@ -1,78 +1,50 @@
 import { useState } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { fireDB } from "../../database/firebase";
-import {
-  Box,
-  TextField,
-  Button,
-  Avatar,
-  InputAdornment,
-  Link,
-  Typography,
-} from "@mui/material";
+
+import { fireAuth } from "../../database/firebase";
+import { user } from "../../database/dexie";
+import { signInWithEmailAndPassword } from "firebase/auth";
+
+import { Box, TextField, Button, InputAdornment, Link, Typography } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import { Stack, Grid } from "@mui/material";
 import backgroundImage from "../../assets/images/test2.jpg";
 
 export default function SignIn({ transfer }) {
-  const [input, setInput] = useState({ id: "", password: "" });
-  const [error, setError] = useState({
-    idState: false,
-    idMessage: "",
-    passwordState: false,
-    passwordMessage: "",
-  });
+  const [input, setInput] = useState({ email: "", password: "" });
+  const [emailError, setEmailError] = useState({ state: false, message: "" });
+  const [passwordError, setPasswordError] = useState({ state: false, message: "" });
 
-  const handleInput = (e) => {
-    setInput({ ...input, [e.target.name]: e.target.value });
-  };
+  const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
 
-  const handleSubmit = async () => {
-    if (input.id.length === 0) {
-      setError({
-        ...error,
-        idState: true,
-        idMessage: "ID không được để trống",
-      });
+  const handleSignIn = () => {
+    if (!input.email.length) {
+      setEmailError({ state: true, message: "Vui lòng nhập email" });
       return;
     }
 
-    if (input.password.length === 0) {
-      setError({
-        ...error,
-        passwordState: true,
-        passwordMessage: "Mật khẩu không được để trống",
-      });
+    if (!input.password.length) {
+      setPasswordError({ state: true, message: "Vui lòng nhập mật khẩu" });
       return;
     }
 
-    const docRef = doc(fireDB, "account", input.id);
-    const docSnap = await getDoc(docRef);
-
-    if (!docSnap.exists()) {
-      setError({
-        ...error,
-        idState: true,
-        idMessage: "ID không tồn tại",
+    signInWithEmailAndPassword(fireAuth, input.email, input.password)
+      .then((userCred) => {
+        user.id = userCred.user.email;
+        transfer();
+      })
+      .catch((error) => {
+        switch (error.code) {
+          case "auth/user-not-found":
+            setEmailError({ state: true, message: "Email không tồn tại" });
+            break;
+          case "auth/wrong-password":
+            setPasswordError({ state: true, message: "Mật khẩu không đúng" });
+            break;
+          default:
+            alert(`${error.code}\n${error.message}`);
+        }
       });
-      transfer(false);
-      return;
-    }
-
-    let account = docSnap.data();
-
-    if (input.password !== account.password) {
-      setError({
-        ...error,
-        passwordState: true,
-        passwordMessage: "Sai mật khẩu",
-      });
-      transfer(false);
-      return;
-    } else {
-      transfer(true);
-    }
   };
 
   return (
@@ -87,7 +59,6 @@ export default function SignIn({ transfer }) {
         backgroundRepeat: "no-repeat",
         backgroundSize: "cover",
         display: "flex",
-        // flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
       }}
@@ -98,7 +69,6 @@ export default function SignIn({ transfer }) {
           width: "100%",
           backdropFilter: "blur(5px)",
           display: "flex",
-          // flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
         }}
@@ -158,8 +128,8 @@ export default function SignIn({ transfer }) {
                   variant="p"
                   sx={{ color: "var(--primary-color)", fontFamily: "poppins" }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Magnam, molestias possimus quod, autem.
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, molestias
+                  possimus quod, autem.
                 </Typography>
               </Box>
             </Stack>
@@ -187,8 +157,8 @@ export default function SignIn({ transfer }) {
               </Typography>
               <TextField
                 required
-                name="id"
-                label="ID"
+                name="email"
+                label="Email"
                 variant="standard"
                 sx={{ width: 1, my: 2, fontFamily: "poppins" }}
                 InputProps={{
@@ -199,8 +169,8 @@ export default function SignIn({ transfer }) {
                   ),
                 }}
                 onChange={handleInput}
-                error={error.idState}
-                helperText={error.idMessage}
+                error={emailError.state}
+                helperText={emailError.message}
               />
               <TextField
                 required
@@ -217,8 +187,8 @@ export default function SignIn({ transfer }) {
                   ),
                 }}
                 onChange={handleInput}
-                error={error.passwordState}
-                helperText={error.passwordMessage}
+                error={passwordError.state}
+                helperText={passwordError.message}
               />
               <Link
                 href=""
@@ -249,7 +219,7 @@ export default function SignIn({ transfer }) {
                     color: "var(--avatar-color)",
                   },
                 }}
-                onClick={handleSubmit}
+                onClick={handleSignIn}
               >
                 Sign In
               </Button>

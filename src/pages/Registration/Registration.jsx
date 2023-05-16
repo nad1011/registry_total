@@ -9,12 +9,8 @@ import styles from "./Registration.module.css";
 import { Grid, IconButton, Box, Stack } from "@mui/material";
 import LICENSE_DATA from "../../data";
 //
-
+import { dexieDB } from "../../database/dexie";
 //
-import {} from "firebase/firestore";
-// import { useLiveQuery } from "dexie-react-hooks";
-// import { fireDB, dexieDB } from "../../firebase/firebase";
-// import { setupListener } from "../../firebase/listener";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -27,14 +23,14 @@ const chunkFilterList = (array, chunkSize) => {
 };
 
 export default function Registration() {
-  //
-  //
-  //
-  //
-  //
-  //
-  //
   const [searchField, setSearchField] = useState("");
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
   const [filter, setFilter] = useState("numberPlate");
@@ -67,34 +63,15 @@ export default function Registration() {
     setChunk(() => chunk + 1);
   };
 
-  const selectHandler = (newFilter) => {
-    setFilter(newFilter);
-  };
+  const selectHandler = (newFilter) => setFilter(newFilter);
 
   return (
     <Page>
-      <Grid
-        container
-        sx={{ height: "100%" }}
-        justifyContent={"flex-start"}
-        alignItems={"center"}
-      >
+      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
         <Grid item xs={12} lg={7.5} sx={{ height: "100vh" }}>
-          <Stack
-            direction="row"
-            justifyContent="space-between"
-            sx={{ height: "6vh", mt: "1vh" }}
-          >
-            <Stack
-              direction="row"
-              spacing={-1}
-              alignItems="center"
-              sx={{ height: 1 }}
-            >
-              <SearchBox
-                placeholder={`Search by ${filter}`}
-                onChangeHandler={onTitleChange}
-              />
+          <Stack direction="row" justifyContent="space-between" sx={{ height: "6vh", mt: "1vh" }}>
+            <Stack direction="row" spacing={-1} alignItems="center" sx={{ height: 1 }}>
+              <SearchBox placeholder={`Search by ${filter}`} onChangeHandler={onTitleChange} />
               <SelectSearch transfer={selectHandler} />
             </Stack>
             <Stack direction="row" spacing={2} alignItems="center">
@@ -125,8 +102,6 @@ export default function Registration() {
               m: "2vh",
               mt: "1vh",
               mr: "1vh",
-              // mt: 0,
-              // mr: 0,
               p: 1,
               py: 1,
               pb: 0,
@@ -135,25 +110,12 @@ export default function Registration() {
               height: "91vh",
             }}
           >
-            <Stack
-              direction="row"
-              spacing={0}
-              alignItems="center"
-              sx={{ height: 1 }}
-            >
+            <Stack direction="row" spacing={0} alignItems="center" sx={{ height: 1 }}>
               <CartList filterList={finalList ? finalList[chunk] : []} />
             </Stack>
           </Box>
         </Grid>
-        <Grid
-          item
-          alignItems="center"
-          height={0.9}
-          xs={12}
-          lg={4.5}
-          p={1}
-          sx={{ height: "100%" }}
-        >
+        <Grid item alignItems="center" height={0.9} xs={12} lg={4.5} p={1} sx={{ height: "100%" }}>
           <RenewForm />
         </Grid>
       </Grid>

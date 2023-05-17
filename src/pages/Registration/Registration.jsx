@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ArrowRightIcon, ArrowLeftIcon } from "@mui/icons-material/ArrowRight";
+import { ArrowRight, ArrowLeft } from "@mui/icons-material";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
@@ -135,7 +135,7 @@ export default function Registration() {
                   }}
                   size="small"
                 >
-                  <ArrowLeftIcon fontSize="large" />
+                  <ArrowLeft fontSize="large" />
                 </IconButton>
                 <IconButton
                   onClick={toNextChunk}
@@ -145,7 +145,7 @@ export default function Registration() {
                   }}
                   size="small"
                 >
-                  <ArrowRightIcon fontSize="large" />
+                  <ArrowRight fontSize="large" />
                 </IconButton>
               </Stack>
             </Stack>

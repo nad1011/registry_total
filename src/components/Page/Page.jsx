@@ -8,6 +8,7 @@ export default function Page({ children }) {
     <>
       <ResponsiveNavbar />
       <Box sx={{
+        marginTop: { sm: "45px", md: "0px"},
         position: "relative",
         width: "100vw",
         height: "100vh",

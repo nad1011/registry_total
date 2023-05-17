@@ -3,71 +3,85 @@ import CloseIcon from "@mui/icons-material/Close";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
+import Modal from "@mui/joy/Modal";
+import ModalClose from "@mui/joy/ModalClose";
+import Typography from "@mui/joy/Typography";
+import Sheet from "@mui/joy/Sheet";
 
-const UserInfo = ({ close }) => {
+const UserInfo = ({ open, close }) => {
   return (
-    <Box
-      sx={{
-        position: "fixed",
-        top: 0,
-        bottom: 0,
-        left: 0,
-        right: 0,
-        zIndex: 1000,
-        color: "black",
-        backgroundColor: "rgba(255, 255, 255,0.5)",
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        gap: 2,
-        textAlign: "center",
-      }}
+    <Modal
+      aria-labelledby="modal-title"
+      aria-describedby="modal-desc"
+      open={open}
+      onClose={close}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
     >
-      <Box>
-        <CloseIcon
-          sx={{ position: "absolute", left: 0, top: 0, fontSize: "40px" }}
-          onClick={close}
-        />
-      </Box>
-
-      <Box
+      <Sheet
+        variant="outlined"
         sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          textAlign: "center",
-          p: 1.5,
-          border: "2px solid var(--secondary-color)",
-          bgcolor: "var(--secondary-color)",
-          borderRadius: 3,
-          width: "40%",
-          height: "80%",
+          maxWidth: 500,
+          borderRadius: "md",
+          p: 3,
+          boxShadow: "lg",
         }}
       >
-        <Stack
-          direction="column"
-          divider={<Divider orientation="vertical" flexItem />}
-          spacing={2}
+        <ModalClose
+          variant="outlined"
+          sx={{
+            top: "calc(-1/4 * var(--IconButton-size))",
+            right: "calc(-1/4 * var(--IconButton-size))",
+            boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
+            borderRadius: "50%",
+            bgcolor: "background.body",
+          }}
+        />
+        <Typography
+          component="h2"
+          id="modal-title"
+          level="h3"
+          textColor="inherit"
+          fontWeight="lg"
+          mb={1}
         >
-          <Avatar>H</Avatar>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <h2>Trung tâm đăng kiểm</h2>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <EmailIcon />
-            <span>Email:</span>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <PhoneIcon />
-            <span>Số điện thoại:</span>
-          </Box>
-          <Box sx={{ display: "flex", alignItems: "center" }}>
-            <BusinessIcon />
-            <span>Địa chỉ:</span>
-          </Box>
+          Trung tâm đăng kiểm
+        </Typography>
+        <Stack height={"30vh"} width={"30vw"} sx={{
+          display: "flex",
+          justifyContent: "space-evenly",
+          alignItems: "flex-start",
+          pl: "10%",
+        }}>
+          <Typography
+            id="modal-desc"
+            textColor="inherit"
+            fontWeight="lg"
+            fontSize={18}
+            startDecorator={<EmailIcon />}
+          >
+            Email:
+          </Typography>
+          <Typography
+            id="modal-desc"
+            textColor="inherit"
+            fontWeight="lg"
+            fontSize={18}
+            startDecorator={<PhoneIcon />}
+          >
+            Số điện thoại:
+          </Typography>
+          <Typography
+            id="modal-desc"
+            textColor="inherit"
+            fontWeight="lg"
+            fontSize={18}
+            startDecorator={<BusinessIcon />}
+          >
+            Địa chỉ:
+          </Typography>
         </Stack>
-      </Box>
-    </Box>
+      </Sheet>
+    </Modal>
   );
 };
 

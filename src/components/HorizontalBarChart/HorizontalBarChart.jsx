@@ -75,7 +75,7 @@ export default function HorizontalBarChart({title}) {
     ],
   };
   return (
-    <div style={{ width: "100%", height: "30%" }}>
+    <div style={{ width: "90%", height: "25%" }}>
       <Bar options={options} data={data} />
     </div>
   );

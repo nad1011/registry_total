@@ -118,7 +118,7 @@ export default function Registration() {
                   sx={{
                     backgroundColor: "var(--secondary-color)",
                     ":hover": { backgroundColor: "var(--border-color)" },
-                    zIndex: 10000,
+                    
                   }}
                   size="small"
                 >

@@ -21,7 +21,7 @@ function LineChart({ viewOption, data }) {
           reverse: false,
         }}
         enableGridX={false}
-        enableGridY={false}
+        enableGridY={true}
         yFormat=" >-.2f"
         curve="cardinal"
         axisTop={null}
@@ -45,8 +45,9 @@ function LineChart({ viewOption, data }) {
           // legendPosition: "middle",
         }}
         colors={{ scheme: "category10" }}
-        pointSize={10}
-        pointColor={{ theme: "background" }}
+        lineWidth={3}
+        pointSize={7}
+        pointColor={{ from: 'color', modifiers: [] }}
         pointBorderWidth={2}
         pointBorderColor={{ from: "serieColor" }}
         pointLabelYOffset={-12}
@@ -54,7 +55,8 @@ function LineChart({ viewOption, data }) {
         useMesh={true}
         // areaBaselineValue={0}
         gridXValues={5}
-        enablePoints={false}
+        enablePoints={true}
+        isInteractive={false}
       />
     </>
   );

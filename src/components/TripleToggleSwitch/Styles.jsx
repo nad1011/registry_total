@@ -5,7 +5,7 @@ export const Switch = styled.div`
   position: relative;
   height: 100%;
   width: 100%;
-  background-color: var(--primary-color);
+  background-color: var(--secondary-color);
   border-radius: 5px;
 `;
 

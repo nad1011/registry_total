@@ -13,24 +13,24 @@ export default function ExampleIosSwitch({ onSwitch }) {
       checked={checked}
       onChange={(event) => setChecked(event.target.checked)}
       sx={(theme) => ({
-        "--Switch-thumbShadow": "0 3px 7px 0 rgba(0 0 0 / 0.12)",
-        "--Switch-thumbSize": "27px",
-        "--Switch-trackWidth": "51px",
-        "--Switch-trackHeight": "31px",
-        "--Switch-trackBackground": theme.vars.palette.background.level3,
+        "--Switch-thumbShadow": "0 3px 7px 0 rgba(0, 0, 0, 0.16)",
+        "--Switch-thumbSize": "20px",
+        "--Switch-trackWidth": "40px",
+        "--Switch-trackHeight": "25px",
+        "--Switch-trackBackground": "var(--border-color)",
         [`& .${switchClasses.thumb}`]: {
           transition: "width 0.5s, left 0.5s",
         },
         "&:hover": {
-          "--Switch-trackBackground": theme.vars.palette.background.level3,
+          "--Switch-trackBackground": "var(--border-color)",
         },
         "&:active": {
           "--Switch-thumbWidth": "32px",
         },
         [`&.${switchClasses.checked}`]: {
-          "--Switch-trackBackground": "rgb(48 209 88)",
+          "--Switch-trackBackground": "var(--avatar-color)",
           "&:hover": {
-            "--Switch-trackBackground": "rgb(48 209 88)",
+            "--Switch-trackBackground": "var(--avatar-color)",
           },
         },
       })}

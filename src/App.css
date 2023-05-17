@@ -1,22 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
 
 :root {
-  --primary-color: 	#EAEDEE;
+  --primary-color: #eaedee;
   --background-color: #f3f3f3;
   --secondary-color: #e1e1e3;
   --avatar-color: #5b5b5bf5;
-  --border-color: #d0d0d0
+  --border-color: #d0d0d0;
 }
 
 * {
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
 }
 body {
   padding: 0;
   margin: 0;
-  font-family: 'poppins',sans-serif;
+  font-family: "poppins", sans-serif;
 }
 
 .App {
@@ -24,4 +25,19 @@ body {
   height: 100vh;
   background-color: var(--background-color);
   color: var(--primary-color);
+}
+
+*::-webkit-scrollbar {
+  width: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: #808080;
+  border-radius: 10px;
+  border: 3px solid #ffffff;
 }

@@ -1,34 +1,26 @@
 import { useState, useEffect } from "react";
-import Box from "@mui/material/Box";
-import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { AiFillSetting } from "react-icons/ai";
-import IconButton from "@mui/material/IconButton";
+import { Box, MenuItem, Menu, IconButton } from "@mui/material";
 
-const ITEMS_SELECTION = {
+const SELECTION = {
   name: "name",
-  numberPlate: "numberPlate",
+  licensePlate: "regNum",
 };
 
 export default function SelectSearch({ transfer }) {
-  const [item, setItem] = useState("numberPlate");
+  const [item, setItem] = useState("regNum");
   const [anchorEl, setAnchorEl] = useState(null);
 
-  const handleMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleMenu = (event) => setAnchorEl(event.currentTarget);
 
-  const handleClose = () => {
-    setAnchorEl(null);
-  };
+  const handleClose = () => setAnchorEl(null);
 
   useEffect(() => {
     transfer(item);
-  }, [item, transfer]);
+  }, [item]);
 
   const handleInput = (event) => {
     setItem(event.target.getAttribute("value"));
-    console.log(event.target.getAttribute("value"));
     handleClose();
   };
   return (
@@ -57,11 +49,11 @@ export default function SelectSearch({ transfer }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem value={ITEMS_SELECTION.name} onClick={handleInput}>
+        <MenuItem value={SELECTION.name} onClick={handleInput}>
           Name
         </MenuItem>
-        <MenuItem value={ITEMS_SELECTION.numberPlate} onClick={handleInput}>
-          Number Plate
+        <MenuItem value={SELECTION.licensePlate} onClick={handleInput}>
+          License Plate
         </MenuItem>
       </Menu>
 

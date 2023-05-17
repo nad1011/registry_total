@@ -1,8 +1,4 @@
-import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-
-import { user } from "./database/dexie";
-
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";

@@ -6,13 +6,13 @@ import { user } from "../../database/dexie";
 
 import {
   Box,
-  TextField,
-  Button,
-  InputAdornment,
-  Link,
-  Typography,
-  Stack,
   Grid,
+  Link,
+  Stack,
+  Button,
+  TextField,
+  Typography,
+  InputAdornment,
 } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";

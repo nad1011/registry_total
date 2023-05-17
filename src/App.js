@@ -1,21 +1,20 @@
-import "./App.css";
-import { Routes, Route } from "react-router-dom";
+import { useEffect } from "react";
+import { Routes, Route, useNavigate } from "react-router-dom";
+
+import { user } from "./database/dexie";
+
+import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
 import Registration from "./pages/Registration/Registration";
 import Statistic from "./pages/Statistic/Statistic";
 import Prediction from "./pages/Prediction/Prediction";
 import CssBaseline from "@mui/material/CssBaseline";
-import SignIn from "./pages/SignIn/SignIn";
-import { useNavigate } from "react-router-dom";
+import "./App.css";
 
-const App = () => {
+export default function App() {
   const navigate = useNavigate();
 
-  const onSignIn = (data) => {
-    if (data) {
-      navigate("/home");
-    }
-  };
+  const onSignIn = () => navigate("/home");
 
   return (
     <div className="App">
@@ -29,6 +28,4 @@ const App = () => {
       </Routes>
     </div>
   );
-};
-
-export default App;
+}

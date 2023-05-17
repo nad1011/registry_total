@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
+import { ArrowRightIcon, ArrowLeftIcon } from "@mui/icons-material/ArrowRight";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
-import ArrowRightIcon from "@mui/icons-material/ArrowRight";
-import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
+import { Grid, IconButton, Box, Stack } from "@mui/material";
 import LICENSE_DATA from "../../data";
-import Stack from "@mui/material/Stack";
-import { Grid, IconButton, Box } from "@mui/material";
+//
+import { dexieDB, user } from "../../database/dexie";
+import { useLiveQuery } from "dexie-react-hooks";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -22,9 +23,22 @@ const chunkFilterList = (array, chunkSize) => {
 
 export default function Registration() {
   const [searchField, setSearchField] = useState("");
+  const [filter, setFilter] = useState("numberPlate");
+  //
+  //
+  const expiredCerts = useLiveQuery(() =>
+    dexieDB
+      .table("certificate")
+      .where("centerID")
+      .equals(user.id)
+      .filter((cert) => {
+        const [date, month, year] = cert.expiredDate.split("/").map(Number);
+        return new Date(year, month - 1, date) < new Date();
+      })
+      .toArray()
+  );
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
-  const [filter, setFilter] = useState("numberPlate");
 
   useEffect(() => {
     const newList = LICENSE_DATA.filter((car) => {
@@ -32,6 +46,8 @@ export default function Registration() {
     });
     setFilterList(newList);
   }, [searchField, filter]);
+
+  useEffect(() => {}, [expiredCerts]);
 
   const onTitleChange = (event) => {
     const searchInput = event.target.value.toUpperCase();
@@ -54,9 +70,7 @@ export default function Registration() {
     setChunk(() => chunk + 1);
   };
 
-  const selectHandler = (newFilter) => {
-    setFilter(newFilter);
-  };
+  const selectHandler = (newFilter) => setFilter(newFilter);
 
   return (
     <Page>
@@ -118,7 +132,6 @@ export default function Registration() {
                   sx={{
                     backgroundColor: "var(--secondary-color)",
                     ":hover": { backgroundColor: "var(--border-color)" },
-                    
                   }}
                   size="small"
                 >
@@ -187,7 +200,6 @@ export default function Registration() {
             md: 2,
             lg: 0,
           }}
-          
         >
           <RenewForm />
         </Grid>

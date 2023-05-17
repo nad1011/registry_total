@@ -42,7 +42,7 @@ car: ~1000
     overall dimension (m)
     * owner
     purpose
-    PIN
+    regNum
     seat number
     suspension type
     transmission

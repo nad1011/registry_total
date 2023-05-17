@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
+import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { fireAuth } from "../../database/firebase";
 import { user } from "../../database/dexie";
-import { signInWithEmailAndPassword } from "firebase/auth";
 
-import { Box, TextField, Button, InputAdornment, Link, Typography } from "@mui/material";
+import {
+  Box,
+  TextField,
+  Button,
+  InputAdornment,
+  Link,
+  Typography,
+  Stack,
+  Grid,
+} from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
-import { Stack, Grid } from "@mui/material";
 import backgroundImage from "../../assets/images/test2.jpg";
 
 export default function SignIn({ transfer }) {
+  useEffect(() => {
+    user.id = "";
+    signOut(fireAuth).catch(console.error);
+  }, []);
+
   const [input, setInput] = useState({ email: "", password: "" });
   const [emailError, setEmailError] = useState({ state: false, message: "" });
   const [passwordError, setPasswordError] = useState({ state: false, message: "" });
@@ -18,6 +31,9 @@ export default function SignIn({ transfer }) {
   const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSignIn = () => {
+    setEmailError({ state: false, message: "" });
+    setPasswordError({ state: false, message: "" });
+
     if (!input.email.length) {
       setEmailError({ state: true, message: "Vui lòng nhập email" });
       return;

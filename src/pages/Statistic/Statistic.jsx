@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
+
+import { useLiveQuery } from "dexie-react-hooks";
+import { dexieDB, user } from "../../database/dexie";
+import { getDocID } from "../../database/function";
+
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../../components/LineChart";
 import Page from "../../components/Page/Page";
 import Switch from "../../components/Switch";
 import Table from "../../components/Table";
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB } from "../../database/dexie";
 
 export default function Statistic() {
   const [graphData, setGraphData] = useState([
@@ -22,14 +25,12 @@ export default function Statistic() {
     },
   ]);
 
-  //require regDate, owner, license plate, center, regID
-  const [tableData, setTableData] = useState([]);
-  //on wait list
-
-  const certificateData = useLiveQuery(() =>
-    dexieDB.table("certificate").where("centerID").equals().toArray()
+  const certs = useLiveQuery(() =>
+    dexieDB.table("certificate").where("centerID").equals(user.id).toArray()
   );
   const [dateList, setDateList] = useState([]);
+  //require regDate, owner, license plate, center, certNO
+  const [tableData, setTableData] = useState([]);
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
@@ -124,10 +125,32 @@ export default function Statistic() {
   };
 
   useEffect(() => {
-    if (!certificateData) return;
-    setDateList(certificateData.map((cert) => cert[`${stateView}Date`]));
+    if (!certs) return;
+    setDateList(certs.map((cert) => cert[`${stateView}Date`]));
     changeTimeView();
-  }, [certificateData, stateView]);
+  }, [certs, stateView]);
+
+  useEffect(() => {
+    if (!certs) return;
+    const reloadTable = async () => {
+      setTableData(
+        await Promise.all(
+          certs.map(async (cert) => {
+            const car = await dexieDB.table("car").get(getDocID(cert.car));
+            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            return {
+              certID: cert.id,
+              center: cert.centerID,
+              regDate: cert.registeredDate,
+              licensePlate: car.regNum,
+              owner: owner.name,
+            };
+          })
+        )
+      );
+    };
+    reloadTable();
+  }, [certs]);
 
   const onChangeDropdown = (mode) => setTimeView(mode);
   const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");

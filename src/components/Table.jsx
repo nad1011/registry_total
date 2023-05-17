@@ -20,25 +20,13 @@ export default function EnhancedTable({ data }) {
 
   const [rows, setRows] = React.useState(
     data.map((row) => {
-      return createData(
-        row.id,
-        row.owner,
-        row.numberPlate,
-        row["registration-date"],
-        row.center
-      );
+      return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
     })
   );
 
   React.useEffect(() => {
     const newRows = data.map((row) => {
-      return createData(
-        row.id,
-        row.owner,
-        row.numberPlate,
-        row["registration-date"],
-        row.center
-      );
+      return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
     });
     setRows(newRows);
   }, [data]);
@@ -128,9 +116,7 @@ export default function EnhancedTable({ data }) {
                   {headCell.label}
                   {orderBy === headCell.id ? (
                     <Box component="span" sx={visuallyHidden}>
-                      {order === "desc"
-                        ? "sorted descending"
-                        : "sorted ascending"}
+                      {order === "desc" ? "sorted descending" : "sorted ascending"}
                     </Box>
                   ) : null}
                 </TableSortLabel>
@@ -165,10 +151,7 @@ export default function EnhancedTable({ data }) {
   }, [rows]);
 
   React.useEffect(() => {
-    let rowsOnMount = stableSort(
-      rows,
-      getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY)
-    );
+    let rowsOnMount = stableSort(rows, getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY));
 
     rowsOnMount = rowsOnMount.slice(
       0 * DEFAULT_ROWS_PER_PAGE,
@@ -185,14 +168,8 @@ export default function EnhancedTable({ data }) {
       setOrder(toggledOrder);
       setOrderBy(newOrderBy);
 
-      const sortedRows = stableSort(
-        rows,
-        getComparator(toggledOrder, newOrderBy)
-      );
-      const updatedRows = sortedRows.slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      );
+      const sortedRows = stableSort(rows, getComparator(toggledOrder, newOrderBy));
+      const updatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
       setVisibleRows(updatedRows);
     },
@@ -240,10 +217,7 @@ export default function EnhancedTable({ data }) {
       setVisibleRows(updatedRows);
 
       // Avoid a layout jump when reaching the last page with empty rows.
-      const numEmptyRows =
-        newPage > 0
-          ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length)
-          : 0;
+      const numEmptyRows = newPage > 0 ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length) : 0;
 
       const newPaddingHeight = 33 * numEmptyRows;
       setPaddingHeight(newPaddingHeight);
@@ -273,7 +247,9 @@ export default function EnhancedTable({ data }) {
   );
 
   const isSelected = (name) => selected.indexOf(name) !== -1;
-  const DisplayedRows = styled("p")`margin-bottom: 0px!important`;
+  const DisplayedRows = styled("p")`
+    margin-bottom: 0px !important;
+  `;
   return (
     <>
       <Box sx={{ width: "100%", height: "90.3%" }}>

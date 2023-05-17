@@ -9,8 +9,8 @@ import styles from "./Registration.module.css";
 import { Grid, IconButton, Box, Stack } from "@mui/material";
 import LICENSE_DATA from "../../data";
 //
-import { dexieDB } from "../../database/dexie";
-//
+import { dexieDB, user } from "../../database/dexie";
+import { useLiveQuery } from "dexie-react-hooks";
 
 const chunkFilterList = (array, chunkSize) => {
   const chunkedArray = [];
@@ -24,16 +24,22 @@ const chunkFilterList = (array, chunkSize) => {
 
 export default function Registration() {
   const [searchField, setSearchField] = useState("");
+  const [filter, setFilter] = useState("numberPlate");
   //
   //
-  //
-  //
-  //
-  //
-  //
+  const expiredCerts = useLiveQuery(() =>
+    dexieDB
+      .table("certificate")
+      .where("centerID")
+      .equals(user.id)
+      .filter((cert) => {
+        const [date, month, year] = cert.expiredDate.split("/").map(Number);
+        return new Date(year, month - 1, date) < new Date();
+      })
+      .toArray()
+  );
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
-  const [filter, setFilter] = useState("numberPlate");
 
   useEffect(() => {
     const newList = LICENSE_DATA.filter((car) => {
@@ -41,6 +47,8 @@ export default function Registration() {
     });
     setFilterList(newList);
   }, [searchField, filter]);
+
+  useEffect(() => {}, [expiredCerts]);
 
   const onTitleChange = (event) => {
     const searchInput = event.target.value.toUpperCase();

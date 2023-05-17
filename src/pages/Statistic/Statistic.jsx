@@ -29,7 +29,6 @@ export default function Statistic() {
     dexieDB.table("certificate").where("centerID").equals(user.id).toArray()
   );
   const [dateList, setDateList] = useState([]);
-  //require regDate, owner, license plate, center, certNO
   const [tableData, setTableData] = useState([]);
 
   const [timeView, setTimeView] = useState("Năm");

@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 import SignIn from "./pages/SignIn/SignIn";
 import Home from "./pages/Home/Home";
@@ -8,6 +9,9 @@ import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
 
 export default function App() {
+  //load listener
+  useEffect(() => {}, []);
+
   const navigate = useNavigate();
 
   const onSignIn = () => navigate("/home");

@@ -6,7 +6,7 @@ import SearchBox from "../../components/SearchBox/SearchBox";
 import RenewForm from "../../components/RenewForm/RenewForm";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { Grid, IconButton, Box, Stack } from "@mui/material";
-import { dexieDB, user } from "../../database/dexie";
+import { dexieDB, user } from "../../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
 import { getDocID } from "../../database/function";
 
@@ -14,7 +14,7 @@ export default function Registration() {
   const expiredCerts = useLiveQuery(() =>
     dexieDB
       .table("certificate")
-      .where("centerID")
+      .where("center")
       .equals(user.id)
       .filter((cert) => {
         const [date, month, year] = cert.expiredDate.split("/").map(Number);

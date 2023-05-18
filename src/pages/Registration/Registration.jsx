@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { ArrowRight, ArrowLeft } from "@mui/icons-material";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
-import SearchBox from "../../components/SearchBox/SearchBox";
+import SearchBox from "../../components/Box/SearchBox/SearchBox";
 import RenewBox from "../../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { Grid, IconButton, Box, Stack } from "@mui/material";

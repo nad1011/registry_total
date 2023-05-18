@@ -6,30 +6,15 @@ import SearchBox from "../../components/Box/SearchBox/SearchBox";
 import RenewBox from "../../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { Grid, IconButton, Box, Stack } from "@mui/material";
-import LICENSE_DATA from "../../data";
-//
-import { dexieDB, user } from "../../database/dexie";
+import { dexieDB, user } from "../../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
-
-const chunkFilterList = (array, chunkSize) => {
-  const chunkedArray = [];
-  if (array.length === 0) return [];
-  for (let i = 0; i < array.length; i += chunkSize) {
-    chunkedArray.push(array.slice(i, i + chunkSize));
-  }
-
-  return chunkedArray;
-};
+import { getDocID } from "../../database/function";
 
 export default function Registration() {
-  const [searchField, setSearchField] = useState("");
-  const [filter, setFilter] = useState("numberPlate");
-  //
-  //
   const expiredCerts = useLiveQuery(() =>
     dexieDB
       .table("certificate")
-      .where("centerID")
+      .where("center")
       .equals(user.id)
       .filter((cert) => {
         const [date, month, year] = cert.expiredDate.split("/").map(Number);
@@ -37,40 +22,49 @@ export default function Registration() {
       })
       .toArray()
   );
-  const [filterList, setFilterList] = useState(LICENSE_DATA);
-  const [chunk, setChunk] = useState(0);
+  const [expiredList, setExpiredList] = useState([]);
+  const [pageData, setPageData] = useState([]);
+
+  const [query, setQuery] = useState("");
+  const [param, setParam] = useState("regNum");
+  const [page, setPage] = useState(0);
 
   useEffect(() => {
-    const newList = LICENSE_DATA.filter((car) => {
-      return car[filter].toUpperCase().includes(searchField);
-    });
-    setFilterList(newList);
-  }, [searchField, filter]);
+    if (!expiredCerts) return;
+    const reloadList = async () => {
+      setExpiredList(
+        await Promise.all(
+          expiredCerts.map(async (cert) => {
+            const car = await dexieDB.table("car").get(getDocID(cert.car));
+            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            return {
+              id: cert.id,
+              name: owner.name,
+              licensePlate: car.regNum,
+              expiredDate: cert.expiredDate,
+            };
+          })
+        )
+      );
+    };
+    reloadList();
+  }, [expiredCerts]);
 
-  useEffect(() => {}, [expiredCerts]);
+  useEffect(() => {
+    setPage(0);
+    const filteredList = expiredList.filter((cert) => cert[param].toUpperCase().includes(query));
+    setPageData(
+      Array.from({ length: Math.ceil(filteredList.length / 6) }, (_, i) =>
+        filteredList.slice(i * 6, i * 6 + 6)
+      )
+    );
+  }, [expiredList, query, param]);
 
-  const onTitleChange = (event) => {
-    const searchInput = event.target.value.toUpperCase();
-    setSearchField(searchInput);
-    setChunk(0);
-  };
+  const onQueryChange = (e) => setQuery(e.target.value.toUpperCase());
+  const selectParam = (newFilter) => setParam(newFilter);
 
-  const chunkSize = 6;
-  const finalList = chunkFilterList(filterList, chunkSize);
-
-  const toPreviousChunk = () => {
-    if (chunk <= 0) return;
-    setChunk(() => chunk - 1);
-  };
-  const toNextChunk = () => {
-    if (finalList.length - 1 <= chunk) {
-      alert("List has reached end");
-      return;
-    }
-    setChunk(() => chunk + 1);
-  };
-
-  const selectHandler = (newFilter) => setFilter(newFilter);
+  const toPrevChunk = () => setPage((page - 1 + pageData.length) % pageData.length);
+  const toNextChunk = () => setPage((page + 1) % pageData.length);
 
   return (
     <Page>
@@ -112,11 +106,8 @@ export default function Registration() {
               alignItems="center"
               sx={{ height: 1, width: "70%", pb: 0.8 }}
             >
-              <SearchBox
-                placeholder={`Search by ${filter}`}
-                onChangeHandler={onTitleChange}
-              />
-              <SelectSearch transfer={selectHandler} />
+              <SearchBox placeholder={`Search by ${param}`} onChangeHandler={onQueryChange} />
+              <SelectSearch transfer={selectParam} />
             </Stack>
             <Stack direction="row" spacing={1} alignItems="flex-end">
               <Stack
@@ -132,7 +123,7 @@ export default function Registration() {
                 }}
               >
                 <IconButton
-                  onClick={toPreviousChunk}
+                  onClick={toPrevChunk}
                   sx={{
                     backgroundColor: "var(--secondary-color)",
                     ":hover": { backgroundColor: "var(--border-color)" },
@@ -171,7 +162,7 @@ export default function Registration() {
               borderTopRightRadius: 0,
             }}
           >
-            <CartList filterList={finalList ? finalList[chunk] : []} />
+            <CartList filterList={pageData[page] ?? []} />
           </Box>
         </Grid>
         <Grid

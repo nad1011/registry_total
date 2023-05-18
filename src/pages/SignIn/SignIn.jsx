@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { fireAuth } from "../../database/firebase";
-import { user } from "../../database/dexie";
+import { user } from "../../database/cache";
 
 import {
   Box,
@@ -20,7 +20,7 @@ import backgroundImage from "../../assets/images/test2.jpg";
 
 export default function SignIn({ transfer }) {
   useEffect(() => {
-    user.id = "";
+    user.reset();
     signOut(fireAuth).catch(console.error);
   }, []);
 
@@ -46,7 +46,7 @@ export default function SignIn({ transfer }) {
 
     signInWithEmailAndPassword(fireAuth, input.email, input.password)
       .then((userCred) => {
-        user.id = userCred.user.email;
+        user.loadData(userCred.user);
         transfer();
       })
       .catch((error) => {

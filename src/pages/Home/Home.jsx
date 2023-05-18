@@ -67,11 +67,10 @@ export default function Home() {
                 mt: 2,
               }}
             >
-              Are you tired of waiting in long lines at the DMV to register your
-              car? Say goodbye to the hassle and register your car online with
-              our easy-to-use platform. Our website offers a fast and convenient
-              way to get your car registered without any unnecessary delays.
-              Save time and energy by using our car registration service today!
+              Are you tired of waiting in long lines at the DMV to register your car? Say goodbye to
+              the hassle and register your car online with our easy-to-use platform. Our website
+              offers a fast and convenient way to get your car registered without any unnecessary
+              delays. Save time and energy by using our car registration service today!
             </Typography>
           </Stack>
         </Grid>
@@ -186,11 +185,7 @@ export default function Home() {
                     },
                   }}
                 >
-                  <Stack
-                    height={1}
-                    justifyContent="space-between"
-                    alignItems="flex-end"
-                  >
+                  <Stack height={1} justifyContent="space-between" alignItems="flex-end">
                     <Typography color={"black"}>{item.describe}</Typography>
                     <Button
                       sx={{

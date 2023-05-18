@@ -142,8 +142,7 @@ const Prediction = () => {
       count++;
     }
 
-    const slope =
-      (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
+    const slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
     const intercept = (sum_y - slope * sum_x) / count;
 
     return { slope: slope, intercept: intercept };
@@ -177,16 +176,7 @@ const Prediction = () => {
             <HorizontalBarChart title={"Năm"} />
           </Stack>
         </Grid>
-        <Grid
-          container
-          item
-          justifyContent="center"
-          height={1}
-          xs={7}
-          p={2}
-          pl={0}
-          pb={6}
-        >
+        <Grid container item justifyContent="center" height={1} xs={7} p={2} pl={0} pb={6}>
           <Box
             sx={{
               bgcolor: "var(--secondary-color)",
@@ -211,9 +201,9 @@ const Prediction = () => {
               height: 0.2,
             }}
           >
-            <PredictBox head={"Tháng"} value={312} percent={-1.0}/>
-            <PredictBox head={"Quý"} value={331} percent={-2.0}/>
-            <PredictBox head={"Năm"} value={256} percent={+5.0}/>
+            <PredictBox head={"Tháng"} value={312} percent={-1.0} />
+            <PredictBox head={"Quý"} value={331} percent={-2.0} />
+            <PredictBox head={"Năm"} value={256} percent={+5.0} />
           </Stack>
           <Box
             sx={{
@@ -232,10 +222,9 @@ const Prediction = () => {
             }}
           >
             <Typography variant="body1" fontFamily={"inter"}>
-              Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
-              hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính
-              vì vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục tăng và có thể trở
-              thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
+              Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu hướng tăng mạnh về số
+              lượng đăng kiểm ô tô trong tương lai. Chính vì vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục
+              tăng và có thể trở thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
               quan.
             </Typography>
           </Box>

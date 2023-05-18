@@ -7,6 +7,9 @@ import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import ArrowRightIcon from "@mui/icons-material/ArrowRight";
 import ArrowLeftIcon from "@mui/icons-material/ArrowLeft";
 import LICENSE_DATA from "../../data";
+//
+import { dexieDB } from "../../database/dexie";
+//
 import Stack from "@mui/material/Stack";
 import { Grid, IconButton, Box } from "@mui/material";
 
@@ -22,6 +25,13 @@ const chunkFilterList = (array, chunkSize) => {
 
 export default function Registration() {
   const [searchField, setSearchField] = useState("");
+  //
+  //
+  //
+  //
+  //
+  //
+  //
   const [filterList, setFilterList] = useState(LICENSE_DATA);
   const [chunk, setChunk] = useState(0);
   const [filter, setFilter] = useState("numberPlate");
@@ -54,9 +64,7 @@ export default function Registration() {
     setChunk(() => chunk + 1);
   };
 
-  const selectHandler = (newFilter) => {
-    setFilter(newFilter);
-  };
+  const selectHandler = (newFilter) => setFilter(newFilter);
 
   return (
     <Page>
@@ -146,48 +154,36 @@ export default function Registration() {
             }}
             sx={{
               border: "2px solid var(--secondary-color)",
-              m: "2%",
-              mt: 0,
-              mb: 0,
+              overflowY: "auto",
+              m: "2vh",
+              mt: "1vh",
+              mr: "1vh",
+              p: 1,
+              py: 1,
+              pb: 0,
               backgroundColor: "var(--secondary-color)",
               borderRadius: 3,
               borderTopRightRadius: 0,
             }}
           >
-            <CartList filterList={finalList ? finalList[chunk] : []} />
+            <Stack
+              direction="row"
+              spacing={0}
+              alignItems="center"
+              sx={{ height: 1 }}
+            >
+              <CartList filterList={finalList ? finalList[chunk] : []} />
+            </Stack>
           </Box>
         </Grid>
         <Grid
           item
           alignItems="center"
-          height={{
-            xs: "75%",
-            sm: "80%",
-            md: "90%",
-            lg: "100%",
-          }}
+          height={0.9}
           xs={12}
           lg={4.5}
-          p={{
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 2,
-          }}
-          pt={{
-            xs: 1,
-            sm: 1,
-            md: 0,
-            lg: 2,
-          }}
-          pb={{ xs: 1, sm: 1, md: 2, lg: 1.65 }}
-          pl={{
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 0,
-          }}
-          
+          p={1}
+          sx={{ height: "100%" }}
         >
           <RenewForm />
         </Grid>

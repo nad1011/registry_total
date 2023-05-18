@@ -5,16 +5,6 @@ export default function ExampleIosSwitch({ onSwitch }) {
   const [checked, setChecked] = useState(false);
 
   useEffect(() => {
-    // const date = "2021-11-23";
-    // if (checked) {
-    //   console.log("date:", date);
-    // } else {
-    //   const newYear = parseInt(date.split("-")[0]) + 2;
-    //   const newDate =
-    //     newYear + "/" + date.split("-")[1] + "/" + date.split("-")[2];
-
-    //   console.log("newDate:", newDate);
-    // }
     onSwitch(checked);
   }, [checked, onSwitch]);
 

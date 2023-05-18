@@ -8,7 +8,7 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB, user } from "../../database/dexie";
 
-export default function Statistic() {
+export default function HqStatistic() {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
@@ -173,7 +173,7 @@ export default function Statistic() {
                     zIndex: 1,
                   }}
                 >
-                  Statistic
+                  Statistic cho cục
                 </Typography>
                 <Switch onSwitch={onToggleSwitch} />
               </Stack>

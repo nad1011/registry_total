@@ -126,12 +126,18 @@ const RenewForm = ({ car }) => {
             />
             <label htmlFor="car-check">Đã kiểm tra xe</label>
           </div>
+          <Button
+            sx={{
+              backgroundColor: "whitesmoke",
+              color: "var(--avatar-color)",
+              fontWeight: "bold",
+            }}
+            size="lg"
+            variant="solid"
+          >
+            Confirm
+          </Button>
         </form>
-        <Button
-          sx={{ backgroundColor: "whitesmoke", color: "var(--avatar-color)", fontWeight: "bold" }}
-          size="lg"
-          variant="solid"
-        >Confirm</Button>
       </Stack>
     </Box>
   );

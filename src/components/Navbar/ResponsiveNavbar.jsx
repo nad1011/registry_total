@@ -1,4 +1,4 @@
-import * as React from "react";
+import {useState, useContext} from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Divider from "@mui/material/Divider";
@@ -20,16 +20,19 @@ import { NavbarContext } from "../../contexts/NavbarContext";
 
 function ResponsiveDrawer(props) {
   const { window } = props;
-  const [mobileOpen, setMobileOpen] = React.useState(false);
-  const [userInfoOpen, setUserInfoOpen] = React.useState(false);
-  const { open, changeOpen } = React.useContext(NavbarContext);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const [userInfoOpen, setUserInfoOpen] = useState(false);
+  const { open, changeOpen } = useContext(NavbarContext);
   const drawerWidth = 180;
   const nonDrawerWidth = 65;
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
   const popUpUserInfo = () => {
-    setUserInfoOpen(!userInfoOpen);
+    setUserInfoOpen(true);
+  };
+  const popDownUserInfo = () => {
+    setUserInfoOpen(false);
   };
   const handleDrawer = () => {
     changeOpen();
@@ -95,10 +98,10 @@ function ResponsiveDrawer(props) {
           >
             <ListItemIcon>
               <Avatar>H</Avatar>
-              <UserInfo open={userInfoOpen} close={popUpUserInfo} />
             </ListItemIcon>
             <ListItemText primary={"Logout"} sx={{ color: "#757575" }} />
           </ListItemButton>
+          <UserInfo open={userInfoOpen} close={popDownUserInfo} />  
         </ListItem>
       </List>
     </>

@@ -1,12 +1,12 @@
-import * as AiIcon from "react-icons/ai";
-import * as MdIcon from "react-icons/md";
+import {AiOutlineHome} from "react-icons/ai";
+import {MdAppRegistration,MdOutlineAnalytics} from "react-icons/md";
 import { GoGraph } from "react-icons/go";
 import styles from "./NavItem.module.css";
 
 const items = [
   {
     path: "/home",
-    icon: <AiIcon.AiOutlineHome className={styles["nav-icon"]} />,
+    icon: <AiOutlineHome className={styles["nav-icon"]} />,
     title: "Home",
   },
   {
@@ -16,12 +16,12 @@ const items = [
   },
   {
     path: "/registration",
-    icon: <MdIcon.MdAppRegistration className={styles["nav-icon"]} />,
+    icon: <MdAppRegistration className={styles["nav-icon"]} />,
     title: "Registration",
   },
   {
     path: "/prediction",
-    icon: <MdIcon.MdOutlineAnalytics className={styles["nav-icon"]} />,
+    icon: <MdOutlineAnalytics className={styles["nav-icon"]} />,
     title: "Prediction",
   },
 ];

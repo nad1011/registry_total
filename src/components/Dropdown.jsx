@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useRef, useState } from "react"; 
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -14,9 +14,9 @@ import { useEffect } from "react";
 const options = ["Tháng", "Quý", "Năm"];
 
 export default function SplitButton({ transfer, changeGraph }) {
-  const [open, setOpen] = React.useState(false);
-  const anchorRef = React.useRef(null);
-  const [selectedIndex, setSelectedIndex] = React.useState();
+  const [open, setOpen] = useState(false);
+  const anchorRef = useRef(null);
+  const [selectedIndex, setSelectedIndex] = useState();
 
   const handleClick = () => {
     // console.info(`You clicked ${options[selectedIndex]}`);
@@ -69,65 +69,17 @@ export default function SplitButton({ transfer, changeGraph }) {
   };
 
   return (
-    <React.Fragment>
+    <>
       <ButtonGroup
         variant="contained"
         ref={anchorRef}
         aria-label="split button"
       >
-        {/*  */}
+
         <Button onClick={handleBtnMonth}>{options[0]}</Button>
         <Button onClick={handleBtnQuarter}>{options[1]}</Button>
         <Button onClick={handleBtnYear}>{options[2]}</Button>
-        {/*  */}
-        {/* <Button onClick={handleClick}>{options[selectedIndex]}</Button>
-        <Button
-          size="small"
-          aria-controls={open ? "split-button-menu" : undefined}
-          aria-expanded={open ? "true" : undefined}
-          aria-label="select merge strategy"
-          aria-haspopup="menu"
-          onClick={handleToggle}
-        >
-          <MdOutlineArrowDropDownCircle />
-        </Button> */}
       </ButtonGroup>
-      {/* <Popper
-        sx={{
-          zIndex: 1,
-        }}
-        open={open}
-        anchorEl={anchorRef.current}
-        role={undefined}
-        transition
-        disablePortal
-      >
-        {({ TransitionProps, placement }) => (
-          <Grow
-            {...TransitionProps}
-            style={{
-              transformOrigin:
-                placement === "bottom" ? "center top" : "center bottom",
-            }}
-          >
-            <Paper>
-              <ClickAwayListener onClickAway={handleClose}>
-                <MenuList id="split-button-menu" autoFocusItem>
-                  {options.map((option, index) => (
-                    <MenuItem
-                      key={option}
-                      selected={index === selectedIndex}
-                      onClick={(event) => handleMenuItemClick(event, index)}
-                    >
-                      {option}
-                    </MenuItem>
-                  ))}
-                </MenuList>
-              </ClickAwayListener>
-            </Paper>
-          </Grow>
-        )}
-      </Popper> */}
-    </React.Fragment>
+    </>
   );
 }

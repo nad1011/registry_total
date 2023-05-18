@@ -1,12 +1,15 @@
-import { Box, Avatar, Stack, Divider } from "@mui/material";
+import { Stack, Button } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import LogoutIcon from "@mui/icons-material/Logout";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
 import Modal from "@mui/joy/Modal";
 import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
-import Sheet from "@mui/joy/Sheet";
+import { Sheet, Box } from "@mui/joy";
+//
+import { user } from "../../database/dexie";
 
 const UserInfo = ({ open, close }) => {
   return (
@@ -29,8 +32,8 @@ const UserInfo = ({ open, close }) => {
         <ModalClose
           variant="outlined"
           sx={{
-            top: "calc(-1/4 * var(--IconButton-size))",
-            right: "calc(-1/4 * var(--IconButton-size))",
+            top: "calc(-1/4 * 40px)",
+            right: "calc(-1/4 * 40px)",
             boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
             borderRadius: "50%",
             bgcolor: "background.body",
@@ -44,14 +47,18 @@ const UserInfo = ({ open, close }) => {
           fontWeight="lg"
           mb={1}
         >
-          Trung tâm đăng kiểm
+          Trung tâm đăng kiểm {user.id}
         </Typography>
-        <Stack height={"30vh"} width={"30vw"} sx={{
-          display: "flex",
-          justifyContent: "space-evenly",
-          alignItems: "flex-start",
-          pl: "10%",
-        }}>
+        <Stack
+          height={"30vh"}
+          width={"30vw"}
+          sx={{
+            display: "flex",
+            justifyContent: "space-evenly",
+            alignItems: "flex-start",
+            pl: "10%",
+          }}
+        >
           <Typography
             id="modal-desc"
             textColor="inherit"
@@ -79,6 +86,30 @@ const UserInfo = ({ open, close }) => {
           >
             Địa chỉ:
           </Typography>
+          <Box
+            width={"110%"}
+            display={"flex"}
+            justifyContent={"center"}
+            ml={"-10%"}
+          >
+            <Button
+              sx={{
+                backgroundColor: "whitesmoke",
+                color: "black",
+                fontWeight: "bold",
+                boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
+                "&:hover": {
+                  backgroundColor: "var(--border-color)",
+                  color: "black",
+                  // boxShadow: "none",
+                },
+              }}
+              size="lg"
+              variant="solid"
+            >
+              <LogoutIcon /> Đăng xuất
+            </Button>
+          </Box>
         </Stack>
       </Sheet>
     </Modal>

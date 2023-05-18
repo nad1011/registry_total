@@ -3,7 +3,7 @@ import { ArrowRight, ArrowLeft } from "@mui/icons-material";
 import Page from "../../components/Page/Page";
 import CartList from "../../components/CardList/CardList";
 import SearchBox from "../../components/SearchBox/SearchBox";
-import RenewForm from "../../components/RenewForm/RenewForm";
+import RenewBox from "../../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../../components/SelectSearch/SelectSearch";
 import { Grid, IconButton, Box, Stack } from "@mui/material";
 import LICENSE_DATA from "../../data";
@@ -77,7 +77,11 @@ export default function Registration() {
       <Grid
         container
         sx={{ height: "100%" }}
-        justifyContent={"flex-start"}
+        justifyContent={{
+          lg: "flex-start",
+          md: "center",
+          xs: "center"
+        }}
         alignItems={"center"}
       >
         <Grid
@@ -179,7 +183,7 @@ export default function Registration() {
             md: "90%",
             lg: "100%",
           }}
-          xs={12}
+          xs={11}
           lg={4.5}
           p={{
             xs: 1,
@@ -201,7 +205,7 @@ export default function Registration() {
             lg: 0,
           }}
         >
-          <RenewForm />
+          <RenewBox />
         </Grid>
       </Grid>
     </Page>

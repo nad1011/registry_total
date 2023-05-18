@@ -3,7 +3,7 @@ import Page from "../../components/Page/Page";
 import PredictChart from "../../components/PredictChart/PredictChart";
 import HorizontalBarChart from "../../components/HorizontalBarChart/HorizontalBarChart";
 import { LineChart } from "../../components/HorizontalBarChart/LineChart";
-import PredictBox from "../../components/PredictBox";
+import PredictBox from "../../components/Box/PredictBox/PredictBox";
 
 const data = [
   {

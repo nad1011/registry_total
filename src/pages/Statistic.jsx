@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user } from "../../database/cache";
-import { getDocID } from "../../database/function";
+import { dexieDB, user, getDocID } from "../database/cache";
 
-import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
-import LineChart from "../../components/LineChart";
-import Page from "../../components/Page/Page";
-import Switch from "../../components/Switch";
-import Table from "../../components/Table";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
+import LineChart from "../components/LineChart";
+import Page from "../components/Page/Page";
+import Switch from "../components/Switch";
+import Table from "../components/Table";
 
 export default function Statistic() {
   const [graphData, setGraphData] = useState([

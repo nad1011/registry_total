@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { fireAuth } from "../../database/firebase";
-import { user } from "../../database/cache";
+import { fireAuth } from "../database/firebase";
+import { user } from "../database/cache";
 
 import {
   Box,
@@ -16,7 +16,7 @@ import {
 } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
-import backgroundImage from "../../assets/images/test2.jpg";
+import backgroundImage from "../assets/images/test2.jpg";
 
 export default function SignIn({ transfer }) {
   useEffect(() => {

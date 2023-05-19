@@ -7,7 +7,7 @@ import Statistic from "./pages/Statistic/Statistic";
 import Prediction from "./pages/Prediction/Prediction";
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";
-import { user } from "./database/dexie";
+import { user } from "./database/cache";
 import HqStatistic from "./pages/HqStatistic/HqStatistic";
 import CreateAccount from "./pages/CreateAccount/CreateAccount";
 import Upload from "./pages/Upload/Upload";

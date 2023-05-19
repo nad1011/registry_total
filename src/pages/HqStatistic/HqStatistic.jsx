@@ -6,7 +6,7 @@ import Switch from "../../components/Switch";
 import Table from "../../components/Table";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user } from "../../database/dexie";
+import { dexieDB, user } from "../../database/cache";
 
 export default function HqStatistic() {
   const [graphData, setGraphData] = useState([

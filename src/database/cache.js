@@ -4,7 +4,7 @@ const dexieDB = new Dexie("cachedData");
 dexieDB.version(1).stores({
   owner: "id",
   car: "id",
-  certificate: "id, center",
+  certificate: "id,center",
 });
 
 export { dexieDB };

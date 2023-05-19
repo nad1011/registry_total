@@ -1,5 +1,4 @@
 import { Stack, Button } from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EmailIcon from "@mui/icons-material/Email";
 import PhoneIcon from "@mui/icons-material/Phone";
@@ -9,7 +8,7 @@ import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import { Sheet, Box } from "@mui/joy";
 //
-import { user } from "../../database/dexie";
+import { user } from "../../database/cache";
 
 const UserInfo = ({ open, close }) => {
   return (
@@ -51,7 +50,7 @@ const UserInfo = ({ open, close }) => {
         </Typography>
         <Stack
           height={"30vh"}
-          width={"30vw"}
+          width={"100%"}
           sx={{
             display: "flex",
             justifyContent: "space-evenly",
@@ -66,7 +65,7 @@ const UserInfo = ({ open, close }) => {
             fontSize={18}
             startDecorator={<EmailIcon />}
           >
-            Email:
+            Email: {user.email}
           </Typography>
           <Typography
             id="modal-desc"
@@ -75,7 +74,7 @@ const UserInfo = ({ open, close }) => {
             fontSize={18}
             startDecorator={<PhoneIcon />}
           >
-            Số điện thoại:
+            Số điện thoại: {user.phone}
           </Typography>
           <Typography
             id="modal-desc"
@@ -84,7 +83,7 @@ const UserInfo = ({ open, close }) => {
             fontSize={18}
             startDecorator={<BusinessIcon />}
           >
-            Địa chỉ:
+            Địa chỉ: {user.address}
           </Typography>
           <Box
             width={"110%"}

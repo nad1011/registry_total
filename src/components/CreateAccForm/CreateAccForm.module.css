@@ -1,0 +1,19 @@
+.form-header {
+  position: relative;
+  /* top: 90%; */
+  font-size: 1.8em;
+  color: #000000;
+  text-align: center;
+  font-family: "Courier New", Courier, monospace;
+  user-select: none;
+}
+
+.checkbox-container {
+  color: white;
+  padding: 10px;
+}
+
+.checkbox-container label {
+  padding: 5px;
+  padding-right: 20px;
+}

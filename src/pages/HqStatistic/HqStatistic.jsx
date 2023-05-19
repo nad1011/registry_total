@@ -1,22 +1,18 @@
 import React, { useState, useEffect } from "react";
-
-import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user } from "../../database/cache";
-import { getDocID } from "../../database/function";
-
 import ToggleSwitch from "../../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../../components/LineChart";
 import Page from "../../components/Page/Page";
 import Switch from "../../components/Switch";
 import Table from "../../components/Table";
-import StatisticBox from "../../components/Box/StatisticBox/StatisticBox";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import { useLiveQuery } from "dexie-react-hooks";
+import { dexieDB, user } from "../../database/dexie";
 
-export default function Statistic() {
+export default function HqStatistic() {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
-      color: "#969696",
+      color: "hsl(62, 70%, 50%)",
       data: Array.from({ length: 10 }, (_, i) => {
         return {
           x: 2014 + i,
@@ -26,11 +22,14 @@ export default function Statistic() {
     },
   ]);
 
-  const certs = useLiveQuery(() =>
-    dexieDB.table("certificate").where("center").equals(user.id).toArray()
+  //require regDate, owner, license plate, center, regID
+  const [tableData, setTableData] = useState([]);
+  //on wait list
+
+  const certificateData = useLiveQuery(() =>
+    dexieDB.table("certificate").where("centerID").equals(user.id).toArray()
   );
   const [dateList, setDateList] = useState([]);
-  const [tableData, setTableData] = useState([]);
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
@@ -45,13 +44,13 @@ export default function Statistic() {
       },
       { latestYear: new Date().getFullYear() }
     );
-    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
-      (obj, year) => {
-        obj[year] = yearCount[year] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => yearCount.latestYear - 9 + i
+    ).reduce((obj, year) => {
+      obj[year] = yearCount[year] || 0;
+      return obj;
+    }, {});
   };
 
   const countDateByQuarter = () => {
@@ -66,17 +65,20 @@ export default function Statistic() {
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
+        latestQuarterNum: getQuarterNum(
+          curDate.getFullYear(),
+          curDate.getMonth()
+        ),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
-      (obj, quarterNum) => {
-        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
-        obj[quarter] = quarterCount[quarterNum] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => quarterCount.latestQuarterNum - 9 + i
+    ).reduce((obj, quarterNum) => {
+      const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+      obj[quarter] = quarterCount[quarterNum] || 0;
+      return obj;
+    }, {});
   };
 
   const countDateByMonth = () => {
@@ -94,14 +96,15 @@ export default function Statistic() {
         latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
-      (obj, monthNum) => {
-        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
-        obj[month] = monthCount[monthNum] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => monthCount.latestMonthNum - 9 + i
+    ).reduce((obj, monthNum) => {
+      const month =
+        `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+      obj[month] = monthCount[monthNum] || 0;
+      return obj;
+    }, {});
   };
 
   const changeTimeView = () => {
@@ -125,53 +128,23 @@ export default function Statistic() {
   };
 
   useEffect(() => {
-    if (!certs) return;
-    setDateList(certs.map((cert) => cert[`${stateView}Date`]));
+    if (!certificateData) return;
+    setDateList(certificateData.map((cert) => cert[`${stateView}Date`]));
     changeTimeView();
-  }, [certs, stateView]);
-
-  useEffect(() => {
-    if (!certs) return;
-    const reloadTable = async () => {
-      setTableData(
-        await Promise.all(
-          certs.map(async (cert) => {
-            const car = await dexieDB.table("car").get(getDocID(cert.car));
-            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
-            return {
-              certID: cert.id,
-              center: cert.center,
-              regDate: cert.registeredDate,
-              licensePlate: car.regNum,
-              owner: owner.name,
-            };
-          })
-        )
-      );
-    };
-    reloadTable();
-  }, [certs]);
+  }, [certificateData, stateView]);
 
   const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");
+  const onToggleSwitch = (state) =>
+    setStateView(state ? "expired" : "registered");
 
   return (
     <Page>
       <Grid container justifyContent="center" spacing={0} height={1}>
-        <Grid
-          item
-          justifyContent="center"
-          height={{
-            xs: "70%",
-            sm: "80%",
-            md: "85%",
-            lg: "100%",
-          }}
-          lg={8}
-          md={12}
-          xs={12}
-        >
-          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ m: "2%", height: "97%", mb: 0 }}>
+        <Grid item justifyContent="center" height="100%" xs={8}>
+          <Stack
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ m: "2%", height: "97%", mb: 0 }}
+          >
             <Box
               sx={{
                 bgcolor: "var(--secondary-color)",
@@ -185,7 +158,11 @@ export default function Statistic() {
                 height: 0.07,
               }}
             >
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Typography
                   variant="h6"
                   sx={{
@@ -196,7 +173,7 @@ export default function Statistic() {
                     zIndex: 1,
                   }}
                 >
-                  Statistic
+                  Statistic cho cục
                 </Typography>
                 <Switch onSwitch={onToggleSwitch} />
               </Stack>
@@ -219,16 +196,29 @@ export default function Statistic() {
             <Stack
               direction="row"
               sx={{
-                display: "flex",
-                justifyContent: "space-evenly",
-                alignItems: "center",
-                width: 1,
                 height: 0.39,
                 mt: "2% !important",
               }}
             >
-              <StatisticBox/>
-              <StatisticBox/>
+              <Box
+                sx={{
+                  bgcolor: "var(--secondary-color)",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                  mr: "2% !important",
+                }}
+              ></Box>
+              <Box
+                sx={{
+                  bgcolor: "var(--secondary-color)",
+                  borderRadius: 2,
+                  p: 1,
+                  width: 0.5,
+                  height: 1,
+                }}
+              ></Box>
             </Stack>
           </Stack>
         </Grid>
@@ -250,18 +240,11 @@ export default function Statistic() {
             justifyContent="center"
             alignItems="center"
             spacing={{ xs: 0, sm: 0 }}
-            sx={{ height: "96%", m: "3.4%", mb: 0, ml: 0 }}
-            mb={{
-              lg: "0%",
-              xs: "3.4%",
-            }}
-            mr={{
-              lg: "3.4%",
-              xs: "0%",
-            }}
-            mt={{
-              lg: "3.4%",
-              xs: "0%",
+            sx={{
+              m: "4%",
+              height: "96%",
+              mb: 0,
+              ml: 0,
             }}
           >
             <Box

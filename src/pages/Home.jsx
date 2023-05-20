@@ -1,11 +1,10 @@
-//react import
 import React from "react";
 import { Link } from "react-router-dom";
 import review from "./Review";
-//UI import
+
 import { Grid, Box, Typography, Stack, Button } from "@mui/material";
-import Page from "../../components/Page/Page";
-import logoImg from "../../assets/images/logo.png";
+import Page from "../components/Page/Page";
+import logoImg from "../assets/images/logo.png";
 
 export default function Home() {
   return (

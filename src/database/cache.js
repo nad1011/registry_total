@@ -29,3 +29,5 @@ export const user = {
     user.email = "";
   },
 };
+
+export const getDocID = (docRef) => docRef.path.split("/").pop();

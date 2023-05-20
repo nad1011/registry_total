@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { ArrowRight, ArrowLeft } from "@mui/icons-material";
-import Page from "../../components/Page/Page";
-import CartList from "../../components/CardList/CardList";
-import SearchBox from "../../components/Box/SearchBox/SearchBox";
-import RenewBox from "../../components/Box/RenewBox/RenewBox";
-import SelectSearch from "../../components/SelectSearch/SelectSearch";
-import { Grid, IconButton, Box, Stack } from "@mui/material";
-import { dexieDB, user } from "../../database/cache";
+
+import { dexieDB, user, getDocID } from "../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
-import { getDocID } from "../../database/function";
+
+import { Grid, IconButton, Box, Stack } from "@mui/material";
+import { ArrowRight, ArrowLeft } from "@mui/icons-material";
+import Page from "../components/Page/Page";
+import CartList from "../components/CardList/CardList";
+import SearchBox from "../components/SearchBox/SearchBox";
+import RenewForm from "../components/RenewForm/RenewForm";
+import SelectSearch from "../components/SelectSearch/SelectSearch";
 
 export default function Registration() {
   const expiredCerts = useLiveQuery(() =>
@@ -68,16 +69,7 @@ export default function Registration() {
 
   return (
     <Page>
-      <Grid
-        container
-        sx={{ height: "100%" }}
-        justifyContent={{
-          lg: "flex-start",
-          md: "center",
-          xs: "center"
-        }}
-        alignItems={"center"}
-      >
+      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
         <Grid
           item
           xs={12}
@@ -174,7 +166,7 @@ export default function Registration() {
             md: "90%",
             lg: "100%",
           }}
-          xs={11}
+          xs={12}
           lg={4.5}
           p={{
             xs: 1,
@@ -196,7 +188,7 @@ export default function Registration() {
             lg: 0,
           }}
         >
-          <RenewBox />
+          <RenewForm />
         </Grid>
       </Grid>
     </Page>

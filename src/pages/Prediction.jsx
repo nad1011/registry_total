@@ -1,9 +1,8 @@
-import { Button, Grid, Box, Stack, Typography } from "@mui/material";
-import Page from "../../components/Page/Page";
-import PredictChart from "../../components/PredictChart/PredictChart";
-import HorizontalBarChart from "../../components/HorizontalBarChart/HorizontalBarChart";
-import { LineChart } from "../../components/HorizontalBarChart/LineChart";
-import PredictBox from "../../components/Box/PredictBox/PredictBox";
+import { Grid, Box, Stack, Typography } from "@mui/material";
+import Page from "../components/Page/Page";
+import HorizontalBarChart from "../components/HorizontalBarChart/HorizontalBarChart";
+import { LineChart } from "../components/HorizontalBarChart/LineChart";
+import PredictBox from "../components/PredictBox";
 
 const data = [
   {

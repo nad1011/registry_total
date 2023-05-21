@@ -13,8 +13,8 @@ import Prediction from "./pages/Prediction";
 import "./App.css";
 import { user } from "./database/cache";
 import HqStatistic from "./pages/HqStatistic/HqStatistic";
-import CreateAccount from "./pages/CreateAccount/CreateAccount";
-import Upload from "./pages/Upload/Upload";
+import CreateAccount from "./pages/CreateAccount";
+import Upload from "./pages/Upload";
 
 export default function App() {
   //load listener
@@ -46,21 +46,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />
-        <Route
-          path="/statistic"
-          element={user.id === "hq" ? <HqStatistic /> : <Statistic />}
-        />
-        {/* <Route path="/registration" element={<Registration />} /> */}
+        <Route path="/statistic" element={user.id === "hq" ? <HqStatistic /> : <Statistic />} />
         <Route
           path="/registration"
           element={user.id === "hq" ? <CreateAccount /> : <Registration />}
         />
-
-        {/* <Route path="/prediction" element={<Prediction />} /> */}
-        <Route
-          path="/prediction"
-          element={user.id === "hq" ? <Upload /> : <Prediction />}
-        />
+        <Route path="/prediction" element={user.id === "hq" ? <Upload /> : <Prediction />} />
       </Routes>
     </div>
   );

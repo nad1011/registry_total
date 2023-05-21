@@ -1,4 +1,4 @@
-import Page from "../../components/Page/Page";
+import Page from "../components/Page/Page";
 import { Button, Box, Stack } from "@mui/material";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
 import { useState } from "react";

@@ -137,7 +137,7 @@ export default function Statistic() {
             const car = await dexieDB.table("car").get(getDocID(cert.car));
             const owner = await dexieDB.table("owner").get(getDocID(car.owner));
             return {
-              certID: cert.id,
+              id: cert.id,
               center: cert.center,
               regDate: cert.registeredDate,
               licensePlate: car.regNum,

@@ -1,8 +1,9 @@
+import { Box } from "@mui/material";
 import styles from "./FormInput.module.css";
 
 const FormInput = ({ label, icon, ...otherProps }) => {
   return (
-    <div className={styles["input-group"]}>
+    <Box className={styles["input-group"]}>
       {icon}
       <input className={styles["form-input"]} {...otherProps} />
       {label && (
@@ -14,7 +15,7 @@ const FormInput = ({ label, icon, ...otherProps }) => {
           {label}
         </label>
       )}
-    </div>
+    </Box>
   );
 };
 

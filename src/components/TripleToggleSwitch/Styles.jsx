@@ -32,7 +32,8 @@ export const SwitchLabel = styled.label`
   float: left;
   width: 33.33333333333333%;
   line-height: 200%;
-  font-size: 14px;
+  font-family: "Inter";
+  font-size: 15px;
   color: rgba(0, 0, 0, 0.6);
   text-align: center;
   cursor: pointer;

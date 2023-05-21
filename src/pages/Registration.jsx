@@ -7,8 +7,8 @@ import { Grid, IconButton, Box, Stack } from "@mui/material";
 import { ArrowRight, ArrowLeft } from "@mui/icons-material";
 import Page from "../components/Page/Page";
 import CartList from "../components/CardList/CardList";
-import SearchBox from "../components/SearchBox/SearchBox";
-import RenewForm from "../components/RenewForm/RenewForm";
+import SearchBox from "../components/Box/SearchBox/SearchBox";
+import RenewBox from "../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../components/SelectSearch/SelectSearch";
 
 export default function Registration() {
@@ -76,27 +76,31 @@ export default function Registration() {
           lg={7.5}
           height={{
             xs: "70%",
-            sm: "75%",
-            md: "70%",
+            sm: "80%",
+            md: "90%",
             lg: "100%",
           }}
+          sx={{ p: "var(--padding-item)"}}
+
         >
           <Stack
             direction="row"
             justifyContent="space-between"
             height={{
-              xs: "13%",
-              sm: "11%",
-              md: "12%",
-              lg: "10%",
+              xs: "10%",
+              sm: "10%",
+              md: "10%",
+              lg: "9%",
             }}
-            sx={{ mx: "2%", pt: 1.5 }}
           >
             <Stack
               direction="row"
-              spacing={0}
+              spacing={{
+                xs: 1,
+                lg: 0,
+              }}
               alignItems="center"
-              sx={{ height: 1, width: "70%", pb: 0.8 }}
+              sx={{ height: 1, width: "70%", pb: "var(--padding-item)" }}
             >
               <SearchBox placeholder={`Search by ${param}`} onChangeHandler={onQueryChange} />
               <SelectSearch transfer={selectParam} />
@@ -108,7 +112,7 @@ export default function Registration() {
                 alignItems="center"
                 sx={{
                   width: "100%",
-                  height: "70%",
+                  height: "50%",
                   backgroundColor: "var(--secondary-color)",
                   borderTopLeftRadius: 15,
                   borderTopRightRadius: 15,
@@ -139,16 +143,13 @@ export default function Registration() {
           </Stack>
           <Box
             height={{
-              xs: "86%",
-              sm: "89%",
-              md: "86%",
-              lg: "87.8%",
+              xs: "90%",
+              sm: "90%",
+              md: "90%",
+              lg: "91%",
             }}
             sx={{
               border: "2px solid var(--secondary-color)",
-              m: "2%",
-              mt: 0,
-              mb: 0,
               backgroundColor: "var(--secondary-color)",
               borderRadius: 3,
               borderTopRightRadius: 0,
@@ -161,34 +162,24 @@ export default function Registration() {
           item
           alignItems="center"
           height={{
-            xs: "75%",
+            xs: "70%",
             sm: "80%",
             md: "90%",
             lg: "100%",
           }}
           xs={12}
           lg={4.5}
-          p={{
-            xs: 1,
-            sm: 1,
-            md: 2,
-            lg: 2,
-          }}
-          pt={{
-            xs: 1,
-            sm: 1,
-            md: 0,
-            lg: 2,
-          }}
-          pb={{ xs: 1, sm: 1, md: 2, lg: 1.65 }}
+          p = {"var(--padding-item)"}
           pl={{
-            xs: 1,
-            sm: 1,
-            md: 2,
+            xs: "var(--padding-item)",
             lg: 0,
           }}
+          pt={{
+            xs: 0,
+            lg: "var(--padding-item)",
+          }}
         >
-          <RenewForm />
+          <RenewBox />
         </Grid>
       </Grid>
     </Page>

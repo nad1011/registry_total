@@ -1,4 +1,4 @@
-import * as React from "react";
+import { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import Box from "@mui/material/Box";
 import Table from "@mui/material/Table";
@@ -17,13 +17,13 @@ export default function EnhancedTable({ data }) {
     return { id, name, numberPlate, registrationDate, center };
   }
 
-  const [rows, setRows] = React.useState(
+  const [rows, setRows] = useState(
     data.map((row) => {
       return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
     })
   );
 
-  React.useEffect(() => {
+  useEffect(() => {
     const newRows = data.map((row) => {
       return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
     });
@@ -106,7 +106,7 @@ export default function EnhancedTable({ data }) {
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}
                 sortDirection={orderBy === headCell.id ? order : false}
-                sx={{bgcolor: "var(--secondary-color)"}}
+                sx={{bgcolor: "var(--secondary-color)", fontSize: 15}}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
@@ -137,20 +137,20 @@ export default function EnhancedTable({ data }) {
     rowCount: PropTypes.number.isRequired,
   };
 
-  const [order, setOrder] = React.useState(DEFAULT_ORDER);
-  const [orderBy, setOrderBy] = React.useState(DEFAULT_ORDER_BY);
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [visibleRows, setVisibleRows] = React.useState(null);
-  const [rowsPerPage, setRowsPerPage] = React.useState(DEFAULT_ROWS_PER_PAGE);
-  const [paddingHeight, setPaddingHeight] = React.useState(0);
+  const [order, setOrder] = useState(DEFAULT_ORDER);
+  const [orderBy, setOrderBy] = useState(DEFAULT_ORDER_BY);
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [visibleRows, setVisibleRows] = useState(null);
+  const [rowsPerPage, setRowsPerPage] = useState(DEFAULT_ROWS_PER_PAGE);
+  const [paddingHeight, setPaddingHeight] = useState(0);
 
-  React.useEffect(() => {
+  useEffect(() => {
     setOrderBy(DEFAULT_ORDER_BY);
     setOrder(DEFAULT_ORDER);
   }, [rows]);
 
-  React.useEffect(() => {
+  useEffect(() => {
     let rowsOnMount = stableSort(rows, getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY));
 
     rowsOnMount = rowsOnMount.slice(
@@ -161,7 +161,7 @@ export default function EnhancedTable({ data }) {
     setVisibleRows(rowsOnMount);
   }, [rows]);
 
-  const handleRequestSort = React.useCallback(
+  const handleRequestSort = useCallback(
     (event, newOrderBy) => {
       const isAsc = orderBy === newOrderBy && order === "asc";
       const toggledOrder = isAsc ? "desc" : "asc";
@@ -204,7 +204,7 @@ export default function EnhancedTable({ data }) {
     setSelected(newSelected);
   };
 
-  const handleChangePage = React.useCallback(
+  const handleChangePage = useCallback(
     (event, newPage) => {
       setPage(newPage);
 
@@ -225,7 +225,7 @@ export default function EnhancedTable({ data }) {
     [order, orderBy, rowsPerPage, rows]
   );
 
-  const handleChangeRowsPerPage = React.useCallback(
+  const handleChangeRowsPerPage = useCallback(
     (event) => {
       const updatedRowsPerPage = parseInt(event.target.value, 10);
       setRowsPerPage(updatedRowsPerPage);
@@ -249,7 +249,7 @@ export default function EnhancedTable({ data }) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <>
-      <Box sx={{ width: "100%", height: "90.3%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
+      <Box sx={{ width: "100%", height: "100%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
         <Paper
           sx={{
             width: "100%",

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { collection, onSnapshot } from "firebase/firestore";
@@ -13,6 +13,10 @@ import Statistic from "./pages/Statistic";
 import Prediction from "./pages/Prediction";
 import HQStatistic from "./pages/HQStatistic";
 import "./App.css";
+import { user } from "./database/cache";
+import HqStatistic from "./pages/HqStatistic/HqStatistic";
+import CreateAccount from "./pages/CreateAccount";
+import Upload from "./pages/Upload";
 
 export default function App() {
   //load listener
@@ -39,9 +43,12 @@ export default function App() {
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/statistic" element={user.id === "hq" ? <HQStatistic /> : <Statistic />} />
-        <Route path="/registration" element={<Registration />} />
-        <Route path="/prediction" element={<Prediction />} />
+        <Route path="/statistic" element={user.id === "hq" ? <HqStatistic /> : <Statistic />} />
+        <Route
+          path="/registration"
+          element={user.id === "hq" ? <CreateAccount /> : <Registration />}
+        />
+        <Route path="/prediction" element={user.id === "hq" ? <Upload /> : <Prediction />} />
       </Routes>
     </div>
   );

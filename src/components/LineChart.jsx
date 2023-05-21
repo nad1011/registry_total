@@ -1,65 +1,69 @@
 import React from "react";
 import { ResponsiveLine } from "@nivo/line";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
+import { faker } from "@faker-js/faker";
 
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
 function LineChart({ viewOption, data }) {
-  return (
-    <>
-      {/* <button onClick={handle}>ok</button> */}
-      <ResponsiveLine
-        data={data}
-        theme={{
-          fontFamily: "roboto mono",
-          fontSize: 10,
-        }}
-        margin={{ top: 20, right: 50, bottom: 50, left: 50 }}
-        xScale={{ type: "point" }}
-        yScale={{
-          type: "linear",
-          min: "auto",
-          max: "auto",
-          stacked: true,
-          reverse: false,
-        }}
-        enableGridX={false}
-        enableGridY={true}
-        yFormat=" >-.2f"
-        curve="cardinal"
-        axisTop={null}
-        axisRight={null}
-        axisBottom={{
-          orient: "bottom",
-          tickSize: 0,
-          tickPadding: 20,
-          tickRotation: 0,
-          // legend: "transportation",
-          // legendOffset: 36,
-          // legendPosition: "middle",
-        }}
-        axisLeft={{
-          orient: "left",
-          tickSize: 0,
-          tickPadding: 15,
-          tickRotation: 0,
-          // legend: "count",
-          // legendOffset: -40,
-          // legendPosition: "middle",
-        }}
-        colors={{ scheme: "category10" }}
-        lineWidth={3}
-        pointSize={7}
-        pointColor={{ from: 'color', modifiers: [] }}
-        pointBorderWidth={2}
-        pointBorderColor={{ from: "serieColor" }}
-        pointLabelYOffset={-12}
-        // enableArea={true}
-        useMesh={true}
-        // areaBaselineValue={0}
-        gridXValues={5}
-        enablePoints={true}
-        isInteractive={false}
-      />
-    </>
-  );
+  const labels = data[0].data.map((item) => item.x);
+  const options = {
+    scales: {
+      x: {
+        grid: {
+          display: false, // Tắt grid trục x
+        },
+      },
+      y: {
+        grid: {
+          display: false, // Tắt grid trục y
+        },
+      },
+    },
+    maintainAspectRatio: false,
+    aspectRatio: 2,
+    responsive: true,
+    plugins: {
+      legend: {
+        display: false,
+        position: "top",
+      },
+      title: {
+        display: false,
+        text: "Dự đoán số lượng đăng kiểm trong tháng tới",
+      },
+    },
+  };
+  const tableData = {
+    labels,
+    datasets: [
+      {
+        label: "Blable",
+        data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
+        borderColor: "rgb(255, 99, 132)",
+        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        cubicInterpolationMode: 'monotone', 
+      },
+    ],
+  };
+  return <Line options={options} data={tableData} />
 }
 
 export default LineChart;

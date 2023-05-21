@@ -9,6 +9,7 @@
   --secondary-color: #e1e1e3;
   --avatar-color: #5b5b5bf5;
   --border-color: #d0d0d0;
+  --padding-item: 2vh;
 }
 
 * {

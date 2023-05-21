@@ -6,9 +6,9 @@ export default function StatisticBox() {
       sx={{
         bgcolor: "var(--secondary-color)",
         borderRadius: 2,
-        p: 1,
-        width: 0.47,
-        height: 1,
+        p: "3%",
+        width: {xs: "50%", lg: "48%"},
+        height: "100%",
         // mr: "2% !important",
       }}
     >
@@ -16,27 +16,26 @@ export default function StatisticBox() {
         justifyContent="space-between"
         sx={{
           color: "var(--avatar-color)",
-          p: 3,
           height: 1,
         }}
       >
         <Typography
-          height={"35%"}
+          height={"30%"}
           sx={{
             fontWeight: "bold",
-            fontFamily: "roboto mono",
-            fontSize: 17,
+            fontFamily: "Inter",
+            fontSize: { xs: 13, sm: 16, md: 22, lg: 20 },
           }}
         >
           Tổng lượng đăng kiểm gần nhất
         </Typography>
         <Stack
-          height={"65%"}
+          height={"70%"}
           justifyContent="space-between"
           mx={{
-            xs: 0,
-            sm: 0,
-            md: 0,
+            xs: 2,
+            sm: 3,
+            md: 5,
             lg: 5,
           }}
         >
@@ -48,6 +47,7 @@ export default function StatisticBox() {
             <Typography
               sx={{
                 fontFamily: "poppins",
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               Tháng
@@ -56,7 +56,7 @@ export default function StatisticBox() {
               sx={{
                 fontWeight: "bold",
                 fontFamily: "poppins",
-                fontSize: 16,
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               10
@@ -70,6 +70,7 @@ export default function StatisticBox() {
             <Typography
               sx={{
                 fontFamily: "poppins",
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               Quý
@@ -78,7 +79,7 @@ export default function StatisticBox() {
               sx={{
                 fontWeight: "bold",
                 fontFamily: "poppins",
-                fontSize: 16,
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               20
@@ -92,6 +93,7 @@ export default function StatisticBox() {
             <Typography
               sx={{
                 fontFamily: "poppins",
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               Năm
@@ -100,7 +102,7 @@ export default function StatisticBox() {
               sx={{
                 fontWeight: "bold",
                 fontFamily: "poppins",
-                fontSize: 16,
+                fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
               30

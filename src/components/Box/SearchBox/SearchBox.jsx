@@ -1,48 +1,59 @@
 import React from "react";
-import { useState } from "react";
-import { BiSearch } from "react-icons/bi";
-import styles from "./SearchBox.module.css";
-import { IconButton } from "@mui/material";
+import { styled } from "@mui/material/styles";
+import InputBase from "@mui/material/InputBase";
+import SearchIcon from "@mui/icons-material/Search";
+
+const Search = styled("div")(({ theme }) => ({
+  position: "relative",
+  borderRadius: "15px",
+  color: "var(--avatar-color)",
+  backgroundColor: "var(--secondary-color)",
+  "&:hover": {
+    backgroundColor: "var(--secondary-color)",
+  },
+  marginLeft: 0,
+  width: "100%",
+  height: "100%",
+  [theme.breakpoints.up("sm")]: {
+    width: "auto",
+  },
+}));
+
+const SearchIconWrapper = styled("div")(({ theme }) => ({
+  padding: theme.spacing(0, 2),
+  height: "100%",
+  position: "absolute",
+  pointerEvents: "none",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+}));
+
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
+  color: "inherit",
+  "& .MuiInputBase-input": {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("sm")]: {
+      width: "12ch",
+      "&:focus": {
+        width: "20ch",
+      },
+    },
+  },
+}));
 
 const SearchBox = ({ placeholder, onChangeHandler }) => {
-  const [search, setSearch] = useState(false);
-  const onSearchClick = () => {
-    setSearch(!search);
-  };
   return (
-    <div
-      className={
-        `${styles["search"]} ${styles["active"]}`
-      }
-    >
-      <IconButton aria-label="delete" disabled onClick={onSearchClick} sx={{
-        // '&:hover': {
-        //   backgroundColor: 'transparent',
-        //   boxShadow: 'none',
-        //   borderColor: '#0062cc',
-        // },
-        // '&:active': {
-        //   boxShadow: 'none',
-        //   backgroundColor: 'transparent',
-        //   borderColor: '#005cbf',
-        // },
-        // '&:focus': {
-        //   boxShadow: '0 0 0 0.2rem transparent',
-        // },
-        // textTransform: 'none',
-        height: '100%',
-        
-      }}>
-        <BiSearch/>
-      </IconButton>
-      <div className={styles["input"]}>
-          <input
-            type="search"
-            placeholder={placeholder}
-            onChange={onChangeHandler}
-          />
-      </div>
-    </div>
+    <Search>
+      <SearchIconWrapper>
+        <SearchIcon />
+      </SearchIconWrapper>
+      <StyledInputBase placeholder={placeholder} onChange={onChangeHandler} />
+    </Search>
   );
 };
 

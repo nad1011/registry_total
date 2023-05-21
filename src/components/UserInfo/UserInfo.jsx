@@ -9,8 +9,12 @@ import Typography from "@mui/joy/Typography";
 import { Sheet, Box } from "@mui/joy";
 //
 import { user } from "../../database/cache";
+import { useNavigate } from "react-router";
 
 const UserInfo = ({ open, close }) => {
+
+  const navigate = useNavigate();
+
   return (
     <Modal
       aria-labelledby="modal-title"
@@ -25,6 +29,7 @@ const UserInfo = ({ open, close }) => {
           maxWidth: 500,
           borderRadius: "md",
           p: 3,
+          pb: 1,
           boxShadow: "lg",
         }}
       >
@@ -49,7 +54,7 @@ const UserInfo = ({ open, close }) => {
           Trung tâm đăng kiểm {user.id}
         </Typography>
         <Stack
-          height={"30vh"}
+          height={"40vh"}
           width={"100%"}
           sx={{
             display: "flex",
@@ -92,6 +97,7 @@ const UserInfo = ({ open, close }) => {
             ml={"-10%"}
           >
             <Button
+              onClick={() => navigate("/")}
               sx={{
                 backgroundColor: "whitesmoke",
                 color: "black",

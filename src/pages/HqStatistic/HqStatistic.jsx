@@ -27,7 +27,7 @@ export default function HqStatistic() {
   //on wait list
 
   const certificateData = useLiveQuery(() =>
-    dexieDB.table("certificate").where("centerID").equals(user.id).toArray()
+    dexieDB.table("certificate").where("center").equals(user.id).toArray()
   );
   const [dateList, setDateList] = useState([]);
 

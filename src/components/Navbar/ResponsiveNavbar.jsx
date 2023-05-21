@@ -42,7 +42,7 @@ function ResponsiveDrawer(props) {
     <>
       <Toolbar
         sx={{
-          minHeight: { sm: "45px", md: "50px" },
+          minHeight: { xs: "45px", md: "50px" },
           marginLeft: open ? 13 : -1.5,
           transition: "all 0.3s ease",
         }}

@@ -2,7 +2,7 @@ import { Grid, Box, Stack, Typography } from "@mui/material";
 import Page from "../components/Page/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart/HorizontalBarChart";
 import { LineChart } from "../components/HorizontalBarChart/LineChart";
-import PredictBox from "../components/PredictBox";
+import PredictBox from "../components/Box/PredictBox/PredictBox";
 
 const data = [
   {
@@ -161,10 +161,7 @@ const Prediction = () => {
             alignItems={"center"}
             sx={{
               bgcolor: "var(--secondary-color)",
-
               borderRadius: 2,
-              // p: 4,
-              // pt:0,
               width: 1,
               height: 1.0,
             }}

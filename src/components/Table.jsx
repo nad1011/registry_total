@@ -106,7 +106,7 @@ export default function EnhancedTable({ data }) {
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}
                 sortDirection={orderBy === headCell.id ? order : false}
-                sx={{bgcolor: "var(--secondary-color)"}}
+                sx={{bgcolor: "var(--secondary-color)", fontSize: 15}}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
@@ -249,7 +249,7 @@ export default function EnhancedTable({ data }) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <>
-      <Box sx={{ width: "100%", height: "90.3%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
+      <Box sx={{ width: "100%", height: "100%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
         <Paper
           sx={{
             width: "100%",

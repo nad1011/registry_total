@@ -1,4 +1,5 @@
 import React from "react";
+import { Box } from "@mui/material";
 import { Bar } from "react-chartjs-2";
 import {
   Chart as ChartJS,
@@ -19,7 +20,7 @@ ChartJS.register(
   Tooltip,
   Legend
 );
-export default function HorizontalBarChart({title}) {
+export default function HorizontalBarChart({ title, tableData }) {
   const labels = ["One"];
   const options = {
     indexAxis: "y",
@@ -33,7 +34,7 @@ export default function HorizontalBarChart({title}) {
     responsive: true,
     plugins: {
       legend: {
-        position: "right",
+        position: "bottom",
       },
       title: {
         display: true,
@@ -41,7 +42,6 @@ export default function HorizontalBarChart({title}) {
       },
     },
     scales: {
-
       // to remove the y-axis labels
       y: {
         ticks: {
@@ -75,8 +75,8 @@ export default function HorizontalBarChart({title}) {
     ],
   };
   return (
-    <div style={{ width: "90%", height: "25%" }}>
+    <Box sx={{ width: {xs: "100%", sm: "50%", md: 1/3 ,lg: "95%"}, height: { xs: "100%", md: "100%", lg: "30%" } }}>
       <Bar options={options} data={data} />
-    </div>
+    </Box>
   );
 }

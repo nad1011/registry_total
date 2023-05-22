@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user, getDocID } from "../database/cache";
+import { dexieDB } from "../database/cache";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
@@ -25,6 +25,7 @@ export default function HQStatistic() {
   ]);
 
   const certs = useLiveQuery(() => dexieDB.table("certificate").toArray());
+  const [filteredCerts, setFilteredCerts] = useState([]);
   const [dateList, setDateList] = useState([]);
   const [tableData, setTableData] = useState([]);
 
@@ -122,10 +123,9 @@ export default function HQStatistic() {
   };
 
   useEffect(() => {
-    if (!certs) return;
-    setDateList(certs.map((cert) => cert[`${stateView}Date`]));
+    setDateList(filteredCerts.map((cert) => cert[`${stateView}Date`]));
     changeTimeView();
-  }, [certs, stateView]);
+  }, [filteredCerts, stateView]);
 
   useEffect(() => {
     if (!certs) return;
@@ -133,8 +133,8 @@ export default function HQStatistic() {
       setTableData(
         await Promise.all(
           certs.map(async (cert) => {
-            const car = await dexieDB.table("car").get(getDocID(cert.car));
-            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            const car = await dexieDB.table("car").get(cert.car);
+            const owner = await dexieDB.table("owner").get(car.owner);
             return {
               id: cert.id,
               center: cert.center,
@@ -148,6 +148,13 @@ export default function HQStatistic() {
     };
     reloadTable();
   }, [certs]);
+
+  useEffect(() => {
+    if (!certs) return;
+    setFilteredCerts(
+      centerView === "All" ? certs : certs.filter((cert) => cert.center === centerView)
+    );
+  }, [certs, centerView]);
 
   const onChangeDropdown = (mode) => setTimeView(mode);
   const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");

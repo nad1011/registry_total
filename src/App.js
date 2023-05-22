@@ -11,10 +11,9 @@ import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import Statistic from "./pages/Statistic";
 import Prediction from "./pages/Prediction";
-import HQStatistic from "./pages/HQStatistic";
+// import HQStatistic from "./pages/HQStatistic";
 import "./App.css";
-import { user } from "./database/cache";
-import HqStatistic from "./pages/HqStatistic/HqStatistic";
+import HqStatistic from "./pages/HQStatistic";
 import CreateAccount from "./pages/CreateAccount";
 import Upload from "./pages/Upload";
 

@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB, user, getDocID } from "../database/cache";
 
+import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
+import Dropdown from "../components/Dropdown";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
@@ -42,13 +44,13 @@ export default function HQStatistic() {
       },
       { latestYear: new Date().getFullYear() }
     );
-    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
-      (obj, year) => {
-        obj[year] = yearCount[year] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => yearCount.latestYear - 9 + i
+    ).reduce((obj, year) => {
+      obj[year] = yearCount[year] || 0;
+      return obj;
+    }, {});
   };
 
   const countDateByQuarter = () => {
@@ -63,17 +65,20 @@ export default function HQStatistic() {
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
+        latestQuarterNum: getQuarterNum(
+          curDate.getFullYear(),
+          curDate.getMonth()
+        ),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
-      (obj, quarterNum) => {
-        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
-        obj[quarter] = quarterCount[quarterNum] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => quarterCount.latestQuarterNum - 9 + i
+    ).reduce((obj, quarterNum) => {
+      const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+      obj[quarter] = quarterCount[quarterNum] || 0;
+      return obj;
+    }, {});
   };
 
   const countDateByMonth = () => {
@@ -91,14 +96,15 @@ export default function HQStatistic() {
         latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
-      (obj, monthNum) => {
-        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
-        obj[month] = monthCount[monthNum] || 0;
-        return obj;
-      },
-      {}
-    );
+    return Array.from(
+      { length: 10 },
+      (_, i) => monthCount.latestMonthNum - 9 + i
+    ).reduce((obj, monthNum) => {
+      const month =
+        `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+      obj[month] = monthCount[monthNum] || 0;
+      return obj;
+    }, {});
   };
 
   const changeTimeView = () => {
@@ -150,7 +156,8 @@ export default function HQStatistic() {
   }, [certs]);
 
   const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");
+  const onToggleSwitch = (state) =>
+    setStateView(state ? "expired" : "registered");
 
   return (
     <Page>
@@ -161,39 +168,50 @@ export default function HQStatistic() {
           height={{
             xs: "70%",
             sm: "80%",
-            md: "85%",
+            md: "90%",
             lg: "100%",
           }}
           lg={8}
           md={12}
           xs={12}
         >
-          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ m: "2%", height: "97%", mb: 0 }}>
+          <Stack
+            spacing={{ xs: 0, sm: 0 }}
+            sx={{ p: "var(--padding-item)", height: "100%" }}
+          >
             <Box
               sx={{
                 bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 borderBottomLeftRadius: 0,
                 borderBottomRightRadius: 0,
-                p: 2,
+                p: "var(--padding-item)",
                 pt: 1,
                 mb: 0,
                 width: 1,
-                height: 0.07,
+                height: "10%",
               }}
             >
-              <Stack direction="row" justifyContent="space-between" alignItems="center">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                alignItems="center"
+              >
                 <Typography
-                  variant="h6"
                   sx={{
                     fontWeight: "bold",
-                    fontFamily: "Raleway",
-                    fontSize: 25,
-                    color: "#000",
+                    fontFamily: "Inter",
+                    fontSize: {
+                      xs: "15px",
+                      sm: "20px",
+                      md: "22px",
+                      lg: "22px",
+                    },
+                    color: "var(--avatar-color)",
                     zIndex: 1,
                   }}
                 >
-                  Statistic
+                  Thống kê số lượng xe đăng kiểm
                 </Typography>
                 <Switch onSwitch={onToggleSwitch} />
               </Stack>
@@ -208,144 +226,35 @@ export default function HQStatistic() {
                 pt: 0,
                 mb: 2,
                 width: 1,
-                height: 0.5,
+                height: "50%",
               }}
             >
               <LineChart viewOption={timeView} data={graphData} />
             </Box>
             <Stack
               direction="row"
+              spacing={1}
               sx={{
-                height: 0.39,
-                mt: "2% !important",
+                display: "flex",
+                justifyContent: "space-evenly",
+                alignItems: "center",
+                width: 1,
+                height: "40%",
+                mt: "var(--padding-item) !important",
               }}
             >
-              <Box
-                sx={{
-                  bgcolor: "var(--secondary-color)",
-                  borderRadius: 2,
-                  p: 1,
-                  width: 0.5,
-                  height: 1,
-                  mr: "2% !important",
-                }}
-              >
-                <Stack
-                  justifyContent="space-between"
-                  sx={{
-                    color: "var(--avatar-color)",
-                    p: 3,
-                    height: 1,
-                  }}
-                >
-                  <Typography
-                    height={"35%"}
-                    sx={{
-                      fontWeight: "bold",
-                      fontFamily: "roboto mono",
-                      fontSize: 17,
-                    }}
-                  >
-                    Tổng lượng đăng kiểm gần nhất
-                  </Typography>
-                  <Stack
-                    height={"65%"}
-                    justifyContent="space-between"
-                    mx={{
-                      xs: 0,
-                      sm: 0,
-                      md: 0,
-                      lg: 5,
-                    }}
-                  >
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography
-                        sx={{
-                          fontFamily: "poppins",
-                        }}
-                      >
-                        Tháng
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontFamily: "poppins",
-                          fontSize: 16,
-                        }}
-                      >
-                        10
-                      </Typography>
-                    </Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography
-                        sx={{
-                          fontFamily: "poppins",
-                        }}
-                      >
-                        Quý
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontFamily: "poppins",
-                          fontSize: 16,
-                        }}
-                      >
-                        20
-                      </Typography>
-                    </Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography
-                        sx={{
-                          fontFamily: "poppins",
-                        }}
-                      >
-                        Năm
-                      </Typography>
-                      <Typography
-                        sx={{
-                          fontWeight: "bold",
-                          fontFamily: "poppins",
-                          fontSize: 16,
-                        }}
-                      >
-                        30
-                      </Typography>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Box>
-              <Box
-                sx={{
-                  bgcolor: "var(--secondary-color)",
-                  borderRadius: 2,
-                  p: 1,
-                  width: 0.5,
-                  height: 1,
-                }}
-              >
-                <Stack
-                  sx={{
-                    color: "var(--avatar-color)",
-                  }}
-                >
-                  <Typography>Số lượng xe sắp hết hạn:</Typography>
-                  <Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography>Tháng </Typography>
-                      <Typography>10</Typography>
-                    </Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography>Quý </Typography>
-                      <Typography>20</Typography>
-                    </Stack>
-                    <Stack direction="row" justifyContent="space-between" alignItems="center">
-                      <Typography>Năm </Typography>
-                      <Typography>30</Typography>
-                    </Stack>
-                  </Stack>
-                </Stack>
-              </Box>
+              <StatisticBox
+                title={"Số lượng đăng kiểm gần đây"}
+                month={123}
+                quarter={222}
+                year={897}
+              />
+              <StatisticBox
+                title={"Số lượng xe hết hạn đăng kiểm"}
+                month={123}
+                quarter={222}
+                year={897}
+              />
             </Stack>
           </Stack>
         </Grid>
@@ -355,51 +264,49 @@ export default function HQStatistic() {
           height={{
             xs: "70%",
             sm: "80%",
-            md: "85%",
+            md: "90%",
             lg: "100%",
           }}
           lg={4}
-          md={10}
-          xs={11}
+          md={12}
+          xs={12}
         >
           <Stack
             display="flex"
             justifyContent="center"
             alignItems="center"
             spacing={{ xs: 0, sm: 0 }}
-            sx={{ height: "96%", m: "3.4%", mb: 0, ml: 0 }}
-            mb={{
-              lg: "0%",
-              xs: "3.4%",
-            }}
-            mr={{
-              lg: "3.4%",
-              xs: "0%",
-            }}
-            mt={{
-              lg: "3.4%",
-              xs: "0%",
+            sx={{
+              height: "100%",
+              p: "var(--padding-item)",
+              pl: { lg: "0", xs: "var(--padding-item)" },
+              pt: { lg: "var(--padding-item)", xs: "0" },
             }}
           >
-            <Box
-              mb={{
-                xs: "2%",
-                lg: "4%",
-              }}
-              sx={{
-                bgcolor: "#fff",
-                borderRadius: 2,
-                p: 1,
-                width: 0.6,
-              }}
-            >
-              <ToggleSwitch
-                values={["Tháng", "Quý", "Năm"]}
-                selected={timeView}
-                onChange={onChangeDropdown}
-                changeGraph={changeTimeView}
-              />
-            </Box>
+            <Grid container>
+              <Grid container item xs={7}>
+                <Box
+                  sx={{
+                    width: 1,
+                    bgcolor: "#fff",
+                    borderRadius: 2,
+                    p: 1,
+                    mb: "var(--padding-item)",
+                  }}
+                >
+                  <ToggleSwitch
+                    values={["Tháng", "Quý", "Năm"]}
+                    selected={timeView}
+                    onChange={onChangeDropdown}
+                    changeGraph={changeTimeView}
+                  />
+                </Box>
+              </Grid>
+              <Grid container item xs={5}>
+                <Dropdown />
+              </Grid>
+            </Grid>
+
             <Table data={tableData} />
           </Stack>
         </Grid>

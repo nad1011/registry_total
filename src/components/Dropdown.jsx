@@ -1,55 +1,22 @@
-import { useRef, useState } from "react"; 
+import React from "react";
+import { useState, useRef } from "react";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
 import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuItem from "@mui/material/MenuItem";
 import MenuList from "@mui/material/MenuList";
-import { MdOutlineArrowDropDownCircle } from "react-icons/md";
+import Box from "@mui/material/Box";
 
-import { useEffect } from "react";
+const options = ["All", "1202D", "3111S"];
 
-const options = ["Tháng", "Quý", "Năm"];
-
-export default function SplitButton({ transfer, changeGraph }) {
+export default function SplitButton() {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
-  const [selectedIndex, setSelectedIndex] = useState();
-
-  const handleClick = () => {
-    // console.info(`You clicked ${options[selectedIndex]}`);
-    transfer(options[selectedIndex]);
-    changeGraph();
-  };
-
-  const handleBtnYear = () => {
-    // console.info(`You clicked ${options[2]}`);
-    transfer(options[2]);
-    setSelectedIndex(2);
-    // changeGraph();
-  };
-
-  const handleBtnQuarter = () => {
-    // console.info(`You clicked ${options[1]}`);
-    transfer(options[1]);
-    setSelectedIndex(1);
-    // changeGraph();
-  };
-
-  const handleBtnMonth = () => {
-    // console.info(`You clicked ${options[0]}`);
-    transfer(options[0]);
-    setSelectedIndex(0);
-    //changeGraph();
-  };
-
-  useEffect(() => {
-    // console.log("effect", options[selectedIndex]);
-    transfer(options[selectedIndex]);
-    // changeGraph();
-  }, [selectedIndex, transfer]);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   const handleMenuItemClick = (event, index) => {
     setSelectedIndex(index);
@@ -69,17 +36,84 @@ export default function SplitButton({ transfer, changeGraph }) {
   };
 
   return (
-    <>
+    <React.Fragment>
       <ButtonGroup
         variant="contained"
         ref={anchorRef}
         aria-label="split button"
+        sx={{
+          width: "100%",
+          // p: "var(--padding-item)",
+          mb: "var(--padding-item)",
+        }}
       >
-
-        <Button onClick={handleBtnMonth}>{options[0]}</Button>
-        <Button onClick={handleBtnQuarter}>{options[1]}</Button>
-        <Button onClick={handleBtnYear}>{options[2]}</Button>
+        <Box
+          sx={{
+            bgcolor: "#fff",
+            color: "#000",
+            fontSize: "15px",
+            width: "80%",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            borderTopLeftRadius: "4px",
+            borderBottomLeftRadius: "4px",
+          }}
+        >
+          {options[selectedIndex]}
+        </Box>
+        <Button
+          sx={{
+            width: "20%",
+            bgcolor: "#fff",
+            color: "#000",
+          }}
+          size="small"
+          aria-controls={open ? "split-button-menu" : undefined}
+          aria-expanded={open ? "true" : undefined}
+          aria-label="all"
+          aria-haspopup="menu"
+          onClick={handleToggle}
+        >
+          <ArrowDropDownIcon />
+        </Button>
       </ButtonGroup>
-    </>
+      <Popper
+        sx={{
+          zIndex: 10,
+        }}
+        open={open}
+        anchorEl={anchorRef.current}
+        role={undefined}
+        transition
+        disablePortal
+      >
+        {({ TransitionProps, placement }) => (
+          <Grow
+            {...TransitionProps}
+            style={{
+              transformOrigin:
+                placement === "bottom" ? "center top" : "center bottom",
+            }}
+          >
+            <Paper>
+              <ClickAwayListener onClickAway={handleClose}>
+                <MenuList id="split-button-menu" autoFocusItem>
+                  {options.map((option, index) => (
+                    <MenuItem
+                      key={option}
+                      selected={index === selectedIndex}
+                      onClick={(event) => handleMenuItemClick(event, index)}
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </MenuList>
+              </ClickAwayListener>
+            </Paper>
+          </Grow>
+        )}
+      </Popper>
+    </React.Fragment>
   );
 }

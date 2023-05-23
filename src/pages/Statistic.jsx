@@ -237,8 +237,8 @@ export default function Statistic() {
                 mt: "var(--padding-item) !important",
               }}
             >
-              <StatisticBox />
-              <StatisticBox />
+              <StatisticBox title={"Số lượng đăng kiểm gần đây"} month={123} quarter={222} year={897}/>
+              <StatisticBox title={"Số lượng xe hết hạn đăng kiểm"} month={123} quarter={222} year={897}/>
             </Stack>
           </Stack>
         </Grid>

@@ -1,13 +1,13 @@
 import { Box, Stack, Typography } from "@mui/material";
 
-export default function StatisticBox() {
+export default function StatisticBox({ title, month, quarter, year }) {
   return (
     <Box
       sx={{
         bgcolor: "var(--secondary-color)",
         borderRadius: 2,
         p: "3%",
-        width: {xs: "50%", lg: "48%"},
+        width: { xs: "50%" },
         height: "100%",
         // mr: "2% !important",
       }}
@@ -24,10 +24,10 @@ export default function StatisticBox() {
           sx={{
             fontWeight: "bold",
             fontFamily: "Inter",
-            fontSize: { xs: 13, sm: 16, md: 22, lg: 20 },
+            fontSize: { xs: 13, sm: 17, md: 22, lg: 20 },
           }}
         >
-          Tổng lượng đăng kiểm gần nhất
+          {title}
         </Typography>
         <Stack
           height={"70%"}
@@ -59,7 +59,7 @@ export default function StatisticBox() {
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
-              10
+              {month}
             </Typography>
           </Stack>
           <Stack
@@ -82,7 +82,7 @@ export default function StatisticBox() {
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
-              20
+              {quarter}
             </Typography>
           </Stack>
           <Stack
@@ -105,7 +105,7 @@ export default function StatisticBox() {
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
-              30
+              {year}
             </Typography>
           </Stack>
         </Stack>

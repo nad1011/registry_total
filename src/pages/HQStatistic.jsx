@@ -10,7 +10,7 @@ import Page from "../components/Page/Page";
 import Switch from "../components/Switch";
 import Table from "../components/Table";
 
-export default function HQStatistic() {
+const HQStatistic = () => {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
@@ -413,4 +413,6 @@ export default function HQStatistic() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default HQStatistic;

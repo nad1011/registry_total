@@ -22,8 +22,7 @@ const CreateAccForm = () => {
     confirmPassword: "",
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { centerId, name, gmail, tel, address, password, confirmPassword } =
-    formFields;
+  const { centerId, name, gmail, tel, address, password, confirmPassword } = formFields;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -31,9 +30,14 @@ const CreateAccForm = () => {
     setFormFields({ ...formFields, [name]: value });
   };
 
-  const submitHandle = (event) => {
+  const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(formFields);
+    //
+    //
+    // new task here: handle account creation
+    //
+    //
+    //
   };
 
   return (
@@ -48,18 +52,11 @@ const CreateAccForm = () => {
       }}
       className={styles["container"]}
     >
-      <Stack
-        direction="column"
-        justifyContent="space-between"
-        alignItems="center"
-        height={1}
-      >
+      <Stack direction="column" justifyContent="space-between" alignItems="center" height={1}>
         <Box width={0.9} sx={{ mt: 2 }}>
-          <h2 className={styles["form-header"]}>
-            Tạo mới tài khoản trung tâm đăng kiểm
-          </h2>
+          <h2 className={styles["form-header"]}>Tạo mới tài khoản trung tâm đăng kiểm</h2>
         </Box>
-        <form onSubmit={submitHandle}>
+        <form onSubmit={handleSubmit}>
           <FormInput
             label="Mã trung tâm"
             type="text"

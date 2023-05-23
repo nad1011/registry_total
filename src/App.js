@@ -16,7 +16,7 @@ import Upload from "./pages/Upload";
 import CreateAccount from "./pages/CreateAccount";
 import "./App.css";
 
-export default function App() {
+const App = () => {
   // useEffect(() => {
   //   const listener = onSnapshot(
   //     collection(fireDB, "certificate"),
@@ -73,4 +73,6 @@ export default function App() {
       </Routes>
     </div>
   );
-}
+};
+
+export default App;

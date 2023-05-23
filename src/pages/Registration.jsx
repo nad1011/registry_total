@@ -11,7 +11,7 @@ import SearchBox from "../components/Box/SearchBox/SearchBox";
 import RenewBox from "../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../components/SelectSearch/SelectSearch";
 
-export default function Registration() {
+const Registration = () => {
   const expiredCerts = useLiveQuery(() =>
     dexieDB
       .table("certificate")
@@ -183,4 +183,6 @@ export default function Registration() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default Registration;

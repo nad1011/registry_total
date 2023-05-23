@@ -10,7 +10,7 @@ import Page from "../components/Page/Page";
 import Switch from "../components/Switch";
 import Table from "../components/Table";
 
-export default function Statistic() {
+const Statistic = () => {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
@@ -277,4 +277,6 @@ export default function Statistic() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default Statistic;

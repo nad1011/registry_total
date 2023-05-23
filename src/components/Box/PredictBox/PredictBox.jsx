@@ -9,7 +9,7 @@ export default function PredictBox({ head, value, percent }) {
       sx={{
         display: "flex",
         height: 1,
-        width: 0.3,
+        width: 1,
         bgcolor: "var(--secondary-color)",
         borderRadius: 2,
       }}
@@ -24,11 +24,15 @@ export default function PredictBox({ head, value, percent }) {
           height: 1,
         }}
       >
-        <Typography color={"black"} fontFamily={"inter"}>
+        <Typography
+          color={"black"}
+          fontFamily={"inter"}
+          sx={{ fontSize: { xs: 13, sm: 14, md: 15, lg: 16 } }}
+        >
           Đăng kiểm {head} sau:
         </Typography>
         <Stack direction="row">
-          <Typography color={"black"} sx={{ fontSize: 20, fontWeight: "bold" }}>
+          <Typography color={"black"} sx={{ fontSize: 22, fontWeight: "bold" }}>
             {value}
           </Typography>
           {percent > 0 ? (
@@ -75,11 +79,11 @@ export default function PredictBox({ head, value, percent }) {
           color={"black"}
           sx={{
             fontFamily: "inter",
-            fontSize: 12,
-            color: "red",
+            fontSize: { xs: 7.5, sm: 10, md: 12, lg: 14 },
+            color: "var(--avatar-color)",
           }}
         >
-          (So sánh với tháng gần nhất)
+          (So sánh với {head} gần nhất)
         </Typography>
       </Stack>
     </Box>

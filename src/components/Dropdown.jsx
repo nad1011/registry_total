@@ -1,25 +1,27 @@
-import React from "react";
-import { useState, useRef } from "react";
-import Button from "@mui/material/Button";
-import ButtonGroup from "@mui/material/ButtonGroup";
+import React, { useState, useRef } from "react";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown";
-import ClickAwayListener from "@mui/material/ClickAwayListener";
-import Grow from "@mui/material/Grow";
-import Paper from "@mui/material/Paper";
-import Popper from "@mui/material/Popper";
-import MenuItem from "@mui/material/MenuItem";
-import MenuList from "@mui/material/MenuList";
-import Box from "@mui/material/Box";
+import {
+  Grow,
+  Paper,
+  Popper,
+  MenuItem,
+  MenuList,
+  Box,
+  ClickAwayListener,
+  Button,
+  ButtonGroup,
+} from "@mui/material";
 
 const options = ["All", "1202D", "3111S"];
 
-export default function SplitButton() {
+export default function SplitButton({ options, onSelect }) {
   const [open, setOpen] = useState(false);
   const anchorRef = useRef(null);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
-  const handleMenuItemClick = (event, index) => {
+  const handleMenuItemClick = (_, index) => {
     setSelectedIndex(index);
+    onSelect(options[index]);
     setOpen(false);
   };
 

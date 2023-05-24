@@ -2,10 +2,11 @@ import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB } from "../database/cache";
+import { adminAuth } from "../database/firebase";
 
-import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
-import Dropdown from "../components/Dropdown";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import Dropdown from "../components/Dropdown";
+import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
 import Page from "../components/Page/Page";
@@ -35,6 +36,8 @@ const HQStatistic = () => {
   const [stateView, setStateView] = useState("registered");
   const [centerView, setCenterView] = useState("All");
 
+  const [centerCodes, setCenterCodes] = useState(["All"]);
+
   const countDateByYear = () => {
     const yearCount = dateList.reduce(
       (obj, date) => {
@@ -45,13 +48,13 @@ const HQStatistic = () => {
       },
       { latestYear: new Date().getFullYear() }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => yearCount.latestYear - 9 + i
-    ).reduce((obj, year) => {
-      obj[year] = yearCount[year] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
+      (obj, year) => {
+        obj[year] = yearCount[year] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByQuarter = () => {
@@ -66,20 +69,17 @@ const HQStatistic = () => {
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(
-          curDate.getFullYear(),
-          curDate.getMonth()
-        ),
+        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => quarterCount.latestQuarterNum - 9 + i
-    ).reduce((obj, quarterNum) => {
-      const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
-      obj[quarter] = quarterCount[quarterNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
+      (obj, quarterNum) => {
+        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+        obj[quarter] = quarterCount[quarterNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByMonth = () => {
@@ -97,15 +97,14 @@ const HQStatistic = () => {
         latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => monthCount.latestMonthNum - 9 + i
-    ).reduce((obj, monthNum) => {
-      const month =
-        `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
-      obj[month] = monthCount[monthNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
+      (obj, monthNum) => {
+        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+        obj[month] = monthCount[monthNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const changeTimeView = () => {
@@ -162,9 +161,20 @@ const HQStatistic = () => {
     );
   }, [certs, centerView]);
 
-  const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) =>
-    setStateView(state ? "expired" : "registered");
+  useEffect(() => {
+    adminAuth.listUsers(237).then((result) => {
+      const newCodes = [...centerCodes];
+      result.users.forEach((user) => {
+        const code = user.email.match(/(?<=email).+(?=@)/)?.[0];
+        if (code) newCodes.push(code);
+      });
+      setCenterCodes(newCodes);
+    });
+  }, []);
+
+  const onTimeSwitch = (mode) => setTimeView(mode);
+  const onViewSwitch = (state) => setStateView(state ? "expired" : "registered");
+  const onCenterSwitch = (center) => setCenterView(center);
 
   return (
     <Page>
@@ -182,10 +192,7 @@ const HQStatistic = () => {
           md={12}
           xs={12}
         >
-          <Stack
-            spacing={{ xs: 0, sm: 0 }}
-            sx={{ p: "var(--padding-item)", height: "100%" }}
-          >
+          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ p: "var(--padding-item)", height: "100%" }}>
             <Box
               sx={{
                 bgcolor: "var(--secondary-color)",
@@ -199,11 +206,7 @@ const HQStatistic = () => {
                 height: "10%",
               }}
             >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   sx={{
                     fontWeight: "bold",
@@ -220,7 +223,7 @@ const HQStatistic = () => {
                 >
                   Thống kê số lượng xe đăng kiểm
                 </Typography>
-                <Switch onSwitch={onToggleSwitch} />
+                <Switch onSwitch={onViewSwitch} />
               </Stack>
             </Box>
             <Box
@@ -304,13 +307,13 @@ const HQStatistic = () => {
                   <ToggleSwitch
                     values={["Tháng", "Quý", "Năm"]}
                     selected={timeView}
-                    onChange={onChangeDropdown}
+                    onChange={onTimeSwitch}
                     changeGraph={changeTimeView}
                   />
                 </Box>
               </Grid>
               <Grid container item xs={5}>
-                <Dropdown />
+                <Dropdown options={centerCodes} onSelect={onCenterSwitch} />
               </Grid>
             </Grid>
 

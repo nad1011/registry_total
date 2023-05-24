@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Box from "@mui/material/Box";
-import Button from "@mui/material/Button";
+import ButtonNina from "../../ButtonNina/ButtonNina";
 import Stack from "@mui/material/Stack";
 import Grid from "@mui/material/Grid";
 import { Typography } from "@mui/material";
@@ -32,29 +32,38 @@ const CreateAccBox = () => {
   };
 
   return (
-    <Box sx={{height: "60%"}}>
-      <Stack>
+    <Box
+      sx={{
+        height: "60%",
+        pb: "var(--padding-item)",
+      }}
+    >
+      <Stack
+        sx={{
+          p: "var(--padding-item)",
+          height: "100%",
+          bgcolor: "#fff",
+          borderRadius: "20px",
+          boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "flex-end",
+        }}
+      >
         <Typography
+          align="center"
           sx={{
-            fontSize: 30,
-            color: "var(--avatar-color)",
+            width: "100%",
+            color: "#4267b2",
+            fontSize: "25px",
+            fontWeight: "bold",
           }}
+          mb={"var(--padding-item)"}
         >
           Tạo mới tài khoản trung tâm đăng kiểm
         </Typography>
         <CreateAccForm formFields={formFields} handleChange={handleChange} />
-        <Button
-          sx={{
-            backgroundColor: "whitesmoke",
-            color: "var(--avatar-color)",
-            fontWeight: "bold",
-          }}
-          size="lg"
-          variant="solid"
-          type="submit"
-        >
-          Confirm
-        </Button>
+        
       </Stack>
     </Box>
 

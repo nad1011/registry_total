@@ -1,14 +1,8 @@
 import React from "react";
 import {
   Checkbox,
-  FormControl,
   FormControlLabel,
-  FormGroup,
-  Input,
-  InputLabel,
   Box,
-  TextField,
-  InputAdornment,
 } from "@mui/material";
 import { DirectionsCar, CalendarMonth, Person } from "@mui/icons-material";
 import FormInput from "./FormInput/FormInput";

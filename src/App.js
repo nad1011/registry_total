@@ -14,24 +14,25 @@ import Prediction from "./pages/Prediction";
 // import HQStatistic from "./pages/HQStatistic";
 import "./App.css";
 import HqStatistic from "./pages/HQStatistic";
+import HqPrediction from "./pages/HQPrediction";
 import CreateAccount from "./pages/CreateAccount";
 import Upload from "./pages/Upload";
 
 export default function App() {
   //load listener
-  useEffect(() => {
-    const listener = onSnapshot(
-      collection(fireDB, "certificate"),
-      (snapshot) => {
-        snapshot.docChanges().forEach((cert) => {});
-      },
-      (error) => {
-        console.log(error.name);
-        console.trace(error.message);
-      }
-    );
-    return () => listener();
-  }, []);
+  // useEffect(() => {
+  //   const listener = onSnapshot(
+  //     collection(fireDB, "certificate"),
+  //     (snapshot) => {
+  //       snapshot.docChanges().forEach((cert) => {});
+  //     },
+  //     (error) => {
+  //       console.log(error.name);
+  //       console.trace(error.message);
+  //     }
+  //   );
+  //   return () => listener();
+  // }, []);
 
   const navigate = useNavigate();
   const onSignIn = () => navigate("/home");
@@ -47,7 +48,7 @@ export default function App() {
           path="/registration"
           element={user.id === "hq" ? <CreateAccount /> : <Registration />}
         />
-        <Route path="/prediction" element={user.id === "hq" ? <Upload /> : <Prediction />} />
+        <Route path="/prediction" element={user.id === "hq" ? <HqPrediction /> : <Prediction />} />
       </Routes>
     </div>
   );

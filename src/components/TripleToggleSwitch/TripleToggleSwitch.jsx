@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Switch, SwitchLabel, SwitchRadio, SwitchSelection } from "./Styles.jsx";
 
-function ToggleSwitch({ values, selected, onChange }) {
+const ToggleSwitch = ({ values, selected, onChange }) => {
   const [selectedState, setSelectedState] = useState(selected);
 
   const ClickableLabel = ({ title, onChange, id }) => (
@@ -39,6 +39,6 @@ function ToggleSwitch({ values, selected, onChange }) {
       <SwitchSelection style={selectionStyle()} />
     </Switch>
   );
-}
+};
 
 export default ToggleSwitch;

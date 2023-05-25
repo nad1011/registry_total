@@ -12,57 +12,43 @@ import Registration from "./pages/Registration";
 import Statistic from "./pages/Statistic";
 import Prediction from "./pages/Prediction";
 import HQStatistic from "./pages/HQStatistic";
-import Upload from "./pages/Upload";
-import HqPrediction from "./pages/HQPrediction";
 import CreateAccount from "./pages/CreateAccount";
+import HQPrediction from "./pages/HQPrediction";
 import "./App.css";
 
 const App = () => {
   // useEffect(() => {
-  //   const listener = onSnapshot(
-  //     collection(fireDB, "certificate"),
-  //     (snapshot) => {
-  //       snapshot.docChanges().forEach(async (cert) => {
-  //         const certDoc = cert.doc;
-  //         const certData = certDoc.data();
+  //   const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
+  //     snapshot.docChanges().forEach(async (cert) => {
+  //       const certDoc = cert.doc;
+  //       const certData = certDoc.data();
 
-  //         if (certDoc.id === "center") {
-  //           await dexieDB.table("certificate").put({
-  //             ...certData,
-  //             id: certDoc.id,
-  //           });
-  //           return;
-  //         }
-
+  //       if (certDoc.id === "center") {
   //         await dexieDB.table("certificate").put({
-  //           ...certData,
+  //           codes: ["All", ...certData.codes],
   //           id: certDoc.id,
-  //           car: getDocID(certData.car),
   //         });
+  //         return;
+  //       }
 
-  //         const carDoc = await getDoc(certData.car);
-  //         const carData = carDoc.data();
-  //         await dexieDB.table("car").put({
-  //           id: carDoc.id,
-  //           regNum: carData.regNum,
-  //           owner: getDocID(carData.owner),
-  //         });
+  //       await dexieDB.table("certificate").put({
+  //         ...certData,
+  //         id: certDoc.id,
+  //         car: getDocID(certData.car),
+  //       });
 
-export default function App() {
-  //load listener
-  useEffect(() => {
-    const listener = onSnapshot(
-      collection(fireDB, "certificate"),
-      (snapshot) => {
-        snapshot.docChanges().forEach((cert) => {});
-      },
-      (error) => {
-        console.log(error.name);
-        console.trace(error.message);
-      }
-    );
-    return () => listener();
-  }, []);
+  //       const carDoc = await getDoc(certData.car);
+  //       const carData = carDoc.data();
+  //       await dexieDB.table("car").put({
+  //         id: carDoc.id,
+  //         regNum: carData.regNum,
+  //         owner: getDocID(carData.owner),
+  //       });
+  //     });
+  //   });
+
+  //   return () => listener();
+  // }, []);
 
   const navigate = useNavigate();
   const onSignIn = () => navigate("/home");
@@ -78,7 +64,7 @@ export default function App() {
           path="/registration"
           element={user.id === "hq" ? <CreateAccount /> : <Registration />}
         />
-        <Route path="/prediction" element={user.id === "hq" ? <HqPrediction /> : <Prediction />} />
+        <Route path="/prediction" element={user.id === "hq" ? <HQPrediction /> : <Prediction />} />
       </Routes>
     </div>
   );

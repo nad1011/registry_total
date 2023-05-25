@@ -5,11 +5,12 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import { Grid, IconButton, Box, Stack } from "@mui/material";
 import { ArrowRight, ArrowLeft } from "@mui/icons-material";
-import Page from "../components/Page/Page";
-import CartList from "../components/CardList/CardList";
-import SearchBox from "../components/Box/SearchBox/SearchBox";
-import RenewBox from "../components/Box/RenewBox/RenewBox";
-import SelectSearch from "../components/SelectSearch/SelectSearch";
+
+import Page from "../components/Page";
+import CartList from "../components/CardList";
+import SearchBox from "../components/Box/SearchBox";
+import RenewBox from "../components/Box/RenewBox";
+import SelectSearch from "../components/SelectSearch";
 
 const Registration = () => {
   const expiredCerts = useLiveQuery(() =>

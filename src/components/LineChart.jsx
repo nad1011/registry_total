@@ -1,5 +1,4 @@
 import React from "react";
-import { ResponsiveLine } from "@nivo/line";
 import {
   Chart as ChartJS,
   CategoryScale,

@@ -1,10 +1,8 @@
 import { useState } from "react";
-import Box from "@mui/material/Box";
-import ButtonNina from "../../ButtonNina/ButtonNina";
-import Stack from "@mui/material/Stack";
-import Grid from "@mui/material/Grid";
-import { Typography } from "@mui/material";
-import CreateAccForm from "../../CreateAccForm";
+
+import { Typography,Stack,Box } from "@mui/material";
+
+import CreateAccForm from "../CreateAccForm";
 
 const CreateAccBox = () => {
   const defaultFormFields = {
@@ -38,7 +36,7 @@ const CreateAccBox = () => {
   return (
     <Box
       sx={{
-        height: "60%",
+        height: { sm: "40%", md: "60%"},
         pb: "var(--padding-item)",
       }}
     >

@@ -1,6 +1,6 @@
-import MyCard from "../MyCard/MyCard";
-import Grid from "@mui/material/Grid";
-import Box from "@mui/material/Box";
+import {Grid, Box} from "@mui/material";
+
+import MyCard from "./MyCard";
 
 const CartList = ({ filterList }) => {
   if (!filterList) {

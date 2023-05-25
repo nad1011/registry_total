@@ -1,9 +1,11 @@
 import React from "react";
+
 import { Grid, Box, Stack, Typography, Slide } from "@mui/material";
-import Page from "../components/Page/Page";
-import HorizontalBarChart from "../components/HorizontalBarChart/HorizontalBarChart";
-import { LineChart } from "../components/HorizontalBarChart/LineChart";
-import PredictBox from "../components/Box/PredictBox/PredictBox";
+
+import Page from "../components/Page";
+import HorizontalBarChart from "../components/HorizontalBarChart";
+import {LineChart} from "../components/PredictLineChart";
+import PredictBox from "../components/Box/PredictBox";
 
 const Prediction = () => {
   const linearRegression = (data) => {

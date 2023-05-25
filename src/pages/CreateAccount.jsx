@@ -1,8 +1,11 @@
-import Page from "../components/Page/Page";
-import CreateAccBox from "../components/Box/CreateAccBox/CreateAccBox";
-import { Box } from "@mui/material";
 import React from "react";
-import DropFileInput from "../components/DropFileInput/DropFileInput";
+
+import { Box } from "@mui/material";
+
+import Page from "../components/Page";
+import DropFileInput from "../components/DropFileInput";
+import CreateAccBox from "../components/Box/CreateAccBox";
+
 
 const CreateAccount = () => {
   const onFileChange = (files) => {

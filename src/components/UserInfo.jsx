@@ -8,7 +8,7 @@ import ModalClose from "@mui/joy/ModalClose";
 import Typography from "@mui/joy/Typography";
 import { Sheet, Box } from "@mui/joy";
 //
-import { user } from "../../database/cache";
+import { user } from "../database/cache";
 import { useNavigate } from "react-router";
 
 const UserInfo = ({ open, close }) => {

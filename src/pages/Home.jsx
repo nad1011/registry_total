@@ -66,10 +66,7 @@ const Home = () => {
                 mt: 2,
               }}
             >
-              Are you tired of waiting in long lines at the DMV to register your car? Say goodbye to
-              the hassle and register your car online with our easy-to-use platform. Our website
-              offers a fast and convenient way to get your car registered without any unnecessary
-              delays. Save time and energy by using our car registration service today!
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa minima, perspiciatis aliquid quo ex totam consequatur repellendus ducimus quisquam incidunt sunt, veniam sequi laborum! Cupiditate minima animi unde ullam sapiente!
             </Typography>
           </Stack>
         </Grid>
@@ -100,7 +97,7 @@ const Home = () => {
             height={{
               sm: "100%",
               md: "130%",
-              lg: "150%",
+              lg: "150%", 
             }}
             width={1}
             sx={{

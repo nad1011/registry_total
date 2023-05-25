@@ -13,6 +13,7 @@ import Statistic from "./pages/Statistic";
 import Prediction from "./pages/Prediction";
 import HQStatistic from "./pages/HQStatistic";
 import Upload from "./pages/Upload";
+import HqPrediction from "./pages/HQPrediction";
 import CreateAccount from "./pages/CreateAccount";
 import "./App.css";
 
@@ -47,22 +48,21 @@ const App = () => {
   //           owner: getDocID(carData.owner),
   //         });
 
-  //         const ownerDoc = await getDoc(carData.owner);
-  //         const ownerData = ownerDoc.data();
-  //         await dexieDB.table("owner").put({
-  //           id: ownerDoc.id,
-  //           name: ownerData.name,
-  //           type: ownerData.type,
-  //         });
-  //       });
-  //     },
-  //     (error) => {
-  //       alert(error.name);
-  //       console.trace(error.message);
-  //     }
-  //   );
-  //   return () => listener();
-  // }, []);
+export default function App() {
+  //load listener
+  useEffect(() => {
+    const listener = onSnapshot(
+      collection(fireDB, "certificate"),
+      (snapshot) => {
+        snapshot.docChanges().forEach((cert) => {});
+      },
+      (error) => {
+        console.log(error.name);
+        console.trace(error.message);
+      }
+    );
+    return () => listener();
+  }, []);
 
   const navigate = useNavigate();
   const onSignIn = () => navigate("/home");
@@ -78,7 +78,7 @@ const App = () => {
           path="/registration"
           element={user.id === "hq" ? <CreateAccount /> : <Registration />}
         />
-        <Route path="/prediction" element={user.id === "hq" ? <Upload /> : <Prediction />} />
+        <Route path="/prediction" element={user.id === "hq" ? <HqPrediction /> : <Prediction />} />
       </Routes>
     </div>
   );

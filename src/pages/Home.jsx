@@ -6,7 +6,7 @@ import { Grid, Box, Typography, Stack, Button } from "@mui/material";
 import Page from "../components/Page/Page";
 import logoImg from "../assets/images/logo.png";
 
-export default function Home() {
+const Home = () => {
   return (
     <Page>
       <Grid
@@ -214,4 +214,6 @@ export default function Home() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default Home;

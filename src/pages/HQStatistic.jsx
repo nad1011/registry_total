@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user, getDocID } from "../database/cache";
+import { dexieDB } from "../database/cache";
 
-import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
-import Dropdown from "../components/Dropdown";
 import { Box, Grid, Stack, Typography } from "@mui/material";
+import Dropdown from "../components/Dropdown";
+import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
 import Page from "../components/Page/Page";
 import Switch from "../components/Switch";
 import Table from "../components/Table";
 
-export default function HQStatistic() {
+const HQStatistic = () => {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
@@ -26,13 +26,18 @@ export default function HQStatistic() {
     },
   ]);
 
-  const certs = useLiveQuery(() => dexieDB.table("certificate").toArray());
+  const certs = useLiveQuery(() =>
+    dexieDB.table("certificate").where("id").notEqual("center").toArray()
+  );
+  const [filteredCerts, setFilteredCerts] = useState([]);
   const [dateList, setDateList] = useState([]);
   const [tableData, setTableData] = useState([]);
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
   const [centerView, setCenterView] = useState("All");
+
+  const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
 
   const countDateByYear = () => {
     const yearCount = dateList.reduce(
@@ -44,13 +49,13 @@ export default function HQStatistic() {
       },
       { latestYear: new Date().getFullYear() }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => yearCount.latestYear - 9 + i
-    ).reduce((obj, year) => {
-      obj[year] = yearCount[year] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
+      (obj, year) => {
+        obj[year] = yearCount[year] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByQuarter = () => {
@@ -65,20 +70,17 @@ export default function HQStatistic() {
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(
-          curDate.getFullYear(),
-          curDate.getMonth()
-        ),
+        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => quarterCount.latestQuarterNum - 9 + i
-    ).reduce((obj, quarterNum) => {
-      const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
-      obj[quarter] = quarterCount[quarterNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
+      (obj, quarterNum) => {
+        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+        obj[quarter] = quarterCount[quarterNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByMonth = () => {
@@ -96,15 +98,14 @@ export default function HQStatistic() {
         latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => monthCount.latestMonthNum - 9 + i
-    ).reduce((obj, monthNum) => {
-      const month =
-        `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
-      obj[month] = monthCount[monthNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
+      (obj, monthNum) => {
+        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+        obj[month] = monthCount[monthNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const changeTimeView = () => {
@@ -128,10 +129,9 @@ export default function HQStatistic() {
   };
 
   useEffect(() => {
-    if (!certs) return;
-    setDateList(certs.map((cert) => cert[`${stateView}Date`]));
+    setDateList(filteredCerts.map((cert) => cert[`${stateView}Date`]));
     changeTimeView();
-  }, [certs, stateView]);
+  }, [filteredCerts, stateView]);
 
   useEffect(() => {
     if (!certs) return;
@@ -139,8 +139,8 @@ export default function HQStatistic() {
       setTableData(
         await Promise.all(
           certs.map(async (cert) => {
-            const car = await dexieDB.table("car").get(getDocID(cert.car));
-            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            const car = await dexieDB.table("car").get(cert.car);
+            const owner = await dexieDB.table("owner").get(car.owner);
             return {
               id: cert.id,
               center: cert.center,
@@ -155,9 +155,18 @@ export default function HQStatistic() {
     reloadTable();
   }, [certs]);
 
-  const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) =>
-    setStateView(state ? "expired" : "registered");
+  useEffect(() => {
+    if (!certs) return;
+    setFilteredCerts(
+      centerView === "All" ? certs : certs.filter((cert) => cert.center === centerView)
+    );
+  }, [certs, centerView]);
+
+  useEffect(() => {}, []);
+
+  const onTimeSwitch = (mode) => setTimeView(mode);
+  const onViewSwitch = (state) => setStateView(state ? "expired" : "registered");
+  const onCenterSwitch = (center) => setCenterView(center);
 
   return (
     <Page>
@@ -175,10 +184,7 @@ export default function HQStatistic() {
           md={12}
           xs={12}
         >
-          <Stack
-            spacing={{ xs: 0, sm: 0 }}
-            sx={{ p: "var(--padding-item)", height: "100%" }}
-          >
+          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ p: "var(--padding-item)", height: "100%" }}>
             <Box
               sx={{
                 bgcolor: "var(--secondary-color)",
@@ -192,11 +198,7 @@ export default function HQStatistic() {
                 height: "10%",
               }}
             >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   sx={{
                     fontWeight: "bold",
@@ -213,7 +215,7 @@ export default function HQStatistic() {
                 >
                   Thống kê số lượng xe đăng kiểm
                 </Typography>
-                <Switch onSwitch={onToggleSwitch} />
+                <Switch onSwitch={onViewSwitch} />
               </Stack>
             </Box>
             <Box
@@ -297,13 +299,13 @@ export default function HQStatistic() {
                   <ToggleSwitch
                     values={["Tháng", "Quý", "Năm"]}
                     selected={timeView}
-                    onChange={onChangeDropdown}
+                    onChange={onTimeSwitch}
                     changeGraph={changeTimeView}
                   />
                 </Box>
               </Grid>
               <Grid container item xs={5}>
-                <Dropdown />
+                <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} />
               </Grid>
             </Grid>
 
@@ -313,4 +315,6 @@ export default function HQStatistic() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default HQStatistic;

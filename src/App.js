@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
-import { collection, onSnapshot } from "firebase/firestore";
+import { collection, getDoc, onSnapshot } from "firebase/firestore";
 import { fireDB } from "./database/firebase";
-import { dexieDB, user } from "./database/cache";
+import { dexieDB, user, getDocID } from "./database/cache";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn";
@@ -11,26 +11,42 @@ import Home from "./pages/Home";
 import Registration from "./pages/Registration";
 import Statistic from "./pages/Statistic";
 import Prediction from "./pages/Prediction";
-// import HQStatistic from "./pages/HQStatistic";
-import "./App.css";
-import HqStatistic from "./pages/HQStatistic";
-import HqPrediction from "./pages/HQPrediction";
+import HQStatistic from "./pages/HQStatistic";
 import CreateAccount from "./pages/CreateAccount";
-import Upload from "./pages/Upload";
+import HQPrediction from "./pages/HQPrediction";
+import "./App.css";
 
-export default function App() {
-  //load listener
+const App = () => {
   // useEffect(() => {
-  //   const listener = onSnapshot(
-  //     collection(fireDB, "certificate"),
-  //     (snapshot) => {
-  //       snapshot.docChanges().forEach((cert) => {});
-  //     },
-  //     (error) => {
-  //       console.log(error.name);
-  //       console.trace(error.message);
-  //     }
-  //   );
+  //   const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
+  //     snapshot.docChanges().forEach(async (cert) => {
+  //       const certDoc = cert.doc;
+  //       const certData = certDoc.data();
+
+  //       if (certDoc.id === "center") {
+  //         await dexieDB.table("certificate").put({
+  //           codes: ["All", ...certData.codes],
+  //           id: certDoc.id,
+  //         });
+  //         return;
+  //       }
+
+  //       await dexieDB.table("certificate").put({
+  //         ...certData,
+  //         id: certDoc.id,
+  //         car: getDocID(certData.car),
+  //       });
+
+  //       const carDoc = await getDoc(certData.car);
+  //       const carData = carDoc.data();
+  //       await dexieDB.table("car").put({
+  //         id: carDoc.id,
+  //         regNum: carData.regNum,
+  //         owner: getDocID(carData.owner),
+  //       });
+  //     });
+  //   });
+
   //   return () => listener();
   // }, []);
 
@@ -43,13 +59,15 @@ export default function App() {
       <Routes>
         <Route path="/" element={<SignIn transfer={onSignIn} />} />
         <Route path="/home" element={<Home />} />
-        <Route path="/statistic" element={user.id === "hq" ? <HqStatistic /> : <Statistic />} />
+        <Route path="/statistic" element={user.id === "hq" ? <HQStatistic /> : <Statistic />} />
         <Route
           path="/registration"
           element={user.id === "hq" ? <CreateAccount /> : <Registration />}
         />
-        <Route path="/prediction" element={user.id === "hq" ? <HqPrediction /> : <Prediction />} />
+        <Route path="/prediction" element={user.id === "hq" ? <HQPrediction /> : <Prediction />} />
       </Routes>
     </div>
   );
-}
+};
+
+export default App;

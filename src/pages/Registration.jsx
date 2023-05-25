@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { dexieDB, user, getDocID } from "../database/cache";
+import { dexieDB, user } from "../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { Grid, IconButton, Box, Stack } from "@mui/material";
@@ -11,7 +11,7 @@ import SearchBox from "../components/Box/SearchBox/SearchBox";
 import RenewBox from "../components/Box/RenewBox/RenewBox";
 import SelectSearch from "../components/SelectSearch/SelectSearch";
 
-export default function Registration() {
+const Registration = () => {
   const expiredCerts = useLiveQuery(() =>
     dexieDB
       .table("certificate")
@@ -36,8 +36,8 @@ export default function Registration() {
       setExpiredList(
         await Promise.all(
           expiredCerts.map(async (cert) => {
-            const car = await dexieDB.table("car").get(getDocID(cert.car));
-            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            const car = await dexieDB.table("car").get(cert.car);
+            const owner = await dexieDB.table("owner").get(car.owner);
             return {
               id: cert.id,
               name: owner.name,
@@ -80,8 +80,7 @@ export default function Registration() {
             md: "90%",
             lg: "100%",
           }}
-          sx={{ p: "var(--padding-item)"}}
-
+          sx={{ p: "var(--padding-item)" }}
         >
           <Stack
             direction="row"
@@ -169,7 +168,7 @@ export default function Registration() {
           }}
           xs={12}
           lg={4.5}
-          p = {"var(--padding-item)"}
+          p={"var(--padding-item)"}
           pl={{
             xs: "var(--padding-item)",
             lg: 0,
@@ -184,4 +183,6 @@ export default function Registration() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default Registration;

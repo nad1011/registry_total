@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB, user, getDocID } from "../database/cache";
+import { dexieDB, user } from "../database/cache";
 import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
@@ -10,7 +10,7 @@ import Page from "../components/Page/Page";
 import Switch from "../components/Switch";
 import Table from "../components/Table";
 
-export default function Statistic() {
+const Statistic = () => {
   const [graphData, setGraphData] = useState([
     {
       id: "statistic",
@@ -43,13 +43,13 @@ export default function Statistic() {
       },
       { latestYear: new Date().getFullYear() }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => yearCount.latestYear - 9 + i
-    ).reduce((obj, year) => {
-      obj[year] = yearCount[year] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => yearCount.latestYear - 9 + i).reduce(
+      (obj, year) => {
+        obj[year] = yearCount[year] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByQuarter = () => {
@@ -64,20 +64,17 @@ export default function Statistic() {
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(
-          curDate.getFullYear(),
-          curDate.getMonth()
-        ),
+        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => quarterCount.latestQuarterNum - 9 + i
-    ).reduce((obj, quarterNum) => {
-      const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
-      obj[quarter] = quarterCount[quarterNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
+      (obj, quarterNum) => {
+        const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
+        obj[quarter] = quarterCount[quarterNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const countDateByMonth = () => {
@@ -95,15 +92,14 @@ export default function Statistic() {
         latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from(
-      { length: 10 },
-      (_, i) => monthCount.latestMonthNum - 9 + i
-    ).reduce((obj, monthNum) => {
-      const month =
-        `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
-      obj[month] = monthCount[monthNum] || 0;
-      return obj;
-    }, {});
+    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
+      (obj, monthNum) => {
+        const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
+        obj[month] = monthCount[monthNum] || 0;
+        return obj;
+      },
+      {}
+    );
   };
 
   const changeTimeView = () => {
@@ -138,8 +134,8 @@ export default function Statistic() {
       setTableData(
         await Promise.all(
           certs.map(async (cert) => {
-            const car = await dexieDB.table("car").get(getDocID(cert.car));
-            const owner = await dexieDB.table("owner").get(getDocID(car.owner));
+            const car = await dexieDB.table("car").get(cert.car);
+            const owner = await dexieDB.table("owner").get(car.owner);
             return {
               id: cert.id,
               center: cert.center,
@@ -155,8 +151,7 @@ export default function Statistic() {
   }, [certs]);
 
   const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) =>
-    setStateView(state ? "expired" : "registered");
+  const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");
 
   return (
     <Page>
@@ -174,10 +169,7 @@ export default function Statistic() {
           md={12}
           xs={12}
         >
-          <Stack
-            spacing={{ xs: 0, sm: 0 }}
-            sx={{ p: "var(--padding-item)", height: "100%" }}
-          >
+          <Stack spacing={{ xs: 0, sm: 0 }} sx={{ p: "var(--padding-item)", height: "100%" }}>
             <Box
               sx={{
                 bgcolor: "var(--secondary-color)",
@@ -191,11 +183,7 @@ export default function Statistic() {
                 height: "10%",
               }}
             >
-              <Stack
-                direction="row"
-                justifyContent="space-between"
-                alignItems="center"
-              >
+              <Stack direction="row" justifyContent="space-between" alignItems="center">
                 <Typography
                   sx={{
                     fontWeight: "bold",
@@ -205,7 +193,7 @@ export default function Statistic() {
                     zIndex: 1,
                   }}
                 >
-                  Thống kê số lượng xe đăng kiểm 
+                  Thống kê số lượng xe đăng kiểm
                 </Typography>
                 <Switch onSwitch={onToggleSwitch} />
               </Stack>
@@ -289,4 +277,6 @@ export default function Statistic() {
       </Grid>
     </Page>
   );
-}
+};
+
+export default Statistic;

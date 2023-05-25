@@ -7,9 +7,7 @@ dexieDB.version(1).stores({
   certificate: "id,center",
 });
 
-export { dexieDB };
-
-export const user = {
+const user = {
   id: "",
   name: "",
   address: "",
@@ -30,4 +28,6 @@ export const user = {
   },
 };
 
-export const getDocID = (docRef) => docRef.path.split("/").pop();
+const getDocID = (docRef) => docRef.path.split("/").pop();
+
+export { dexieDB, user, getDocID };

@@ -18,7 +18,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/test2.jpg";
 
-export default function SignIn({ transfer }) {
+const SignIn = ({ transfer }) => {
   useEffect(() => {
     user.reset();
     signOut(fireAuth).catch(console.error);
@@ -245,4 +245,6 @@ export default function SignIn({ transfer }) {
       </Box>
     </Box>
   );
-}
+};
+
+export default SignIn;

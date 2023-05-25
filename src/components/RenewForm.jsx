@@ -1,9 +1,5 @@
 import React from "react";
-import {
-  Checkbox,
-  FormControlLabel,
-  Box,
-} from "@mui/material";
+import { Checkbox, FormControlLabel, Box } from "@mui/material";
 import { DirectionsCar, CalendarMonth, Person } from "@mui/icons-material";
 import FormInput from "./FormInput/FormInput";
 
@@ -19,7 +15,7 @@ export default function RenewForm({
   submitHandle,
 }) {
   return (
-    <form onSubmit={submitHandle} style={{width: "85%"}}>
+    <form onSubmit={submitHandle} style={{ width: "85%" }}>
       <FormInput
         label="Name"
         type="text"
@@ -49,23 +45,11 @@ export default function RenewForm({
       />
       <Box>
         <FormControlLabel
-          control={
-            <Checkbox
-              checked={feeCheck}
-              onChange={handleFeeCheck}
-              name="feeCheck"
-            />
-          }
+          control={<Checkbox checked={feeCheck} onChange={handleFeeCheck} name="feeCheck" />}
           label="Đóng đủ phí"
         />
         <FormControlLabel
-          control={
-            <Checkbox
-              checked={carCheck}
-              onChange={handleCarCheck}
-              name="carCheck"
-            />
-          }
+          control={<Checkbox checked={carCheck} onChange={handleCarCheck} name="carCheck" />}
           label="Đã kiểm tra xe"
         />
       </Box>

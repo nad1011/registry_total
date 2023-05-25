@@ -1,12 +1,16 @@
 import { useContext } from "react";
 
-import { Button, Typography } from "@mui/material";
-import CardMedia from "@mui/material/CardMedia";
-import CardContent from "@mui/material/CardContent";
-import CardActions from "@mui/material/CardActions";
-import { FormContext } from "../../contexts/FormContext";
-import Card from "@mui/material/Card";
-import Box from "@mui/material/Box";
+import {
+  Button,
+  Typography,
+  CardMedia,
+  CardContent,
+  CardActions,
+  Card,
+  Box,
+} from "@mui/material";
+
+import { FormContext } from "../contexts/FormContext";
 
 const MyCard = ({ car }) => {
   const { id, name, expirationDate, numberPlate } = car;

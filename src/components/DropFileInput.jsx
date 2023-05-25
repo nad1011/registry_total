@@ -5,8 +5,9 @@ import { Box, Grid, Stack, Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
-import { ImageConfig } from "../../ImageConfig";
-import ButtonNina from "../ButtonNina/ButtonNina";
+
+import { ImageConfig } from "../ImageConfig";
+import ButtonNina from "./ButtonNina/ButtonNina";
 
 const DropFileInput = (props) => {
   const wrapperRef = useRef(null);

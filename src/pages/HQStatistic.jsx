@@ -5,10 +5,10 @@ import { dexieDB } from "../database/cache";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Dropdown from "../components/Dropdown";
-import StatisticBox from "../components/Box/StatisticBox/StatisticBox";
+import StatisticBox from "../components/Box/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
-import Page from "../components/Page/Page";
+import Page from "../components/Page";
 import Switch from "../components/Switch";
 import Table from "../components/Table";
 

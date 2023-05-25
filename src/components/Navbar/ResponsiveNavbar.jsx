@@ -1,21 +1,26 @@
-import {useState, useContext} from "react";
-import AppBar from "@mui/material/AppBar";
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
+import React, { useState, useContext } from "react";
+
+import {
+  AppBar,
+  Box,
+  Divider,
+  Drawer,
+  IconButton,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Toolbar,
+  Typography,
+  Avatar
+} from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
-import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import items from "./ItemInfor";
+
 import { Link } from "react-router-dom";
-import Avatar from "@mui/material/Avatar";
-import UserInfo from "../UserInfo/UserInfo";
+
+import items from "./ItemInfor";
+import UserInfo from "../UserInfo";
 import { NavbarContext } from "../../contexts/NavbarContext";
 
 function ResponsiveDrawer(props) {
@@ -101,7 +106,7 @@ function ResponsiveDrawer(props) {
             </ListItemIcon>
             <ListItemText primary={"Logout"} sx={{ color: "#757575" }} />
           </ListItemButton>
-          <UserInfo open={userInfoOpen} close={popDownUserInfo} />  
+          <UserInfo open={userInfoOpen} close={popDownUserInfo} />
         </ListItem>
       </List>
     </>

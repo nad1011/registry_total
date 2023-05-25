@@ -1,10 +1,9 @@
 import { useState, useContext, useEffect } from "react";
-import RenewForm from "../../RenewForm";
-import Box from "@mui/material/Box";
-import { FormContext } from "../../../contexts/FormContext";
-import Button from "@mui/material/Button";
-import Stack from "@mui/material/Stack";
-import { Typography } from "@mui/material";
+
+import { Typography, Box, Stack, Button } from "@mui/material";
+
+import { FormContext } from "../../contexts/FormContext";
+import RenewForm from "../RenewForm";
 
 const RenewBox = ({ car }) => {
   const { autoName, autoNumberPlate } = useContext(FormContext);

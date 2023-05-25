@@ -1,6 +1,6 @@
 import React from "react";
 import { Children } from "react";
-import ResponsiveNavbar from "../../components/Navbar/ResponsiveNavbar";
+import ResponsiveNavbar from "./Navbar/ResponsiveNavbar";
 import { Box } from "@mui/system";
 
 export default function Page({ children }) {

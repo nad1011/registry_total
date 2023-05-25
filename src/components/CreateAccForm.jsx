@@ -1,13 +1,14 @@
 import React from "react";
-import FormInputHQ from "./FormInputHQ/FormInputHQ";
+
+import { Stack,Grid } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
 import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
 import EmailIcon from "@mui/icons-material/Email";
 import Grid3x3Icon from "@mui/icons-material/Grid3x3";
-import Grid from "@mui/material/Grid";
-import { Stack, badgeClasses } from "@mui/material";
+
+import FormInputHQ from "./FormInputHQ/FormInputHQ";
 import ButtonNina from "./ButtonNina/ButtonNina";
 
 export default function CreateAccForm({ formFields, handleChange }) {

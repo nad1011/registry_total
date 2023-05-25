@@ -1,9 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
 import review from "./Review";
 
 import { Grid, Box, Typography, Stack, Button } from "@mui/material";
-import Page from "../components/Page/Page";
+
+import Page from "../components/Page";
 import logoImg from "../assets/images/logo.png";
 
 const Home = () => {

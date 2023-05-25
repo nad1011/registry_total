@@ -127,7 +127,6 @@ const Statistic = () => {
   useEffect(() => {
     if (!certs) return;
     setDateList(certs.map((cert) => cert[`${stateView}Date`]));
-    changeTimeView();
   }, [certs, stateView]);
 
   useEffect(() => {
@@ -152,8 +151,10 @@ const Statistic = () => {
     reloadTable();
   }, [certs]);
 
-  const onChangeDropdown = (mode) => setTimeView(mode);
-  const onToggleSwitch = (state) => setStateView(state ? "expired" : "registered");
+  useEffect(() => changeTimeView(), [dateList, timeView]);
+
+  const onTimeSwitch = (mode) => setTimeView(mode);
+  const onStateSwitch = (state) => setStateView(state ? "expired" : "registered");
 
   return (
     <Page>
@@ -197,7 +198,7 @@ const Statistic = () => {
                 >
                   Thống kê số lượng xe đăng kiểm
                 </Typography>
-                <Switch onSwitch={onToggleSwitch} />
+                <Switch onSwitch={onStateSwitch} />
               </Stack>
             </Box>
             <Box
@@ -227,8 +228,18 @@ const Statistic = () => {
                 mt: "var(--padding-item) !important",
               }}
             >
-              <StatisticBox title={"Số lượng đăng kiểm gần đây"} month={123} quarter={222} year={897}/>
-              <StatisticBox title={"Số lượng xe hết hạn đăng kiểm"} month={123} quarter={222} year={897}/>
+              <StatisticBox
+                title={"Số lượng đăng kiểm gần đây"}
+                month={123}
+                quarter={222}
+                year={897}
+              />
+              <StatisticBox
+                title={"Số lượng xe hết hạn đăng kiểm"}
+                month={123}
+                quarter={222}
+                year={897}
+              />
             </Stack>
           </Stack>
         </Grid>
@@ -269,8 +280,7 @@ const Statistic = () => {
               <ToggleSwitch
                 values={["Tháng", "Quý", "Năm"]}
                 selected={timeView}
-                onChange={onChangeDropdown}
-                changeGraph={changeTimeView}
+                onChange={onTimeSwitch}
               />
             </Box>
             <Table data={tableData} />

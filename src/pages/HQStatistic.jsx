@@ -128,10 +128,10 @@ const HQStatistic = () => {
     ]);
   };
 
-  useEffect(() => {
-    setDateList(filteredCerts.map((cert) => cert[`${stateView}Date`]));
-    changeTimeView();
-  }, [filteredCerts, stateView]);
+  useEffect(
+    () => setDateList(filteredCerts.map((cert) => cert[`${stateView}Date`])),
+    [filteredCerts, stateView]
+  );
 
   useEffect(() => {
     if (!certs) return;
@@ -154,6 +154,8 @@ const HQStatistic = () => {
     };
     reloadTable();
   }, [certs]);
+
+  useEffect(() => changeTimeView(), [dateList, timeView]);
 
   useEffect(() => {
     if (!certs) return;
@@ -298,7 +300,6 @@ const HQStatistic = () => {
                     values={["Tháng", "Quý", "Năm"]}
                     selected={timeView}
                     onChange={onTimeSwitch}
-                    changeGraph={changeTimeView}
                   />
                 </Box>
               </Grid>

@@ -1,37 +1,24 @@
-import React, { useState, useEffect } from "react";
-import {
-  Switch,
-  SwitchLabel,
-  SwitchRadio,
-  SwitchSelection,
-} from "./Styles.jsx";
+import React, { useEffect, useState } from "react";
+import { Switch, SwitchLabel, SwitchRadio, SwitchSelection } from "./Styles.jsx";
 
-function ToggleSwitch ({ values, selected, onChange, changeGraph }) {
+function ToggleSwitch({ values, selected, onChange }) {
   const [selectedState, setSelectedState] = useState(selected);
-  const titleCase = (str) =>
-    str
-      .split(/\s+/)
-      .map((w) => w[0].toUpperCase() + w.slice(1))
-      .join(" ");
 
   const ClickableLabel = ({ title, onChange, id }) => (
     <SwitchLabel onClick={() => onChange(title)} className={id}>
-      {titleCase(title)}  
+      {title}
     </SwitchLabel>
   );
 
   const ConcealedRadio = ({ value, selected }) => (
-    <SwitchRadio type="radio" name="switch" checked={selected === value} readOnly={true}/>
+    <SwitchRadio type="radio" name="switch" checked={selected === value} readOnly={true} />
   );
-  useEffect(() => {
-    setSelectedState(selected);
-  }, [selected]);
 
-  const handleChange = (val) => {
-    setSelectedState(val);
-    if (onChange) onChange(val);
-    changeGraph();
-  };
+  const handleChange = (state) => setSelectedState(state);
+
+  useEffect(() => {
+    onChange(selectedState);
+  }, [selectedState]);
 
   const selectionStyle = () => {
     return {
@@ -52,6 +39,6 @@ function ToggleSwitch ({ values, selected, onChange, changeGraph }) {
       <SwitchSelection style={selectionStyle()} />
     </Switch>
   );
-};
+}
 
 export default ToggleSwitch;

@@ -16,7 +16,6 @@ export default function CreateAccForm({ formFields, handleChange }) {
       container
       sx={{
         height: "90%",
-        // p: "var(--padding-item)",
       }}
     >
       <Grid

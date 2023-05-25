@@ -38,15 +38,29 @@ const DropFileInput = (props) => {
   return (
     <Grid
       container
-      height={"40%"}
+      mb={2}
+      height={{
+        xs: "auto",
+        sm: "60%",
+        md: "40%",
+        lg: "40%",
+      }}
       backgroundColor={"#fff"}
       p={"var(--padding-item)"}
       sx={{
         borderRadius: "20px",
         boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
       }}
     >
-      <Grid container item xs={4} height={"100%"}>
+      <Grid container item xs={3} sm={5} md={3.5}  lg={4} height={{
+        xs: "30%",
+        sm: "35%",
+        md: "100%",
+        lg: "100%",
+      }}>
         <Box
           ref={wrapperRef}
           onDragEnter={onDragEnter}
@@ -91,7 +105,9 @@ const DropFileInput = (props) => {
                 fontSize: "80px",
               }}
             />
-            <Typography color="var(--avatar-color)" height="20%" align="center">
+            <Typography color="var(--avatar-color)" height="20%" align="center" sx={{
+               fontSize: { xs: 12, sm: 13, md: 14, lg: 15 }
+            }}>
               Drag & Drop your files here or Click to browse files
             </Typography>
           </Stack>
@@ -115,6 +131,15 @@ const DropFileInput = (props) => {
         container
         item
         xs={2}
+        sm={4}
+        md={2}
+        lg={2}
+        height={{
+          xs: "30%",
+          sm: "35%",
+          md: "100%",
+          lg: "100%",
+        }}
         sx={{
           display: "flex",
           justifyContent: "center",
@@ -127,7 +152,7 @@ const DropFileInput = (props) => {
             color="#4267b2"
             align="center"
             sx={{
-              fontSize: "22px",
+              fontSize: { xs: 12, sm: 13, md: 17, lg: 22 },
               fontWeight: "bold",
             }}
           >
@@ -137,7 +162,7 @@ const DropFileInput = (props) => {
             color="var(--avatar-color)"
             align="center"
             sx={{
-              fontSize: "15px",
+              fontSize:  { xs: 12, sm: 13, md: 14, lg: 15 },
             }}
           >
             chứa thông tin về các xe mới
@@ -145,7 +170,12 @@ const DropFileInput = (props) => {
         </Stack>
         <ButtonNina />
       </Grid>
-      <Grid container item xs={6} height={"100%"}>
+      <Grid container item sm={10} md={6.5} lg={6} pt={"var(--padding-item)"} height={{
+        xs: "30%",
+        sm: "65%",
+        md: "100%",
+        lg: "100%",
+      }}>
         <Stack
           direction={"row"}
           spacing={2}
@@ -164,7 +194,7 @@ const DropFileInput = (props) => {
               bgcolor: "#f5f8ff",
               borderRadius: "20px",
               overflowY: "auto",
-              border: "2px dashed #4267b2",
+              border: "2px solid #4267b2",
               p: "var(--padding-item)",
             }}
           >

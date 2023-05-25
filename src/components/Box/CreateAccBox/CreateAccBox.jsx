@@ -34,7 +34,7 @@ const CreateAccBox = () => {
   return (
     <Box
       sx={{
-        height: "60%",
+        height: { sm: "40%", md: "60%"},
         pb: "var(--padding-item)",
       }}
     >

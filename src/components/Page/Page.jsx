@@ -11,7 +11,7 @@ export default function Page({ children }) {
         marginTop: { xs: "50px", sm: "45px" , md: "0px"},
         position: "relative",
         width: "100vw",
-        height: "100vh",
+        height: "auto",
         backgroundColor: "var(--background-color)",
         overflow: "auto",
       }}>

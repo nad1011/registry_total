@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
-import { clientAuth } from "../database/firebase";
+import { fireAuth } from "../database/firebase";
 import { user } from "../database/cache";
 
 import {
@@ -21,7 +21,7 @@ import backgroundImage from "../assets/images/test2.jpg";
 const SignIn = ({ transfer }) => {
   useEffect(() => {
     user.reset();
-    signOut(clientAuth).catch(console.error);
+    signOut(fireAuth).catch(console.error);
   }, []);
 
   const [input, setInput] = useState({ email: "", password: "" });
@@ -44,7 +44,7 @@ const SignIn = ({ transfer }) => {
       return;
     }
 
-    signInWithEmailAndPassword(clientAuth, input.email, input.password)
+    signInWithEmailAndPassword(fireAuth, input.email, input.password)
       .then((userCred) => {
         user.loadData(userCred.user);
         transfer();

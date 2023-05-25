@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB } from "../database/cache";
-import { adminAuth } from "../database/firebase";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Dropdown from "../components/Dropdown";
@@ -27,7 +26,9 @@ const HQStatistic = () => {
     },
   ]);
 
-  const certs = useLiveQuery(() => dexieDB.table("certificate").toArray());
+  const certs = useLiveQuery(() =>
+    dexieDB.table("certificate").where("id").notEqual("center").toArray()
+  );
   const [filteredCerts, setFilteredCerts] = useState([]);
   const [dateList, setDateList] = useState([]);
   const [tableData, setTableData] = useState([]);
@@ -36,7 +37,7 @@ const HQStatistic = () => {
   const [stateView, setStateView] = useState("registered");
   const [centerView, setCenterView] = useState("All");
 
-  const [centerCodes, setCenterCodes] = useState(["All"]);
+  const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
 
   const countDateByYear = () => {
     const yearCount = dateList.reduce(
@@ -161,16 +162,7 @@ const HQStatistic = () => {
     );
   }, [certs, centerView]);
 
-  useEffect(() => {
-    adminAuth.listUsers(237).then((result) => {
-      const newCodes = [...centerCodes];
-      result.users.forEach((user) => {
-        const code = user.email.match(/(?<=email).+(?=@)/)?.[0];
-        if (code) newCodes.push(code);
-      });
-      setCenterCodes(newCodes);
-    });
-  }, []);
+  useEffect(() => {}, []);
 
   const onTimeSwitch = (mode) => setTimeView(mode);
   const onViewSwitch = (state) => setStateView(state ? "expired" : "registered");
@@ -313,7 +305,7 @@ const HQStatistic = () => {
                 </Box>
               </Grid>
               <Grid container item xs={5}>
-                <Dropdown options={centerCodes} onSelect={onCenterSwitch} />
+                <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} />
               </Grid>
             </Grid>
 

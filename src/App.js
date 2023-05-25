@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { collection, getDoc, onSnapshot } from "firebase/firestore";
-import { clientDB } from "./database/firebase";
+import { fireDB } from "./database/firebase";
 import { dexieDB, user, getDocID } from "./database/cache";
 
 import CssBaseline from "@mui/material/CssBaseline";
@@ -19,11 +19,20 @@ import "./App.css";
 const App = () => {
   // useEffect(() => {
   //   const listener = onSnapshot(
-  //     collection(clientDB, "certificate"),
+  //     collection(fireDB, "certificate"),
   //     (snapshot) => {
   //       snapshot.docChanges().forEach(async (cert) => {
   //         const certDoc = cert.doc;
   //         const certData = certDoc.data();
+
+  //         if (certDoc.id === "center") {
+  //           await dexieDB.table("certificate").put({
+  //             ...certData,
+  //             id: certDoc.id,
+  //           });
+  //           return;
+  //         }
+
   //         await dexieDB.table("certificate").put({
   //           ...certData,
   //           id: certDoc.id,

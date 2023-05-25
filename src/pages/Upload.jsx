@@ -11,7 +11,11 @@ const Upload = () => {
   };
 
   const handleUpload = () => {
-    console.log("File uploaded:", selectedFile);
+    //
+    //
+    // task here
+    //
+    //
   };
 
   return (

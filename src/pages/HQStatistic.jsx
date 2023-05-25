@@ -162,8 +162,6 @@ const HQStatistic = () => {
     );
   }, [certs, centerView]);
 
-  useEffect(() => {}, []);
-
   const onTimeSwitch = (mode) => setTimeView(mode);
   const onViewSwitch = (state) => setStateView(state ? "expired" : "registered");
   const onCenterSwitch = (center) => setCenterView(center);

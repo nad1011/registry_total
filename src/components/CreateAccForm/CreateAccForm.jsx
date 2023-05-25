@@ -34,7 +34,7 @@ const CreateAccForm = () => {
     event.preventDefault();
     //
     //
-    // new task here: handle account creation
+    // task here
     //
     //
     //

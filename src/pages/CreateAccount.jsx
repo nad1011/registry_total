@@ -6,7 +6,11 @@ import DropFileInput from "../components/DropFileInput/DropFileInput";
 
 const CreateAccount = () => {
   const onFileChange = (files) => {
-    console.log(files);
+    //
+    //
+    // task here
+    //
+    //
   };
   return (
     <Page>

@@ -6,7 +6,11 @@ export default function ButtonNina() {
       className="button button--nina button--text-thick button--text-upper button--size-s"
       data-text="Upload"
       onClick={() => {
-        console.log("Upload");
+        //
+        //
+        // task here
+        //
+        //
       }}
     >
       <span>U</span>

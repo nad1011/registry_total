@@ -28,7 +28,11 @@ const CreateAccBox = () => {
 
   const submitHandle = (event) => {
     event.preventDefault();
-    console.log(formFields);
+    //
+    //
+    // task here
+    //
+    //
   };
 
   return (
@@ -63,7 +67,6 @@ const CreateAccBox = () => {
           Tạo mới tài khoản trung tâm đăng kiểm
         </Typography>
         <CreateAccForm formFields={formFields} handleChange={handleChange} />
-        
       </Stack>
     </Box>
 

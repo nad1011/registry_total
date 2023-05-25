@@ -17,8 +17,7 @@ const RenewBox = ({ car }) => {
     newExpirationDate: "",
   };
   const [formFields, setFormFields] = useState(defaultFormFields);
-  const { name, numberPlate, feeCheck, carCheck, newExpirationDate } =
-    formFields;
+  const { name, numberPlate, feeCheck, carCheck, newExpirationDate } = formFields;
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -28,7 +27,11 @@ const RenewBox = ({ car }) => {
 
   const submitHandle = (event) => {
     event.preventDefault();
-    console.log(formFields);
+    //
+    //
+    // task here
+    //
+    //
   };
 
   const handleFeeCheck = () => {
@@ -66,12 +69,7 @@ const RenewBox = ({ car }) => {
         borderRadius: 3,
       }}
     >
-      <Stack
-        direction="column"
-        justifyContent="space-between"
-        alignItems="center"
-        height={1}
-      >
+      <Stack direction="column" justifyContent="space-between" alignItems="center" height={1}>
         <Box
           width={0.9}
           sx={{ mt: 2 }}

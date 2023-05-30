@@ -2,8 +2,8 @@
   float: left;
   min-width: 100px;
   width: 20%;
-  height: 25%;
-  max-height: 50px;
+  height: 20%;
+  max-height: 45px;
   display: block;
   padding: 1em 1em;
   border: none;
@@ -34,7 +34,7 @@
 }
 .button--nina {
   padding: 0 1em;
-  background: #7986cb;
+  background: var(--background-color);
   color: #fff;
   overflow: hidden;
   -webkit-transition: background-color 0.3s;
@@ -42,12 +42,12 @@
 }
 .button--nina.button--inverted {
   background: #fff;
-  color: #7986cb;
+  color: var(--background-color);
 }
 .button--nina > span {
+  opacity: 0;
   display: inline-block;
   padding: 1em 0;
-  opacity: 0;
   color: #fff;
   -webkit-transform: translate3d(0, -10px, 0);
   transform: translate3d(0, -10px, 0);
@@ -70,7 +70,7 @@
   transition-timing-function: cubic-bezier(0.75, 0, 0.125, 1);
 }
 .button--nina:hover {
-  background-color: #3f51b5;
+  background-color: var(--title-color);
 }
 .button--nina:hover::before {
   opacity: 0;

@@ -45,11 +45,29 @@ export default function RenewForm({
       />
       <Box>
         <FormControlLabel
-          control={<Checkbox checked={feeCheck} onChange={handleFeeCheck} name="feeCheck" />}
+          control={
+            <Checkbox
+              checked={feeCheck}
+              onChange={handleFeeCheck}
+              name="feeCheck"
+            />
+          }
+          sx={{
+            color: "var(--font1-color)",
+          }}
           label="Đóng đủ phí"
         />
         <FormControlLabel
-          control={<Checkbox checked={carCheck} onChange={handleCarCheck} name="carCheck" />}
+          control={
+            <Checkbox
+              checked={carCheck}
+              onChange={handleCarCheck}
+              name="carCheck"
+            />
+          }
+          sx={{
+            color: "black",
+          }}
           label="Đã kiểm tra xe"
         />
       </Box>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import review from "./Review";
 
@@ -9,6 +9,7 @@ import Page from "../components/Page";
 import logoImg from "../assets/images/logo.png";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <Page>
       <Grid
@@ -25,10 +26,19 @@ const Home = () => {
           sm={7}
           md={8}
           sx={{
-            height: "40%",
             width: "100%",
-            pl: "4%",
-            pt: "4%",
+            pt: "var(--padding-item)",
+            pl: {
+              xs: "var(--padding-item)",
+              sm: "var(--padding-item)",
+              md: "calc(var(--padding-item)*2)",
+              lg: "calc(var(--padding-item)*3)",
+            },
+            pr: {
+              xs: "var(--padding-item)",
+              sm: "var(--padding-item)",
+              md: 0,
+            },
             display: "flex",
             justifyContent: "flex-start",
             alignItems: "center",
@@ -36,7 +46,6 @@ const Home = () => {
         >
           <Stack
             sx={{
-              height: 0.35,
               width: 1,
               display: "flex",
               justifyContent: "center",
@@ -46,42 +55,45 @@ const Home = () => {
             <Typography
               variant="h2"
               fontSize={{
-                xs: "35px",
+                xs: "30px",
                 sm: "35px",
-                md: "40px",
+                md: "50px",
                 lg: "50px",
               }}
               sx={{
-                fontFamily: "roboto mono",
+                fontFamily: "var(--font-roboto)",
                 fontWeight: "bold",
-                color: "black",
+                color: "var(--title-color)",
               }}
             >
               Registry Total
             </Typography>
             <Typography
               variant="body1"
+              fontSize={{
+                xs: "20px",
+                sm: "20px",
+                md: "21px",
+                lg: "20px",
+              }}
               sx={{
-                color: "black",
-                textAlign: "justify",
-                fontFamily: "poppins",
-                mt: 2,
+                color: "var(--font1-color)",
+                textAlign: "start",
+                fontFamily: "var(--font-inter)",
               }}
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa minima, perspiciatis aliquid quo ex totam consequatur repellendus ducimus quisquam incidunt sunt, veniam sequi laborum! Cupiditate minima animi unde ullam sapiente!
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
+              minima, perspiciatis aliquid quo ex totam consequatur repellendus
+              ducimus quisquam incidunt sunt, veniam sequi laborum! Cupiditate
+              minima animi unde ullam sapiente!
             </Typography>
           </Stack>
         </Grid>
-        <Grid
+        {/* <Grid
           container
           item
           sm={5}
           md={4}
-          // p={{
-          //   sm: '25%',
-          //   md: '5%',
-          //   lg: '5%'
-          // }}
           pt={{
             sm: "20%",
             md: "5%",
@@ -95,6 +107,7 @@ const Home = () => {
             zIndex: 1,
           }}
         >
+          // LOGO PUT IN HERE 
           <Box
             height={{
               sm: "100%",
@@ -110,11 +123,11 @@ const Home = () => {
               filter: "opacity(0.5) drop-shadow(0 0 var(--avatar-color))",
             }}
           ></Box>
-        </Grid>
+        </Grid> */}
         <Grid
           item
           sx={{
-            height: "10%",
+            minHeight: "5%",
             width: "100%",
             backgroundImage:
               "linear-gradient(to bottom right, var(--primary-color) 50%, var(--secondary-color) 50%)",
@@ -127,7 +140,7 @@ const Home = () => {
           container
           item
           sx={{
-            height: "50%",
+            p: "var(--padding-item)",
             width: "100%",
             backgroundColor: "var(--secondary-color)",
             overflow: "auto",
@@ -152,40 +165,67 @@ const Home = () => {
                 sm={6}
                 md={4}
                 sx={{
+                  position: "relative",
                   bgcolor: "var(--secondary-color)",
-                  overflow: "auto",
+                  // overflow: "auto",
+                  ":hover": {
+                    ".box": {
+                      transform: "translate3d(0, 0, 0)",
+                      opacity: 0.4,
+                    },
+                  },
                 }}
                 borderRight={{
-                  sm: "1px solid black",
-                  md: index !== 1 ? "1px solid black" : "none",
+                  xs: "1px solid var(--border-color)",
+                  sm: "1px solid var(--border-color)",
+                  md: index !== 1 ? "1.5px solid var(--border-color)" : "none",
                 }}
                 borderLeft={{
-                  sm: "1px solid black",
-                  md: index !== 1 ? "1px solid black" : "none",
+                  xs: "1px solid var(--border-color)",
+                  sm: index !== 1 ? "1px solid var(--border-color)" : "none",
+                  md: index !== 1 ? "1.5px solid var(--border-color)" : "none",
                 }}
                 height={{
-                  sm: 0.4,
-                  md: 0.6,
+                  xs: "auto",
+                  sm: 0.5,
+                  md: 0.8,
+                  lg: 0.8,
                 }}
                 display="flex"
                 justifyContent="center"
                 alignItems="center"
               >
                 <Box
+                  className="box"
+                  onClick={() => navigate(item.path)}
                   sx={{
-                    bgcolor: "#darkgray",
+                    position: "absolute",
+                    bgcolor: "var(--background-color)",
+                    height: 1,
+                    width: 0.9,
+                    opacity: 0,
+                    transform: "translate3d(0, -50%, 0)",
+                    transition: "transform 0.2s, opacity 0.5s",
+                  }}
+                ></Box>
+                <Box
+                  sx={{
+                    bgcolor: "var(--secondary-color)",
                     width: 0.9,
                     height: 0.9,
                     p: 1,
-                    ":hover": {
-                      bgcolor: "var(--border-color)",
-                      transition: "all 0.3s ease-in-out",
-                    },
                   }}
                 >
-                  <Stack height={1} justifyContent="space-between" alignItems="flex-end">
-                    <Typography color={"black"}>{item.describe}</Typography>
-                    <Button
+                  <Stack
+                    height={1}
+                    justifyContent="space-between"
+                    alignItems="flex-end"
+                  >
+                    <Typography color={"var(--font1-color)"}>
+                      {item.describe}
+                    </Typography>
+                    {/* <Button
+                      disabled
                       sx={{
                         backgroundColor: "smoke",
                         fontWeight: "bold",
@@ -196,17 +236,16 @@ const Home = () => {
                       size="lg"
                       variant="solid"
                     >
-                      <Link
-                        to={item.path}
-                        style={{
-                          textDecoration: "none",
-                          color: "black",
-                          fontFamily: "tahoma,sans-serif",
-                        }}
-                      >
                         {item.title}
-                      </Link>
-                    </Button>
+                    </Button> */}
+                    <Typography
+                      sx={{
+                        color: "var(--title-color)",
+                        fontWeight: "bold",
+                      }}
+                    >
+                      {item.title}
+                    </Typography>
                   </Stack>
                 </Box>
               </Grid>

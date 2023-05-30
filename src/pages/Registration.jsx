@@ -96,16 +96,19 @@ const Registration = () => {
               sm: "10%",
               md: "10%",
               lg: "9%",
+              xl: "9%",
             }}
           >
             <Stack
               direction="row"
               spacing={{
-                xs: 1,
+                xs: 0,
                 lg: 0,
               }}
               alignItems="center"
-              sx={{ height: 1, width: "70%", pb: "var(--padding-item)" }}
+              sx={{ height: 1, width: "70%", pb: {
+                xs: "calc(var(--padding-item)/2)",
+              } }}
             >
               <SearchBox
                 placeholder={`Search by ${paramName[param]}`}
@@ -155,6 +158,7 @@ const Registration = () => {
               sm: "90%",
               md: "90%",
               lg: "91%",
+              xl: "91%",
             }}
             sx={{
               border: "2px solid var(--secondary-color)",

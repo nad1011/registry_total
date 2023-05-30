@@ -1,24 +1,23 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400&display=swap");
-@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@600&display=swap");
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Raleway&family=Roboto:wght@400&display=swap');
 
 :root {
-  --primary-color: #eaedee;
-  --background-color: #f3f3f3;
-  --secondary-color: #e1e1e3;
-  --avatar-color: #5b5b5bf5;
-  --border-color: #d0d0d0;
+  --secondary-color: #ffffff;
+  --primary-color: #efeeee;
+  --background-color: #14b0b9;
+  --border-color: #00ADB5;
+  --title-color: #00ADB5;
+  --avatar-color: #474b52;
+  --font1-color: #393E46;
+  --font2-color: #222831;
   --padding-item: 2vh;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-inter: 'Inter', sans-serif;
+  --font-raleway: 'Raleway', sans-serif;
 }
 
-* {
-  font-family: "Poppins", sans-serif;
-}
 body {
   padding: 0;
   margin: 0;
-  font-family: "poppins", sans-serif;
 }
 
 .App {

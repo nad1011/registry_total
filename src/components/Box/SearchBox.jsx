@@ -6,7 +6,7 @@ import SearchIcon from "@mui/icons-material/Search";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
-  borderRadius: "15px",
+  borderRadius: "20px",
   color: "var(--avatar-color)",
   backgroundColor: "var(--secondary-color)",
   "&:hover": {
@@ -21,7 +21,7 @@ const Search = styled("div")(({ theme }) => ({
 }));
 
 const SearchIconWrapper = styled("div")(({ theme }) => ({
-  padding: theme.spacing(0, 2),
+  padding: theme.spacing(0, 1),
   height: "100%",
   position: "absolute",
   pointerEvents: "none",
@@ -31,17 +31,18 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "var(--font2-color)",
+  height: "100%",
   "& .MuiInputBase-input": {
-    padding: theme.spacing(1, 1, 1, 0),
+    padding: theme.spacing(1, 2, 1, 0),
     // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
+    paddingLeft: `calc(1em + ${theme.spacing(3)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
     [theme.breakpoints.up("sm")]: {
-      width: "12ch",
+      width: "6ch",
       "&:focus": {
-        width: "20ch",
+        width: "16ch",
       },
     },
   },
@@ -51,7 +52,9 @@ const SearchBox = ({ placeholder, onChangeHandler }) => {
   return (
     <Search>
       <SearchIconWrapper>
-        <SearchIcon />
+        <SearchIcon sx={{
+          color: "var(--border-color)",
+        }}/>
       </SearchIconWrapper>
       <StyledInputBase placeholder={placeholder} onChange={onChangeHandler} />
     </Search>

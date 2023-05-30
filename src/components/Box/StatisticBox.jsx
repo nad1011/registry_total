@@ -6,25 +6,24 @@ export default function StatisticBox({ title, month, quarter, year }) {
       sx={{
         bgcolor: "var(--secondary-color)",
         borderRadius: 2,
-        p: "3%",
+        p: "calc(var(--padding-item)*2)",
         width: { xs: "50%" },
         height: "100%",
-        // mr: "2% !important",
       }}
     >
       <Stack
         justifyContent="space-between"
         sx={{
-          color: "var(--avatar-color)",
           height: 1,
         }}
       >
         <Typography
           height={"30%"}
           sx={{
-            fontWeight: "bold",
-            fontFamily: "Inter",
+            fontWeight: "600",
+            fontFamily: "var(--font-inter))",
             fontSize: { xs: 13, sm: 17, md: 22, lg: 20 },
+            color: "var(--title-color)",
           }}
         >
           {title}
@@ -46,7 +45,8 @@ export default function StatisticBox({ title, month, quarter, year }) {
           >
             <Typography
               sx={{
-                fontFamily: "poppins",
+                fontFamily: "var(--font-roboto)",
+                color: "var(--font1-color)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
@@ -54,8 +54,9 @@ export default function StatisticBox({ title, month, quarter, year }) {
             </Typography>
             <Typography
               sx={{
+                color: "var(--font2-color)",
                 fontWeight: "bold",
-                fontFamily: "poppins",
+                fontFamily: "var(--font-roboto)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
@@ -69,7 +70,8 @@ export default function StatisticBox({ title, month, quarter, year }) {
           >
             <Typography
               sx={{
-                fontFamily: "poppins",
+                color: "var(--font1-color)",
+                fontFamily: "var(--font-roboto)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
@@ -77,8 +79,9 @@ export default function StatisticBox({ title, month, quarter, year }) {
             </Typography>
             <Typography
               sx={{
+                color: "var(--font2-color)",
                 fontWeight: "bold",
-                fontFamily: "poppins",
+                fontFamily: "var(--font-roboto)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
@@ -92,7 +95,8 @@ export default function StatisticBox({ title, month, quarter, year }) {
           >
             <Typography
               sx={{
-                fontFamily: "poppins",
+                color: "var(--font1-color)",
+                fontFamily: "var(--font-roboto)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >
@@ -101,7 +105,8 @@ export default function StatisticBox({ title, month, quarter, year }) {
             <Typography
               sx={{
                 fontWeight: "bold",
-                fontFamily: "poppins",
+                color: "var(--font2-color)",
+                fontFamily: "var(--font-roboto)",
                 fontSize: { xs: 13, sm: 16, md: 20, lg: 20 },
               }}
             >

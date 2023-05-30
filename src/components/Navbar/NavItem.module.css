@@ -4,4 +4,5 @@
     min-width: 50px;
     height: 30px;
     line-height: 60px;
+    color: var(--background-color);
 }

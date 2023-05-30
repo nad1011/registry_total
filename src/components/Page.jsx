@@ -8,11 +8,11 @@ export default function Page({ children }) {
     <>
       <ResponsiveNavbar />
       <Box sx={{
-        marginTop: { xs: "50px", sm: "45px" , md: "0px"},
+        marginTop: { xs: "45px", sm: "45px" , md: "0px"},
         position: "relative",
         width: "100vw",
         height: "auto",
-        backgroundColor: "var(--background-color)",
+        backgroundColor: "var(--primary-color)",
         overflow: "auto",
       }}>
         {Children.map(children, (child) => (

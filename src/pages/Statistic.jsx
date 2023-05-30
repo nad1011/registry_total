@@ -190,9 +190,9 @@ const Statistic = () => {
                 <Typography
                   sx={{
                     fontWeight: "bold",
-                    fontFamily: "Inter",
+                    fontFamily: "var(--font-inter)",
                     fontSize: { xs: "15px", sm: "20px", md: "22px", lg: "22px" },
-                    color: "var(--avatar-color)",
+                    color: "var(--title-color)",
                     zIndex: 1,
                   }}
                 >
@@ -218,7 +218,7 @@ const Statistic = () => {
             </Box>
             <Stack
               direction="row"
-              spacing={1}
+              spacing={"var(--padding-item)"}
               sx={{
                 display: "flex",
                 justifyContent: "space-evenly",
@@ -270,9 +270,9 @@ const Statistic = () => {
           >
             <Box
               sx={{
-                bgcolor: "#fff",
+                bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
-                p: 1,
+                p: 0.5,
                 mb: "var(--padding-item)",
                 width: 0.7,
               }}

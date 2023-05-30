@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { AiFillSetting } from "react-icons/ai";
+import SettingsIcon from '@mui/icons-material/Settings';
 import { Box, MenuItem, Menu, IconButton } from "@mui/material";
 
 const SELECTION = {
@@ -32,7 +32,9 @@ export default function SelectSearch({ transfer }) {
         onClick={handleMenu}
         color="default"
       >
-        <AiFillSetting />
+        <SettingsIcon sx={{
+          color: "var(--border-color)",
+        }}/>
       </IconButton>
       <Menu
         id="menu-appbar"
@@ -44,20 +46,26 @@ export default function SelectSearch({ transfer }) {
         keepMounted
         transformOrigin={{
           vertical: "top",
-          horizontal: "right",
+          horizontal: "left",
         }}
         open={Boolean(anchorEl)}
         onClose={handleClose}
+        sx={{
+          color: "var(--secondary-color)",
+          "& .MuiPaper-root": {
+            backgroundColor: "var(--background-color)",
+            boxShadow: "none",
+            color: "var(--secondary-color)",
+          }
+        }}
       >
-        <MenuItem value={SELECTION.name} onClick={handleInput}>
+        <MenuItem value={SELECTION.name} onClick={handleInput} >
           Name
         </MenuItem>
         <MenuItem value={SELECTION.licensePlate} onClick={handleInput}>
           License Plate
         </MenuItem>
       </Menu>
-
-      {/* </Select> */}
     </Box>
   );
 }

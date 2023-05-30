@@ -255,8 +255,8 @@ export default function EnhancedTable({ data }) {
             width: "100%",
             height: "100%",
             boxShadow: 0,
-            pt: "3%",
-            px: "3%",
+            pt: "var(--padding-item)",
+            px: "var(--padding-item)",
             borderRadius: 2,
             bgcolor: "var(--secondary-color)"
           }}

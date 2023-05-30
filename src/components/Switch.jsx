@@ -17,12 +17,12 @@ export default function ExampleIosSwitch({ onSwitch }) {
         "--Switch-thumbSize": "20px",
         "--Switch-trackWidth": "40px",
         "--Switch-trackHeight": "25px",
-        "--Switch-trackBackground": "var(--border-color)",
+        "--Switch-trackBackground": "var(--background-color)",
         [`& .${switchClasses.thumb}`]: {
           transition: "width 0.5s, left 0.5s",
         },
         "&:hover": {
-          "--Switch-trackBackground": "var(--border-color)",
+          "--Switch-trackBackground": "var(--background-color)",
         },
         "&:active": {
           "--Switch-thumbWidth": "32px",

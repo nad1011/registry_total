@@ -13,7 +13,7 @@ import {
   ListItemText,
   Toolbar,
   Typography,
-  Avatar
+  Avatar,
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 
@@ -61,10 +61,14 @@ function ResponsiveDrawer(props) {
             },
           }}
         >
-          <MenuIcon />
+          <MenuIcon
+            sx={{
+              color: "var(--title-color)",
+            }}
+          />
         </IconButton>
       </Toolbar>
-      <Divider />
+      <Divider/>
       <List
         sx={{
           height: 1,
@@ -83,13 +87,13 @@ function ResponsiveDrawer(props) {
                 }}
               >
                 <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.title} sx={{ color: "#757575" }} />
+                <ListItemText primary={item.title} sx={{ color: "var(--font1-color)" }} />
               </ListItemButton>
             </Link>
           </ListItem>
         ))}
       </List>
-      <Divider />
+      <Divider/>
       <List sx={{ p: 0 }}>
         <ListItem
           sx={{
@@ -116,7 +120,7 @@ function ResponsiveDrawer(props) {
     window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex" }}>
+    <Box sx={{ display: "flex"}}>
       <AppBar
         position="fixed"
         sx={{
@@ -131,7 +135,7 @@ function ResponsiveDrawer(props) {
       >
         <Toolbar
           sx={{
-            minHeight: { sm: "45px", md: "50px" },
+            minHeight: { xs: "45px", md: "50px" },
             display: { md: "none" },
           }}
         >

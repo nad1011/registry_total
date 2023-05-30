@@ -3,7 +3,9 @@ import { useState, useContext, useEffect } from "react";
 import { Typography, Box, Stack, Button } from "@mui/material";
 
 import { FormContext } from "../../contexts/FormContext";
+import ButtonGroup from "@mui/material";
 import RenewForm from "../RenewForm";
+import ButtonNina from "../ButtonNina/ButtonNina";
 
 const RenewBox = ({ car }) => {
   const { autoName, autoNumberPlate } = useContext(FormContext);
@@ -79,10 +81,12 @@ const RenewBox = ({ car }) => {
           <Typography
             sx={{
               fontSize: 30,
-              color: "var(--avatar-color)",
+              fontWeight: "bold",
+              fontFamily: "var(--font-raleway)",
+              color: "var(--title-color)",
             }}
           >
-            Renew Car Registration
+            ĐƠN ĐĂNG KIỂM  
           </Typography>
         </Box>
         <RenewForm
@@ -92,17 +96,7 @@ const RenewBox = ({ car }) => {
           carCheck={carCheck}
           newExpirationDate={newExpirationDate}
         />
-        <Button
-          sx={{
-            backgroundColor: "whitesmoke",
-            color: "var(--avatar-color)",
-            fontWeight: "bold",
-          }}
-          size="lg"
-          variant="solid"
-        >
-          Confirm
-        </Button>
+        <ButtonNina/>
       </Stack>
     </Box>
   );

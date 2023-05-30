@@ -16,7 +16,7 @@ const CartList = ({ filterList }) => {
             <Grid
               item
               p={{
-                xs: `5px !important`,
+                xs: `calc(var(--padding-item)/2) !important`,
               }}
               xs={12}
               sm={6}

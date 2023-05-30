@@ -133,6 +133,8 @@ const HQStatistic = () => {
     [filteredCerts, stateView]
   );
 
+  useEffect(() => changeTimeView(), [dateList, timeView]);
+
   useEffect(() => {
     if (!certs) return;
     const reloadTable = async () => {
@@ -154,8 +156,6 @@ const HQStatistic = () => {
     };
     reloadTable();
   }, [certs]);
-
-  useEffect(() => changeTimeView(), [dateList, timeView]);
 
   useEffect(() => {
     if (!certs) return;

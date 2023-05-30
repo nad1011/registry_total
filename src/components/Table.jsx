@@ -13,30 +13,23 @@ import Paper from "@mui/material/Paper";
 import { visuallyHidden } from "@mui/utils";
 
 export default function EnhancedTable({ data }) {
-  function createData(id, name, numberPlate, registrationDate, center) {
-    return { id, name, numberPlate, registrationDate, center };
+  function createData({ id, owner, licensePlate, regDate, center }) {
+    return {
+      id,
+      owner,
+      licensePlate,
+      regDate,
+      center,
+    };
   }
 
-  const [rows, setRows] = useState(
-    data.map((row) => {
-      return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
-    })
-  );
+  const [rows, setRows] = useState(data.map(createData));
 
-  useEffect(() => {
-    const newRows = data.map((row) => {
-      return createData(row.id, row.owner, row.numberPlate, row["registration-date"], row.center);
-    });
-    setRows(newRows);
-  }, [data]);
+  useEffect(() => setRows(data.map(createData)), [data]);
 
   function descendingComparator(a, b, orderBy) {
-    if (b[orderBy] < a[orderBy]) {
-      return -1;
-    }
-    if (b[orderBy] > a[orderBy]) {
-      return 1;
-    }
+    if (b[orderBy] < a[orderBy]) return -1;
+    if (b[orderBy] > a[orderBy]) return 1;
     return 0;
   }
 
@@ -60,19 +53,19 @@ export default function EnhancedTable({ data }) {
 
   const headCells = [
     {
-      id: "registrationDate",
+      id: "regDate",
       numeric: false,
       disablePadding: true,
-      label: "Registration Date",
+      label: "Registered Date",
     },
     {
-      id: "name",
+      id: "owner",
       numeric: false,
       disablePadding: true,
       label: "Owner",
     },
     {
-      id: "numberPlate",
+      id: "licensePlate",
       numeric: false,
       disablePadding: true,
       label: "Number Plate",
@@ -87,7 +80,7 @@ export default function EnhancedTable({ data }) {
   ];
 
   const DEFAULT_ORDER = "asc";
-  const DEFAULT_ORDER_BY = "registrationDate";
+  const DEFAULT_ORDER_BY = "regDate";
   const DEFAULT_ROWS_PER_PAGE = 14;
 
   function EnhancedTableHead(props) {
@@ -98,15 +91,15 @@ export default function EnhancedTable({ data }) {
 
     return (
       <>
-        <TableHead sx={{bgcolor: "var(--secondary-color)"}}>
-          <TableRow sx={{bgcolor: "var(--secondary-color)"}}>
+        <TableHead sx={{ bgcolor: "var(--secondary-color)" }}>
+          <TableRow sx={{ bgcolor: "var(--secondary-color)" }}>
             {headCells.map((headCell) => (
               <TableCell
                 key={headCell.id}
                 align={headCell.numeric ? "right" : "left"}
                 padding={headCell.disablePadding ? "none" : "normal"}
                 sortDirection={orderBy === headCell.id ? order : false}
-                sx={{bgcolor: "var(--secondary-color)", fontSize: 15}}
+                sx={{ bgcolor: "var(--secondary-color)", fontSize: 15 }}
               >
                 <TableSortLabel
                   active={orderBy === headCell.id}
@@ -162,7 +155,7 @@ export default function EnhancedTable({ data }) {
   }, [rows]);
 
   const handleRequestSort = useCallback(
-    (event, newOrderBy) => {
+    (_, newOrderBy) => {
       const isAsc = orderBy === newOrderBy && order === "asc";
       const toggledOrder = isAsc ? "desc" : "asc";
       setOrder(toggledOrder);
@@ -177,15 +170,10 @@ export default function EnhancedTable({ data }) {
   );
 
   const handleSelectAllClick = (event) => {
-    if (event.target.checked) {
-      const newSelected = rows.map((n) => n.name);
-      setSelected(newSelected);
-      return;
-    }
-    setSelected([]);
+    setSelected(event.target.checked ? rows.map((n) => n.name) : []);
   };
 
-  const handleClick = (event, name) => {
+  const handleClick = (_, name) => {
     const selectedIndex = selected.indexOf(name);
     let newSelected = [];
 
@@ -249,7 +237,9 @@ export default function EnhancedTable({ data }) {
   const isSelected = (name) => selected.indexOf(name) !== -1;
   return (
     <>
-      <Box sx={{ width: "100%", height: "100%", bgcolor: "var(--secondary-color)",borderRadius: 2, }}>
+      <Box
+        sx={{ width: "100%", height: "100%", bgcolor: "var(--secondary-color)", borderRadius: 2 }}
+      >
         <Paper
           sx={{
             width: "100%",
@@ -258,7 +248,7 @@ export default function EnhancedTable({ data }) {
             pt: "3%",
             px: "3%",
             borderRadius: 2,
-            bgcolor: "var(--secondary-color)"
+            bgcolor: "var(--secondary-color)",
           }}
         >
           <TableContainer sx={{ maxHeight: 0.93, bgcolor: "var(--secondary-color)" }}>
@@ -279,13 +269,13 @@ export default function EnhancedTable({ data }) {
               <TableBody>
                 {visibleRows
                   ? visibleRows.map((row, index) => {
-                      const isItemSelected = isSelected(row.name);
+                      const isItemSelected = isSelected(row.owner);
                       const labelId = `enhanced-table-checkbox-${index}`;
 
                       return (
                         <TableRow
                           hover
-                          onClick={(event) => handleClick(event, row.name)}
+                          onClick={(event) => handleClick(event, row.owner)}
                           role="checkbox"
                           aria-checked={isItemSelected}
                           tabIndex={-1}
@@ -293,16 +283,16 @@ export default function EnhancedTable({ data }) {
                           selected={isItemSelected}
                           sx={{ cursor: "pointer" }}
                         >
-                          <TableCell>{row.registrationDate}</TableCell>
+                          <TableCell>{row.regDate}</TableCell>
                           <TableCell
                             component="th"
                             id={labelId}
                             scope="row"
                             // padding="none"
                           >
-                            {row.name}
+                            {row.owner}
                           </TableCell>
-                          <TableCell>{row.numberPlate}</TableCell>
+                          <TableCell>{row.licensePlate}</TableCell>
 
                           <TableCell>{row.center}</TableCell>
                           <TableCell>{row.protein}</TableCell>

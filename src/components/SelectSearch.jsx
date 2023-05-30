@@ -2,13 +2,8 @@ import { useState, useEffect } from "react";
 import { AiFillSetting } from "react-icons/ai";
 import { Box, MenuItem, Menu, IconButton } from "@mui/material";
 
-const SELECTION = {
-  name: "name",
-  licensePlate: "regNum",
-};
-
 export default function SelectSearch({ transfer }) {
-  const [item, setItem] = useState("regNum");
+  const [item, setItem] = useState("licensePlate");
   const [anchorEl, setAnchorEl] = useState(null);
 
   const handleMenu = (event) => setAnchorEl(event.currentTarget);
@@ -23,8 +18,9 @@ export default function SelectSearch({ transfer }) {
     setItem(event.target.getAttribute("value"));
     handleClose();
   };
+
   return (
-    <Box sx={{ minWidth: '30%' }}>
+    <Box sx={{ minWidth: "30%" }}>
       <IconButton
         size="medium"
         aria-controls="menu-appbar"
@@ -49,15 +45,13 @@ export default function SelectSearch({ transfer }) {
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        <MenuItem value={SELECTION.name} onClick={handleInput}>
+        <MenuItem value={"name"} onClick={handleInput}>
           Name
         </MenuItem>
-        <MenuItem value={SELECTION.licensePlate} onClick={handleInput}>
+        <MenuItem value={"licensePlate"} onClick={handleInput}>
           License Plate
         </MenuItem>
       </Menu>
-
-      {/* </Select> */}
     </Box>
   );
 }

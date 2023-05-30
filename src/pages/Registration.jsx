@@ -12,6 +12,11 @@ import SearchBox from "../components/Box/SearchBox";
 import RenewBox from "../components/Box/RenewBox";
 import SelectSearch from "../components/SelectSearch";
 
+const paramName = {
+  name: "name",
+  licensePlate: "license plate",
+};
+
 const Registration = () => {
   const expiredCerts = useLiveQuery(() =>
     dexieDB
@@ -28,7 +33,7 @@ const Registration = () => {
   const [pageData, setPageData] = useState([]);
 
   const [query, setQuery] = useState("");
-  const [param, setParam] = useState("regNum");
+  const [param, setParam] = useState("licensePlate");
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -102,7 +107,10 @@ const Registration = () => {
               alignItems="center"
               sx={{ height: 1, width: "70%", pb: "var(--padding-item)" }}
             >
-              <SearchBox placeholder={`Search by ${param}`} onChangeHandler={onQueryChange} />
+              <SearchBox
+                placeholder={`Search by ${paramName[param]}`}
+                onChangeHandler={onQueryChange}
+              />
               <SelectSearch transfer={selectParam} />
             </Stack>
             <Stack direction="row" spacing={1} alignItems="flex-end">

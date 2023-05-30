@@ -1,12 +1,8 @@
-import {Grid, Box} from "@mui/material";
+import { Grid, Box } from "@mui/material";
 
 import MyCard from "./MyCard";
 
 const CartList = ({ filterList }) => {
-  if (!filterList) {
-    return null;
-  }
-
   return (
     <Box display={"flex"} sx={{ width: 1, height: 1, p: 1 }}>
       <Grid
@@ -14,9 +10,8 @@ const CartList = ({ filterList }) => {
         m={{ xs: 0 }}
         spacing={{ xs: 1, md: 2 }}
         sx={{ height: 1, overflowY: "auto" }}
-        
       >
-        {filterList.map((car, index) => {
+        {filterList.map((cert) => {
           return (
             <Grid
               item
@@ -33,9 +28,9 @@ const CartList = ({ filterList }) => {
                 md: "75%",
                 lg: "50%",
               }}
-              key={car.id}
+              key={cert.id}
             >
-              <MyCard car={car} key={car.id} />
+              <MyCard cert={cert} key={cert.id} />
             </Grid>
           );
         })}

@@ -44,6 +44,16 @@ const App = () => {
   //         regNum: carData.regNum,
   //         owner: getDocID(carData.owner),
   //       });
+
+  //       const ownerDoc = await getDoc(carData.owner);
+  //       const ownerData = ownerDoc.data();
+  //       await dexieDB.table("owner").put({
+  //         id: ownerDoc.id,
+  //         name: ownerData.name,
+  //         address: ownerData.address,
+  //         telephone: ownerData.telephone,
+  //         type: ownerData.type,
+  //       });
   //     });
   //   });
 

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Stack,Grid } from "@mui/material";
+import { Stack, Grid } from "@mui/material";
 import LockIcon from "@mui/icons-material/Lock";
 import PhoneIcon from "@mui/icons-material/Phone";
 import BusinessIcon from "@mui/icons-material/Business";
@@ -13,12 +13,7 @@ import ButtonNina from "./ButtonNina/ButtonNina";
 
 export default function CreateAccForm({ formFields, handleChange }) {
   return (
-    <Grid
-      container
-      sx={{
-        height: "90%",
-      }}
-    >
+    <Grid container sx={{ height: "90%" }}>
       <Grid
         item
         xs={6}
@@ -98,12 +93,12 @@ export default function CreateAccForm({ formFields, handleChange }) {
           }}
         >
           <FormInputHQ
-            label="Gmail"
+            label="Email"
             type="text"
             required
             onChange={handleChange}
-            name="gmail"
-            value={formFields.gmail}
+            name="email"
+            value={formFields.email}
             icon=<EmailIcon />
           />
           <FormInputHQ
@@ -125,7 +120,7 @@ export default function CreateAccForm({ formFields, handleChange }) {
             icon=<BusinessIcon />
           />
         </Stack>
-        <ButtonNina/>
+        <ButtonNina />
       </Grid>
     </Grid>
   );

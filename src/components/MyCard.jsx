@@ -1,24 +1,16 @@
 import { useContext } from "react";
 
-import {
-  Button,
-  Typography,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Card,
-  Box,
-} from "@mui/material";
+import { Button, Typography, CardMedia, CardContent, CardActions, Card, Box } from "@mui/material";
 
 import { FormContext } from "../contexts/FormContext";
 
-const MyCard = ({ car }) => {
-  const { id, name, expirationDate, numberPlate } = car;
+const MyCard = ({ cert }) => {
+  const { name, expiredDate, licensePlate } = cert;
 
   const { autoCompleteNameAndNumberPlate } = useContext(FormContext);
 
   const onClickHandler = () => {
-    autoCompleteNameAndNumberPlate(name, numberPlate);
+    autoCompleteNameAndNumberPlate(name, licensePlate);
   };
 
   return (
@@ -55,7 +47,7 @@ const MyCard = ({ car }) => {
               fontWeight: "bold",
             }}
           >
-            {car.numberPlate}
+            {licensePlate}
           </Typography>
           <Box
             sx={{
@@ -80,7 +72,7 @@ const MyCard = ({ car }) => {
                 fontSize: "1rem",
               }}
             >
-              {expirationDate}
+              {expiredDate}
             </Typography>
           </Box>
           <CardActions

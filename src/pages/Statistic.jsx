@@ -235,7 +235,7 @@ const Statistic = () => {
                 year={897}
               />
               <StatisticBox
-                title={"Số lượng xe hết hạn đăng kiểm"}
+                title={"Lượng xe hết hạn đăng kiểm"}
                 month={123}
                 quarter={222}
                 year={897}

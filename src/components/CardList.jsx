@@ -24,8 +24,8 @@ const CartList = ({ filterList }) => {
               lg={4}
               height={{
                 xs: "80%",
-                sm: "75%",
-                md: "75%",
+                sm: "55%",
+                md: "60%",
                 lg: "50%",
               }}
               key={cert.id}

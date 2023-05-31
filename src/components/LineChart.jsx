@@ -52,7 +52,6 @@ function LineChart({ viewOption, data }) {
       },
       title: {
         display: false,
-        text: "Dự đoán số lượng đăng kiểm trong tháng tới",
       },
     },
   };
@@ -60,7 +59,7 @@ function LineChart({ viewOption, data }) {
     labels,
     datasets: [
       {
-        label: "Blable",
+        label: "Số lượng",
         data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
         borderColor: "#00ADB5",
         backgroundColor: "#14b0b9",

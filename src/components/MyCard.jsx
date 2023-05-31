@@ -20,6 +20,7 @@ const MyCard = ({ cert }) => {
           height: "100%",
           borderRadius: "6%",
           border: "1.5px solid var(--border-color)",
+          boxShadow: "none",
         }}
       >
         <CardMedia
@@ -48,7 +49,6 @@ const MyCard = ({ cert }) => {
               fontWeight: "bold",
               fontFamily: "var(--font-roboto)",
               color: "var(--title-color)",
-              whiteSpace: "nowrap",
             }}
           >
             {licensePlate}
@@ -58,7 +58,7 @@ const MyCard = ({ cert }) => {
               display: "flex",
               flexDirection: "column",
               justifyContent: "center",
-              alignItems: "flex-start",
+              alignItems: { xs: "center", sm: "center", md: "flex-start" },
               overflowX: "hidden",
             }}
           >
@@ -69,6 +69,7 @@ const MyCard = ({ cert }) => {
                 fontSize: "1rem",
                 fontFamily: "var(--font-inter)",
                 color: "var(--font2-color)",
+                whiteSpace: "nowrap",
               }}
             >
               {name}
@@ -87,7 +88,7 @@ const MyCard = ({ cert }) => {
           <CardActions
             sx={{
               display: "flex",
-              justifyContent: "flex-end",
+              justifyContent: { xs: "center", sm: "center" },
               alignItems: "center",
               pr: 0,
               width: "100%",
@@ -105,10 +106,10 @@ const MyCard = ({ cert }) => {
                 border: "1.5px solid var(--border-color)",
                 fontSize: "0.8em",
                 fontFamily: "var(--font-raleway)",
-                width: "60%",
+                width: {xs: "80%", sm: "100%", md: "100%", lg: "80%"},
                 height: "100%",
                 color: "var(--title-color)",
-                transition: "all 0.3s",
+                transition: "all 0.4s",
                 "&:hover": {
                   backgroundColor: "var(--border-color)",
                   color: "var(--primary-color)",

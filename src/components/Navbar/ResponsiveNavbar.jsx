@@ -18,6 +18,7 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { Link } from "react-router-dom";
+import { user } from "../../database/cache";
 
 import items from "./ItemInfor";
 import UserInfo from "../UserInfo";
@@ -108,7 +109,7 @@ function ResponsiveDrawer(props) {
             <ListItemIcon>
               <Avatar>H</Avatar>
             </ListItemIcon>
-            <ListItemText primary={"Logout"} sx={{ color: "#757575" }} />
+            <ListItemText primary={user.id} sx={{ color: "var(--title-color)", fontWeight: "bold" }} />
           </ListItemButton>
           <UserInfo open={userInfoOpen} close={popDownUserInfo} />
         </ListItem>
@@ -130,7 +131,7 @@ function ResponsiveDrawer(props) {
           ml: { md: `${open ? drawerWidth : nonDrawerWidth}px` },
           bgcolor: "var(--border-color)",
           boxShadow: "none",
-          color: "black",
+          color: "var(--secondary-color)",
         }}
       >
         <Toolbar

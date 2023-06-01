@@ -247,9 +247,9 @@ const Statistic = () => {
           item
           justifyContent="center"
           height={{
-            xs: "70%",
-            sm: "80%",
-            md: "90%",
+            xs: "100%",
+            sm: "100%",
+            md: "100%",
             lg: "100%",
           }}
           lg={4}
@@ -275,6 +275,7 @@ const Statistic = () => {
                 p: 0.5,
                 mb: "var(--padding-item)",
                 width: 0.7,
+                // height: "10%",
               }}
             >
               <ToggleSwitch

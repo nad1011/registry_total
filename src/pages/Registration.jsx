@@ -37,10 +37,10 @@ const StyledButton = styled("button")({
     zIndex: 10,
   },
   "& span:last-child": {
+    fontSize: "0.7em",
     color: "white",
     display: "block",
     position: "absolute",
-    fontSize: "0.9em",
     bottom: 0,
     transition: "all 300ms cubic-bezier(0.48, 0, 0.12, 1)",
     zIndex: 100,
@@ -212,44 +212,34 @@ const Registration = () => {
                   borderTopRightRadius: 15,
                 }}
               > */}
-              <StyledButton onClick={toPrevChunk} >
+              <StyledButton onClick={toPrevChunk}>
                 <span>
-                  <ArrowLeft fontSize="large" sx={{
-                    height: "100%",
-                  }}/>
+                  <ArrowLeft
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  />
                 </span>
                 <span>BACK</span>
               </StyledButton>
               <StyledButton onClick={toNextChunk}>
                 <span>
-                  <ArrowRight fontSize="large" 
-                  sx={{
-                    height: "100%",
-                  }}/>
+                  <ArrowRight
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      // fontSize: {
+                      //   xs: "10",
+                      //   sm: "10",
+                      //   md: "30",
+                      //   lg: "30",
+                      // }
+                    }}
+                  />
                 </span>
                 <span>NEXT</span>
               </StyledButton>
-              {/* <IconButton
-                  onClick={toPrevChunk}
-                  sx={{
-                    backgroundColor: "var(--secondary-color)",
-                    ":hover": { backgroundColor: "var(--border-color)" },
-                  }}
-                  size="small"
-                >
-                  <ArrowLeft fontSize="large" />
-                </IconButton>
-                <IconButton
-                  onClick={toNextChunk}
-                  sx={{
-                    backgroundColor: "var(--secondary-color)",
-                    ":hover": { backgroundColor: "var(--border-color)" },
-                  }}
-                  size="small"
-                >
-                  <ArrowRight fontSize="large" />
-                </IconButton> */}
-              {/* </Stack> */}
             </Stack>
           </Stack>
           <Box

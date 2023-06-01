@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Raleway&family=Roboto:wght@400&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@600&display=swap');
 :root {
   --secondary-color: #ffffff;
   --primary-color: #efeeee;
@@ -28,7 +28,8 @@ body {
 }
 
 *::-webkit-scrollbar {
-  width: 10px;
+  max-width: 10px;
+  max-height: 10px;
 }
 
 *::-webkit-scrollbar-track {
@@ -37,7 +38,7 @@ body {
 }
 
 *::-webkit-scrollbar-thumb {
-  background-color: #808080;
+  background-color: #569DAA;
   border-radius: 10px;
   border: 3px solid #ffffff;
 }

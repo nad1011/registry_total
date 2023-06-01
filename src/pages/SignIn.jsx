@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { fireAuth } from "../database/firebase";
 import { user } from "../database/cache";
+import { styled } from "@mui/material/styles";
+import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
 import {
   Box,
@@ -16,7 +18,66 @@ import {
 } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
-import backgroundImage from "../assets/images/test2.jpg";
+import backgroundImage from "../assets/images/WVntmOE.jpg";
+
+const CustomTextField1 = styled(TextField)(({ theme }) => ({
+  position: "relative",
+  width: "100%",
+  marginTop: "20px",
+  marginBottom: "20px",
+  "& .MuiInputBase-input": {
+    position: "relative",
+    width: "100%",
+    padding: "10px 5px",
+    background: "transparent",
+    outline: "none",
+    boxShadow: "none",
+    border: "none",
+    color: "#569DAA",
+    fontSize: "1em",
+    letterSpacing: "0.05em",
+    transition: "0.5s",
+    zIndex: 10,
+  },
+  "& .MuiInputLabel-root": {
+    color: "var(--title-color)",
+    fontWeight: "bold",
+    position: "absolute",
+    left: 0,
+    // padding: "20px 10px 10px",
+    fontSize: "1em",
+    fontFamily: "prompt",
+    letterSpacing: "0.05em",
+    transition: "0.5s",
+    pointerEvents: "none",
+  },
+  "&.Mui-focused .MuiInputLabel-root": {
+    color: "var(--title-color) !important", // update label color when focused
+  },
+  "& .MuiInputLabel-shrink": {
+    transform: "translateY(-20px)",
+    fontSize: "0.8em",
+  },
+  "& .MuiInputBase-root::after": {
+    position: "absolute",
+    left: 0,
+    bottom: 0,
+    width: "100%",
+    height: "2px",
+    background: "#B9EDDD",
+    borderRadius: "4px",
+    transition: "0.5s",
+    pointerEvents: "none",
+    zIndex: 9,
+    content: '""',
+  },
+  "& .MuiInputLabel-shrink + .MuiInputBase-root::after": {
+    height: "100%",
+  },
+  "& .MuiOutlinedInput-notchedOutline": {
+    border: "none",
+  },
+}));
 
 const SignIn = ({ transfer }) => {
   useEffect(() => {
@@ -26,9 +87,13 @@ const SignIn = ({ transfer }) => {
 
   const [input, setInput] = useState({ email: "", password: "" });
   const [emailError, setEmailError] = useState({ state: false, message: "" });
-  const [passwordError, setPasswordError] = useState({ state: false, message: "" });
+  const [passwordError, setPasswordError] = useState({
+    state: false,
+    message: "",
+  });
 
-  const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
+  const handleInput = (e) =>
+    setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSignIn = () => {
     setEmailError({ state: false, message: "" });
@@ -105,18 +170,20 @@ const SignIn = ({ transfer }) => {
           alignItems={"center"}
         >
           <Grid item xs={0} lg={6} sx={{ height: "100%" }}>
-            <Stack sx={{ height: "100%", p: 10 }}>
+            <Stack sx={{ height: "100%", p: { xs: 3, sm: 4, md: 6, lg: 10 } }}>
               <Box sx={{ height: "50%" }}>
                 <Typography
                   variant="h4"
                   gutterBottom
                   sx={{
-                    color: "var(--avatar-color)",
+                    textShadow: "0 0 8px rgba(1,173,181, 0.8)",
+                    color: "var(--title-color)",
                     fontWeight: "bold",
-                    fontFamily: "Roboto Mono",
+                    fontFamily: "Prompt",
+                    fontSize: 50,
                   }}
                 >
-                  Registry Total
+                  REGISTRY TOTAL
                 </Typography>
               </Box>
               <Box sx={{ height: "50%" }}>
@@ -124,7 +191,7 @@ const SignIn = ({ transfer }) => {
                   variant="h3"
                   sx={{
                     color: "var(--primary-color)",
-                    fontFamily: "roboto mono",
+                    fontFamily: "var(--font-raleway)",
                     fontWeight: "bold",
                   }}
                 >
@@ -134,18 +201,22 @@ const SignIn = ({ transfer }) => {
                   variant="h3"
                   sx={{
                     color: "var(--primary-color)",
-                    fontFamily: "roboto mono",
+                    fontFamily: "var(--font-raleway)",
                     fontWeight: "bold",
                   }}
                 >
-                  To Bla Ble!
+                  To Registry Total !
                 </Typography>
                 <Typography
                   variant="p"
-                  sx={{ color: "var(--primary-color)", fontFamily: "poppins" }}
+                  sx={{
+                    color: "var(--primary-color)",
+                    fontFamily: "var(--font-roboto)",
+                    fontSize: 16,
+                  }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, molestias
-                  possimus quod, autem.
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+                  Magnam, molestias possimus quod, autem.
                 </Typography>
               </Box>
             </Stack>
@@ -164,23 +235,30 @@ const SignIn = ({ transfer }) => {
               <Typography
                 variant="h4"
                 sx={{
-                  color: "var(--avatar-color)",
-                  fontFamily: "roboto mono",
+                  textShadow: {
+                    xs: "0 0 8px rgba(1,173,181, 0.8)",
+                    lg: "0 0 8px rgba(255, 255, 255, 0.8)",
+                  },
+                  color: { xs: "#569DAA", lg: "var(--secondary-color)" },
+                  fontFamily: "Prompt",
                   fontWeight: "bold",
                 }}
               >
                 Sign in
               </Typography>
-              <TextField
+              <CustomTextField1
                 required
                 name="email"
                 label="Email"
-                variant="standard"
-                sx={{ width: 1, my: 2, fontFamily: "poppins" }}
                 InputProps={{
                   endAdornment: (
-                    <InputAdornment position="end">
-                      <MdPermIdentity size={24} />
+                    <InputAdornment
+                      position="end"
+                      sx={{
+                        zIndex: 10,
+                      }}
+                    >
+                      <MdPermIdentity size={24} color="var(--title-color)" />
                     </InputAdornment>
                   ),
                 }}
@@ -188,19 +266,34 @@ const SignIn = ({ transfer }) => {
                 error={emailError.state}
                 helperText={emailError.message}
               />
-              <TextField
-                required
+              <CustomTextField1
                 type="password"
                 name="password"
                 label="Password"
-                variant="standard"
-                sx={{ width: 1, my: 2, fontFamily: "poppins" }}
+                required
                 InputProps={{
+                  classes: {
+                    input: "MuiInputBase-input",
+                  },
                   endAdornment: (
-                    <InputAdornment position="end">
-                      <RiLockPasswordFill size={24} />
+                    <InputAdornment
+                      position="end"
+                      sx={{
+                        zIndex: 10,
+                      }}
+                    >
+                      <RiLockPasswordFill
+                        size={24}
+                        color="var(--title-color)"
+                      />
                     </InputAdornment>
                   ),
+                }}
+                InputLabelProps={{
+                  classes: {
+                    root: "MuiInputLabel-root",
+                    shrink: "MuiInputLabel-shrink",
+                  },
                 }}
                 onChange={handleInput}
                 error={passwordError.state}
@@ -209,14 +302,17 @@ const SignIn = ({ transfer }) => {
               <Link
                 href=""
                 sx={{
+                  // width: 0.8,
+                  height: 0.1,
                   alignSelf: "flex-end",
                   mt: 1,
-                  fontFamily: "poppins",
+                  fontFamily: "var(--font-roboto)",
                   fontWeight: "bold",
                   fontSize: 14,
-                  color: "var(--primary-color)",
+                  color: { xs: "#569DAA", lg: "var(--primary-color)" },
                   textDecoration: "none",
-                  ":hover": { color: "var(--border-color)" },
+                  transition: "0.5s",
+                  ":hover": { color: "#B9EDDD", fontSize: 16 },
                 }}
               >
                 Forget password
@@ -226,13 +322,16 @@ const SignIn = ({ transfer }) => {
                   width: 0.8,
                   height: 50,
                   mt: 2,
-                  backgroundColor: "var(--avatar-color)",
-                  color: "whitesmoke",
+                  backgroundColor: "#569DAA",
+                  fontSize: "1em",
+                  borderRadius: 5,
+                  color: "white",
                   fontWeight: "bold",
-                  fontFamily: "poppins",
+                  fontFamily: "prompt",
+                  transition: "0.3s",
                   "&:hover": {
                     backgroundColor: "var(--border-color)",
-                    color: "var(--avatar-color)",
+                    fontSize: "1.2em",
                   },
                 }}
                 onClick={handleSignIn}

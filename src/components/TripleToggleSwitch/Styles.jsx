@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Switch = styled.div`
   font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
   position: relative;
-  height: 100%;
+  height: 30px;
   width: 100%;
   background-color: var(--secondary-color);
   border-radius: 5px;

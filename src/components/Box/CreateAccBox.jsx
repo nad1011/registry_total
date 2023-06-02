@@ -23,11 +23,7 @@ const CreateAccBox = () => {
 
   const submitHandle = (event) => {
     event.preventDefault();
-    //
-    //
     // task here
-    //
-    //
   };
 
   return (

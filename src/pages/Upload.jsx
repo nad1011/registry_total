@@ -11,11 +11,7 @@ const Upload = () => {
   };
 
   const handleUpload = () => {
-    //
-    //
     // task here
-    //
-    //
   };
 
   return (

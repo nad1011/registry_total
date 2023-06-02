@@ -1,17 +1,11 @@
 import "./ButtonNina.css";
 
-export default function ButtonNina() {
+const ButtonNina = ({ onClick }) => {
   return (
     <button
       className="button button--nina button--text-thick button--text-upper button--size-s"
       data-text="Upload"
-      onClick={() => {
-        //
-        //
-        // task here
-        //
-        //
-      }}
+      onClick={onClick}
     >
       <span>U</span>
       <span>p</span>
@@ -21,4 +15,5 @@ export default function ButtonNina() {
       <span>d</span>
     </button>
   );
-}
+};
+export default ButtonNina;

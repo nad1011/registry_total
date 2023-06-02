@@ -1,18 +1,17 @@
-import React, { useRef, useState } from "react";
-import PropTypes from "prop-types";
+import React, { useEffect, useRef, useState } from "react";
+
+import { Box, Grid, Stack, Typography, IconButton } from "@mui/material";
 import Image from "mui-image";
-import { Box, Grid, Stack, Typography } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
 
 import { ImageConfig } from "../ImageConfig";
 import ButtonNina from "./ButtonNina/ButtonNina";
 
-const DropFileInput = (props) => {
-  const wrapperRef = useRef(null);
-
+const DropFileInput = ({ onFileListChange }) => {
   const [fileList, setFileList] = useState([]);
+
+  const wrapperRef = useRef(null);
 
   const onDragEnter = () => wrapperRef.current.classList.add("dragover");
 
@@ -20,21 +19,17 @@ const DropFileInput = (props) => {
 
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
-  const onFileDrop = (e) => {
-    const newFile = e.target.files[0];
-    if (newFile) {
-      const updatedList = [...fileList, newFile];
-      setFileList(updatedList);
-      props.onFileChange(updatedList);
-    }
+  const addFile = (file) => setFileList([...fileList, file]);
+
+  const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
+
+  const handleUpload = () => {
+    //task here
   };
 
-  const fileRemove = (file) => {
-    const updatedList = [...fileList];
-    updatedList.splice(fileList.indexOf(file), 1);
-    setFileList(updatedList);
-    props.onFileChange(updatedList);
-  };
+  useEffect(() => {
+    onFileListChange(fileList);
+  }, [fileList]);
 
   return (
     <Grid
@@ -56,12 +51,20 @@ const DropFileInput = (props) => {
         alignItems: "center",
       }}
     >
-      <Grid container item xs={3} sm={5} md={3.5}  lg={4} height={{
-        xs: "30%",
-        sm: "35%",
-        md: "100%",
-        lg: "100%",
-      }}>
+      <Grid
+        container
+        item
+        xs={3}
+        sm={5}
+        md={3.5}
+        lg={4}
+        height={{
+          xs: "30%",
+          sm: "35%",
+          md: "100%",
+          lg: "100%",
+        }}
+      >
         <Box
           ref={wrapperRef}
           onDragEnter={onDragEnter}
@@ -91,7 +94,6 @@ const DropFileInput = (props) => {
           <Stack
             spacing={1}
             sx={{
-              // opacity: 0.7,
               display: "flex",
               alignItems: "center",
               justifyContent: "center",
@@ -106,16 +108,21 @@ const DropFileInput = (props) => {
                 fontSize: "80px",
               }}
             />
-            <Typography color="var(--avatar-color)" height="20%" align="center" sx={{
-               fontSize: { xs: 12, sm: 13, md: 14, lg: 15 }
-            }}>
+            <Typography
+              color="var(--avatar-color)"
+              height="20%"
+              align="center"
+              sx={{
+                fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
+              }}
+            >
               Drag & Drop your files here or Click to browse files
             </Typography>
           </Stack>
           <input
             type="file"
             value=""
-            onChange={onFileDrop}
+            onChange={(event) => addFile(event.target.files[0])}
             style={{
               opacity: 0,
               position: "absolute",
@@ -163,20 +170,28 @@ const DropFileInput = (props) => {
             color="var(--avatar-color)"
             align="center"
             sx={{
-              fontSize:  { xs: 12, sm: 13, md: 14, lg: 15 },
+              fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
             }}
           >
             chứa thông tin về các xe mới
           </Typography>
         </Stack>
-        <ButtonNina />
+        <ButtonNina onClick={handleUpload} />
       </Grid>
-      <Grid container item sm={10} md={6.5} lg={6} pt={"var(--padding-item)"} height={{
-        xs: "30%",
-        sm: "65%",
-        md: "100%",
-        lg: "100%",
-      }}>
+      <Grid
+        container
+        item
+        sm={10}
+        md={6.5}
+        lg={6}
+        pt={"var(--padding-item)"}
+        height={{
+          xs: "30%",
+          sm: "65%",
+          md: "100%",
+          lg: "100%",
+        }}
+      >
         <Stack
           direction={"row"}
           spacing={2}
@@ -218,10 +233,7 @@ const DropFileInput = (props) => {
                   >
                     <Image
                       duration={0}
-                      src={
-                        ImageConfig[item.type.split("/")[1]] ||
-                        ImageConfig["default"]
-                      }
+                      src={ImageConfig[item.type.split("/")[1]] || ImageConfig["default"]}
                       height="100%"
                       width="10%"
                       fit="fit"
@@ -238,14 +250,12 @@ const DropFileInput = (props) => {
                       }}
                     >
                       <Box>
+                        <Typography color="var(--avatar-color)">{item.name}</Typography>
                         <Typography color="var(--avatar-color)">
-                          {item.name}
-                        </Typography>
-                        <Typography color="var(--avatar-color)">
-                          {(item.size / (1024 * 1024)).toFixed(2)}MB
+                          {(item.size / 1024 ** 2).toFixed(2)}MB
                         </Typography>
                       </Box>
-                      <IconButton size="small" onClick={() => fileRemove(item)}>
+                      <IconButton size="small" onClick={() => removeFile(item)}>
                         <CloseIcon />
                       </IconButton>
                     </Stack>
@@ -258,10 +268,6 @@ const DropFileInput = (props) => {
       </Grid>
     </Grid>
   );
-};
-
-DropFileInput.propTypes = {
-  onFileChange: PropTypes.func,
 };
 
 export default DropFileInput;

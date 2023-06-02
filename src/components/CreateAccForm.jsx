@@ -16,9 +16,10 @@ export default function CreateAccForm({ formFields, handleChange }) {
     <Grid container sx={{ height: "90%" }}>
       <Grid
         item
-        xs={6}
+        xs={12}
+        md={6}
         sx={{
-          height: "100%",
+          height: { xs: "50%", md: "100%" },
           pr: "calc(var(--padding-item)/2)",
         }}
       >
@@ -28,7 +29,7 @@ export default function CreateAccForm({ formFields, handleChange }) {
             p: "var(--padding-item)",
             py: 0,
             borderRadius: "20px",
-            height: "100%",
+            height:"100%",
           }}
         >
           <FormInputHQ
@@ -71,10 +72,11 @@ export default function CreateAccForm({ formFields, handleChange }) {
       </Grid>
       <Grid
         item
-        xs={6}
+        xs={12}
+        md={6}
         sx={{
           pl: "calc(var(--padding-item)/2)",
-          height: "100%",
+          height: { xs: "50%", md: "100%" },
           display: "flex",
           flexDirection: "column",
           justifyContent: "center",
@@ -89,7 +91,7 @@ export default function CreateAccForm({ formFields, handleChange }) {
             py: 0,
             borderRadius: "20px",
             height: "75.65%",
-            mb: "var(--padding-item)",
+            mb: {xs:0, md:"var(--padding-item)"},
           }}
         >
           <FormInputHQ
@@ -120,7 +122,7 @@ export default function CreateAccForm({ formFields, handleChange }) {
             icon=<BusinessIcon />
           />
         </Stack>
-        <ButtonNina />
+        <ButtonNina content="Tạo mới"/>
       </Grid>
     </Grid>
   );

@@ -46,8 +46,12 @@ export default function SplitButton({ options, onSelect }) {
         aria-label="split button"
         sx={{
           width: "100%",
+          height: "100%",
+          boxShadow: "none",
           // p: "var(--padding-item)",
-          mb: "var(--padding-item)",
+          // mb: "var(--padding-item)",
+          pl: "calc(var(--padding-item))",
+          pb: "var(--padding-item)",
         }}
       >
         <Box
@@ -68,8 +72,12 @@ export default function SplitButton({ options, onSelect }) {
         <Button
           sx={{
             width: "20%",
-            bgcolor: "#fff",
-            color: "#000",
+            bgcolor: "var(--background-color)",
+            color: "var(--font1-color)",
+            "&:hover": {
+              bgcolor: "#B9EDDD",
+              color: "var(--title-color)",
+            }
           }}
           size="small"
           aria-controls={open ? "split-button-menu" : undefined}

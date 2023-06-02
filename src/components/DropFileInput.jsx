@@ -41,27 +41,32 @@ const DropFileInput = (props) => {
       container
       mb={2}
       height={{
-        xs: "auto",
+        xs: "60%",
         sm: "60%",
         md: "40%",
-        lg: "40%",
       }}
       backgroundColor={"#fff"}
       p={"var(--padding-item)"}
       sx={{
         borderRadius: "20px",
-        boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
+        // boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Grid container item xs={3} sm={5} md={3.5}  lg={4} height={{
-        xs: "30%",
-        sm: "35%",
-        md: "100%",
-        lg: "100%",
-      }}>
+      <Grid
+        container
+        item
+        xs={6}
+        md={3}
+        lg={4}
+        height={{
+          xs: "50%",
+          sm: "50%",
+          md: "100%",
+        }}
+      >
         <Box
           ref={wrapperRef}
           onDragEnter={onDragEnter}
@@ -72,7 +77,7 @@ const DropFileInput = (props) => {
             position: "relative",
             width: "100%",
             height: "100%",
-            border: "2px dashed #4267b2",
+            border: "2px dashed #569DAA",
             borderRadius: "20px",
             display: "flex",
             alignItems: "center",
@@ -102,13 +107,18 @@ const DropFileInput = (props) => {
           >
             <FileUploadOutlinedIcon
               sx={{
-                color: "#4267b2",
+                color: "#569DAA",
                 fontSize: "80px",
               }}
             />
-            <Typography color="var(--avatar-color)" height="20%" align="center" sx={{
-               fontSize: { xs: 12, sm: 13, md: 14, lg: 15 }
-            }}>
+            <Typography
+              color="var(--avatar-color)"
+              height="20%"
+              align="center"
+              sx={{
+                fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
+              }}
+            >
               Drag & Drop your files here or Click to browse files
             </Typography>
           </Stack>
@@ -131,15 +141,14 @@ const DropFileInput = (props) => {
       <Grid
         container
         item
-        xs={2}
+        xs={5}
         sm={4}
-        md={2}
+        md={3}
         lg={2}
         height={{
-          xs: "30%",
-          sm: "35%",
+          xs: "45%",
+          sm: "45%",
           md: "100%",
-          lg: "100%",
         }}
         sx={{
           display: "flex",
@@ -148,12 +157,18 @@ const DropFileInput = (props) => {
           p: "var(--padding-item)",
         }}
       >
-        <Stack height={0.2}>
+        <Stack
+          height={{
+            xs: "50%",
+            md: "20%",
+          }}
+        >
           <Typography
-            color="#4267b2"
+            color="#569DAA"
             align="center"
             sx={{
               fontSize: { xs: 12, sm: 13, md: 17, lg: 22 },
+              fontFamily: "var(--font-raleway)",
               fontWeight: "bold",
             }}
           >
@@ -163,20 +178,28 @@ const DropFileInput = (props) => {
             color="var(--avatar-color)"
             align="center"
             sx={{
-              fontSize:  { xs: 12, sm: 13, md: 14, lg: 15 },
+              fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
             }}
           >
             chứa thông tin về các xe mới
           </Typography>
         </Stack>
-        <ButtonNina />
+        <ButtonNina content="Tải lên" />
       </Grid>
-      <Grid container item sm={10} md={6.5} lg={6} pt={"var(--padding-item)"} height={{
-        xs: "30%",
-        sm: "65%",
-        md: "100%",
-        lg: "100%",
-      }}>
+      <Grid
+        container
+        item
+        sm={10}
+        md={6}
+        lg={6}
+        pt={"var(--padding-item)"}
+        height={{
+          xs: "50%",
+          sm: "50%",
+          md: "100%",
+          lg: "100%",
+        }}
+      >
         <Stack
           direction={"row"}
           spacing={2}
@@ -195,7 +218,7 @@ const DropFileInput = (props) => {
               bgcolor: "#f5f8ff",
               borderRadius: "20px",
               overflowY: "auto",
-              border: "2px solid #4267b2",
+              border: "2px solid #569DAA",
               p: "var(--padding-item)",
             }}
           >
@@ -210,9 +233,10 @@ const DropFileInput = (props) => {
                       width: "100%",
                       position: "relative",
                       display: "flex",
-                      backgroundColor: "#dce6fc",
+                      border: "1.5px solid var(--border-color)",
+                      backgroundColor: "#fff",
                       p: "calc(var(--padding-item)/2)",
-                      borderRadius: "20px",
+                      borderRadius: "15px",
                       mb: "var(--padding-item)",
                     }}
                   >
@@ -238,10 +262,23 @@ const DropFileInput = (props) => {
                       }}
                     >
                       <Box>
-                        <Typography color="var(--avatar-color)">
+                        <Typography
+                          sx={{
+                            fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
+                            fontFamily: "var(--font-inter)",
+                            fontWeight: "bold",
+                            color: "var(--title-color)"
+                          }}
+                        >
                           {item.name}
                         </Typography>
-                        <Typography color="var(--avatar-color)">
+                        <Typography
+                          color="var(--avatar-color)"
+                          sx={{
+                            fontSize: { xs: 12, sm: 13, md: 14, lg: 15 },
+                            fontFamily: "var(--font-inter)",
+                          }}
+                        >
                           {(item.size / (1024 * 1024)).toFixed(2)}MB
                         </Typography>
                       </Box>

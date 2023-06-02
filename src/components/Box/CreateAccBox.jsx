@@ -33,7 +33,7 @@ const CreateAccBox = () => {
   return (
     <Box
       sx={{
-        height: { sm: "40%", md: "60%" },
+        height: { xs: "100%", md: "60%" },
         pb: "var(--padding-item)",
       }}
     >
@@ -53,9 +53,11 @@ const CreateAccBox = () => {
           align="center"
           sx={{
             width: "100%",
-            color: "#4267b2",
+            color: "var(--title-color)",
+            fontFamily: "var(--font-raleway)",
             fontSize: "25px",
             fontWeight: "bold",
+            textShadow: "0px 4px 10px rgba(86, 157, 170, 0.5)",
           }}
           mb={"var(--padding-item)"}
         >

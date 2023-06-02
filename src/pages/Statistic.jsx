@@ -270,12 +270,12 @@ const Statistic = () => {
           >
             <Box
               sx={{
-                bgcolor: "var(--secondary-color)",
+                // bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 p: 0.5,
-                mb: "var(--padding-item)",
+                pb: "var(--padding-item)",
                 width: 0.7,
-                // height: "10%",
+                height: "8.5%",
               }}
             >
               <ToggleSwitch

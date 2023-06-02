@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const Switch = styled.div`
   font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
   position: relative;
-  height: 30px;
+  height: 100%;
   width: 100%;
   background-color: var(--secondary-color);
   border-radius: 5px;
@@ -31,7 +31,7 @@ export const SwitchLabel = styled.label`
   z-index: 2;
   float: left;
   width: 33.33333333333333%;
-  line-height: 200%;
+  line-height: 235%;
   font-family: "Inter";
   font-size: 15px;
   color: rgba(0, 0, 0, 0.6);

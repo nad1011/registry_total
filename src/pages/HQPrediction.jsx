@@ -6,6 +6,7 @@ import Page from "../components/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import {LineChart} from "../components/PredictLineChart";
 import PredictBox from "../components/Box/PredictBox";
+import SlideShow from "../components/SlideShow";
 
 const Prediction = () => {
   const linearRegression = (data) => {
@@ -156,17 +157,7 @@ const Prediction = () => {
               color: "#051c33",
             }}
           >
-            <Typography
-              variant="body1"
-              fontFamily={"inter"}
-              sx={{ fontSize: { xs: 11, sm: 13, md: 16, lg: 18 } }}
-            >
-              Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
-              hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính
-              vì vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục tăng và có thể trở
-              thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
-              quan.
-            </Typography>
+            <SlideShow/>
           </Box>
         </Grid>
       </Grid>

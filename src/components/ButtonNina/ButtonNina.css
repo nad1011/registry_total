@@ -47,6 +47,7 @@
 .button--nina > span {
   opacity: 0;
   display: inline-block;
+  min-width: 2px;
   padding: 1em 0;
   color: #fff;
   -webkit-transform: translate3d(0, -10px, 0);

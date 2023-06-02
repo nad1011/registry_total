@@ -1,10 +1,10 @@
 import "./ButtonNina.css";
 
-export default function ButtonNina() {
+export default function ButtonNina({ content }) {
   return (
     <button
       className="button button--nina button--text-thick button--text-upper button--size-s"
-      data-text="Upload"
+      data-text={content}
       onClick={() => {
         //
         //
@@ -13,12 +13,15 @@ export default function ButtonNina() {
         //
       }}
     >
-      <span>U</span>
+      {content &&
+        content.split("").map((char, index) => <span key={index}>{char}</span>)}
+      {/* <span>U</span>
       <span>p</span>
+      <span>&nbsp;</span>
       <span>l</span>
       <span>o</span>
       <span>a</span>
-      <span>d</span>
+      <span>d</span> */}
     </button>
   );
 }

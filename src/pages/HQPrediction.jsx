@@ -2,13 +2,18 @@ import React from "react";
 
 import { Grid, Box, Stack, Typography, Slide } from "@mui/material";
 
+import { useLiveQuery } from "dexie-react-hooks";
+import { dexieDB } from "../database/cache";
+
 import Page from "../components/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import { LineChart } from "../components/PredictLineChart";
 import PredictBox from "../components/Box/PredictBox";
-import SlideShow from "../components/SlideShow";
+import NewDropdown from "../components/PredictDropdown";
 
 const Prediction = () => {
+  const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
+
   const linearRegression = (data) => {
     let sum_x = 0;
     let sum_y = 0;
@@ -97,8 +102,46 @@ const Prediction = () => {
             xs: 0,
             lg: "var(--padding-item)",
           }}
-          pb={"calc(var(--padding-item)*3)"}
+          pb={"calc(var(--padding-item)*2)"}
         >
+          <Stack
+            direction={"row"}
+            sx={{
+              width: 1,
+              height: { xs: "10%", sm: "10%", md: "10%", lg: "10%" },
+            }}
+          >
+            <Typography
+              sx={{
+                width: "40%",
+                height: "100%",
+                fontSize: { xs: "1.2rem", sm: "1.2rem", md: "1.2rem", lg: "1.5rem" },
+                fontWeight: "bold",
+                fontFamily: "var(--font-inter)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                pb: "var(--padding-item)",
+                color: "#569DAA",
+                textShadow: "0 0 1em rgba(86, 157, 170, 0.8)",
+              }}
+            >
+              Lựa chọn khu vực
+            </Typography>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                borderRadius: 2,
+                width: "60%",
+                height: "100%",
+                color: "#051c33",
+              }}
+            >
+              <NewDropdown options={center?.codes ?? []} />
+            </Box>
+          </Stack>
           <Box
             sx={{
               bgcolor: "var(--secondary-color)",
@@ -106,7 +149,7 @@ const Prediction = () => {
               pl: 1,
               pr: 1,
               width: 1,
-              height: { xs: "55%", sm: "60%", md: "60%", lg: "60%" },
+              height: { xs: "55%", sm: "60%", md: "60%", lg: "70%" },
               color: "#051c33",
             }}
           >
@@ -120,7 +163,7 @@ const Prediction = () => {
               // px: 1,
               mt: "var(--padding-item)",
               width: 1,
-              height: { xs: "25%", sm: "20%", md: "20%", lg: "20%" },
+              height: { xs: "30%", sm: "30%", md: "30%", lg: "20%" },
             }}
           >
             <Grid container item xs={4} pr={1}>
@@ -133,24 +176,6 @@ const Prediction = () => {
               <PredictBox head={"Năm"} value={256} percent={+5.0} />
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              bgcolor: "var(--secondary-color)",
-
-              borderRadius: 2,
-              pl: 1,
-              pr: 1,
-              width: 1,
-              mt: "var(--padding-item)",
-              height: 0.2,
-              color: "#051c33",
-            }}
-          >
-            <SlideShow />
-          </Box>
         </Grid>
       </Grid>
     </Page>

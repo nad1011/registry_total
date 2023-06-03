@@ -14,18 +14,18 @@
     height: 100%;
     border: none;
     border-radius: 10px;
-    border: 1px solid grey;
+    border: 1.5px solid var(--border-color);
 }
 .form-input:focus {
     outline: none;
-    border: 1px solid rgb(64, 64, 64);
+    border: 1.5px solid var(--border-color);
 }
 .form-input:focus ~ .form-input-label {
     left: 50%;
     transform: translateX(-50%);
     font-size: 16px;
     font-weight: bold;
-    color: rgb(0, 0, 0);
+    /* color: rgb(0, 0, 0);  */
 }
 .form-input:focus ~ svg{
     font-size: 1.8em;
@@ -36,7 +36,7 @@
     padding: 0 10px;
     font-family: inter;
     background-color: #f5f8ff;
-    color: rgb(0, 0, 0);
+    color: #569DAA;
     font-size: 16px;
     font-weight: normal;
     position: absolute;
@@ -50,7 +50,6 @@
     top: -13px;
     font-size: 12px;
     padding: 0 5px;
-    color: rgb(0, 0, 0);
 }
 
 .form-input label {
@@ -60,7 +59,7 @@
 .input-group svg {
     position: absolute;
     right: 0;
-    color: #2b2b2bd4;
+    color: var(--title-color);
     font-size: 1.4em;
     top: 50%;
     right: 2%;

@@ -5,6 +5,7 @@ import { dexieDB } from "../database/cache";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
 import Dropdown from "../components/Dropdown";
+import NewDropdown from "../components/NewDropdown";
 import StatisticBox from "../components/Box/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
@@ -209,7 +210,7 @@ const HQStatistic = () => {
                       md: "22px",
                       lg: "22px",
                     },
-                    color: "var(--avatar-color)",
+                    color: "var(--title-color)",
                     zIndex: 1,
                   }}
                 >
@@ -280,20 +281,27 @@ const HQStatistic = () => {
             spacing={{ xs: 0, sm: 0 }}
             sx={{
               height: "100%",
+              width: "100%",
               p: "var(--padding-item)",
               pl: { lg: "0", xs: "var(--padding-item)" },
               pt: { lg: "var(--padding-item)", xs: "0" },
             }}
           >
-            <Grid container>
-              <Grid container item xs={7}>
+            {/* <Grid container> */}
+              <Stack direction={"row"} sx={{
+                width: "100%",
+                height: "8.3%",
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "flex-start",
+              }}>
                 <Box
                   sx={{
                     width: 1,
-                    bgcolor: "#fff",
+                    height: 1,
+                    // bgcolor: "#fff",
                     borderRadius: 2,
-                    p: 1,
-                    mb: "var(--padding-item)",
+                    pb: "var(--padding-item)",
                   }}
                 >
                   <ToggleSwitch
@@ -302,12 +310,12 @@ const HQStatistic = () => {
                     onChange={onTimeSwitch}
                   />
                 </Box>
-              </Grid>
-              <Grid container item xs={5}>
-                <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} />
-              </Grid>
-            </Grid>
-
+                {/* <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} /> */}
+                <NewDropdown options={center?.codes ?? []}/>
+              </Stack>
+              {/* <Grid container item xs={5}>
+              </Grid> */}
+            {/* </Grid> */}
             <Table data={tableData} />
           </Stack>
         </Grid>

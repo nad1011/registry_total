@@ -31,7 +31,7 @@ export const SwitchLabel = styled.label`
   z-index: 2;
   float: left;
   width: 33.33333333333333%;
-  line-height: 200%;
+  line-height: 235%;
   font-family: "Inter";
   font-size: 15px;
   color: rgba(0, 0, 0, 0.6);

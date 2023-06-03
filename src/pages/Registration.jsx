@@ -5,12 +5,75 @@ import { useLiveQuery } from "dexie-react-hooks";
 
 import { Grid, IconButton, Box, Stack } from "@mui/material";
 import { ArrowRight, ArrowLeft } from "@mui/icons-material";
+import { styled } from "@mui/material/styles";
 
 import Page from "../components/Page";
 import CartList from "../components/CardList";
 import SearchBox from "../components/Box/SearchBox";
 import RenewBox from "../components/Box/RenewBox";
 import SelectSearch from "../components/SelectSearch";
+
+const StyledButton = styled("button")({
+  position: "relative",
+  overflow: "hidden",
+  border: "1.5px solid var(--border-color)",
+  borderRadius: "20px",
+  width: "50%",
+  height: "60%",
+  color: "var(--border-color)",
+  display: "inline-block",
+  fontSize: "1em",
+  // lineHeight: "10px",
+  // padding: '18px 18px 17px',
+  textDecoration: "none",
+  cursor: "pointer",
+  background: "#fff",
+  userSelect: "none",
+  WebkitUserSelect: "none",
+  touchAction: "manipulation",
+  "& span:first-child": {
+    position: "relative",
+    transition: "color 300ms cubic-bezier(0.48, 0, 0.12, 1)",
+    zIndex: 10,
+  },
+  "& span:last-child": {
+    fontSize: "0.7em",
+    color: "white",
+    display: "block",
+    position: "absolute",
+    bottom: 0,
+    transition: "all 300ms cubic-bezier(0.48, 0, 0.12, 1)",
+    zIndex: 100,
+    opacity: 0,
+    top: "50%",
+    left: "50%",
+    transform: "translateY(225%) translateX(-50%)",
+    height: "14px",
+    lineHeight: "13px",
+  },
+  "&:after": {
+    content: '""',
+    position: "absolute",
+    bottom: "-50%",
+    left: 0,
+    width: "100%",
+    height: "100%",
+    backgroundColor: "var(--background-color)",
+    transformOrigin: "bottom center",
+    transition: "transform 400ms cubic-bezier(0.48, 0, 0.12, 1)",
+    transform: "skewY(9.3deg) scaleY(0)",
+    zIndex: 50,
+  },
+  "&:hover:after": {
+    transformOrigin: "bottom center",
+    transform: "skewY(9.3deg) scaleY(2)",
+  },
+  "&:hover span:last-child": {
+    transform: "translateX(-50%) translateY(-50%)",
+    opacity: 1,
+    transition: "all 500ms cubic-bezier(0.48, 0, 0.12, 1)",
+  },
+});
 
 const paramName = {
   name: "name",
@@ -59,7 +122,9 @@ const Registration = () => {
 
   useEffect(() => {
     setPage(0);
-    const filteredList = expiredList.filter((cert) => cert[param].toUpperCase().includes(query));
+    const filteredList = expiredList.filter((cert) =>
+      cert[param].toUpperCase().includes(query)
+    );
     setPageData(
       Array.from({ length: Math.ceil(filteredList.length / 6) }, (_, i) =>
         filteredList.slice(i * 6, i * 6 + 6)
@@ -70,12 +135,18 @@ const Registration = () => {
   const onQueryChange = (e) => setQuery(e.target.value.toUpperCase());
   const selectParam = (newFilter) => setParam(newFilter);
 
-  const toPrevChunk = () => setPage((page - 1 + pageData.length) % pageData.length);
+  const toPrevChunk = () =>
+    setPage((page - 1 + pageData.length) % pageData.length);
   const toNextChunk = () => setPage((page + 1) % pageData.length);
 
   return (
     <Page>
-      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
+      <Grid
+        container
+        sx={{ height: "100%" }}
+        justifyContent={"flex-start"}
+        alignItems={"center"}
+      >
         <Grid
           item
           xs={12}
@@ -106,9 +177,13 @@ const Registration = () => {
                 lg: 0,
               }}
               alignItems="center"
-              sx={{ height: 1, width: "70%", pb: {
-                xs: "calc(var(--padding-item)/2)",
-              } }}
+              sx={{
+                height: 1,
+                width: "70%",
+                pb: {
+                  xs: "calc(var(--padding-item)/2)",
+                },
+              }}
             >
               <SearchBox
                 placeholder={`Search by ${paramName[param]}`}
@@ -116,8 +191,16 @@ const Registration = () => {
               />
               <SelectSearch transfer={selectParam} />
             </Stack>
-            <Stack direction="row" spacing={1} alignItems="flex-end">
-              <Stack
+            <Stack
+              direction="row"
+              spacing={1}
+              alignItems="center"
+              sx={{
+                width: "20%",
+                height: "100%",
+              }}
+            >
+              {/* <Stack
                 direction="row"
                 spacing={1}
                 alignItems="center"
@@ -128,28 +211,35 @@ const Registration = () => {
                   borderTopLeftRadius: 15,
                   borderTopRightRadius: 15,
                 }}
-              >
-                <IconButton
-                  onClick={toPrevChunk}
-                  sx={{
-                    backgroundColor: "var(--secondary-color)",
-                    ":hover": { backgroundColor: "var(--border-color)" },
-                  }}
-                  size="small"
-                >
-                  <ArrowLeft fontSize="large" />
-                </IconButton>
-                <IconButton
-                  onClick={toNextChunk}
-                  sx={{
-                    backgroundColor: "var(--secondary-color)",
-                    ":hover": { backgroundColor: "var(--border-color)" },
-                  }}
-                  size="small"
-                >
-                  <ArrowRight fontSize="large" />
-                </IconButton>
-              </Stack>
+              > */}
+              <StyledButton onClick={toPrevChunk}>
+                <span>
+                  <ArrowLeft
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                    }}
+                  />
+                </span>
+                <span>BACK</span>
+              </StyledButton>
+              <StyledButton onClick={toNextChunk}>
+                <span>
+                  <ArrowRight
+                    sx={{
+                      height: "100%",
+                      width: "100%",
+                      // fontSize: {
+                      //   xs: "10",
+                      //   sm: "10",
+                      //   md: "30",
+                      //   lg: "30",
+                      // }
+                    }}
+                  />
+                </span>
+                <span>NEXT</span>
+              </StyledButton>
             </Stack>
           </Stack>
           <Box
@@ -164,7 +254,6 @@ const Registration = () => {
               border: "2px solid var(--secondary-color)",
               backgroundColor: "var(--secondary-color)",
               borderRadius: 3,
-              borderTopRightRadius: 0,
             }}
           >
             <CartList filterList={pageData[page] ?? []} />

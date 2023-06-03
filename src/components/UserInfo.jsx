@@ -47,9 +47,12 @@ const UserInfo = ({ open, close }) => {
           component="h2"
           id="modal-title"
           level="h3"
-          textColor="inherit"
-          fontWeight="lg"
           mb={1}
+          sx={{
+            fontFamily: "var(--font-roboto)",
+            fontWeight: "bold",
+            color: "var(--title-color)"
+          }}
         >
           Trung tâm đăng kiểm {user.id}
         </Typography>
@@ -65,27 +68,33 @@ const UserInfo = ({ open, close }) => {
         >
           <Typography
             id="modal-desc"
-            textColor="inherit"
-            fontWeight="lg"
-            fontSize={18}
             startDecorator={<EmailIcon />}
+            sx={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: "bold",
+              color: "var(--font2-color)",
+            }}
           >
             Email: {user.email}
           </Typography>
           <Typography
             id="modal-desc"
-            textColor="inherit"
-            fontWeight="lg"
-            fontSize={18}
+            sx={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: "bold",
+              color: "var(--font2-color)",
+            }}
             startDecorator={<PhoneIcon />}
           >
             Số điện thoại: {user.phone}
           </Typography>
           <Typography
             id="modal-desc"
-            textColor="inherit"
-            fontWeight="lg"
-            fontSize={18}
+            sx={{
+              fontFamily: "var(--font-inter)",
+              fontWeight: "bold",
+              color: "var(--font2-color)",
+            }}
             startDecorator={<BusinessIcon />}
           >
             Địa chỉ: {user.address}
@@ -99,13 +108,16 @@ const UserInfo = ({ open, close }) => {
             <Button
               onClick={() => navigate("/")}
               sx={{
-                backgroundColor: "whitesmoke",
-                color: "black",
+                backgroundColor: "var(--background-color)",
+                border: "1.5px solid var(--background-color)",
+                color: "white",
                 fontWeight: "bold",
-                boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
+                borderRadius: 3,
+                // boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
                 "&:hover": {
-                  backgroundColor: "var(--border-color)",
-                  color: "black",
+                  border: "1.5px solid var(--border-color)",
+                  backgroundColor: "white",
+                  color: "var(--title-color)",
                   // boxShadow: "none",
                 },
               }}

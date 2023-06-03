@@ -4,8 +4,8 @@ import styles from "./FormInput.module.css";
 const FormInput = ({ label, icon, ...otherProps }) => {
   return (
     <Box className={styles["input-group"]}>
-      {icon}
       <input className={styles["form-input"]} {...otherProps} />
+      {icon}
       {label && (
         <label
           className={`${otherProps.value.length ? styles["shrink"] : ""} ${

@@ -4,7 +4,7 @@ import { Grid, Box, Stack, Typography } from "@mui/material";
 
 import Page from "../components/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart";
-import {LineChart} from "../components/PredictLineChart";
+import { LineChart } from "../components/PredictLineChart";
 import PredictBox from "../components/Box/PredictBox";
 
 const Prediction = () => {
@@ -113,7 +113,7 @@ const Prediction = () => {
               pl: 1,
               pr: 1,
               width: 1,
-              height: {xs: "55%", sm: "60%", md: "60%", lg: "60%"},
+              height: { xs: "55%", sm: "60%", md: "60%", lg: "60%" },
               color: "#051c33",
             }}
           >
@@ -158,8 +158,10 @@ const Prediction = () => {
           >
             <Typography
               variant="body1"
-              fontFamily={"inter"}
-              sx={{ fontSize: { xs: 11, sm: 13, md: 16, lg: 18 } }}
+              fontFamily={"var(--font-inter)"}
+              sx={{
+                fontSize: { xs: 11, sm: 13, md: 16, lg: 18 },
+              }}
             >
               Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
               hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính

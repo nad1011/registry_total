@@ -235,7 +235,7 @@ const Statistic = () => {
                 year={897}
               />
               <StatisticBox
-                title={"Số lượng xe hết hạn đăng kiểm"}
+                title={"Lượng xe hết hạn đăng kiểm"}
                 month={123}
                 quarter={222}
                 year={897}
@@ -247,9 +247,9 @@ const Statistic = () => {
           item
           justifyContent="center"
           height={{
-            xs: "70%",
-            sm: "80%",
-            md: "90%",
+            xs: "100%",
+            sm: "100%",
+            md: "100%",
             lg: "100%",
           }}
           lg={4}
@@ -270,11 +270,12 @@ const Statistic = () => {
           >
             <Box
               sx={{
-                bgcolor: "var(--secondary-color)",
+                // bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 p: 0.5,
-                mb: "var(--padding-item)",
+                pb: "var(--padding-item)",
                 width: 0.7,
+                height: "8.5%",
               }}
             >
               <ToggleSwitch

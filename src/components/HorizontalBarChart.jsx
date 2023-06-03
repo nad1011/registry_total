@@ -38,6 +38,12 @@ export default function HorizontalBarChart({ title, tableData }) {
       },
       title: {
         display: true,
+        color: "#00ADB5",
+        fontFamily: "inter",
+        font: {
+          size: 18,
+          family: "inter",
+        },
         text: title,
       },
     },
@@ -62,20 +68,20 @@ export default function HorizontalBarChart({ title, tableData }) {
     datasets: [
       {
         label: "Gần đây",
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        borderColor: "rgb(255, 99, 132)",
-        backgroundColor: "rgba(255, 99, 132, 0.5)",
+        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        borderColor: "transparent",
+        backgroundColor: "#B9EDDD",
       },
       {
         label: "Dự đoán",
-        data: labels.map(() => faker.datatype.number({ min: 0, max: 1000 })),
-        borderColor: "rgb(100, 99, 132)",
-        backgroundColor: "rgba(100, 99, 132, 0.5)",
+        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        borderColor: "transparent",
+        backgroundColor: "#569DAA",
       },
     ],
   };
   return (
-    <Box sx={{ width: {xs: "100%", sm: "50%", md: 1/3 ,lg: "95%"}, height: { xs: "100%", md: "100%", lg: "30%" } }}>
+    <Box sx={{ width: {xs: "100%", sm: "40%", md: 1/2 ,lg: "95%"}, height: { xs: "100%", md: "100%", lg: "33%" } }}>
       <Bar options={options} data={data} />
     </Box>
   );

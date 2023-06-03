@@ -30,11 +30,17 @@ export const options = {
   responsive: true,
   plugins: {
     legend: {
+      display: false,
       position: "top",
     },
     title: {
       display: true,
       text: "Dự đoán số lượng đăng kiểm trong tháng tới",
+      color: "#569DAA",
+      font: {
+        size: 20,
+        family: "inter",
+      },
     },
   },
 };
@@ -52,16 +58,18 @@ export const data = {
   labels,
   datasets: [
     {
-      label: "Dataset 1",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
-      borderColor: "rgb(255, 99, 132)",
-      backgroundColor: "rgba(255, 99, 132, 0.5)",
+      label: "Tháng tới",
+      data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
+      borderColor: "#00ADB5",
+      backgroundColor: "#14b0b9",
+      cubicInterpolationMode: 'monotone', 
     },
     {
-      label: "Dataset 2",
-      data: labels.map(() => faker.datatype.number({ min: 0, max: 100 })),
-      borderColor: "rgb(53, 162, 235)",
-      backgroundColor: "rgba(53, 162, 235, 0.5)",
+      label: "Tháng này",
+      data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
+      borderColor: "#B9EDDD",
+      backgroundColor: "#B9EDDD",
+      cubicInterpolationMode: 'monotone', 
     },
   ],
 };

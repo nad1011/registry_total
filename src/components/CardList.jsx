@@ -16,7 +16,7 @@ const CartList = ({ filterList }) => {
             <Grid
               item
               p={{
-                xs: `5px !important`,
+                xs: `calc(var(--padding-item)/2) !important`,
               }}
               xs={12}
               sm={6}
@@ -24,8 +24,8 @@ const CartList = ({ filterList }) => {
               lg={4}
               height={{
                 xs: "80%",
-                sm: "75%",
-                md: "75%",
+                sm: "55%",
+                md: "60%",
                 lg: "50%",
               }}
               key={cert.id}

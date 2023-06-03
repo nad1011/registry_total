@@ -4,18 +4,8 @@ import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { fireAuth } from "../database/firebase";
 import { user } from "../database/cache";
 import { styled } from "@mui/material/styles";
-import KeyboardDoubleArrowRightIcon from "@mui/icons-material/KeyboardDoubleArrowRight";
 
-import {
-  Box,
-  Grid,
-  Link,
-  Stack,
-  Button,
-  TextField,
-  Typography,
-  InputAdornment,
-} from "@mui/material";
+import { Box, Grid, Stack, Button, TextField, Typography, InputAdornment } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/WVntmOE.jpg";
@@ -44,7 +34,6 @@ const CustomTextField1 = styled(TextField)(({ theme }) => ({
     fontWeight: "bold",
     position: "absolute",
     left: 0,
-    // padding: "20px 10px 10px",
     fontSize: "1em",
     fontFamily: "prompt",
     letterSpacing: "0.05em",
@@ -52,7 +41,7 @@ const CustomTextField1 = styled(TextField)(({ theme }) => ({
     pointerEvents: "none",
   },
   "&.Mui-focused .MuiInputLabel-root": {
-    color: "var(--title-color) !important", // update label color when focused
+    color: "var(--title-color) !important",
   },
   "& .MuiInputLabel-shrink": {
     transform: "translateY(-20px)",
@@ -87,17 +76,13 @@ const SignIn = ({ transfer }) => {
 
   const [input, setInput] = useState({ email: "", password: "" });
   const [emailError, setEmailError] = useState({ state: false, message: "" });
-  const [passwordError, setPasswordError] = useState({
-    state: false,
-    message: "",
-  });
+  const [pwError, setPwError] = useState({ state: false, message: "" });
 
-  const handleInput = (e) =>
-    setInput({ ...input, [e.target.name]: e.target.value });
+  const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSignIn = () => {
     setEmailError({ state: false, message: "" });
-    setPasswordError({ state: false, message: "" });
+    setPwError({ state: false, message: "" });
 
     if (!input.email.length) {
       setEmailError({ state: true, message: "Vui lòng nhập email" });
@@ -105,7 +90,7 @@ const SignIn = ({ transfer }) => {
     }
 
     if (!input.password.length) {
-      setPasswordError({ state: true, message: "Vui lòng nhập mật khẩu" });
+      setPwError({ state: true, message: "Vui lòng nhập mật khẩu" });
       return;
     }
 
@@ -120,7 +105,7 @@ const SignIn = ({ transfer }) => {
             setEmailError({ state: true, message: "Email không tồn tại" });
             break;
           case "auth/wrong-password":
-            setPasswordError({ state: true, message: "Mật khẩu không đúng" });
+            setPwError({ state: true, message: "Mật khẩu không đúng" });
             break;
           default:
             alert(`${error.code}\n${error.message}`);
@@ -215,8 +200,8 @@ const SignIn = ({ transfer }) => {
                     fontSize: 16,
                   }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-                  Magnam, molestias possimus quod, autem.
+                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, molestias
+                  possimus quod, autem.
                 </Typography>
               </Box>
             </Stack>
@@ -282,10 +267,7 @@ const SignIn = ({ transfer }) => {
                         zIndex: 10,
                       }}
                     >
-                      <RiLockPasswordFill
-                        size={24}
-                        color="var(--title-color)"
-                      />
+                      <RiLockPasswordFill size={24} color="var(--title-color)" />
                     </InputAdornment>
                   ),
                 }}
@@ -296,27 +278,9 @@ const SignIn = ({ transfer }) => {
                   },
                 }}
                 onChange={handleInput}
-                error={passwordError.state}
-                helperText={passwordError.message}
+                error={pwError.state}
+                helperText={pwError.message}
               />
-              <Link
-                href=""
-                sx={{
-                  // width: 0.8,
-                  height: 0.1,
-                  alignSelf: "flex-end",
-                  mt: 1,
-                  fontFamily: "var(--font-roboto)",
-                  fontWeight: "bold",
-                  fontSize: 14,
-                  color: { xs: "#569DAA", lg: "var(--primary-color)" },
-                  textDecoration: "none",
-                  transition: "0.5s",
-                  ":hover": { color: "#B9EDDD", fontSize: 16 },
-                }}
-              >
-                Forget password
-              </Link>
               <Button
                 sx={{
                   width: 0.8,

@@ -4,7 +4,7 @@ import { Grid, Box, Stack, Typography, Slide } from "@mui/material";
 
 import Page from "../components/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart";
-import {LineChart} from "../components/PredictLineChart";
+import { LineChart } from "../components/PredictLineChart";
 import PredictBox from "../components/Box/PredictBox";
 import SlideShow from "../components/SlideShow";
 
@@ -28,17 +28,11 @@ const Prediction = () => {
       count++;
     }
 
-    const slope =
-      (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
+    const slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
     const intercept = (sum_y - slope * sum_x) / count;
 
     return { slope: slope, intercept: intercept };
   };
-
-  // const regression = () => {
-  //   const regression = linearRegression(data[0].data);
-  //   console.log(regression);
-  // };
 
   return (
     <Page>
@@ -48,8 +42,6 @@ const Prediction = () => {
           item
           height={{
             xs: "30%",
-            // sm: "30%",
-            // md: "30%",
             lg: "100%",
           }}
           md={12}
@@ -114,7 +106,7 @@ const Prediction = () => {
               pl: 1,
               pr: 1,
               width: 1,
-              height: {xs: "55%", sm: "60%", md: "60%", lg: "60%"},
+              height: { xs: "55%", sm: "60%", md: "60%", lg: "60%" },
               color: "#051c33",
             }}
           >
@@ -157,7 +149,7 @@ const Prediction = () => {
               color: "#051c33",
             }}
           >
-            <SlideShow/>
+            <SlideShow />
           </Box>
         </Grid>
       </Grid>

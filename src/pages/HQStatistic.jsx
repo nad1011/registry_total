@@ -4,7 +4,6 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB } from "../database/cache";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import Dropdown from "../components/Dropdown";
 import NewDropdown from "../components/NewDropdown";
 import StatisticBox from "../components/Box/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
@@ -165,9 +164,9 @@ const HQStatistic = () => {
     );
   }, [certs, centerView]);
 
-  const onTimeSwitch = (mode) => setTimeView(mode);
-  const onViewSwitch = (state) => setStateView(state ? "expired" : "registered");
-  const onCenterSwitch = (center) => setCenterView(center);
+  const switchTime = (mode) => setTimeView(mode);
+  const switchState = (state) => setStateView(state ? "expired" : "registered");
+  const switchCenter = (center) => setCenterView(center);
 
   return (
     <Page>
@@ -216,7 +215,7 @@ const HQStatistic = () => {
                 >
                   Thống kê số lượng xe đăng kiểm
                 </Typography>
-                <Switch onSwitch={onViewSwitch} />
+                <Switch onSwitch={switchState} />
               </Stack>
             </Box>
             <Box
@@ -287,35 +286,32 @@ const HQStatistic = () => {
               pt: { lg: "var(--padding-item)", xs: "0" },
             }}
           >
-            {/* <Grid container> */}
-              <Stack direction={"row"} sx={{
+            <Stack
+              direction={"row"}
+              sx={{
                 width: "100%",
                 height: "8.3%",
                 display: "flex",
                 justifyContent: "space-between",
                 alignItems: "flex-start",
-              }}>
-                <Box
-                  sx={{
-                    width: 1,
-                    height: 1,
-                    // bgcolor: "#fff",
-                    borderRadius: 2,
-                    pb: "var(--padding-item)",
-                  }}
-                >
-                  <ToggleSwitch
-                    values={["Tháng", "Quý", "Năm"]}
-                    selected={timeView}
-                    onChange={onTimeSwitch}
-                  />
-                </Box>
-                {/* <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} /> */}
-                <NewDropdown options={center?.codes ?? []}/>
-              </Stack>
-              {/* <Grid container item xs={5}>
-              </Grid> */}
-            {/* </Grid> */}
+              }}
+            >
+              <Box
+                sx={{
+                  width: 1,
+                  height: 1,
+                  borderRadius: 2,
+                  pb: "var(--padding-item)",
+                }}
+              >
+                <ToggleSwitch
+                  values={["Tháng", "Quý", "Năm"]}
+                  selected={timeView}
+                  onChange={switchTime}
+                />
+              </Box>
+              <NewDropdown options={center?.codes ?? []} onSwitch={switchCenter} />
+            </Stack>
             <Table data={tableData} />
           </Stack>
         </Grid>

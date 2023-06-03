@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Typography, Menu, MenuItem } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
-const NewDropdown = ({ options }) => {
+const NewDropdown = ({ options, onSwitch }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedOption, setSelectedOption] = useState("All");
 
@@ -17,6 +17,7 @@ const NewDropdown = ({ options }) => {
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     handleCloseMenu();
+    onSwitch(option);
   };
 
   return (

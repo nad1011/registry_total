@@ -270,7 +270,6 @@ const Statistic = () => {
           >
             <Box
               sx={{
-                // bgcolor: "var(--secondary-color)",
                 borderRadius: 2,
                 p: 0.5,
                 pb: "var(--padding-item)",

@@ -122,9 +122,7 @@ const Registration = () => {
 
   useEffect(() => {
     setPage(0);
-    const filteredList = expiredList.filter((cert) =>
-      cert[param].toUpperCase().includes(query)
-    );
+    const filteredList = expiredList.filter((cert) => cert[param].toUpperCase().includes(query));
     setPageData(
       Array.from({ length: Math.ceil(filteredList.length / 6) }, (_, i) =>
         filteredList.slice(i * 6, i * 6 + 6)
@@ -135,18 +133,12 @@ const Registration = () => {
   const onQueryChange = (e) => setQuery(e.target.value.toUpperCase());
   const selectParam = (newFilter) => setParam(newFilter);
 
-  const toPrevChunk = () =>
-    setPage((page - 1 + pageData.length) % pageData.length);
+  const toPrevChunk = () => setPage((page - 1 + pageData.length) % pageData.length);
   const toNextChunk = () => setPage((page + 1) % pageData.length);
 
   return (
     <Page>
-      <Grid
-        container
-        sx={{ height: "100%" }}
-        justifyContent={"flex-start"}
-        alignItems={"center"}
-      >
+      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
         <Grid
           item
           xs={12}
@@ -200,18 +192,6 @@ const Registration = () => {
                 height: "100%",
               }}
             >
-              {/* <Stack
-                direction="row"
-                spacing={1}
-                alignItems="center"
-                sx={{
-                  width: "100%",
-                  height: "50%",
-                  backgroundColor: "var(--secondary-color)",
-                  borderTopLeftRadius: 15,
-                  borderTopRightRadius: 15,
-                }}
-              > */}
               <StyledButton onClick={toPrevChunk}>
                 <span>
                   <ArrowLeft
@@ -229,12 +209,6 @@ const Registration = () => {
                     sx={{
                       height: "100%",
                       width: "100%",
-                      // fontSize: {
-                      //   xs: "10",
-                      //   sm: "10",
-                      //   md: "30",
-                      //   lg: "30",
-                      // }
                     }}
                   />
                 </span>

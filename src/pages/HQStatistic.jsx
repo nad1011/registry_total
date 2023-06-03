@@ -313,9 +313,6 @@ const HQStatistic = () => {
                 {/* <Dropdown options={center?.codes ?? []} onSelect={onCenterSwitch} /> */}
                 <NewDropdown options={center?.codes ?? []}/>
               </Stack>
-              {/* <Grid container item xs={5}>
-              </Grid> */}
-            {/* </Grid> */}
             <Table data={tableData} />
           </Stack>
         </Grid>

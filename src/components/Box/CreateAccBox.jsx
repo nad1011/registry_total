@@ -4,6 +4,8 @@ import { Typography, Stack, Box } from "@mui/material";
 
 import CreateAccForm from "../CreateAccForm";
 
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 const CreateAccBox = () => {
   const defaultFormFields = {
     centerId: "",

@@ -26,7 +26,7 @@ const App = () => {
   //       if (certDoc.id === "center") {
   //         await dexieDB.table("certificate").put({
   //           codes: ["All", ...certData.codes],
-  //           id: certDoc.id,
+  //           id: "center",
   //         });
   //         return;
   //       }

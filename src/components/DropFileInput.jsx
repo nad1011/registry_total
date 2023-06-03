@@ -2,8 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 
 import { Box, Grid, Stack, Typography, IconButton } from "@mui/material";
 import Image from "mui-image";
-import CloseIcon from "@mui/icons-material/Close";
-import FileUploadOutlinedIcon from "@mui/icons-material/FileUploadOutlined";
+import { Close, FileUploadOutlined } from "@mui/icons-material";
 
 import { ImageConfig } from "../ImageConfig";
 import ButtonNina from "./ButtonNina/ButtonNina";
@@ -24,7 +23,10 @@ const DropFileInput = ({ onFileListChange }) => {
   const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
 
   const handleUpload = () => {
-    //task here
+    fileList.forEach((file) => {
+      //task here
+    });
+    setFileList([]);
   };
 
   useEffect(() => {
@@ -102,7 +104,7 @@ const DropFileInput = ({ onFileListChange }) => {
               height: "100%",
             }}
           >
-            <FileUploadOutlinedIcon
+            <FileUploadOutlined
               sx={{
                 color: "#4267b2",
                 fontSize: "80px",
@@ -121,7 +123,7 @@ const DropFileInput = ({ onFileListChange }) => {
           </Stack>
           <input
             type="file"
-            value=""
+            accept=".xlsx,.csv"
             onChange={(event) => addFile(event.target.files[0])}
             style={{
               opacity: 0,
@@ -256,7 +258,7 @@ const DropFileInput = ({ onFileListChange }) => {
                         </Typography>
                       </Box>
                       <IconButton size="small" onClick={() => removeFile(item)}>
-                        <CloseIcon />
+                        <Close />
                       </IconButton>
                     </Stack>
                   </Stack>

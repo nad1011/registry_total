@@ -56,26 +56,26 @@ export default function EnhancedTable({ data }) {
       id: "regDate",
       numeric: false,
       disablePadding: true,
-      label: "Registered Date",
+      label: "Ngày đăng kiểm",
     },
     {
       id: "owner",
       numeric: false,
       disablePadding: true,
-      label: "Owner",
+      label: "Chủ xe",
     },
     {
       id: "licensePlate",
       numeric: false,
       disablePadding: true,
-      label: "Number Plate",
+      label: "Biển số",
     },
 
     {
       id: "center",
       numeric: false,
       disablePadding: true,
-      label: "Center",
+      label: "Trung tâm",
     },
   ];
 
@@ -109,9 +109,7 @@ export default function EnhancedTable({ data }) {
                   {headCell.label}
                   {orderBy === headCell.id ? (
                     <Box component="span" sx={visuallyHidden}>
-                      {order === "desc"
-                        ? "sorted descending"
-                        : "sorted ascending"}
+                      {order === "desc" ? "sorted descending" : "sorted ascending"}
                     </Box>
                   ) : null}
                 </TableSortLabel>
@@ -146,10 +144,7 @@ export default function EnhancedTable({ data }) {
   }, [rows]);
 
   useEffect(() => {
-    let rowsOnMount = stableSort(
-      rows,
-      getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY)
-    );
+    let rowsOnMount = stableSort(rows, getComparator(DEFAULT_ORDER, DEFAULT_ORDER_BY));
 
     rowsOnMount = rowsOnMount.slice(
       0 * DEFAULT_ROWS_PER_PAGE,
@@ -166,14 +161,8 @@ export default function EnhancedTable({ data }) {
       setOrder(toggledOrder);
       setOrderBy(newOrderBy);
 
-      const sortedRows = stableSort(
-        rows,
-        getComparator(toggledOrder, newOrderBy)
-      );
-      const updatedRows = sortedRows.slice(
-        page * rowsPerPage,
-        page * rowsPerPage + rowsPerPage
-      );
+      const sortedRows = stableSort(rows, getComparator(toggledOrder, newOrderBy));
+      const updatedRows = sortedRows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
 
       setVisibleRows(updatedRows);
     },
@@ -216,10 +205,7 @@ export default function EnhancedTable({ data }) {
       setVisibleRows(updatedRows);
 
       // Avoid a layout jump when reaching the last page with empty rows.
-      const numEmptyRows =
-        newPage > 0
-          ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length)
-          : 0;
+      const numEmptyRows = newPage > 0 ? Math.max(0, (1 + newPage) * rowsPerPage - rows.length) : 0;
 
       const newPaddingHeight = 33 * numEmptyRows;
       setPaddingHeight(newPaddingHeight);
@@ -270,9 +256,7 @@ export default function EnhancedTable({ data }) {
             bgcolor: "var(--secondary-color)",
           }}
         >
-          <TableContainer
-            sx={{ maxHeight: 0.93, bgcolor: "var(--secondary-color)" }}
-          >
+          <TableContainer sx={{ maxHeight: 0.93, bgcolor: "var(--secondary-color)" }}>
             <Table
               stickyHeader
               sx={{ minWidth: 750, height: "80%" }}

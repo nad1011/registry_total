@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB, user } from "../database/cache";
@@ -55,21 +55,21 @@ const Statistic = () => {
   };
 
   const countDateByQuarter = () => {
-    const getQuarterNum = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
+    const getQuarterVal = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
     const curDate = new Date();
     const quarterCount = dateList.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
-        const quarterNum = getQuarterNum(year, month);
-        obj.latestQuarterNum = Math.max(obj.latestQuarterNum, quarterNum);
+        const quarterNum = getQuarterVal(year, month);
+        obj.latestQuarter = Math.max(obj.latestQuarter, quarterNum);
         obj[quarterNum] = (obj[quarterNum] || 0) + 1;
         return obj;
       },
       {
-        latestQuarterNum: getQuarterNum(curDate.getFullYear(), curDate.getMonth()),
+        latestQuarter: getQuarterVal(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarterNum - 9 + i).reduce(
+    return Array.from({ length: 10 }, (_, i) => quarterCount.latestQuarter - 9 + i).reduce(
       (obj, quarterNum) => {
         const quarter = `Q${(quarterNum % 4) + 1}-${parseInt(quarterNum / 4)}`;
         obj[quarter] = quarterCount[quarterNum] || 0;
@@ -80,21 +80,21 @@ const Statistic = () => {
   };
 
   const countDateByMonth = () => {
-    const getMonthNum = (year, month) => year * 12 + month;
+    const getMonthVal = (year, month) => year * 12 + month;
     const curDate = new Date();
     const monthCount = dateList.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
-        const monthNum = getMonthNum(year, month - 1);
-        obj.latestMonthNum = Math.max(obj.latestMonthNum, monthNum);
+        const monthNum = getMonthVal(year, month - 1);
+        obj.latestMonth = Math.max(obj.latestMonth, monthNum);
         obj[monthNum] = (obj[monthNum] || 0) + 1;
         return obj;
       },
       {
-        latestMonthNum: getMonthNum(curDate.getFullYear(), curDate.getMonth()),
+        latestMonth: getMonthVal(curDate.getFullYear(), curDate.getMonth()),
       }
     );
-    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonthNum - 9 + i).reduce(
+    return Array.from({ length: 10 }, (_, i) => monthCount.latestMonth - 9 + i).reduce(
       (obj, monthNum) => {
         const month = `0${(monthNum % 12) + 1}`.slice(-2) + `-${parseInt(monthNum / 12)}`;
         obj[month] = monthCount[monthNum] || 0;

@@ -1,18 +1,11 @@
 import { Stack, Button } from "@mui/material";
-import LogoutIcon from "@mui/icons-material/Logout";
-import EmailIcon from "@mui/icons-material/Email";
-import PhoneIcon from "@mui/icons-material/Phone";
-import BusinessIcon from "@mui/icons-material/Business";
-import Modal from "@mui/joy/Modal";
-import ModalClose from "@mui/joy/ModalClose";
-import Typography from "@mui/joy/Typography";
-import { Sheet, Box } from "@mui/joy";
-//
+import { Logout, Email, Phone, Business } from "@mui/icons-material";
+import { Sheet, Box, ModalClose, Typography, Modal } from "@mui/joy";
+
 import { user } from "../database/cache";
 import { useNavigate } from "react-router";
 
 const UserInfo = ({ open, close }) => {
-
   const navigate = useNavigate();
 
   return (
@@ -51,10 +44,10 @@ const UserInfo = ({ open, close }) => {
           sx={{
             fontFamily: "var(--font-roboto)",
             fontWeight: "bold",
-            color: "var(--title-color)"
+            color: "var(--title-color)",
           }}
         >
-          Trung tâm đăng kiểm {user.id}
+          {user.id === "hq" ? "Cục đăng kiểm" : `Trung tâm đăng kiểm ${user.id}`}
         </Typography>
         <Stack
           height={"40vh"}
@@ -68,7 +61,7 @@ const UserInfo = ({ open, close }) => {
         >
           <Typography
             id="modal-desc"
-            startDecorator={<EmailIcon />}
+            startDecorator={<Email />}
             sx={{
               fontFamily: "var(--font-inter)",
               fontWeight: "bold",
@@ -84,9 +77,9 @@ const UserInfo = ({ open, close }) => {
               fontWeight: "bold",
               color: "var(--font2-color)",
             }}
-            startDecorator={<PhoneIcon />}
+            startDecorator={<Phone />}
           >
-            Số điện thoại: {user.phone}
+            Số điện thoại: {user.tel}
           </Typography>
           <Typography
             id="modal-desc"
@@ -95,16 +88,11 @@ const UserInfo = ({ open, close }) => {
               fontWeight: "bold",
               color: "var(--font2-color)",
             }}
-            startDecorator={<BusinessIcon />}
+            startDecorator={<Business />}
           >
             Địa chỉ: {user.address}
           </Typography>
-          <Box
-            width={"110%"}
-            display={"flex"}
-            justifyContent={"center"}
-            ml={"-10%"}
-          >
+          <Box width={"110%"} display={"flex"} justifyContent={"center"} ml={"-10%"}>
             <Button
               onClick={() => navigate("/")}
               sx={{
@@ -113,18 +101,16 @@ const UserInfo = ({ open, close }) => {
                 color: "white",
                 fontWeight: "bold",
                 borderRadius: 3,
-                // boxShadow: "0 2px 12px 0 rgba(0 0 0 / 0.2)",
                 "&:hover": {
                   border: "1.5px solid var(--border-color)",
                   backgroundColor: "white",
                   color: "var(--title-color)",
-                  // boxShadow: "none",
                 },
               }}
               size="lg"
               variant="solid"
             >
-              <LogoutIcon /> Đăng xuất
+              <Logout /> Đăng xuất
             </Button>
           </Box>
         </Stack>

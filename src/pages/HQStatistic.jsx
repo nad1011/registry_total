@@ -4,7 +4,7 @@ import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB } from "../database/cache";
 
 import { Box, Grid, Stack, Typography } from "@mui/material";
-import NewDropdown from "../components/NewDropdown";
+import Dropdown from "../components/Dropdown";
 import StatisticBox from "../components/Box/StatisticBox";
 import ToggleSwitch from "../components/TripleToggleSwitch/TripleToggleSwitch";
 import LineChart from "../components/LineChart";
@@ -35,7 +35,7 @@ const HQStatistic = () => {
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
-  const [centerView, setCenterView] = useState("All");
+  const [centerView, setCenterView] = useState("Tất cả");
 
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
 
@@ -160,13 +160,13 @@ const HQStatistic = () => {
   useEffect(() => {
     if (!certs) return;
     setFilteredCerts(
-      centerView === "All" ? certs : certs.filter((cert) => cert.center === centerView)
+      centerView === "Tất cả" ? certs : certs.filter((cert) => cert.center === centerView)
     );
   }, [certs, centerView]);
 
   const switchTime = (mode) => setTimeView(mode);
   const switchState = (state) => setStateView(state ? "expired" : "registered");
-  const switchCenter = (center) => setCenterView(center);
+  const selectCenter = (center) => setCenterView(center);
 
   return (
     <Page>
@@ -310,7 +310,7 @@ const HQStatistic = () => {
                   onChange={switchTime}
                 />
               </Box>
-              <NewDropdown options={center?.codes ?? []} onSwitch={switchCenter} />
+              <Dropdown options={center?.codes ?? []} onSelect={selectCenter} />
             </Stack>
             <Table data={tableData} />
           </Stack>

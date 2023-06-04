@@ -2,22 +2,18 @@ import React, { useState } from "react";
 import { Box, Typography, Menu, MenuItem } from "@mui/material";
 import { ExpandMore } from "@mui/icons-material";
 
-const NewDropdown = ({ options, onSwitch }) => {
+const Dropdown = ({ options, onSelect }) => {
   const [anchorEl, setAnchorEl] = useState(null);
-  const [selectedOption, setSelectedOption] = useState("All");
+  const [selectedOption, setSelectedOption] = useState("Tất cả");
 
-  const handleOpenMenu = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
+  const handleOpenMenu = (event) => setAnchorEl(event.currentTarget);
 
-  const handleCloseMenu = () => {
-    setAnchorEl(null);
-  };
+  const handleCloseMenu = () => setAnchorEl(null);
 
   const handleOptionSelect = (option) => {
     setSelectedOption(option);
     handleCloseMenu();
-    onSwitch(option);
+    onSelect(option);
   };
 
   return (
@@ -71,8 +67,9 @@ const NewDropdown = ({ options, onSwitch }) => {
           },
         }}
       >
-        {options.map((option) => (
+        {options.map((option, index) => (
           <MenuItem
+            key={index}
             onClick={() => handleOptionSelect(option)}
             sx={{
               transition: "all 0.2s",
@@ -94,4 +91,4 @@ const NewDropdown = ({ options, onSwitch }) => {
   );
 };
 
-export default NewDropdown;
+export default Dropdown;

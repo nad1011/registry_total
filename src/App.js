@@ -8,11 +8,11 @@ import { dexieDB, user, getDocID } from "./database/cache";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
-import Registration from "./pages/Registration";
 import Statistic from "./pages/Statistic";
+import Registration from "./pages/Registration";
 import Prediction from "./pages/Prediction";
 import HQStatistic from "./pages/HQStatistic";
-import CreateAccount from "./pages/CreateAccount";
+import HQRegistration from "./pages/HQRegistration";
 import HQPrediction from "./pages/HQPrediction";
 import "./App.css";
 
@@ -25,7 +25,7 @@ const App = () => {
 
   //       if (certDoc.id === "center") {
   //         await dexieDB.table("certificate").put({
-  //           codes: ["All", ...certData.codes],
+  //           codes: ["Tất cả", ...certData.codes],
   //           id: "center",
   //         });
   //         return;
@@ -72,7 +72,7 @@ const App = () => {
         <Route path="/statistic" element={user.id === "hq" ? <HQStatistic /> : <Statistic />} />
         <Route
           path="/registration"
-          element={user.id === "hq" ? <CreateAccount /> : <Registration />}
+          element={user.id === "hq" ? <HQRegistration /> : <Registration />}
         />
         <Route path="/prediction" element={user.id === "hq" ? <HQPrediction /> : <Prediction />} />
       </Routes>

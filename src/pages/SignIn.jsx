@@ -10,7 +10,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/WVntmOE.jpg";
 
-const CustomTextField1 = styled(TextField)(({ theme }) => ({
+const CustomTextField = styled(TextField)(({ theme }) => ({
   position: "relative",
   width: "100%",
   marginTop: "20px",
@@ -94,12 +94,12 @@ const SignIn = ({ transfer }) => {
       return;
     }
 
-    signInWithEmailAndPassword(fireAuth, input.email, input.password)
-      .then((userCred) => {
-        user.loadData(userCred.user);
+    const signIn = async ({ email, password }) => {
+      try {
+        const userCred = await signInWithEmailAndPassword(fireAuth, email, password);
+        user.loadData(userCred.user.email);
         transfer();
-      })
-      .catch((error) => {
+      } catch (error) {
         switch (error.code) {
           case "auth/user-not-found":
             setEmailError({ state: true, message: "Email không tồn tại" });
@@ -110,7 +110,10 @@ const SignIn = ({ transfer }) => {
           default:
             alert(`${error.code}\n${error.message}`);
         }
-      });
+      }
+    };
+
+    signIn(input);
   };
 
   return (
@@ -231,7 +234,7 @@ const SignIn = ({ transfer }) => {
               >
                 Sign in
               </Typography>
-              <CustomTextField1
+              <CustomTextField
                 required
                 name="email"
                 label="Email"
@@ -251,7 +254,7 @@ const SignIn = ({ transfer }) => {
                 error={emailError.state}
                 helperText={emailError.message}
               />
-              <CustomTextField1
+              <CustomTextField
                 type="password"
                 name="password"
                 label="Password"

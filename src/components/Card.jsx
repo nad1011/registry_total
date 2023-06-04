@@ -4,7 +4,7 @@ import { Button, Typography, CardMedia, CardContent, CardActions, Card, Box } fr
 
 import { FormContext } from "../contexts/FormContext";
 
-const MyCard = ({ cert }) => {
+const CustomCard = ({ cert }) => {
   const { name, expiredDate, licensePlate } = cert;
 
   const { autoCompleteNameAndNumberPlate } = useContext(FormContext);
@@ -96,7 +96,6 @@ const MyCard = ({ cert }) => {
             }}
           >
             <Button
-              // variant="contained"
               disableRipple
               onClick={onClickHandler}
               sx={{
@@ -106,7 +105,7 @@ const MyCard = ({ cert }) => {
                 border: "1.5px solid var(--border-color)",
                 fontSize: "0.8em",
                 fontFamily: "var(--font-raleway)",
-                width: {xs: "80%", sm: "100%", md: "100%", lg: "80%"},
+                width: { xs: "80%", sm: "100%", md: "100%", lg: "80%" },
                 height: "100%",
                 color: "var(--title-color)",
                 transition: "all 0.4s",
@@ -128,4 +127,4 @@ const MyCard = ({ cert }) => {
   );
 };
 
-export default MyCard;
+export default CustomCard;

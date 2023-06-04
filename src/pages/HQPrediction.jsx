@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Grid, Box, Stack, Typography, Slide } from "@mui/material";
+import { Grid, Box, Stack, Typography } from "@mui/material";
 
 import { useLiveQuery } from "dexie-react-hooks";
 import { dexieDB } from "../database/cache";
@@ -9,7 +9,7 @@ import Page from "../components/Page";
 import HorizontalBarChart from "../components/HorizontalBarChart";
 import { LineChart } from "../components/PredictLineChart";
 import PredictBox from "../components/Box/PredictBox";
-import NewDropdown from "../components/PredictDropdown";
+import Dropdown from "../components/PredictDropdown";
 
 const Prediction = () => {
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
@@ -139,7 +139,7 @@ const Prediction = () => {
                 color: "#051c33",
               }}
             >
-              <NewDropdown options={center?.codes ?? []} />
+              <Dropdown options={center?.codes ?? []} onSelect={(option) => {}} />
             </Box>
           </Stack>
           <Box

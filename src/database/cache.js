@@ -1,4 +1,6 @@
 import Dexie from "dexie";
+import { fireDB } from "./firebase";
+import { doc, getDoc } from "firebase/firestore";
 
 const dexieDB = new Dexie("cachedData");
 dexieDB.version(1).stores({
@@ -8,22 +10,28 @@ dexieDB.version(1).stores({
 });
 
 const user = {
-  id: "",
+  id: "hq",
   name: "",
   address: "",
-  phone: "",
+  tel: "",
   email: "",
-  loadData: ({ email, displayName }) => {
-    user.id = email.match(/.+(?=@)/)?.[0] ?? "";
-    user.id = user.id.match(/(?<=center).+/)?.[0].toUpperCase() ?? user.id;
-    [user.name, user.address, user.phone] = displayName.split("|");
+  loadData: (email) => {
+    user.id = email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq";
     user.email = email;
+    const loadProfile = async () => {
+      const userDoc = await getDoc(doc(fireDB, "user", user.id));
+      const data = userDoc.data();
+      user.name = data.name;
+      user.address = data.address;
+      user.tel = data.tel;
+    };
+    loadProfile();
   },
   reset: () => {
-    user.id = "";
+    user.id = "hq";
     user.name = "";
     user.address = "";
-    user.phone = "";
+    user.tel = "";
     user.email = "";
   },
 };

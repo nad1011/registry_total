@@ -1,9 +1,8 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import review from "./Review";
 
-import { Grid, Box, Typography, Stack, Button } from "@mui/material";
+import { Grid, Box, Typography, Stack } from "@mui/material";
 
 import Page from "../components/Page";
 import logoImg from "../assets/images/logo.png";
@@ -82,48 +81,12 @@ const Home = () => {
                 fontFamily: "var(--font-inter)",
               }}
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa
-              minima, perspiciatis aliquid quo ex totam consequatur repellendus
-              ducimus quisquam incidunt sunt, veniam sequi laborum! Cupiditate
-              minima animi unde ullam sapiente!
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa minima, perspiciatis
+              aliquid quo ex totam consequatur repellendus ducimus quisquam incidunt sunt, veniam
+              sequi laborum! Cupiditate minima animi unde ullam sapiente!
             </Typography>
           </Stack>
         </Grid>
-        {/* <Grid
-          container
-          item
-          sm={5}
-          md={4}
-          pt={{
-            sm: "20%",
-            md: "5%",
-            lg: "3%",
-          }}
-          sx={{
-            p: "3%",
-            display: "fixed",
-            justifyContent: "center",
-            alignItems: "center",
-            zIndex: 1,
-          }}
-        >
-          // LOGO PUT IN HERE 
-          <Box
-            height={{
-              sm: "100%",
-              md: "130%",
-              lg: "150%", 
-            }}
-            width={1}
-            sx={{
-              background: `url(${logoImg})`,
-              backgroundRepeat: "no-repeat",
-              backgroundSize: "100% 100%",
-              zIndex: 1,
-              filter: "opacity(0.5) drop-shadow(0 0 var(--avatar-color))",
-            }}
-          ></Box>
-        </Grid> */}
         <Grid
           item
           sx={{
@@ -160,6 +123,7 @@ const Home = () => {
           >
             {review.map((item, index) => (
               <Grid
+                key={index}
                 item
                 container
                 sm={6}
@@ -167,7 +131,6 @@ const Home = () => {
                 sx={{
                   position: "relative",
                   bgcolor: "var(--secondary-color)",
-                  // overflow: "auto",
                   ":hover": {
                     ".box": {
                       transform: "translate3d(0, 0, 0)",
@@ -216,28 +179,8 @@ const Home = () => {
                     p: 1,
                   }}
                 >
-                  <Stack
-                    height={1}
-                    justifyContent="space-between"
-                    alignItems="flex-end"
-                  >
-                    <Typography color={"var(--font1-color)"}>
-                      {item.describe}
-                    </Typography>
-                    {/* <Button
-                      disabled
-                      sx={{
-                        backgroundColor: "smoke",
-                        fontWeight: "bold",
-                        ":hover": {
-                          bgcolor: "whitesmoke",
-                        },
-                      }}
-                      size="lg"
-                      variant="solid"
-                    >
-                        {item.title}
-                    </Button> */}
+                  <Stack height={1} justifyContent="space-between" alignItems="flex-end">
+                    <Typography color={"var(--font1-color)"}>{item.describe}</Typography>
                     <Typography
                       sx={{
                         color: "var(--title-color)",

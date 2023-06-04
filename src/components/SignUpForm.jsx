@@ -1,17 +1,12 @@
 import React from "react";
 
 import { Stack, Grid } from "@mui/material";
-import LockIcon from "@mui/icons-material/Lock";
-import PhoneIcon from "@mui/icons-material/Phone";
-import BusinessIcon from "@mui/icons-material/Business";
-import BusinessCenterIcon from "@mui/icons-material/BusinessCenter";
-import EmailIcon from "@mui/icons-material/Email";
-import Grid3x3Icon from "@mui/icons-material/Grid3x3";
+import { Lock, Phone, Business, BusinessCenter, Email, Grid3x3 } from "@mui/icons-material";
 
 import FormInputHQ from "./FormInputHQ/FormInputHQ";
 import ButtonNina from "./ButtonNina/ButtonNina";
 
-export default function CreateAccForm({ formFields, handleChange }) {
+export default function SignUpForm({ form, onChange, onSubmit }) {
   return (
     <Grid container sx={{ height: "90%" }}>
       <Grid
@@ -29,44 +24,40 @@ export default function CreateAccForm({ formFields, handleChange }) {
             p: "var(--padding-item)",
             py: 0,
             borderRadius: "20px",
-            height:"100%",
+            height: "100%",
           }}
         >
           <FormInputHQ
-            label="Tên trung tâm"
+            label="Mã trung tâm*"
             type="text"
-            required
-            onChange={handleChange}
-            name="name"
-            value={formFields.name}
-            icon=<BusinessCenterIcon />
+            onChange={onChange}
+            name="centerId"
+            value={form.centerId}
+            icon=<Grid3x3 />
           />
           <FormInputHQ
-            label="Mã trung tâm"
+            label="Email"
             type="text"
-            required
-            onChange={handleChange}
-            name="centerId"
-            value={formFields.centerId}
-            icon=<Grid3x3Icon />
+            readOnly
+            name="email"
+            value={form.email}
+            icon=<Email />
           />
           <FormInputHQ
             label="Mật khẩu"
             type="password"
-            required
-            onChange={handleChange}
+            readOnly
             name="password"
-            value={formFields.password}
-            icon=<LockIcon />
+            value={form.password}
+            icon=<Lock />
           />
           <FormInputHQ
-            label="Nhập lại mật khẩu"
+            label="Xác nhận mật khẩu*"
             type="password"
-            required
-            onChange={handleChange}
+            onChange={onChange}
             name="confirmPassword"
-            value={formFields.confirmPassword}
-            icon=<LockIcon />
+            value={form.confirmPassword}
+            icon=<Lock />
           />
         </Stack>
       </Grid>
@@ -91,38 +82,35 @@ export default function CreateAccForm({ formFields, handleChange }) {
             py: 0,
             borderRadius: "20px",
             height: "75.65%",
-            mb: {xs:0, md:"var(--padding-item)"},
+            mb: { xs: 0, md: "var(--padding-item)" },
           }}
         >
           <FormInputHQ
-            label="Email"
+            label="Tên trung tâm*"
             type="text"
-            required
-            onChange={handleChange}
-            name="email"
-            value={formFields.email}
-            icon=<EmailIcon />
+            onChange={onChange}
+            name="name"
+            value={form.name}
+            icon=<BusinessCenter />
           />
           <FormInputHQ
-            label="Số điện thoại"
+            label="Số điện thoại*"
             type="text"
-            required
-            onChange={handleChange}
+            onChange={onChange}
             name="tel"
-            value={formFields.tel}
-            icon=<PhoneIcon />
+            value={form.tel}
+            icon=<Phone />
           />
           <FormInputHQ
-            label="Địa chỉ"
+            label="Địa chỉ*"
             type="text"
-            required
-            onChange={handleChange}
+            onChange={onChange}
             name="address"
-            value={formFields.address}
-            icon=<BusinessIcon />
+            value={form.address}
+            icon=<Business />
           />
         </Stack>
-        <ButtonNina content="Tạo mới"/>
+        <ButtonNina content="Tạo mới" onClick={onSubmit} />
       </Grid>
     </Grid>
   );

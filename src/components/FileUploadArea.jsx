@@ -7,7 +7,7 @@ import { Close, FileUploadOutlined } from "@mui/icons-material";
 import { ImageConfig } from "../ImageConfig";
 import ButtonNina from "./ButtonNina/ButtonNina";
 
-const DropFileInput = ({ onFileListChange }) => {
+const FileUploadArea = () => {
   const [fileList, setFileList] = useState([]);
 
   const wrapperRef = useRef(null);
@@ -29,10 +29,6 @@ const DropFileInput = ({ onFileListChange }) => {
     setFileList([]);
   };
 
-  useEffect(() => {
-    onFileListChange(fileList);
-  }, [fileList]);
-
   return (
     <Grid
       container
@@ -46,7 +42,6 @@ const DropFileInput = ({ onFileListChange }) => {
       p={"var(--padding-item)"}
       sx={{
         borderRadius: "20px",
-        // boxShadow: "rgba(149, 157, 165, 0.2) 0px 8px 24px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -180,7 +175,7 @@ const DropFileInput = ({ onFileListChange }) => {
             chứa thông tin về các xe mới
           </Typography>
         </Stack>
-        <ButtonNina content="Tải lên" />
+        <ButtonNina content="Tải lên" onClick={handleUpload} />
       </Grid>
       <Grid
         container
@@ -290,4 +285,4 @@ const DropFileInput = ({ onFileListChange }) => {
   );
 };
 
-export default DropFileInput;
+export default FileUploadArea;

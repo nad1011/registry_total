@@ -1,6 +1,6 @@
 import { Grid, Box } from "@mui/material";
 
-import MyCard from "./MyCard";
+import Card from "./Card";
 
 const CartList = ({ filterList }) => {
   return (
@@ -30,7 +30,7 @@ const CartList = ({ filterList }) => {
               }}
               key={cert.id}
             >
-              <MyCard cert={cert} key={cert.id} />
+              <Card cert={cert} key={cert.id} />
             </Grid>
           );
         })}

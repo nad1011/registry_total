@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -12,16 +11,9 @@ import {
 import { Line } from "react-chartjs-2";
 import { faker } from "@faker-js/faker";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
-function LineChart({ viewOption, data }) {
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
+
+const LineChart = ({ data }) => {
   const labels = data[0].data.map((item) => item.x);
   const options = {
     scales: {
@@ -60,14 +52,14 @@ function LineChart({ viewOption, data }) {
     datasets: [
       {
         label: "Số lượng",
-        data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
+        data: data[0].data.map((item) => item.y),
         borderColor: "#00ADB5",
         backgroundColor: "#14b0b9",
-        cubicInterpolationMode: 'monotone', 
+        cubicInterpolationMode: "monotone",
       },
     ],
   };
-  return <Line options={options} data={tableData} />
-}
+  return <Line options={options} data={tableData} />;
+};
 
 export default LineChart;

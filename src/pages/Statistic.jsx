@@ -214,7 +214,7 @@ const Statistic = () => {
                 height: "50%",
               }}
             >
-              <LineChart viewOption={timeView} data={graphData} />
+              <LineChart data={graphData} />
             </Box>
             <Stack
               direction="row"

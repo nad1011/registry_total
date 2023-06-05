@@ -3,54 +3,45 @@ import { useState, useContext, useEffect } from "react";
 import { Typography, Box, Stack, Button } from "@mui/material";
 
 import { FormContext } from "../../contexts/FormContext";
-import ButtonGroup from "@mui/material";
 import RenewForm from "../RenewForm";
 import ButtonNina from "../ButtonNina/ButtonNina";
 
 const RenewBox = ({ car }) => {
   const { autoName, autoNumberPlate } = useContext(FormContext);
 
-  const defaultFormFields = {
+  const defaultForm = {
     name: "",
     numberPlate: "",
     feeCheck: false,
     carCheck: false,
     newExpirationDate: "",
   };
-  const [formFields, setFormFields] = useState(defaultFormFields);
-  const { name, numberPlate, feeCheck, carCheck, newExpirationDate } = formFields;
+  const [form, setForm] = useState(defaultForm);
+  const { name, numberPlate, feeCheck, carCheck, newExpirationDate } = form;
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-
-    setFormFields({ ...formFields, [name]: value });
-  };
+  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
 
   const submitHandle = (event) => {
     event.preventDefault();
-    //
-    //
     // task here
-    //
-    //
   };
 
   const handleFeeCheck = () => {
-    setFormFields((prevFormFields) => ({
+    setForm((prevFormFields) => ({
       ...prevFormFields,
       feeCheck: !prevFormFields.feeCheck,
     }));
   };
 
   const handleCarCheck = () => {
-    setFormFields((prevFormFields) => ({
+    setForm((prevFormFields) => ({
       ...prevFormFields,
       carCheck: !prevFormFields.carCheck,
     }));
   };
 
   useEffect(() => {
-    setFormFields({
+    setForm({
       name: autoName,
       numberPlate: autoNumberPlate,
       feeCheck: false,
@@ -86,7 +77,7 @@ const RenewBox = ({ car }) => {
               color: "var(--title-color)",
             }}
           >
-            ĐƠN ĐĂNG KIỂM  
+            ĐƠN ĐĂNG KIỂM
           </Typography>
         </Box>
         <RenewForm
@@ -96,7 +87,7 @@ const RenewBox = ({ car }) => {
           carCheck={carCheck}
           newExpirationDate={newExpirationDate}
         />
-        <ButtonNina/>
+        <ButtonNina />
       </Stack>
     </Box>
   );

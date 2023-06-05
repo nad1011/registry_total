@@ -39,8 +39,8 @@ const HQStatistic = () => {
 
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
 
-  const countDateByYear = () => {
-    const yearCount = dateList.reduce(
+  const countDateByYear = (list) => {
+    const yearCount = (list ?? dateList).reduce(
       (obj, date) => {
         const year = Number(date.split("/")[2]);
         obj.latestYear = Math.max(obj.latestYear, year);
@@ -128,6 +128,13 @@ const HQStatistic = () => {
     ]);
   };
 
+  useEffect(() => {
+    if (!certs) return;
+    setFilteredCerts(
+      centerView === "Tất cả" ? certs : certs.filter((cert) => cert.center === centerView)
+    );
+  }, [certs, centerView]);
+
   useEffect(
     () => setDateList(filteredCerts.map((cert) => cert[`${stateView}Date`])),
     [filteredCerts, stateView]
@@ -136,11 +143,10 @@ const HQStatistic = () => {
   useEffect(() => changeTimeView(), [dateList, timeView]);
 
   useEffect(() => {
-    if (!certs) return;
     const reloadTable = async () => {
       setTableData(
         await Promise.all(
-          certs.map(async (cert) => {
+          filteredCerts.map(async (cert) => {
             const car = await dexieDB.table("car").get(cert.car);
             const owner = await dexieDB.table("owner").get(car.owner);
             return {
@@ -155,14 +161,7 @@ const HQStatistic = () => {
       );
     };
     reloadTable();
-  }, [certs]);
-
-  useEffect(() => {
-    if (!certs) return;
-    setFilteredCerts(
-      centerView === "Tất cả" ? certs : certs.filter((cert) => cert.center === centerView)
-    );
-  }, [certs, centerView]);
+  }, [filteredCerts]);
 
   const switchTime = (mode) => setTimeView(mode);
   const switchState = (state) => setStateView(state ? "expired" : "registered");
@@ -231,7 +230,7 @@ const HQStatistic = () => {
                 height: "50%",
               }}
             >
-              <LineChart viewOption={timeView} data={graphData} />
+              <LineChart data={graphData} />
             </Box>
             <Stack
               direction="row"

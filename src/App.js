@@ -17,48 +17,48 @@ import HQPrediction from "./pages/HQPrediction";
 import "./App.css";
 
 const App = () => {
-  // useEffect(() => {
-  //   const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
-  //     snapshot.docChanges().forEach(async (cert) => {
-  //       const certDoc = cert.doc;
-  //       const certData = certDoc.data();
+  useEffect(() => {
+    const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
+      snapshot.docChanges().forEach(async (cert) => {
+        const certDoc = cert.doc;
+        const certData = certDoc.data();
 
-  //       if (certDoc.id === "center") {
-  //         await dexieDB.table("certificate").put({
-  //           codes: ["Tất cả", ...certData.codes],
-  //           id: "center",
-  //         });
-  //         return;
-  //       }
+        if (certDoc.id === "center") {
+          await dexieDB.table("certificate").put({
+            codes: ["Tất cả", ...certData.codes],
+            id: "center",
+          });
+          return;
+        }
 
-  //       await dexieDB.table("certificate").put({
-  //         ...certData,
-  //         id: certDoc.id,
-  //         car: getDocID(certData.car),
-  //       });
+        await dexieDB.table("certificate").put({
+          ...certData,
+          id: certDoc.id,
+          car: getDocID(certData.car),
+        });
 
-  //       const carDoc = await getDoc(certData.car);
-  //       const carData = carDoc.data();
-  //       await dexieDB.table("car").put({
-  //         id: carDoc.id,
-  //         regNum: carData.regNum,
-  //         owner: getDocID(carData.owner),
-  //       });
+        const carDoc = await getDoc(certData.car);
+        const carData = carDoc.data();
+        await dexieDB.table("car").put({
+          id: carDoc.id,
+          regNum: carData.regNum,
+          owner: getDocID(carData.owner),
+        });
 
-  //       const ownerDoc = await getDoc(carData.owner);
-  //       const ownerData = ownerDoc.data();
-  //       await dexieDB.table("owner").put({
-  //         id: ownerDoc.id,
-  //         name: ownerData.name,
-  //         address: ownerData.address,
-  //         telephone: ownerData.telephone,
-  //         type: ownerData.type,
-  //       });
-  //     });
-  //   });
+        const ownerDoc = await getDoc(carData.owner);
+        const ownerData = ownerDoc.data();
+        await dexieDB.table("owner").put({
+          id: ownerDoc.id,
+          name: ownerData.name,
+          address: ownerData.address,
+          telephone: ownerData.telephone,
+          type: ownerData.type,
+        });
+      });
+    });
 
-  //   return () => listener();
-  // }, []);
+    return () => listener();
+  }, []);
 
   const navigate = useNavigate();
   const onSignIn = () => navigate("/home");

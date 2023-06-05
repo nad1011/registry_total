@@ -1,8 +1,8 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 
 import { Box, Grid, Stack, Typography, IconButton } from "@mui/material";
-import Image from "mui-image";
 import { Close, FileUploadOutlined } from "@mui/icons-material";
+import Image from "mui-image";
 
 import { ImageConfig } from "../ImageConfig";
 import ButtonNina from "./ButtonNina/ButtonNina";
@@ -18,7 +18,10 @@ const FileUploadArea = () => {
 
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
-  const addFile = (file) => setFileList([...fileList, file]);
+  const addFile = (file) => {
+    const extension = file.type.split("/")[1];
+    if (extension === "csv") setFileList([...fileList, file]);
+  };
 
   const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
 
@@ -115,7 +118,7 @@ const FileUploadArea = () => {
           </Stack>
           <input
             type="file"
-            accept=".xlsx,.csv"
+            accept=".csv"
             onChange={(event) => addFile(event.target.files[0])}
             style={{
               opacity: 0,
@@ -236,7 +239,7 @@ const FileUploadArea = () => {
                       src={ImageConfig[item.type.split("/")[1]] || ImageConfig["default"]}
                       height="100%"
                       width="10%"
-                      fit="fit"
+                      fit="fill"
                     />
                     <Stack
                       direction={"row"}

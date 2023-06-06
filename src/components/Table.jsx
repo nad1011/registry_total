@@ -16,12 +16,17 @@ import { visuallyHidden } from "@mui/utils";
 
 //task here: fix sorting
 export default function EnhancedTable({ data }) {
+  const changeDateForm = (date) => {
+    const [day, month, year] = date.split("/");
+    return `${year}-${month}-${day}`;
+  };
+
   function createData({ id, owner, licensePlate, regDate, center }) {
     return {
       id,
       owner,
       licensePlate,
-      regDate,
+      regDate: changeDateForm(regDate),
       center,
     };
   }

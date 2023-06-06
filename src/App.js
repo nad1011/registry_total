@@ -8,11 +8,11 @@ import { dexieDB, user, getDocID } from "./database/cache";
 import CssBaseline from "@mui/material/CssBaseline";
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
-import Statistic from "./pages/Statistic";
+import Statistic from "./pages/Statistic/centerUI";
+import HQStatistic from "./pages/Statistic/hqUI";
 import Registration from "./pages/Registration";
-import Prediction from "./pages/Prediction";
-import HQStatistic from "./pages/HQStatistic";
 import HQRegistration from "./pages/HQRegistration";
+import Prediction from "./pages/Prediction";
 import HQPrediction from "./pages/HQPrediction";
 import "./App.css";
 

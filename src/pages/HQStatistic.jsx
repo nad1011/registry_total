@@ -32,15 +32,26 @@ const HQStatistic = () => {
   const [filteredCerts, setFilteredCerts] = useState([]);
   const [dateList, setDateList] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [total, setTotal] = useState({
+    registered: {
+      month: 0,
+      quarter: 0,
+      year: 0,
+    },
+    expired: {
+      month: 0,
+      quarter: 0,
+      year: 0,
+    },
+  });
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
   const [centerView, setCenterView] = useState("Tất cả");
-
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
 
-  const countDateByYear = (list) => {
-    const yearCount = (list ?? dateList).reduce(
+  const countDateByYear = (list = dateList) => {
+    const yearCount = list.reduce(
       (obj, date) => {
         const year = Number(date.split("/")[2]);
         obj.latestYear = Math.max(obj.latestYear, year);
@@ -58,10 +69,10 @@ const HQStatistic = () => {
     );
   };
 
-  const countDateByQuarter = () => {
+  const countDateByQuarter = (list = dateList) => {
     const getQuarterNum = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
     const curDate = new Date();
-    const quarterCount = dateList.reduce(
+    const quarterCount = list.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
         const quarterNum = getQuarterNum(year, month);
@@ -83,10 +94,10 @@ const HQStatistic = () => {
     );
   };
 
-  const countDateByMonth = () => {
+  const countDateByMonth = (list = dateList) => {
     const getMonthNum = (year, month) => year * 12 + month;
     const curDate = new Date();
-    const monthCount = dateList.reduce(
+    const monthCount = list.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
         const monthNum = getMonthNum(year, month - 1);
@@ -161,6 +172,24 @@ const HQStatistic = () => {
       );
     };
     reloadTable();
+
+    const recentRegistered = filteredCerts.map((cert) => cert.registeredDate);
+    const recentExpired = filteredCerts.map((cert) => cert.expiredDate);
+
+    const getRecent = (obj) => Object.values(obj).pop();
+
+    setTotal({
+      registered: {
+        month: getRecent(countDateByMonth(recentRegistered)),
+        quarter: getRecent(countDateByQuarter(recentRegistered)),
+        year: getRecent(countDateByYear(recentRegistered)),
+      },
+      expired: {
+        month: getRecent(countDateByMonth(recentExpired)),
+        quarter: getRecent(countDateByQuarter(recentExpired)),
+        year: getRecent(countDateByYear(recentExpired)),
+      },
+    });
   }, [filteredCerts]);
 
   const switchTime = (mode) => setTimeView(mode);
@@ -246,15 +275,15 @@ const HQStatistic = () => {
             >
               <StatisticBox
                 title={"Số lượng đăng kiểm gần đây"}
-                month={123}
-                quarter={222}
-                year={897}
+                month={total.registered.month}
+                quarter={total.registered.quarter}
+                year={total.registered.year}
               />
               <StatisticBox
-                title={"Số lượng xe hết hạn đăng kiểm"}
-                month={123}
-                quarter={222}
-                year={897}
+                title={"Số lượng hết hạn gần đây"}
+                month={total.expired.month}
+                quarter={total.expired.quarter}
+                year={total.expired.year}
               />
             </Stack>
           </Stack>

@@ -7,11 +7,11 @@ center account
 
 ------------------------------------------------------------------------------------------
 
-owner: 500
+owner:
     address
     name
     email
-    telephone
+    tel
     * owned cars
     type
         "personal"
@@ -20,15 +20,15 @@ owner: 500
         "company"
             representative
 -------------------------
-car: ~1000
+car:
     brake type
     * certificate
     curb weight (ton)
-    door number
+    door num
     fuel
-    gear number
+    gear num
     max output (kW)
-    manufacturing:
+    mfg:
         country
         manufacturer
         year
@@ -37,15 +37,20 @@ car: ~1000
     * owner
     purpose
     regNum
-    seat number
+    seat num
     suspension type
     transmission
     type
     wheel formula
     wheel tread
 -------------------------
-certificate: ~1000
+certificate:
     * car
     center
     registered date
     expired date
+-------------------------
+center:
+    address
+    name
+    tel

@@ -69,7 +69,7 @@ function ResponsiveDrawer(props) {
           />
         </IconButton>
       </Toolbar>
-      <Divider/>
+      <Divider />
       <List
         sx={{
           height: 1,
@@ -77,10 +77,7 @@ function ResponsiveDrawer(props) {
       >
         {items.map((item, index) => (
           <ListItem key={index} disablePadding sx={{}}>
-            <Link
-              to={item.path}
-              style={{ textDecoration: "none", width: "100%" }}
-            >
+            <Link to={item.path} style={{ textDecoration: "none", width: "100%" }}>
               <ListItemButton
                 sx={{
                   transition: "0.3s",
@@ -94,7 +91,7 @@ function ResponsiveDrawer(props) {
           </ListItem>
         ))}
       </List>
-      <Divider/>
+      <Divider />
       <List sx={{ p: 0 }}>
         <ListItem
           sx={{
@@ -102,14 +99,14 @@ function ResponsiveDrawer(props) {
             hover: "none",
           }}
         >
-          <ListItemButton
-            onClick={popUpUserInfo}
-            sx={{ transition: "0.3s", pl: open ? 4.5 : 1.5 }}
-          >
+          <ListItemButton onClick={popUpUserInfo} sx={{ transition: "0.3s", pl: open ? 4.5 : 1.5 }}>
             <ListItemIcon>
               <Avatar>H</Avatar>
             </ListItemIcon>
-            <ListItemText primary={user.id} sx={{ color: "var(--title-color)", fontWeight: "bold" }} />
+            <ListItemText
+              primary={user.id === "hq" ? "Cục" : user.id}
+              sx={{ color: "var(--title-color)", fontWeight: "bold" }}
+            />
           </ListItemButton>
           <UserInfo open={userInfoOpen} close={popDownUserInfo} />
         </ListItem>
@@ -117,11 +114,10 @@ function ResponsiveDrawer(props) {
     </>
   );
 
-  const container =
-    window !== undefined ? () => window().document.body : undefined;
+  const container = window !== undefined ? () => window().document.body : undefined;
 
   return (
-    <Box sx={{ display: "flex"}}>
+    <Box sx={{ display: "flex" }}>
       <AppBar
         position="fixed"
         sx={{

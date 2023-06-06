@@ -7,6 +7,11 @@ import Image from "mui-image";
 import { ImageConfig } from "../ImageConfig";
 import ButtonNina from "./ButtonNina/ButtonNina";
 
+import { fireDB } from "../database/firebase";
+import { arrayUnion, doc, getDoc, writeBatch } from "firebase/firestore";
+
+import Papa from "papaparse";
+
 const FileUploadArea = () => {
   const [fileList, setFileList] = useState([]);
 
@@ -18,17 +23,72 @@ const FileUploadArea = () => {
 
   const onDrop = () => wrapperRef.current.classList.remove("dragover");
 
-  const addFile = (file) => {
+  const addFile = (e) => {
+    const file = e.target.files[0];
     const extension = file.type.split("/")[1];
     if (extension === "csv") setFileList([...fileList, file]);
+    e.target.value = "";
   };
 
   const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
 
   const handleUpload = () => {
-    fileList.forEach((file) => {
-      //task here
-    });
+    const reader = new FileReader();
+    const batch = writeBatch(fireDB);
+
+    reader.onload = async ({ target }) => {
+      const csv = Papa.parse(target.result, { header: true });
+      const parsedData = csv?.data;
+      if (!parsedData) return;
+      parsedData.pop();
+
+      for (const row of parsedData) {
+        const {
+          id,
+          address,
+          name,
+          email,
+          tel,
+          type,
+          dateOfBirth,
+          occupation,
+          representative,
+          vin,
+          ...car
+        } = row;
+
+        let owner = { address, name, email, tel, type };
+        owner =
+          owner.type === "personal"
+            ? { ...owner, dateOfBirth, occupation }
+            : { ...owner, representative };
+        const ownerRef = doc(fireDB, "owner", id);
+
+        car.type = car["type_1"];
+        car.owner = ownerRef;
+        car.curbWeight = `${car.curbWeight} (ton)`;
+        car.maxOutput = `${car.maxOutput}(kW)`;
+        car.overallDimension = `${car.overallDimension} (m)`;
+        car.wheelTread = `${car.wheelTread} (m)`;
+        const { year, manufacturer, country } = car;
+        car.mfg = { year, manufacturer, country };
+        delete car["type_1"];
+        delete car.year;
+        delete car.manufacturer;
+        delete car.country;
+        const carRef = doc(fireDB, "car", vin);
+
+        batch.set(carRef, car);
+        const ownerDoc = await getDoc(ownerRef);
+        if (ownerDoc.exists()) batch.update(ownerRef, { ownedCars: arrayUnion(carRef) });
+        else batch.set(ownerRef, { ...owner, ownedCars: [carRef] });
+      }
+
+      await batch.commit();
+    };
+
+    fileList.forEach((file) => reader.readAsText(file));
+
     setFileList([]);
   };
 
@@ -119,7 +179,7 @@ const FileUploadArea = () => {
           <input
             type="file"
             accept=".csv"
-            onChange={(event) => addFile(event.target.files[0])}
+            onChange={addFile}
             style={{
               opacity: 0,
               position: "absolute",

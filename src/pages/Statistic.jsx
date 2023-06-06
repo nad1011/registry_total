@@ -31,12 +31,24 @@ const Statistic = () => {
   );
   const [dateList, setDateList] = useState([]);
   const [tableData, setTableData] = useState([]);
+  const [total, setTotal] = useState({
+    registered: {
+      month: 0,
+      quarter: 0,
+      year: 0,
+    },
+    expired: {
+      month: 0,
+      quarter: 0,
+      year: 0,
+    },
+  });
 
   const [timeView, setTimeView] = useState("Năm");
   const [stateView, setStateView] = useState("registered");
 
-  const countDateByYear = () => {
-    const yearCount = dateList.reduce(
+  const countDateByYear = (list = dateList) => {
+    const yearCount = list.reduce(
       (obj, date) => {
         const year = Number(date.split("/")[2]);
         obj.latestYear = Math.max(obj.latestYear, year);
@@ -54,10 +66,10 @@ const Statistic = () => {
     );
   };
 
-  const countDateByQuarter = () => {
+  const countDateByQuarter = (list = dateList) => {
     const getQuarterVal = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
     const curDate = new Date();
-    const quarterCount = dateList.reduce(
+    const quarterCount = list.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
         const quarterNum = getQuarterVal(year, month);
@@ -79,10 +91,10 @@ const Statistic = () => {
     );
   };
 
-  const countDateByMonth = () => {
+  const countDateByMonth = (list = dateList) => {
     const getMonthVal = (year, month) => year * 12 + month;
     const curDate = new Date();
-    const monthCount = dateList.reduce(
+    const monthCount = list.reduce(
       (obj, date) => {
         const [, month, year] = date.split("/").map(Number);
         const monthNum = getMonthVal(year, month - 1);
@@ -149,6 +161,24 @@ const Statistic = () => {
       );
     };
     reloadTable();
+
+    const recentRegistered = certs.map((cert) => cert.registeredDate);
+    const recentExpired = certs.map((cert) => cert.expiredDate);
+
+    const getRecent = (obj) => Object.values(obj).pop();
+
+    setTotal({
+      registered: {
+        month: getRecent(countDateByMonth(recentRegistered)),
+        quarter: getRecent(countDateByQuarter(recentRegistered)),
+        year: getRecent(countDateByYear(recentRegistered)),
+      },
+      expired: {
+        month: getRecent(countDateByMonth(recentExpired)),
+        quarter: getRecent(countDateByQuarter(recentExpired)),
+        year: getRecent(countDateByYear(recentExpired)),
+      },
+    });
   }, [certs]);
 
   useEffect(() => changeTimeView(), [dateList, timeView]);
@@ -230,15 +260,15 @@ const Statistic = () => {
             >
               <StatisticBox
                 title={"Số lượng đăng kiểm gần đây"}
-                month={123}
-                quarter={222}
-                year={897}
+                month={total.registered.month}
+                quarter={total.registered.quarter}
+                year={total.registered.year}
               />
               <StatisticBox
-                title={"Lượng xe hết hạn đăng kiểm"}
-                month={123}
-                quarter={222}
-                year={897}
+                title={"Số lượng hết hạn gần đây"}
+                month={total.expired.month}
+                quarter={total.expired.quarter}
+                year={total.expired.year}
               />
             </Stack>
           </Stack>

@@ -10,7 +10,7 @@ dexieDB.version(1).stores({
 });
 
 const user = {
-  id: "hq",
+  id: "",
   name: "",
   address: "",
   tel: "",

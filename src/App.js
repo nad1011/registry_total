@@ -6,15 +6,16 @@ import { fireDB } from "./database/firebase";
 import { dexieDB, user, getDocID } from "./database/cache";
 
 import CssBaseline from "@mui/material/CssBaseline";
+import "./App.css";
+
 import SignIn from "./pages/SignIn";
 import Home from "./pages/Home";
-import Statistic from "./pages/Statistic/centerUI";
-import HQStatistic from "./pages/Statistic/hqUI";
-import Registration from "./pages/Registration";
-import HQRegistration from "./pages/HQRegistration";
+import Statistic from "./pages/Statistic/center";
+import HQStatistic from "./pages/Statistic/hq";
+import Registration from "./pages/Registration/center";
+import HQRegistration from "./pages/Registration/hq";
 import Prediction from "./pages/Prediction";
 import HQPrediction from "./pages/HQPrediction";
-import "./App.css";
 
 const App = () => {
   // useEffect(() => {

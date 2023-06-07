@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 
-import { dexieDB, user } from "../database/cache";
+import { dexieDB, user } from "../../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
 
-import { Grid, IconButton, Box, Stack } from "@mui/material";
+import { Grid, Box, Stack } from "@mui/material";
 import { ArrowRight, ArrowLeft } from "@mui/icons-material";
 import { styled } from "@mui/material/styles";
 
-import Page from "../components/Page";
-import CartList from "../components/CardList";
-import SearchBox from "../components/Box/SearchBox";
-import RenewBox from "../components/Box/RenewBox";
-import SelectSearch from "../components/SelectSearch";
+import Page from "../../components/Page";
+import CartList from "../../components/CardList";
+import SearchBox from "../../components/Box/SearchBox";
+import RenewBox from "../../components/Box/RenewBox";
+import SelectSearch from "../../components/SelectSearch";
 
 const StyledButton = styled("button")({
   position: "relative",
@@ -23,8 +23,6 @@ const StyledButton = styled("button")({
   color: "var(--border-color)",
   display: "inline-block",
   fontSize: "1em",
-  // lineHeight: "10px",
-  // padding: '18px 18px 17px',
   textDecoration: "none",
   cursor: "pointer",
   background: "#fff",
@@ -76,8 +74,8 @@ const StyledButton = styled("button")({
 });
 
 const paramName = {
-  name: "name",
-  licensePlate: "license plate",
+  name: "chủ",
+  licensePlate: "biển số",
 };
 
 const Registration = () => {
@@ -93,10 +91,11 @@ const Registration = () => {
       .toArray()
   );
   const [expiredList, setExpiredList] = useState([]);
-  const [pageData, setPageData] = useState([]);
 
+  const [pageData, setPageData] = useState([]);
   const [query, setQuery] = useState("");
   const [param, setParam] = useState("licensePlate");
+
   const [page, setPage] = useState(0);
 
   useEffect(() => {
@@ -178,7 +177,7 @@ const Registration = () => {
               }}
             >
               <SearchBox
-                placeholder={`Search by ${paramName[param]}`}
+                placeholder={`Tìm theo ${paramName[param]} xe`}
                 onChangeHandler={onQueryChange}
               />
               <SelectSearch transfer={selectParam} />

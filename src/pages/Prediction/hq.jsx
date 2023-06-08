@@ -111,28 +111,28 @@ const Prediction = () => {
           >
             <Typography
               sx={{
-                width: "40%",
+                width: "50%",
                 height: "100%",
                 fontSize: { xs: "1.2rem", sm: "1.2rem", md: "1.2rem", lg: "1.5rem" },
                 fontWeight: "bold",
                 fontFamily: "var(--font-inter)",
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-end",
                 alignItems: "center",
                 pb: "var(--padding-item)",
                 color: "#569DAA",
                 textShadow: "0 0 1em rgba(86, 157, 170, 0.8)",
               }}
             >
-              Lựa chọn khu vực
+              Lựa chọn khu vực&nbsp;
             </Typography>
             <Box
               sx={{
                 display: "flex",
-                justifyContent: "center",
+                justifyContent: "flex-start",
                 alignItems: "center",
                 borderRadius: 2,
-                width: "60%",
+                width: "50%",
                 height: "100%",
                 color: "#051c33",
               }}

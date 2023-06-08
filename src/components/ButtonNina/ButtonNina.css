@@ -3,7 +3,8 @@
   min-width: 100px;
   width: 20%;
   height: 20%;
-  max-height: 45px;
+  min-height: 45px;
+  max-height: 50px;
   display: block;
   padding: 1em 1em;
   border: none;

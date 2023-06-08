@@ -66,3 +66,20 @@
     transform: translateY(-50%);
     transition: 200ms ease all;
 }
+
+.other-color {
+    color: #a9be41;
+    border-color: #a9be41;
+}
+
+.other-color:focus {
+    border-color: #a9be41;
+}
+
+.other-color ~ svg {
+    color: #a9be41;
+}
+
+.other-color:focus ~ svg {
+    color: #a9be41;
+}

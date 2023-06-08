@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Box, Stack, Typography } from "@mui/material";
 import ArrowCircleUpIcon from "@mui/icons-material/ArrowCircleUp";
 import ArrowCircleDownIcon from "@mui/icons-material/ArrowCircleDown";
@@ -28,16 +26,12 @@ export default function PredictBox({ head, value, percent }) {
         <Typography
           color={"var(--font2-color)"}
           fontFamily={"var(--font-inter)"}
-          // fontWeight={600}
           sx={{ fontSize: { xs: 10, sm: 12, md: 14, lg: 16 }, fontWeight: 600 }}
         >
           Đăng kiểm {head} sau:
         </Typography>
         <Stack direction="row">
-          <Typography
-            color={"var(--title-color)"}
-            sx={{ fontSize: 22, fontWeight: "bold" }}
-          >
+          <Typography color={"var(--title-color)"} sx={{ fontSize: 22, fontWeight: "bold" }}>
             {value}
           </Typography>
           {percent > 0 ? (

@@ -58,10 +58,10 @@ export default function SelectSearch({ transfer }) {
         }}
       >
         <MenuItem value={"name"} onClick={handleInput}>
-          Name
+          CHỦ XE
         </MenuItem>
         <MenuItem value={"licensePlate"} onClick={handleInput}>
-          License Plate
+          BIỂN SỐ
         </MenuItem>
       </Menu>
     </Box>

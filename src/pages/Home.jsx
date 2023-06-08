@@ -1,10 +1,10 @@
 import { useNavigate } from "react-router-dom";
 
-import review from "./Review";
-
 import { Grid, Box, Typography, Stack } from "@mui/material";
 
 import Page from "../components/Page";
+import review from "./Review";
+
 import logoImg from "../assets/images/logo.png";
 
 const Home = () => {

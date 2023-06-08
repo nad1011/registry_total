@@ -1,5 +1,3 @@
-import React from "react";
-
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -14,15 +12,7 @@ import { Line } from "react-chartjs-2";
 
 import { faker } from "@faker-js/faker";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, PointElement, LineElement, Title, Tooltip, Legend);
 
 export const options = {
   maintainAspectRatio: false,
@@ -45,14 +35,7 @@ export const options = {
   },
 };
 
-const labels = [
-  "Xe tải",
-  "Máy kéo",
-  "Rơ moóc",
-  "Xe khách",
-  "Ô tô",
-  "Xe cứu thương",
-];
+const labels = ["Xe tải", "Máy kéo", "Rơ moóc", "Xe khách", "Ô tô", "Xe cứu thương"];
 
 export const data = {
   labels,
@@ -62,14 +45,14 @@ export const data = {
       data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
       borderColor: "#00ADB5",
       backgroundColor: "#14b0b9",
-      cubicInterpolationMode: 'monotone', 
+      cubicInterpolationMode: "monotone",
     },
     {
       label: "Tháng này",
       data: labels.map(() => faker.number.int({ min: 0, max: 100 })),
       borderColor: "#B9EDDD",
       backgroundColor: "#B9EDDD",
-      cubicInterpolationMode: 'monotone', 
+      cubicInterpolationMode: "monotone",
     },
   ],
 };

@@ -1,15 +1,13 @@
-import React from "react";
-
 import { Grid, Box, Stack, Typography } from "@mui/material";
 
 import { useLiveQuery } from "dexie-react-hooks";
-import { dexieDB } from "../database/cache";
+import { dexieDB } from "../../database/cache";
 
-import Page from "../components/Page";
-import HorizontalBarChart from "../components/HorizontalBarChart";
-import { LineChart } from "../components/PredictLineChart";
-import PredictBox from "../components/Box/PredictBox";
-import Dropdown from "../components/PredictDropdown";
+import Page from "../../components/Page";
+import HorizontalBarChart from "../../components/HorizontalBarChart";
+import { LineChart } from "../../components/PredictLineChart";
+import PredictBox from "../../components/Box/PredictBox";
+import Dropdown from "../../components/PredictDropdown";
 
 const Prediction = () => {
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));

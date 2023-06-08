@@ -1,5 +1,3 @@
-import React from "react";
-
 import { styled } from "@mui/material/styles";
 import InputBase from "@mui/material/InputBase";
 import SearchIcon from "@mui/icons-material/Search";
@@ -35,7 +33,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   height: "100%",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 2, 1, 0),
-    // vertical padding + font size from searchIcon
     paddingLeft: `calc(1em + ${theme.spacing(3)})`,
     transition: theme.transitions.create("width"),
     width: "100%",
@@ -52,9 +49,11 @@ const SearchBox = ({ placeholder, onChangeHandler }) => {
   return (
     <Search>
       <SearchIconWrapper>
-        <SearchIcon sx={{
-          color: "var(--border-color)",
-        }}/>
+        <SearchIcon
+          sx={{
+            color: "var(--border-color)",
+          }}
+        />
       </SearchIconWrapper>
       <StyledInputBase placeholder={placeholder} onChange={onChangeHandler} />
     </Search>

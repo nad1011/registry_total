@@ -1,5 +1,3 @@
-import React from "react";
-
 import { Stack, Grid } from "@mui/material";
 import { Lock, Phone, Business, BusinessCenter, Email, Grid3x3 } from "@mui/icons-material";
 

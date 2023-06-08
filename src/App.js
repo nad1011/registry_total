@@ -14,8 +14,8 @@ import Statistic from "./pages/Statistic/center";
 import HQStatistic from "./pages/Statistic/hq";
 import Registration from "./pages/Registration/center";
 import HQRegistration from "./pages/Registration/hq";
-import Prediction from "./pages/Prediction";
-import HQPrediction from "./pages/HQPrediction";
+import Prediction from "./pages/Prediction/center";
+import HQPrediction from "./pages/Prediction/hq";
 
 const App = () => {
   // useEffect(() => {

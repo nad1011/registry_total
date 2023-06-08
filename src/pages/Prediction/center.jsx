@@ -1,11 +1,9 @@
-import React from "react";
-
 import { Grid, Box, Stack, Typography } from "@mui/material";
 
-import Page from "../components/Page";
-import HorizontalBarChart from "../components/HorizontalBarChart";
-import { LineChart } from "../components/PredictLineChart";
-import PredictBox from "../components/Box/PredictBox";
+import Page from "../../components/Page";
+import HorizontalBarChart from "../../components/HorizontalBarChart";
+import { LineChart } from "../../components/PredictLineChart";
+import PredictBox from "../../components/Box/PredictBox";
 
 const Prediction = () => {
   const linearRegression = (data) => {
@@ -27,17 +25,11 @@ const Prediction = () => {
       count++;
     }
 
-    const slope =
-      (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
+    const slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
     const intercept = (sum_y - slope * sum_x) / count;
 
     return { slope: slope, intercept: intercept };
   };
-
-  // const regression = () => {
-  //   const regression = linearRegression(data[0].data);
-  //   console.log(regression);
-  // };
 
   return (
     <Page>
@@ -47,8 +39,6 @@ const Prediction = () => {
           item
           height={{
             xs: "30%",
-            // sm: "30%",
-            // md: "30%",
             lg: "100%",
           }}
           md={12}
@@ -124,52 +114,21 @@ const Prediction = () => {
             direction="row"
             sx={{
               justifyContent: "space-between",
-              // px: 1,
               mt: "var(--padding-item)",
               width: 1,
               height: { xs: "25%", sm: "20%", md: "20%", lg: "20%" },
             }}
           >
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"Tháng"} value={312} percent={-1.0} />
+              <PredictBox head={"tháng"} value={312} percent={-1.0} />
             </Grid>
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"Quý"} value={331} percent={-2.0} />
+              <PredictBox head={"quý"} value={331} percent={-2.0} />
             </Grid>
             <Grid container item xs={4}>
-              <PredictBox head={"Năm"} value={256} percent={+5.0} />
+              <PredictBox head={"năm"} value={256} percent={+5.0} />
             </Grid>
           </Grid>
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              bgcolor: "var(--secondary-color)",
-
-              borderRadius: 2,
-              pl: 1,
-              pr: 1,
-              width: 1,
-              mt: "var(--padding-item)",
-              height: 0.2,
-              color: "#051c33",
-            }}
-          >
-            <Typography
-              variant="body1"
-              fontFamily={"var(--font-inter)"}
-              sx={{
-                fontSize: { xs: 11, sm: 13, md: 16, lg: 18 },
-              }}
-            >
-              Dựa trên những dữ liệu thống kê, có thể nhận thấy rằng có một xu
-              hướng tăng mạnh về số lượng đăng kiểm ô tô trong tương lai. Chính
-              vì vậy, nhu cầu đăng kiểm ô tô sẽ tiếp tục tăng và có thể trở
-              thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
-              quan.
-            </Typography>
-          </Box>
         </Grid>
       </Grid>
     </Page>

@@ -1,4 +1,3 @@
-import React from "react";
 import { Box } from "@mui/material";
 import { Bar } from "react-chartjs-2";
 import {
@@ -12,14 +11,7 @@ import {
 } from "chart.js";
 import { faker } from "@faker-js/faker";
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  BarElement,
-  Title,
-  Tooltip,
-  Legend
-);
+ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
 export default function HorizontalBarChart({ title, tableData }) {
   const labels = ["One"];
   const options = {
@@ -81,7 +73,12 @@ export default function HorizontalBarChart({ title, tableData }) {
     ],
   };
   return (
-    <Box sx={{ width: {xs: "100%", sm: "40%", md: 1/2 ,lg: "95%"}, height: { xs: "100%", md: "100%", lg: "33%" } }}>
+    <Box
+      sx={{
+        width: { xs: "100%", sm: "40%", md: 1 / 2, lg: "95%" },
+        height: { xs: "100%", md: "100%", lg: "33%" },
+      }}
+    >
       <Bar options={options} data={data} />
     </Box>
   );

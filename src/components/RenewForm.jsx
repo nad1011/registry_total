@@ -1,4 +1,3 @@
-import React from "react";
 import { FormControlLabel, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { DirectionsCar, CalendarMonth, Person } from "@mui/icons-material";

@@ -20,8 +20,8 @@ const Dropdown = ({ options, onSelect }) => {
     <Box
       position="relative"
       sx={{
-        height: "100%",
-        width: "100%",
+        height: "90%",
+        width: "50%",
         pb: "var(--padding-item)",
       }}
     >
@@ -56,8 +56,8 @@ const Dropdown = ({ options, onSelect }) => {
         PaperProps={{
           sx: {
             position: "absolute",
-            width: { xs: "50%", sm: "50%", md: "50%", lg: "30%" },
-            height: { xs: "50%", sm: "50%", md: "40%", lg: "37%" },
+            width: { xs: "20%", sm: "20%", md: "20%", lg: "10%" },
+            height: { xs: "50%", sm: "50%", md: "50%", lg: "50%" },
             backgroundColor: "#fff",
             boxShadow: "0 0.5em 1em rgba(0, 0, 0, 0.2)",
             borderRadius: "0.5em",

@@ -16,7 +16,7 @@ const user = {
   tel: "",
   email: "",
   loadData: (email) => {
-    user.id = email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "";
+    user.id = email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq";
     const loadProfile = async () => {
       const userDoc = await getDoc(doc(fireDB, "user", user.id));
       const data = userDoc.data();

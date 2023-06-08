@@ -1,7 +1,14 @@
 import React from "react";
 
 import { Stack, Grid } from "@mui/material";
-import { Lock, Phone, Business, BusinessCenter, Email, Grid3x3 } from "@mui/icons-material";
+import {
+  Lock,
+  Phone,
+  Business,
+  BusinessCenter,
+  Email,
+  Grid3x3,
+} from "@mui/icons-material";
 
 import FormInputHQ from "./FormInputHQ/FormInputHQ";
 import ButtonNina from "./ButtonNina/ButtonNina";
@@ -42,6 +49,7 @@ export default function SignUpForm({ form, onChange, onSubmit }) {
             name="email"
             value={form.email}
             icon=<Email />
+            color="other"
           />
           <FormInputHQ
             label="Mật khẩu"
@@ -50,6 +58,7 @@ export default function SignUpForm({ form, onChange, onSubmit }) {
             name="password"
             value={form.password}
             icon=<Lock />
+            color="other"
           />
           <FormInputHQ
             label="Xác nhận mật khẩu*"

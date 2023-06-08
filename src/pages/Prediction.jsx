@@ -46,7 +46,7 @@ const Prediction = () => {
           container
           item
           height={{
-            xs: "30%",
+            xs: "40%",
             // sm: "30%",
             // md: "30%",
             lg: "100%",
@@ -88,8 +88,8 @@ const Prediction = () => {
           item
           justifyContent="center"
           height={{
-            xs: "70%",
-            sm: "80%",
+            xs: "60%",
+            sm: "70%",
             md: "90%",
             lg: "100%",
           }}
@@ -104,7 +104,7 @@ const Prediction = () => {
             xs: 0,
             lg: "var(--padding-item)",
           }}
-          pb={"calc(var(--padding-item)*3)"}
+          pb={"calc(var(--padding-item)*2)"}
         >
           <Box
             sx={{
@@ -113,7 +113,7 @@ const Prediction = () => {
               pl: 1,
               pr: 1,
               width: 1,
-              height: { xs: "55%", sm: "60%", md: "60%", lg: "60%" },
+              height: { xs: "65%", sm: "70%", md: "70%", lg: "70%" },
               color: "#051c33",
             }}
           >
@@ -127,7 +127,7 @@ const Prediction = () => {
               // px: 1,
               mt: "var(--padding-item)",
               width: 1,
-              height: { xs: "25%", sm: "20%", md: "20%", lg: "20%" },
+              height: { xs: "35%", sm: "30%", md: "30%", lg: "30%" },
             }}
           >
             <Grid container item xs={4} pr={1}>
@@ -140,7 +140,7 @@ const Prediction = () => {
               <PredictBox head={"Năm"} value={256} percent={+5.0} />
             </Grid>
           </Grid>
-          <Box
+          {/* <Box
             sx={{
               display: "flex",
               justifyContent: "center",
@@ -169,7 +169,7 @@ const Prediction = () => {
               thành một vấn đề quan trọng đối với các chính phủ và tổ chức liên
               quan.
             </Typography>
-          </Box>
+          </Box> */}
         </Grid>
       </Grid>
     </Page>

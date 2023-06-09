@@ -1,8 +1,10 @@
 import { Children } from "react";
 import ResponsiveNavbar from "./Navbar/ResponsiveNavbar";
 import { Box } from "@mui/system";
+import { user } from "../database/cache";
 
 export default function Page({ children }) {
+  if (!user.id) return <></>;
   return (
     <>
       <ResponsiveNavbar />

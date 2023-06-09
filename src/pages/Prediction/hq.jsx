@@ -5,37 +5,12 @@ import { dexieDB } from "../../database/cache";
 
 import Page from "../../components/Page";
 import HorizontalBarChart from "../../components/HorizontalBarChart";
-import { LineChart } from "../../components/PredictLineChart";
+import LineChart from "../../components/PredictLineChart";
 import PredictBox from "../../components/Box/PredictBox";
 import Dropdown from "../../components/PredictDropdown";
 
 const Prediction = () => {
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
-
-  const linearRegression = (data) => {
-    let sum_x = 0;
-    let sum_y = 0;
-    let sum_xy = 0;
-    let sum_xx = 0;
-    let count = 0;
-
-    for (let i = 0; i < data.length; i++) {
-      const x = data[i].y;
-      const y = i + 1;
-
-      sum_x += x;
-      sum_y += y;
-      sum_xy += x * y;
-      sum_xx += x * x;
-
-      count++;
-    }
-
-    const slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
-    const intercept = (sum_y - slope * sum_x) / count;
-
-    return { slope: slope, intercept: intercept };
-  };
 
   return (
     <Page>
@@ -124,7 +99,7 @@ const Prediction = () => {
                 textShadow: "0 0 1em rgba(86, 157, 170, 0.8)",
               }}
             >
-              Lựa chọn khu vực&nbsp;
+              Lựa chọn trung tâm&nbsp;
             </Typography>
             <Box
               sx={{
@@ -158,7 +133,6 @@ const Prediction = () => {
             direction="row"
             sx={{
               justifyContent: "space-between",
-              // px: 1,
               mt: "var(--padding-item)",
               width: 1,
               height: { xs: "30%", sm: "30%", md: "30%", lg: "20%" },

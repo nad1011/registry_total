@@ -57,6 +57,6 @@ export const data = {
   ],
 };
 
-export function LineChart() {
+export default function LineChart() {
   return <Line options={options} data={data} />;
 }

@@ -10,6 +10,7 @@ import ButtonNina from "./ButtonNina/ButtonNina";
 import { fireDB } from "../database/firebase";
 import { arrayUnion, doc, getDoc, writeBatch } from "firebase/firestore";
 
+import { faker } from "@faker-js/faker";
 import Papa from "papaparse";
 
 const FileUploadArea = () => {
@@ -31,6 +32,14 @@ const FileUploadArea = () => {
   };
 
   const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
+
+  const generateCertId = () => {
+    let id = faker.string.alphanumeric({ length: 12, casing: "upper" });
+    getDoc(doc(fireDB, "certificate", id)).then((doc) => {
+      if (doc.exists()) id = generateCertId();
+    });
+    return id;
+  };
 
   const handleUpload = () => {
     const reader = new FileReader();
@@ -64,6 +73,10 @@ const FileUploadArea = () => {
             : { ...owner, representative };
         const ownerRef = doc(fireDB, "owner", id);
 
+        const certId = generateCertId();
+        const certRef = doc(fireDB, "certificate", certId);
+
+        car.cert = certRef;
         car.type = car["type_1"];
         car.owner = ownerRef;
         car.curbWeight = `${car.curbWeight} (ton)`;
@@ -78,6 +91,10 @@ const FileUploadArea = () => {
         delete car.country;
         const carRef = doc(fireDB, "car", vin);
 
+        batch.set(certRef, {
+          center: "None",
+          car: carRef,
+        });
         batch.set(carRef, car);
         const ownerDoc = await getDoc(ownerRef);
         if (ownerDoc.exists()) batch.update(ownerRef, { ownedCars: arrayUnion(carRef) });

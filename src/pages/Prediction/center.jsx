@@ -1,36 +1,11 @@
-import { Grid, Box, Stack, Typography } from "@mui/material";
+import { Grid, Box, Stack } from "@mui/material";
 
 import Page from "../../components/Page";
 import HorizontalBarChart from "../../components/HorizontalBarChart";
-import { LineChart } from "../../components/PredictLineChart";
+import LineChart from "../../components/PredictLineChart";
 import PredictBox from "../../components/Box/PredictBox";
 
 const Prediction = () => {
-  const linearRegression = (data) => {
-    let sum_x = 0;
-    let sum_y = 0;
-    let sum_xy = 0;
-    let sum_xx = 0;
-    let count = 0;
-
-    for (let i = 0; i < data.length; i++) {
-      const x = data[i].y;
-      const y = i + 1;
-
-      sum_x += x;
-      sum_y += y;
-      sum_xy += x * y;
-      sum_xx += x * x;
-
-      count++;
-    }
-
-    const slope = (count * sum_xy - sum_x * sum_y) / (count * sum_xx - sum_x * sum_x);
-    const intercept = (sum_y - slope * sum_x) / count;
-
-    return { slope: slope, intercept: intercept };
-  };
-
   return (
     <Page>
       <Grid container height={1}>

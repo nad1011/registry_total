@@ -83,8 +83,9 @@ const Registration = () => {
     dexieDB
       .table("certificate")
       .where("center")
-      .equals(user.id)
+      .anyOf(user.id, "None")
       .filter((cert) => {
+        if (!cert.expiredDate) return true;
         const [date, month, year] = cert.expiredDate.split("/").map(Number);
         return new Date(year, month - 1, date) < new Date();
       })
@@ -110,7 +111,7 @@ const Registration = () => {
               id: cert.id,
               name: owner.name,
               licensePlate: car.regNum,
-              expiredDate: cert.expiredDate,
+              expiredDate: cert.expiredDate || "New",
             };
           })
         )

@@ -81,9 +81,9 @@ const Home = () => {
                 fontFamily: "var(--font-inter)",
               }}
             >
-              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa minima, perspiciatis
-              aliquid quo ex totam consequatur repellendus ducimus quisquam incidunt sunt, veniam
-              sequi laborum! Cupiditate minima animi unde ullam sapiente!
+              Ứng dụng web được phát triển nhằm hỗ trợ Cục đăng kiểm và các
+              trung tâm đăng điểm trên toàn quốc quản lý đăng kiểm đối với xe ô
+              tô.
             </Typography>
           </Stack>
         </Grid>
@@ -179,8 +179,14 @@ const Home = () => {
                     p: 1,
                   }}
                 >
-                  <Stack height={1} justifyContent="space-between" alignItems="flex-end">
-                    <Typography color={"var(--font1-color)"}>{item.describe}</Typography>
+                  <Stack
+                    height={1}
+                    justifyContent="space-between"
+                    alignItems="flex-end"
+                  >
+                    <Typography color={"var(--font1-color)"}>
+                      {item.describe}
+                    </Typography>
                     <Typography
                       sx={{
                         color: "var(--title-color)",

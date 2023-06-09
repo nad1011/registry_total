@@ -5,7 +5,15 @@ import { fireAuth } from "../database/firebase";
 import { user } from "../database/cache";
 import { styled } from "@mui/material/styles";
 
-import { Box, Grid, Stack, Button, TextField, Typography, InputAdornment } from "@mui/material";
+import {
+  Box,
+  Grid,
+  Stack,
+  Button,
+  TextField,
+  Typography,
+  InputAdornment,
+} from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/WVntmOE.jpg";
@@ -78,7 +86,8 @@ const SignIn = ({ transfer }) => {
   const [emailError, setEmailError] = useState({ state: false, message: "" });
   const [pwError, setPwError] = useState({ state: false, message: "" });
 
-  const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
+  const handleInput = (e) =>
+    setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSignIn = () => {
     setEmailError({ state: false, message: "" });
@@ -96,7 +105,11 @@ const SignIn = ({ transfer }) => {
 
     const signIn = async ({ email, password }) => {
       try {
-        const userCred = await signInWithEmailAndPassword(fireAuth, email, password);
+        const userCred = await signInWithEmailAndPassword(
+          fireAuth,
+          email,
+          password
+        );
         user.loadData(userCred.user.email);
         transfer();
       } catch (error) {
@@ -183,7 +196,7 @@ const SignIn = ({ transfer }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  Welcome
+                  Hệ thống
                 </Typography>
                 <Typography
                   variant="h3"
@@ -193,7 +206,7 @@ const SignIn = ({ transfer }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  To Registry Total !
+                  quản lý đăng kiểm
                 </Typography>
                 <Typography
                   variant="p"
@@ -203,8 +216,8 @@ const SignIn = ({ transfer }) => {
                     fontSize: 16,
                   }}
                 >
-                  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Magnam, molestias
-                  possimus quod, autem.
+                  Quản lý đăng kiểm xe ô tô dễ dàng hơn cho cục đăng kiểm và các
+                  trung tâm đăng kiểm.
                 </Typography>
               </Box>
             </Stack>
@@ -232,7 +245,7 @@ const SignIn = ({ transfer }) => {
                   fontWeight: "bold",
                 }}
               >
-                Sign in
+                Đăng nhập
               </Typography>
               <CustomTextField
                 required
@@ -257,7 +270,7 @@ const SignIn = ({ transfer }) => {
               <CustomTextField
                 type="password"
                 name="password"
-                label="Password"
+                label="Mật khẩu"
                 required
                 InputProps={{
                   classes: {
@@ -270,7 +283,10 @@ const SignIn = ({ transfer }) => {
                         zIndex: 10,
                       }}
                     >
-                      <RiLockPasswordFill size={24} color="var(--title-color)" />
+                      <RiLockPasswordFill
+                        size={24}
+                        color="var(--title-color)"
+                      />
                     </InputAdornment>
                   ),
                 }}
@@ -303,7 +319,7 @@ const SignIn = ({ transfer }) => {
                 }}
                 onClick={handleSignIn}
               >
-                Sign In
+                Đăng nhập
               </Button>
             </Box>
           </Grid>

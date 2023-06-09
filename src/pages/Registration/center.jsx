@@ -121,7 +121,9 @@ const Registration = () => {
 
   useEffect(() => {
     setPage(0);
-    const filteredList = expiredList.filter((cert) => cert[param].toUpperCase().includes(query));
+    const filteredList = expiredList.filter((cert) =>
+      cert[param].toUpperCase().includes(query)
+    );
     setPageData(
       Array.from({ length: Math.ceil(filteredList.length / 6) }, (_, i) =>
         filteredList.slice(i * 6, i * 6 + 6)
@@ -132,12 +134,18 @@ const Registration = () => {
   const onQueryChange = (e) => setQuery(e.target.value.toUpperCase());
   const selectParam = (newFilter) => setParam(newFilter);
 
-  const toPrevChunk = () => setPage((page - 1 + pageData.length) % pageData.length);
+  const toPrevChunk = () =>
+    setPage((page - 1 + pageData.length) % pageData.length);
   const toNextChunk = () => setPage((page + 1) % pageData.length);
 
   return (
     <Page>
-      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
+      <Grid
+        container
+        sx={{ height: "100%" }}
+        justifyContent={"flex-start"}
+        alignItems={"center"}
+      >
         <Grid
           item
           xs={12}
@@ -171,9 +179,7 @@ const Registration = () => {
               sx={{
                 height: 1,
                 width: "70%",
-                pb: {
-                  xs: "calc(var(--padding-item)/2)",
-                },
+                pb: "calc(var(--padding-item))",
               }}
             >
               <SearchBox

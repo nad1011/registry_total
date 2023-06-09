@@ -83,11 +83,12 @@ const RenewBox = ({ car }) => {
         <RenewForm
           name={name}
           numberPlate={numberPlate}
+          handleChange={handleChange}
           feeCheck={feeCheck}
           carCheck={carCheck}
           newExpirationDate={newExpirationDate}
         />
-        <ButtonNina />
+        <ButtonNina content="Đăng kiểm"/>
       </Stack>
     </Box>
   );

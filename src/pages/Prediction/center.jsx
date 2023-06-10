@@ -7,7 +7,7 @@ import HorizontalBarChart from "../../components/HorizontalBarChart";
 import LineChart from "../../components/PredictLineChart";
 import PredictBox from "../../components/Box/PredictBox";
 
-import { dexieDB, user } from "../../database/cache";
+import { dexieDB } from "../../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { updateRecent, updatePredicted, updatePercent } from "./function";

@@ -18,7 +18,6 @@ import {
 import MenuIcon from "@mui/icons-material/Menu";
 
 import { Link } from "react-router-dom";
-import { user } from "../../database/cache";
 
 import items from "./ItemInfor";
 import UserInfo from "../UserInfo";

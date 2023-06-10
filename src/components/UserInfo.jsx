@@ -2,7 +2,6 @@ import { Stack, Button } from "@mui/material";
 import { Logout, Email, Phone, Business } from "@mui/icons-material";
 import { Sheet, Box, ModalClose, Typography, Modal } from "@mui/joy";
 
-import { user } from "../database/cache";
 import { useNavigate } from "react-router";
 
 const UserInfo = ({ open, close }) => {

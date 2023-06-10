@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-import { dexieDB, user } from "../../database/cache";
+import { dexieDB } from "../../database/cache";
 import { useLiveQuery } from "dexie-react-hooks";
 
 import { Grid, Box, Stack } from "@mui/material";

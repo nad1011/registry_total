@@ -7,7 +7,6 @@ import RegistrationForm from "../RegistrationForm";
 import ButtonNina from "../ButtonNina/ButtonNina";
 
 import { fireDB } from "../../database/firebase";
-import { user } from "../../database/cache";
 import { doc, updateDoc } from "firebase/firestore";
 import { changeFormat } from "../../contexts/FormContext";
 

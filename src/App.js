@@ -2,8 +2,8 @@ import { useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
 
 import { collection, getDoc, onSnapshot } from "firebase/firestore";
-import { fireDB, fireAuth } from "./database/firebase";
-import { dexieDB, user, getDocID } from "./database/cache";
+import { fireDB } from "./database/firebase";
+import { dexieDB, getDocID } from "./database/cache";
 
 import CssBaseline from "@mui/material/CssBaseline";
 import "./App.css";

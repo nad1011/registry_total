@@ -5,8 +5,6 @@ import { Grid, Box, Typography, Stack } from "@mui/material";
 import Page from "../components/Page";
 import review from "./Review";
 
-import logoImg from "../assets/images/logo.png";
-
 const Home = () => {
   const navigate = useNavigate();
   return (
@@ -81,9 +79,8 @@ const Home = () => {
                 fontFamily: "var(--font-inter)",
               }}
             >
-              Ứng dụng web được phát triển nhằm hỗ trợ Cục đăng kiểm và các
-              trung tâm đăng điểm trên toàn quốc quản lý đăng kiểm đối với xe ô
-              tô.
+              Ứng dụng web được phát triển nhằm hỗ trợ Cục đăng kiểm và các trung tâm đăng điểm trên
+              toàn quốc quản lý đăng kiểm đối với xe ô tô.
             </Typography>
           </Stack>
         </Grid>
@@ -179,14 +176,8 @@ const Home = () => {
                     p: 1,
                   }}
                 >
-                  <Stack
-                    height={1}
-                    justifyContent="space-between"
-                    alignItems="flex-end"
-                  >
-                    <Typography color={"var(--font1-color)"}>
-                      {item.describe}
-                    </Typography>
+                  <Stack height={1} justifyContent="space-between" alignItems="flex-end">
+                    <Typography color={"var(--font1-color)"}>{item.describe}</Typography>
                     <Typography
                       sx={{
                         color: "var(--title-color)",

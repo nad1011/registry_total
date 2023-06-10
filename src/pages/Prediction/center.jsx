@@ -14,7 +14,7 @@ import { updateRecent, updatePredicted, updatePercent } from "./function";
 
 const Prediction = () => {
   const certs = useLiveQuery(() =>
-    dexieDB.table("certificate").where("center").equals(user.id).toArray()
+    dexieDB.table("certificate").where("center").equals(localStorage.getItem("id")).toArray()
   );
 
   const [recentStat, setRecentStat] = useState({ year: 0, quarter: 0, month: 0 });

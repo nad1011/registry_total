@@ -1,12 +1,7 @@
 import { createContext, useState } from "react";
 import { faker } from "@faker-js/faker";
 
-export const FormContext = createContext({
-  id: "",
-  owner: "",
-  licensePlate: "",
-  expiredDate: "",
-});
+export const FormContext = createContext();
 
 export const changeFormat = (date) => {
   const day = "0" + date.getDate();

@@ -25,21 +25,19 @@ import UserInfo from "../UserInfo";
 import { NavbarContext } from "../../contexts/NavbarContext";
 
 function ResponsiveDrawer(props) {
+  const id = localStorage.getItem("id");
   const { window } = props;
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userInfoOpen, setUserInfoOpen] = useState(false);
   const { open, changeOpen } = useContext(NavbarContext);
+
   const drawerWidth = 180;
   const nonDrawerWidth = 65;
-  const handleDrawerToggle = () => {
-    setMobileOpen(!mobileOpen);
-  };
-  const popUpUserInfo = () => {
-    setUserInfoOpen(true);
-  };
-  const popDownUserInfo = () => {
-    setUserInfoOpen(false);
-  };
+
+  const handleDrawerToggle = () => setMobileOpen(!mobileOpen);
+  const popUpUserInfo = () => setUserInfoOpen(true);
+  const popDownUserInfo = () => setUserInfoOpen(false);
+
   const handleDrawer = () => {
     changeOpen();
   };
@@ -104,7 +102,7 @@ function ResponsiveDrawer(props) {
               <Avatar>H</Avatar>
             </ListItemIcon>
             <ListItemText
-              primary={user.id === "hq" ? "Cục" : user.id}
+              primary={id === "hq" ? "Cục" : id}
               sx={{ color: "var(--title-color)", fontWeight: "bold" }}
             />
           </ListItemButton>

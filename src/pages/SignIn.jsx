@@ -2,21 +2,14 @@ import { useState, useEffect } from "react";
 
 import { signInWithEmailAndPassword, signOut } from "firebase/auth";
 import { fireAuth } from "../database/firebase";
-import { user } from "../database/cache";
 import { styled } from "@mui/material/styles";
 
-import {
-  Box,
-  Grid,
-  Stack,
-  Button,
-  TextField,
-  Typography,
-  InputAdornment,
-} from "@mui/material";
+import { Box, Grid, Stack, Button, TextField, Typography, InputAdornment } from "@mui/material";
 import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/WVntmOE.jpg";
+
+import { loadCache, clearCache } from "../database/cache";
 
 const CustomTextField = styled(TextField)(({ theme }) => ({
   position: "relative",
@@ -78,7 +71,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 
 const SignIn = ({ transfer }) => {
   useEffect(() => {
-    user.reset();
+    clearCache();
     signOut(fireAuth).catch(console.error);
   }, []);
 
@@ -86,8 +79,7 @@ const SignIn = ({ transfer }) => {
   const [emailError, setEmailError] = useState({ state: false, message: "" });
   const [pwError, setPwError] = useState({ state: false, message: "" });
 
-  const handleInput = (e) =>
-    setInput({ ...input, [e.target.name]: e.target.value });
+  const handleInput = (e) => setInput({ ...input, [e.target.name]: e.target.value });
 
   const handleSignIn = () => {
     setEmailError({ state: false, message: "" });
@@ -105,12 +97,8 @@ const SignIn = ({ transfer }) => {
 
     const signIn = async ({ email, password }) => {
       try {
-        const userCred = await signInWithEmailAndPassword(
-          fireAuth,
-          email,
-          password
-        );
-        user.loadData(userCred.user.email);
+        const userCred = await signInWithEmailAndPassword(fireAuth, email, password);
+        loadCache(userCred.user.email);
         transfer();
       } catch (error) {
         switch (error.code) {
@@ -216,8 +204,8 @@ const SignIn = ({ transfer }) => {
                     fontSize: 16,
                   }}
                 >
-                  Quản lý đăng kiểm xe ô tô dễ dàng hơn cho cục đăng kiểm và các
-                  trung tâm đăng kiểm.
+                  Quản lý đăng kiểm xe ô tô dễ dàng hơn cho cục đăng kiểm và các trung tâm đăng
+                  kiểm.
                 </Typography>
               </Box>
             </Stack>
@@ -283,10 +271,7 @@ const SignIn = ({ transfer }) => {
                         zIndex: 10,
                       }}
                     >
-                      <RiLockPasswordFill
-                        size={24}
-                        color="var(--title-color)"
-                      />
+                      <RiLockPasswordFill size={24} color="var(--title-color)" />
                     </InputAdornment>
                   ),
                 }}

@@ -29,7 +29,7 @@ const RegistrationBox = () => {
     }
 
     updateDoc(doc(fireDB, "certificate", id), {
-      center: user.id,
+      center: localStorage.getItem("id"),
       registeredDate: changeFormat(new Date()),
       expiredDate: expiredDate,
     });
@@ -70,7 +70,7 @@ const RegistrationBox = () => {
         <RegistrationForm
           owner={owner}
           licensePlate={licensePlate}
-          center={user.id}
+          center={localStorage.getItem("id")}
           expiredDate={expiredDate}
           handleFeeChecked={() => handleCheckBox("fee")}
           handleCarChecked={() => handleCheckBox("car")}

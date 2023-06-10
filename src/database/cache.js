@@ -9,33 +9,23 @@ dexieDB.version(1).stores({
   certificate: "id,center",
 });
 
-const user = {
-  id: "",
-  name: "",
-  address: "",
-  tel: "",
-  email: "",
-  loadData: (email) => {
-    user.id = email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq";
-    const loadProfile = async () => {
-      const userDoc = await getDoc(doc(fireDB, "user", user.id));
-      const data = userDoc.data();
-      user.name = data.name;
-      user.email = email;
-      user.address = data.address;
-      user.tel = data.tel;
-    };
-    loadProfile();
-  },
-  reset: () => {
-    user.id = "";
-    user.name = "";
-    user.address = "";
-    user.tel = "";
-    user.email = "";
-  },
+const loadCache = (email) => {
+  localStorage.setItem("email", email);
+  localStorage.setItem("id", email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq");
+
+  const loadProfile = async () => {
+    const userDoc = await getDoc(doc(fireDB, "user", localStorage.getItem("id")));
+    const data = userDoc.data();
+    localStorage.setItem("name", data.name);
+    localStorage.setItem("address", data.address);
+    localStorage.setItem("tel", data.tel);
+  };
+  //loadProfile();
 };
+
+const clearCache = () =>
+  ["id", "name", "address", "tel", "email"].forEach((key) => localStorage.setItem(key, ""));
 
 const getDocID = (docRef) => docRef.path.split("/").pop();
 
-export { dexieDB, user, getDocID };
+export { dexieDB, loadCache, clearCache, getDocID };

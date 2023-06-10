@@ -7,6 +7,7 @@ import { useNavigate } from "react-router";
 
 const UserInfo = ({ open, close }) => {
   const navigate = useNavigate();
+  const id = localStorage.getItem("id");
 
   return (
     <Modal
@@ -47,7 +48,7 @@ const UserInfo = ({ open, close }) => {
             color: "var(--title-color)",
           }}
         >
-          {user.id === "hq" ? "Cục đăng kiểm" : `Trung tâm đăng kiểm ${user.id}`}
+          {id === "hq" ? "Cục đăng kiểm" : `Trung tâm đăng kiểm ${id}`}
         </Typography>
         <Stack
           height={"40vh"}
@@ -68,7 +69,7 @@ const UserInfo = ({ open, close }) => {
               color: "var(--font2-color)",
             }}
           >
-            Email: {user.email}
+            Email: {localStorage.getItem("email")}
           </Typography>
           <Typography
             id="modal-desc"
@@ -79,7 +80,7 @@ const UserInfo = ({ open, close }) => {
             }}
             startDecorator={<Phone />}
           >
-            Số điện thoại: {user.tel}
+            Số điện thoại: {localStorage.getItem("tel")}
           </Typography>
           <Typography
             id="modal-desc"
@@ -90,7 +91,7 @@ const UserInfo = ({ open, close }) => {
             }}
             startDecorator={<Business />}
           >
-            Địa chỉ: {user.address}
+            Địa chỉ: {localStorage.getItem("address")}
           </Typography>
           <Box width={"110%"} display={"flex"} justifyContent={"center"} ml={"-10%"}>
             <Button

@@ -83,7 +83,7 @@ const Registration = () => {
     dexieDB
       .table("certificate")
       .where("center")
-      .anyOf(user.id, "None")
+      .anyOf(localStorage.getItem("id"), "None")
       .filter((cert) => {
         if (!cert.expiredDate) return true;
         const [date, month, year] = cert.expiredDate.split("/").map(Number);

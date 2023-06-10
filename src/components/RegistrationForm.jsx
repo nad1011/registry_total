@@ -32,52 +32,50 @@ const CheckBox = styled("input")(({ theme }) => ({
   },
 }));
 
-export default function RenewForm({
-  name,
-  numberPlate,
-  carInfo,
-  handleChange,
-  newExpirationDate,
-  handleFeeCheck,
-  handleCarCheck,
-  submitHandle,
+export default function RegistrationForm({
+  owner,
+  licensePlate,
+  center,
+  expiredDate,
+  handleFeeChecked,
+  handleCarChecked,
 }) {
   return (
-    <form onSubmit={submitHandle} style={{ width: "85%" }}>
+    <form style={{ width: "85%" }}>
       <FormInput
+        readOnly
         label="Chủ sở hữu"
         type="text"
         required
-        // onChange={handleChange}
         name="name"
-        value={name}
+        value={owner}
         icon=<Person />
       />
       <FormInput
+        readOnly
         label="Biển số xe"
         type="text"
         required
-        // onChange={handleChange}
-        name="numberPlate"
-        value={numberPlate}
+        name="licensePlate"
+        value={licensePlate}
         icon=<DirectionsCar />
       />
       <FormInput
+        readOnly
         label="Trung tâm đăng kiểm"
         type="text"
         required
-        // onChange={handleChange}
-        name="newExpirationDate"
-        value={newExpirationDate}
+        name="center"
+        value={center}
         icon=<BusinessCenter />
       />
       <FormInput
+        readOnly
         label="Ngày hết hạn mới"
         type="text"
         required
-        // onChange={handleChange}
-        name="newExpirationDate"
-        value={newExpirationDate}
+        name="expiredDate"
+        value={expiredDate}
         icon=<CalendarMonth />
       />
       <Box
@@ -88,14 +86,7 @@ export default function RenewForm({
         }}
       >
         <FormControlLabel
-          control={
-            <CheckBox
-              type="checkbox"
-              // checked={feeCheck}
-              onChange={handleFeeCheck}
-              name="feeCheck"
-            />
-          }
+          control={<CheckBox type="checkbox" onChange={handleFeeChecked} name="FeeChecked" />}
           sx={{
             color: "var(--font1-color)",
             fontSize: "1.5rem",
@@ -103,14 +94,7 @@ export default function RenewForm({
           label="Đóng đủ phí"
         />
         <FormControlLabel
-          control={
-            <CheckBox
-              type="checkbox"
-              // checked={carCheck}
-              onChange={handleCarCheck}
-              name="carCheck"
-            />
-          }
+          control={<CheckBox type="checkbox" onChange={handleCarChecked} name="CarChecked" />}
           sx={{
             color: "var(--font1-color)",
             fontSize: "1.5rem",

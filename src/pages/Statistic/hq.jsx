@@ -16,7 +16,12 @@ import Table from "../../components/Table";
 
 const Statistic = () => {
   const certs = useLiveQuery(() =>
-    dexieDB.table("certificate").where("id").notEqual("center").toArray()
+    dexieDB
+      .table("certificate")
+      .where("id")
+      .notEqual("center")
+      .and((cert) => cert.center !== "None")
+      .toArray()
   );
   const [filteredCerts, setFilteredCerts] = useState([]);
   const [dateList, setDateList] = useState([]);

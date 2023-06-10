@@ -1,6 +1,6 @@
 import { dexieDB } from "../../database/cache";
 
-const countDateByYear = (list) => {
+export const countDateByYear = (list) => {
   const yearCount = list.reduce(
     (obj, date) => {
       const year = Number(date.split("/")[2]);
@@ -16,7 +16,7 @@ const countDateByYear = (list) => {
   }, {});
 };
 
-const countDateByQuarter = (list) => {
+export const countDateByQuarter = (list) => {
   const getQuarterVal = (year, month) => year * 4 + Math.ceil(month / 3) - 1;
   const curDate = new Date();
   const quarterCount = list.reduce(
@@ -41,7 +41,7 @@ const countDateByQuarter = (list) => {
   );
 };
 
-const countDateByMonth = (list) => {
+export const countDateByMonth = (list) => {
   const getMonthVal = (year, month) => year * 12 + month;
   const curDate = new Date();
   const monthCount = list.reduce(

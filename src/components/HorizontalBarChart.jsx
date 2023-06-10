@@ -9,11 +9,10 @@ import {
   Tooltip,
   Legend,
 } from "chart.js";
-import { faker } from "@faker-js/faker";
 
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);
-export default function HorizontalBarChart({ title, tableData }) {
-  const labels = ["One"];
+export default function HorizontalBarChart({ title, recent, predicted }) {
+  const labels = [""];
   const options = {
     indexAxis: "y",
     maintainAspectRatio: false,
@@ -40,13 +39,11 @@ export default function HorizontalBarChart({ title, tableData }) {
       },
     },
     scales: {
-      // to remove the y-axis labels
       y: {
         ticks: {
           display: false,
           beginAtZero: true,
         },
-        // to remove the y-axis grid
         grid: {
           drawBorder: true,
           display: true,
@@ -60,13 +57,13 @@ export default function HorizontalBarChart({ title, tableData }) {
     datasets: [
       {
         label: "Gần đây",
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: [recent],
         borderColor: "transparent",
         backgroundColor: "#B9EDDD",
       },
       {
         label: "Dự đoán",
-        data: labels.map(() => faker.number.int({ min: 0, max: 1000 })),
+        data: [predicted],
         borderColor: "transparent",
         backgroundColor: "#569DAA",
       },

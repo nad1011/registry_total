@@ -2,7 +2,7 @@ import ReportIcon from "@mui/icons-material/Report";
 import WarningIcon from "@mui/icons-material/Warning";
 import { useNavigate } from "react-router-dom";
 
-import { Box, Stack, Typography, Button } from "@mui/material";
+import { Stack, Typography, Button } from "@mui/material";
 
 export default function Warning() {
   const navigate = useNavigate();

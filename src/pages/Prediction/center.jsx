@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 import { Grid, Box, Stack } from "@mui/material";
 
 import Page from "../../components/Page";
@@ -5,7 +7,36 @@ import HorizontalBarChart from "../../components/HorizontalBarChart";
 import LineChart from "../../components/PredictLineChart";
 import PredictBox from "../../components/Box/PredictBox";
 
+import { dexieDB, user } from "../../database/cache";
+import { useLiveQuery } from "dexie-react-hooks";
+
+import { updateRecent, updatePredicted, updatePercent } from "./function";
+
 const Prediction = () => {
+  const certs = useLiveQuery(() =>
+    dexieDB.table("certificate").where("center").equals(user.id).toArray()
+  );
+
+  const [recentStat, setRecentStat] = useState({ year: 0, quarter: 0, month: 0 });
+  const [predictedStat, setPredictedStat] = useState({ year: 0, quarter: 0, month: 0 });
+  const [percent, setPercent] = useState({ year: 0, quarter: 0, month: 0 });
+
+  useEffect(() => {
+    if (!certs) return;
+    updateRecent(
+      certs.map((cert) => cert.expiredDate),
+      setRecentStat
+    );
+    updatePredicted(
+      certs.map((cert) => cert.registeredDate),
+      setPredictedStat
+    );
+  }, [certs]);
+
+  useEffect(() => {
+    updatePercent(recentStat, predictedStat, setPercent);
+  }, [recentStat, predictedStat]);
+
   return (
     <Page>
       <Grid container height={1}>
@@ -43,9 +74,21 @@ const Prediction = () => {
               height: 1.0,
             }}
           >
-            <HorizontalBarChart title={"Tháng"} />
-            <HorizontalBarChart title={"Quý"} />
-            <HorizontalBarChart title={"Năm"} />
+            <HorizontalBarChart
+              title={"Tháng"}
+              recent={recentStat.month}
+              predicted={predictedStat.month}
+            />
+            <HorizontalBarChart
+              title={"Quý"}
+              recent={recentStat.quarter}
+              predicted={predictedStat.quarter}
+            />
+            <HorizontalBarChart
+              title={"Năm"}
+              recent={recentStat.year}
+              predicted={predictedStat.year}
+            />
           </Stack>
         </Grid>
         <Grid
@@ -82,7 +125,7 @@ const Prediction = () => {
               color: "#051c33",
             }}
           >
-            <LineChart />
+            <LineChart average={predictedStat.month} />
           </Box>
           <Grid
             container
@@ -95,13 +138,13 @@ const Prediction = () => {
             }}
           >
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"tháng"} value={312} percent={-1.0} />
+              <PredictBox head={"tháng"} value={predictedStat.month} percent={percent.month} />
             </Grid>
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"quý"} value={331} percent={-2.0} />
+              <PredictBox head={"quý"} value={predictedStat.quarter} percent={percent.quarter} />
             </Grid>
             <Grid container item xs={4}>
-              <PredictBox head={"năm"} value={256} percent={+5.0} />
+              <PredictBox head={"năm"} value={predictedStat.year} percent={percent.year} />
             </Grid>
           </Grid>
         </Grid>

@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+
 import { Grid, Box, Stack, Typography } from "@mui/material";
 
 import { useLiveQuery } from "dexie-react-hooks";
@@ -9,8 +11,49 @@ import LineChart from "../../components/PredictLineChart";
 import PredictBox from "../../components/Box/PredictBox";
 import Dropdown from "../../components/PredictDropdown";
 
+import { updateRecent, updatePredicted, updatePercent } from "./function";
+
 const Prediction = () => {
+  const certs = useLiveQuery(() =>
+    dexieDB
+      .table("certificate")
+      .where("id")
+      .notEqual("center")
+      .and((cert) => cert.center !== "None")
+      .toArray()
+  );
+  const [filteredCerts, setFilteredCerts] = useState([]);
+
+  const [recentStat, setRecentStat] = useState({ year: 0, quarter: 0, month: 0 });
+  const [predictedStat, setPredictedStat] = useState({ year: 0, quarter: 0, month: 0 });
+  const [percent, setPercent] = useState({ year: 0, quarter: 0, month: 0 });
+
   const center = useLiveQuery(() => dexieDB.table("certificate").get("center"));
+  const [centerView, setCenterView] = useState("Tất cả");
+
+  useEffect(() => {
+    if (!certs) return;
+    setFilteredCerts(
+      centerView === "Tất cả" ? certs : certs.filter((cert) => cert.center === centerView)
+    );
+  }, [certs, centerView]);
+
+  useEffect(() => {
+    updateRecent(
+      filteredCerts.map((cert) => cert.expiredDate),
+      setRecentStat
+    );
+    updatePredicted(
+      filteredCerts.map((cert) => cert.registeredDate),
+      setPredictedStat
+    );
+  }, [filteredCerts]);
+
+  useEffect(() => {
+    updatePercent(recentStat, predictedStat, setPercent);
+  }, [recentStat, predictedStat]);
+
+  const selectCenter = (center) => setCenterView(center);
 
   return (
     <Page>
@@ -49,9 +92,21 @@ const Prediction = () => {
               height: 1.0,
             }}
           >
-            <HorizontalBarChart title={"Tháng"} />
-            <HorizontalBarChart title={"Quý"} />
-            <HorizontalBarChart title={"Năm"} />
+            <HorizontalBarChart
+              title={"Tháng"}
+              recent={recentStat.month}
+              predicted={predictedStat.month}
+            />
+            <HorizontalBarChart
+              title={"Quý"}
+              recent={recentStat.quarter}
+              predicted={predictedStat.quarter}
+            />
+            <HorizontalBarChart
+              title={"Năm"}
+              recent={recentStat.year}
+              predicted={predictedStat.year}
+            />
           </Stack>
         </Grid>
         <Grid
@@ -112,7 +167,7 @@ const Prediction = () => {
                 color: "#051c33",
               }}
             >
-              <Dropdown options={center?.codes ?? []} onSelect={(option) => {}} />
+              <Dropdown options={center?.codes ?? []} onSelect={selectCenter} />
             </Box>
           </Stack>
           <Box
@@ -126,7 +181,7 @@ const Prediction = () => {
               color: "#051c33",
             }}
           >
-            <LineChart />
+            <LineChart average={predictedStat.month} />
           </Box>
           <Grid
             container
@@ -139,13 +194,13 @@ const Prediction = () => {
             }}
           >
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"Tháng"} value={312} percent={-1.0} />
+              <PredictBox head={"tháng"} value={predictedStat.month} percent={percent.month} />
             </Grid>
             <Grid container item xs={4} pr={1}>
-              <PredictBox head={"Quý"} value={331} percent={-2.0} />
+              <PredictBox head={"quý"} value={predictedStat.quarter} percent={percent.quarter} />
             </Grid>
             <Grid container item xs={4}>
-              <PredictBox head={"Năm"} value={256} percent={+5.0} />
+              <PredictBox head={"năm"} value={predictedStat.year} percent={percent.year} />
             </Grid>
           </Grid>
         </Grid>

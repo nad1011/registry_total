@@ -5,13 +5,9 @@ import { Button, Typography, CardMedia, CardContent, CardActions, Card, Box } fr
 import { FormContext } from "../contexts/FormContext";
 
 const CustomCard = ({ cert }) => {
-  const { name, expiredDate, licensePlate } = cert;
+  const { id, name, licensePlate, expiredDate } = cert;
 
-  const { autoCompleteNameAndNumberPlate } = useContext(FormContext);
-
-  const onClickHandler = () => {
-    autoCompleteNameAndNumberPlate(name, licensePlate);
-  };
+  const { autoComplete } = useContext(FormContext);
 
   return (
     <>
@@ -97,7 +93,7 @@ const CustomCard = ({ cert }) => {
           >
             <Button
               disableRipple
-              onClick={onClickHandler}
+              onClick={() => autoComplete(id, name, licensePlate)}
               sx={{
                 boxShadow: "none",
                 textTransform: "none",

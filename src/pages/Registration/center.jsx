@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import Page from "../../components/Page";
 import CartList from "../../components/CardList";
 import SearchBox from "../../components/Box/SearchBox";
-import RenewBox from "../../components/Box/RenewBox";
+import RegistrationBox from "../../components/Box/RegistrationBox";
 import SelectSearch from "../../components/SelectSearch";
 
 const StyledButton = styled("button")({
@@ -29,7 +29,7 @@ const StyledButton = styled("button")({
   userSelect: "none",
   WebkitUserSelect: "none",
   touchAction: "manipulation",
-  "& span:first-child": {
+  "& span:first-of-type": {
     position: "relative",
     transition: "color 300ms cubic-bezier(0.48, 0, 0.12, 1)",
     zIndex: 10,
@@ -122,9 +122,7 @@ const Registration = () => {
 
   useEffect(() => {
     setPage(0);
-    const filteredList = expiredList.filter((cert) =>
-      cert[param].toUpperCase().includes(query)
-    );
+    const filteredList = expiredList.filter((cert) => cert[param].toUpperCase().includes(query));
     setPageData(
       Array.from({ length: Math.ceil(filteredList.length / 6) }, (_, i) =>
         filteredList.slice(i * 6, i * 6 + 6)
@@ -135,18 +133,12 @@ const Registration = () => {
   const onQueryChange = (e) => setQuery(e.target.value.toUpperCase());
   const selectParam = (newFilter) => setParam(newFilter);
 
-  const toPrevChunk = () =>
-    setPage((page - 1 + pageData.length) % pageData.length);
+  const toPrevChunk = () => setPage((page - 1 + pageData.length) % pageData.length);
   const toNextChunk = () => setPage((page + 1) % pageData.length);
 
   return (
     <Page>
-      <Grid
-        container
-        sx={{ height: "100%" }}
-        justifyContent={"flex-start"}
-        alignItems={"center"}
-      >
+      <Grid container sx={{ height: "100%" }} justifyContent={"flex-start"} alignItems={"center"}>
         <Grid
           item
           xs={12}
@@ -260,7 +252,7 @@ const Registration = () => {
             lg: "var(--padding-item)",
           }}
         >
-          <RenewBox />
+          <RegistrationBox />
         </Grid>
       </Grid>
     </Page>

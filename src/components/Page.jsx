@@ -6,7 +6,6 @@ import { user } from "../database/cache";
 import Warning from "../pages/Warning";
 
 export default function Page({ children }) {
-  if (!user.id) return <></>;
   return (
     <>
       {!user.id ? (

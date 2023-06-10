@@ -9,7 +9,7 @@ dexieDB.version(1).stores({
   certificate: "id,center",
 });
 
-const loadCache = (email) => {
+const loadUserState = (email) => {
   localStorage.setItem("email", email);
   localStorage.setItem("id", email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq");
 
@@ -20,12 +20,12 @@ const loadCache = (email) => {
     localStorage.setItem("address", data.address);
     localStorage.setItem("tel", data.tel);
   };
-  //loadProfile();
+  loadProfile();
 };
 
-const clearCache = () =>
+const clearUserState = () =>
   ["id", "name", "address", "tel", "email"].forEach((key) => localStorage.setItem(key, ""));
 
 const getDocID = (docRef) => docRef.path.split("/").pop();
 
-export { dexieDB, loadCache, clearCache, getDocID };
+export { dexieDB, loadUserState, clearUserState, getDocID };

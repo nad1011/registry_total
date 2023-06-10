@@ -1,6 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { getAuth, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { loadUserState, clearUserState } from "./cache";
 
 const app = initializeApp({
   apiKey: "AIzaSyCserEAADxBpBDkNWDig-mQGRXOuyx_-hg",
@@ -16,5 +17,10 @@ const fireDB = getFirestore(app);
 const fireAuth = getAuth(app);
 
 await setPersistence(fireAuth, browserLocalPersistence);
+
+fireAuth.onAuthStateChanged((user) => {
+  if (user) loadUserState(user.email);
+  else clearUserState();
+});
 
 export { fireDB, fireAuth };

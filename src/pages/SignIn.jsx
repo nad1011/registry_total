@@ -9,8 +9,6 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { MdPermIdentity } from "react-icons/md";
 import backgroundImage from "../assets/images/WVntmOE.jpg";
 
-import { loadCache, clearCache } from "../database/cache";
-
 const CustomTextField = styled(TextField)(({ theme }) => ({
   position: "relative",
   width: "100%",
@@ -71,8 +69,7 @@ const CustomTextField = styled(TextField)(({ theme }) => ({
 
 const SignIn = ({ transfer }) => {
   useEffect(() => {
-    clearCache();
-    signOut(fireAuth).catch(console.error);
+    signOut(fireAuth);
   }, []);
 
   const [input, setInput] = useState({ email: "", password: "" });
@@ -97,8 +94,7 @@ const SignIn = ({ transfer }) => {
 
     const signIn = async ({ email, password }) => {
       try {
-        const userCred = await signInWithEmailAndPassword(fireAuth, email, password);
-        loadCache(userCred.user.email);
+        await signInWithEmailAndPassword(fireAuth, email, password);
         transfer();
       } catch (error) {
         switch (error.code) {

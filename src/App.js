@@ -18,25 +18,25 @@ import Prediction from "./pages/Prediction/center";
 import HQPrediction from "./pages/Prediction/hq";
 
 const App = () => {
-  // useEffect(() => {
-  //   const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
-  //     snapshot.docChanges().forEach(async (cert) => {
-  //       const certDoc = cert.doc;
-  //       const certData = certDoc.data();
-  //       if (certDoc.id === "center") {
-  //         await dexieDB.table("certificate").put({
-  //           id: "center",
-  //           codes: ["Tất cả", ...certData.codes],
-  //         });
-  //         return;
-  //       }
-  //       const certCachedData = { ...certData, id: certDoc.id };
-  //       delete certCachedData.car;
-  //       await dexieDB.table("certificate").put(certCachedData);
-  //     });
-  //   });
-  //   return () => listener();
-  // }, []);
+  useEffect(() => {
+    const listener = onSnapshot(collection(fireDB, "certificate"), (snapshot) => {
+      snapshot.docChanges().forEach(async (cert) => {
+        const certDoc = cert.doc;
+        const certData = certDoc.data();
+        if (certDoc.id === "center") {
+          await dexieDB.table("certificate").put({
+            id: "center",
+            codes: ["Tất cả", ...certData.codes],
+          });
+          return;
+        }
+        const certCachedData = { ...certData, id: certDoc.id };
+        delete certCachedData.car;
+        await dexieDB.table("certificate").put(certCachedData);
+      });
+    });
+    return () => listener();
+  }, []);
 
   const navigate = useNavigate();
   const onSignIn = () => navigate("/home");

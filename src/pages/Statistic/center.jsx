@@ -96,7 +96,7 @@ const Statistic = () => {
                     zIndex: 1,
                   }}
                 >
-                  Thống kê số lượng xe đăng kiểm
+                  Thống kê số lượng xe {stateView === "registered" ? "đăng kiểm" : "hết hạn"}
                 </Typography>
                 <Switch onSwitch={onStateSwitch} />
               </Stack>

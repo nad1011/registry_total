@@ -86,21 +86,17 @@ export const updateGraph = (data, timeView, oldGraph, setter) => {
   ]);
 };
 
-export const updateTable = async (data, setter) => {
+export const updateTable = (data, setter) => {
   setter(
-    await Promise.all(
-      data.map(async (cert) => {
-        const car = await dexieDB.table("car").get(cert.car);
-        const owner = await dexieDB.table("owner").get(car.owner);
-        return {
-          id: cert.id,
-          center: cert.center,
-          regDate: cert.registeredDate,
-          licensePlate: car.regNum,
-          owner: owner.name,
-        };
-      })
-    )
+    data.map((cert) => {
+      return {
+        id: cert.id,
+        center: cert.center,
+        regDate: cert.registeredDate,
+        licensePlate: cert.licensePlate,
+        owner: cert.owner,
+      };
+    })
   );
 };
 

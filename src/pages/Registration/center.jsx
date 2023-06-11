@@ -101,23 +101,16 @@ const Registration = () => {
 
   useEffect(() => {
     if (!expiredCerts) return;
-    const reloadList = async () => {
-      setExpiredList(
-        await Promise.all(
-          expiredCerts.map(async (cert) => {
-            const car = await dexieDB.table("car").get(cert.car);
-            const owner = await dexieDB.table("owner").get(car.owner);
-            return {
-              id: cert.id,
-              name: owner.name,
-              licensePlate: car.regNum,
-              expiredDate: cert.expiredDate || "New",
-            };
-          })
-        )
-      );
-    };
-    reloadList();
+    setExpiredList(
+      expiredCerts.map((cert) => {
+        return {
+          id: cert.id,
+          name: cert.owner,
+          licensePlate: cert.licensePlate,
+          expiredDate: cert.expiredDate || "New",
+        };
+      })
+    );
   }, [expiredCerts]);
 
   useEffect(() => {

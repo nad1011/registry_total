@@ -1,13 +1,19 @@
+import { useContext } from "react";
+
 import { Children } from "react";
 import { Box } from "@mui/system";
 
 import Warning from "../pages/Warning";
 import ResponsiveNavbar from "./Navbar/ResponsiveNavbar";
 
+import { AuthContext } from "../contexts/AuthProvider";
+
 export default function Page({ children }) {
+  const currentUser = useContext(AuthContext);
+
   return (
     <>
-      {!localStorage.getItem("id") ? (
+      {!currentUser ? (
         <Warning />
       ) : (
         <>

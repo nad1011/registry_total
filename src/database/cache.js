@@ -4,8 +4,6 @@ import { doc, getDoc } from "firebase/firestore";
 
 const dexieDB = new Dexie("cachedData");
 dexieDB.version(1).stores({
-  owner: "id",
-  car: "id",
   certificate: "id,center",
 });
 

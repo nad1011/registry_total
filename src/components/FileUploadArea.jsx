@@ -33,11 +33,10 @@ const FileUploadArea = () => {
 
   const removeFile = (file) => setFileList(fileList.filter((item) => item !== file));
 
-  const generateCertId = () => {
+  const generateCertId = async () => {
     let id = faker.string.alphanumeric({ length: 12, casing: "upper" });
-    getDoc(doc(fireDB, "certificate", id)).then((doc) => {
-      if (doc.exists()) id = generateCertId();
-    });
+    const doc = await getDoc(doc(fireDB, "certificate", id));
+    if (doc.exists()) id = await generateCertId();
     return id;
   };
 
@@ -73,32 +72,40 @@ const FileUploadArea = () => {
             : { ...owner, representative };
         const ownerRef = doc(fireDB, "owner", id);
 
-        const certId = generateCertId();
-        const certRef = doc(fireDB, "certificate", certId);
-
-        car.cert = certRef;
+        const carRef = doc(fireDB, "car", vin);
+        const carDoc = await getDoc(carRef);
+        if (carDoc.exists()) continue;
         car.type = car["type_1"];
-        car.owner = ownerRef;
-        car.curbWeight = `${car.curbWeight} (ton)`;
-        car.maxOutput = `${car.maxOutput}(kW)`;
-        car.overallDimension = `${car.overallDimension} (m)`;
-        car.wheelTread = `${car.wheelTread} (m)`;
+        delete car["type_1"];
         const { year, manufacturer, country } = car;
         car.mfg = { year, manufacturer, country };
-        delete car["type_1"];
         delete car.year;
         delete car.manufacturer;
         delete car.country;
-        const carRef = doc(fireDB, "car", vin);
+
+        const certId = await generateCertId();
+        const certRef = doc(fireDB, "certificate", certId);
+
+        const ownerDoc = await getDoc(ownerRef);
+        if (ownerDoc.exists()) batch.update(ownerRef, { ownedCars: arrayUnion(carRef) });
+        else batch.set(ownerRef, { ...owner, ownedCars: [carRef] });
+
+        batch.set(carRef, {
+          ...car,
+          cert: certRef,
+          owner: ownerRef,
+          curbWeight: `${car.curbWeight} (ton)`,
+          maxOutput: `${car.maxOutput}(kW)`,
+          overallDimension: `${car.overallDimension} (m)`,
+          wheelTread: `${car.wheelTread} (m)`,
+        });
 
         batch.set(certRef, {
           center: "None",
           car: carRef,
+          owner: owner.name,
+          licensePlate: car.regNum,
         });
-        batch.set(carRef, car);
-        const ownerDoc = await getDoc(ownerRef);
-        if (ownerDoc.exists()) batch.update(ownerRef, { ownedCars: arrayUnion(carRef) });
-        else batch.set(ownerRef, { ...owner, ownedCars: [carRef] });
       }
 
       await batch.commit();

@@ -10,9 +10,15 @@ dexieDB.version(1).stores({
 });
 
 const loadUserState = (email) => {
-  if (localStorage.getItem("loaded") === "true") return;
+  if (
+    localStorage.getItem("id") &&
+    localStorage.getItem("email") &&
+    localStorage.getItem("name") &&
+    localStorage.getItem("address") &&
+    localStorage.getItem("tel")
+  )
+    return;
 
-  localStorage.setItem("loaded", true);
   localStorage.setItem("email", email);
   localStorage.setItem("id", email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq");
   const loadProfile = async () => {
@@ -26,7 +32,6 @@ const loadUserState = (email) => {
 };
 
 const clearUserState = () => {
-  localStorage.setItem("loaded", false);
   ["id", "name", "address", "tel", "email"].forEach((key) => localStorage.setItem(key, ""));
 };
 

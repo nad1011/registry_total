@@ -17,7 +17,6 @@ const fireDB = getFirestore(app);
 const fireAuth = getAuth(app);
 
 await setPersistence(fireAuth, browserLocalPersistence);
-
 fireAuth.onAuthStateChanged((user) => {
   if (user) loadUserState(user.email);
   else clearUserState();

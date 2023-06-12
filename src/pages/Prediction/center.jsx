@@ -112,7 +112,7 @@ const Prediction = () => {
             xs: 0,
             lg: "var(--padding-item)",
           }}
-          pb={"calc(var(--padding-item)*3)"}
+          pb={"calc(var(--padding-item)*2)"}
         >
           <Box
             sx={{
@@ -121,7 +121,7 @@ const Prediction = () => {
               pl: 1,
               pr: 1,
               width: 1,
-              height: { xs: "55%", sm: "60%", md: "60%", lg: "60%" },
+              height: { xs: "65%", sm: "70%", md: "70%", lg: "70%" },
               color: "#051c33",
             }}
           >
@@ -134,7 +134,7 @@ const Prediction = () => {
               justifyContent: "space-between",
               mt: "var(--padding-item)",
               width: 1,
-              height: { xs: "25%", sm: "20%", md: "20%", lg: "20%" },
+              height: { xs: "35%", sm: "30%", md: "30%", lg: "30%" },
             }}
           >
             <Grid container item xs={4} pr={1}>

@@ -35,8 +35,8 @@ const FileUploadArea = () => {
 
   const generateCertId = async () => {
     let id = faker.string.alphanumeric({ length: 12, casing: "upper" });
-    const doc = await getDoc(doc(fireDB, "certificate", id));
-    if (doc.exists()) id = await generateCertId();
+    const certDoc = await getDoc(doc(fireDB, "certificate", id));
+    if (certDoc.exists()) id = await generateCertId();
     return id;
   };
 

@@ -82,8 +82,8 @@ const Registration = () => {
   const expiredCerts = useLiveQuery(() =>
     dexieDB
       .table("certificate")
-      .where("center")
-      .anyOf(localStorage.getItem("id"), "None")
+      .where("id")
+      .notEqual("center")
       .filter((cert) => {
         if (!cert.expiredDate) return true;
         const [date, month, year] = cert.expiredDate.split("/").map(Number);

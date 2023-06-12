@@ -8,15 +8,6 @@ dexieDB.version(1).stores({
 });
 
 const loadUserState = (email) => {
-  if (
-    localStorage.getItem("id") &&
-    localStorage.getItem("email") &&
-    localStorage.getItem("name") &&
-    localStorage.getItem("address") &&
-    localStorage.getItem("tel")
-  )
-    return;
-
   localStorage.setItem("email", email);
   localStorage.setItem("id", email.match(/(?<=center).+(?=@)/)?.[0].toUpperCase() ?? "hq");
   const loadProfile = async () => {
@@ -33,6 +24,4 @@ const clearUserState = () => {
   ["id", "name", "address", "tel", "email"].forEach((key) => localStorage.setItem(key, ""));
 };
 
-const getDocID = (docRef) => docRef.path.split("/").pop();
-
-export { dexieDB, loadUserState, clearUserState, getDocID };
+export { dexieDB, loadUserState, clearUserState };
